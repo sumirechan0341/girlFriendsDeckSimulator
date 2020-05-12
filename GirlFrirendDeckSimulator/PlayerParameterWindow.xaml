@@ -1,0 +1,115 @@
+﻿<Window
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:c="clr-namespace:GirlFriendDeckSimulator;assembly=GirlFrirendDeckSimulator"
+    Title="PlayerParameterWindow" Height="1000" Width="525">
+
+    <Window.Resources>
+        <ObjectDataProvider x:Key="playerViewModel" ObjectType="{x:Type c:PlayerViewModel}"/>
+        <ObjectDataProvider x:Key="attrTypesKey" MethodName="getAllAttributeTypeNames" ObjectType="{x:Type c:AttributeType}"/>
+        <c:ClubTypeConverter x:Key="clubTypeConverter"/>
+        <c:AttributeTypeConverter x:Key="attributeTypeConverter"/>
+        <c:ClubRoleTypeConverter x:Key="clubRoleTypeConverter"/>
+
+        <Style x:Key="textBoxInError" TargetType="{x:Type TextBox}">
+            <Style.Triggers>
+                <Trigger Property="Validation.HasError" Value="true">
+                    <Setter Property="ToolTip" Value="{Binding RelativeSource={x:Static RelativeSource.Self}, Path=(Validation.Errors)/ErrorContent}"/>
+                    <Setter Property="Background" Value="#ffeeff" />
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+    </Window.Resources>
+
+    <StackPanel HorizontalAlignment="Left" Height="900" Margin="150,20,0,0" VerticalAlignment="Top" Width="213">
+        <TextBlock Text="ユーザ名"/>
+        <TextBox x:Name="PlayerNameTextBox" Style="{StaticResource textBoxInError}">
+            <TextBox.Text>
+                <Binding Source="{StaticResource playerViewModel}" Path="PlayerName" UpdateSourceTrigger="PropertyChanged">
+                    
+                </Binding>
+            </TextBox.Text>
+        </TextBox>
+        <TextBlock Text="Max攻コスト"/>
+        <TextBox x:Name="AttackCostTextBox" Style="{StaticResource textBoxInError}">
+            <TextBox.Text>
+                <Binding Source="{StaticResource playerViewModel}" Path="AttackCost" UpdateSourceTrigger="PropertyChanged">
+
+                </Binding>
+            </TextBox.Text>
+        </TextBox>
+        <TextBlock Text="副センバツ枠数"/>
+        <TextBox x:Name="BackDeckNum" Style="{StaticResource textBoxInError}">
+            <TextBox.Text>
+                <Binding Source="{StaticResource playerViewModel}" Path="BackDeckNum" UpdateSourceTrigger="PropertyChanged">
+
+                </Binding>
+            </TextBox.Text>
+        </TextBox>
+        <TextBlock Text="部活タイプ"/>
+        <ComboBox x:Name="ClubTypeComboBox" ItemsSource="{Binding Source={StaticResource playerViewModel}, Path=ClubTypes}" SelectedValue ="{Binding Source={StaticResource playerViewModel}, Path=SelectedClubType, UpdateSourceTrigger=PropertyChanged}">
+            <ComboBox.ItemTemplate>
+                <DataTemplate>
+                    <TextBlock Text="{Binding Converter={StaticResource clubTypeConverter}}"/>
+                </DataTemplate>
+            </ComboBox.ItemTemplate>
+        </ComboBox>
+        <TextBlock Text="属性"/>
+        <ComboBox x:Name="AttributeTypeComboBox" ItemsSource="{Binding Source={StaticResource playerViewModel}, Path=AttributeTypes}" SelectedValue ="{Binding Source={StaticResource playerViewModel}, Path=SelectedAttributeType, UpdateSourceTrigger=PropertyChanged}">
+            <ComboBox.ItemTemplate>
+                <DataTemplate>
+                    <TextBlock Text="{Binding Converter={StaticResource attributeTypeConverter}}"/>
+                </DataTemplate>
+            </ComboBox.ItemTemplate>
+        </ComboBox>
+        <TextBlock Text="ぷち(属性・学年%)"/>
+        <ComboBox x:Name="PetitGirlTypeComboBox1"/>
+        <TextBlock Text="ぷち(属性・学年%)"/>
+        <ComboBox x:Name="PetitGirlTypeComboBox2"/>
+        <TextBlock Text="ぷち(属性・学年%)"/>
+        <ComboBox x:Name="PetitGirlTypeComboBox3"/>
+        <TextBlock Text="コロン(COOL)"/>
+        <TextBox x:Name="CoolColonTextBox" Style="{StaticResource textBoxInError}">
+            <TextBox.Text>
+                <Binding Source="{StaticResource playerViewModel}" Path="CoolColon" UpdateSourceTrigger="PropertyChanged">
+                    <Binding.ValidationRules>
+                        <c:ColonFormRule/>
+                    </Binding.ValidationRules>
+                </Binding>
+            </TextBox.Text>
+        </TextBox>
+        <TextBlock Text="コロン(POP)"/>
+        <TextBox x:Name="PopColonTextBox" Style="{StaticResource textBoxInError}">
+            <TextBox.Text>
+                <Binding Source="{StaticResource playerViewModel}" Path="PopColon" UpdateSourceTrigger="PropertyChanged">
+                    <Binding.ValidationRules>
+                        <c:ColonFormRule/>
+                    </Binding.ValidationRules>
+                </Binding>
+            </TextBox.Text>
+        </TextBox>
+        <TextBlock Text="コロン(SWEET)"/>
+        <TextBox x:Name="SweetColonTextBox" Style="{StaticResource textBoxInError}">
+            <TextBox.Text>
+                <Binding Source="{StaticResource playerViewModel}" Path="SweetColon" UpdateSourceTrigger="PropertyChanged">
+                    <Binding.ValidationRules>
+                        <c:ColonFormRule/>
+                    </Binding.ValidationRules>
+                </Binding>
+            </TextBox.Text>
+        </TextBox>
+        <TextBlock Text="部活設備"/>
+        <CheckBox Content="ホワイトボード" IsChecked="{Binding Source={StaticResource playerViewModel}, Path=ExistWhiteBoard}"  />
+        <CheckBox Content="テレビ" IsChecked="{Binding Source={StaticResource playerViewModel}, Path=ExistTelevision}"  />
+        <CheckBox Content="ロッカー" IsChecked="{Binding Source={StaticResource playerViewModel}, Path=ExistLocker}"  />
+        <TextBlock Text="役職"/>
+        <ComboBox x:Name="ClubRoleTypeComboBox" ItemsSource="{Binding Source={StaticResource playerViewModel}, Path=ClubRoleTypes}" SelectedValue ="{Binding Source={StaticResource playerViewModel}, Path=SelectedClubRoleType, UpdateSourceTrigger=PropertyChanged}">
+            <ComboBox.ItemTemplate>
+                <DataTemplate>
+                    <TextBlock Text="{Binding Converter={StaticResource clubRoleTypeConverter}}"/>
+                </DataTemplate>
+            </ComboBox.ItemTemplate>
+        </ComboBox>
+    </StackPanel>
+</Window>
+	
