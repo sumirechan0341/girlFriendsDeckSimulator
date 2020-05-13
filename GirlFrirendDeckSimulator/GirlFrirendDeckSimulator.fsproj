@@ -67,11 +67,9 @@
     <Compile Include="Player.fs" />
     <Compile Include="EventType.fs" />
     <Compile Include="PlayerViewModel.fs" />
-    <Compile Include="DeckEditViewModel.fs" />
     <Compile Include="Girl.fs" />
     <Compile Include="SkilType.fs" />
     <Compile Include="Card.fs" />
-    <Compile Include="CardFactory.fs" />
     <Compile Include="ColonFormRule.fs" />
     <Compile Include="Converter.fs" />
     <Compile Include="ClubRoleTypeConverter.fs" />
@@ -80,9 +78,11 @@
     <Compile Include="ClubTypeConverter.fs" />
     <Compile Include="CardConverter.fs" />
     <Compile Include="GirlFactory.fs" />
-    <Compile Include="PetitGirlCheerConverter.fs" />
-    <Compile Include="SkillTypeConverter.fs" />
     <Compile Include="ModeConverter.fs" />
+    <Compile Include="SkillTypeConverter.fs" />
+    <Compile Include="CardFactory.fs" />
+    <Compile Include="PetitGirlCheerConverter.fs" />
+    <Compile Include="DeckEditViewModel.fs" />
     <None Include="CardList.json" />
     <None Include="GirlInfo.json" />
     <Resource Include="PlayerParameterWindow.xaml" />

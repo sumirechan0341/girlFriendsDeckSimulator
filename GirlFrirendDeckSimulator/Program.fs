@@ -7,13 +7,13 @@ open System.ComponentModel
 open System.Diagnostics
 
  
- type PlayerParameterWindow = XAML<"PlayerParameterWindow.xaml">
+ type DeckEditWindow = XAML<"DeckEditWindow.xaml">
  
 [<STAThread>]
 [<EntryPoint>]
 let main argv =
     //initializeでフォーム生成
-    let window = PlayerParameterWindow()
+    let window = DeckEditWindow()
     //loadでセーブデータがあれば読み込み
     //なければ初期状態から
     

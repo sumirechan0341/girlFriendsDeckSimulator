@@ -18,6 +18,8 @@ module Card =
         eventName: string
         attribute: AttributeType
         rarity: Rarity
+        attack: int
+        defence: int
         cardType: CardType
         isEXed: bool
         cost: int

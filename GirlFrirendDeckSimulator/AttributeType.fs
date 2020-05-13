@@ -9,3 +9,10 @@ module AttributeType =
 
     let getAllAttributeTypes = Enum.GetValues(typeof<AttributeType>)
 
+module SkillAttributeType =
+    type SkillAttributeType =
+        | Cool
+        | Pop
+        | Sweet
+        | All
+

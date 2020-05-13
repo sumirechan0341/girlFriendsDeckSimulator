@@ -44,3 +44,9 @@ module CardConverter =
             | ParseRegex "仲良し|×ｱﾆﾒ仲良し" _
                 -> CardType.Friends
             | _ -> CardType.Common
+
+    let toString(card: Card) =
+        card.girl.name + " " + card.attack.ToString()
+
+type CardConverter() =
+    inherit ConverterBase(CardConverter.toString >> (fun s -> s :> obj) |> convert, nullFunction)

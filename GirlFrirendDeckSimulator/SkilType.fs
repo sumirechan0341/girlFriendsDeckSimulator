@@ -1,5 +1,5 @@
 ﻿namespace GirlFriendDeckSimulator
-open AttributeType
+open SkillAttributeType
 open Mode
 module SkillType =
     type SkillTarget = 
@@ -12,6 +12,7 @@ module SkillType =
 
     type Effect = 
         Ultra
+        | ExtraSuper
         | Super 
         | ExtraLarge 
         | Large 
@@ -22,10 +23,11 @@ module SkillType =
     type SkillMode = Up | Down
 
     type SkillType = {
-        attribute: AttributeType
+        attribute: SkillAttributeType
         target: SkillTarget
         effect: Effect
         mode: Mode
         skillMode: SkillMode
+        skillEnchantLevel: int
     }
     

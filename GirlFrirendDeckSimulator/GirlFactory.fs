@@ -4,11 +4,13 @@ open SelectionBonus
 open Girl
 open System
 open System.IO
+open System.Text.RegularExpressions
 
 module GirlFactory =
     
     type GirlInfo = JsonProvider<""" {"name": "上条るい", "club": "運動部(個人競技)", "grade": "2年生", "classRoom": "2年A組", "selectionBonus": ["Ｌｅｔ’ｓ 精神集中♪", "↑スレンダーズボルケーノ↑"], "birthDay": "5月2日"} """>
-    let girlFactroyFromJson(girlInfoJson) = 
+    
+    let girlFactroyFromJson(girlInfoJson: string) = 
         let girlInfo = GirlInfo.Parse(girlInfoJson)
         {
             name = girlInfo.Name;
@@ -18,6 +20,9 @@ module GirlFactory =
             selectionBonuses = Array.map(SelectionBonus) (girlInfo.SelectionBonus)
             birthDay = girlInfo.BirthDay
         }
-    let getAllGirl = Seq.map(fun json -> girlFactroyFromJson(json)) (File.ReadAllText("GirlInfo.json").Split('}'))
 
-    let getGirlByName(girlName: string) = Seq.find(fun girl -> girl.name = girlName) (getAllGirl)
+    let getAllGirl = Seq.map(girlFactroyFromJson) (File.ReadAllText("..\..\GirlInfo.json") |> Regex("(?<=}),").Split)
+
+    let getGirlByName(girlName: string) = 
+        System.Console.WriteLine(girlName)
+        Seq.find(fun girl -> (if(girlName.Contains("+")) then girlName.[0..girlName.Length-2] else girlName) |> (=) girl.name) (getAllGirl)

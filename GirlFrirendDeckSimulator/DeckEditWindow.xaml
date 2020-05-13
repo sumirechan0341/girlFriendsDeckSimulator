@@ -2,15 +2,23 @@
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:c="clr-namespace:GirlFriendDeckSimulator;assembly=GirlFrirendDeckSimulator"
-    Title="PlayerParameterWindow" Height="1000" Width="525">
+    Title="DeckEditWindow" Height="1000" Width="525">
 
     <Window.Resources>
         <ObjectDataProvider x:Key="deckEditViewModel" ObjectType="{x:Type c:DeckEditViewModel}"/>
-        
+        <c:CardConverter x:Key="cardConverter"/>
     </Window.Resources>
 
     <StackPanel HorizontalAlignment="Left" Height="900" Margin="150,20,0,0" VerticalAlignment="Top" Width="213">
-        
+        <ListBox x:Name="GirlListBox" ItemsSource="{Binding Source={StaticResource deckEditViewModel}, Path=CardList}">
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Text="{Binding Converter={StaticResource cardConverter}}" Margin="10"/>
+                    </StackPanel>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+        </ListBox>
     </StackPanel>
 </Window>
 	

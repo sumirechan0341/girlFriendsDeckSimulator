@@ -1,3 +1,3 @@
 ﻿namespace GirlFriendDeckSimulator
 module Grade =
-    type Grade = First | Second | Third | Teacher
+    type Grade = First | Second | Third | Other

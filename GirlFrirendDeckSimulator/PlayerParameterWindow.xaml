@@ -6,7 +6,6 @@
 
     <Window.Resources>
         <ObjectDataProvider x:Key="playerViewModel" ObjectType="{x:Type c:PlayerViewModel}"/>
-        <ObjectDataProvider x:Key="attrTypesKey" MethodName="getAllAttributeTypeNames" ObjectType="{x:Type c:AttributeType}"/>
         <c:ClubTypeConverter x:Key="clubTypeConverter"/>
         <c:AttributeTypeConverter x:Key="attributeTypeConverter"/>
         <c:ClubRoleTypeConverter x:Key="clubRoleTypeConverter"/>

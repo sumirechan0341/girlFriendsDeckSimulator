@@ -8,7 +8,7 @@ module GradeConverter =
         | Grade.First -> "1年生"
         | Grade.Second -> "2年生"
         | Grade.Third -> "3年生"
-        | Grade.Teacher -> "教師"
+        | Grade.Other -> "その他"
         
     
     let fromString(gradeName: string): Grade = 
@@ -16,7 +16,7 @@ module GradeConverter =
         | "1年生" -> Grade.First
         | "2年生" -> Grade.Second
         | "3年生" -> Grade.Third
-        | "教師" -> Grade.Teacher
+        | _ -> Grade.Other
         
     
 type GradeConverter() =
