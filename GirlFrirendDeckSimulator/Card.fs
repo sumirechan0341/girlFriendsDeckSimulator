@@ -11,7 +11,7 @@ module Card =
         | Kira 
         | Mirror
         | Friends
-        | BirthDay
+        | Birthday
 
     type Card = {
         girl: Girl
@@ -23,7 +23,7 @@ module Card =
         cardType: CardType
         isEXed: bool
         cost: int
-        skillType: SkillType
+        skillType: option<SkillType>
         skillLevel: int
     }
 

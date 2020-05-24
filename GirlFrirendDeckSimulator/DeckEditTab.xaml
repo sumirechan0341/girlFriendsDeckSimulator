@@ -1,0 +1,44 @@
+﻿<UserControl
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:c="clr-namespace:GirlFriendDeckSimulator;assembly=GirlFrirendDeckSimulator"
+>
+    <UserControl.DataContext>
+        <c:DeckEditViewModel/>
+    </UserControl.DataContext>
+
+    <ScrollViewer HorizontalScrollBarVisibility="Auto">
+        <StackPanel HorizontalAlignment="Left" Height="900" Margin="150,20,10,10" VerticalAlignment="Top" Width="505">
+            <StackPanel.Resources>
+                <c:CardConverter x:Key="cardConverter"/>
+            </StackPanel.Resources>
+            <DataGrid x:Name="GirlListBox" ItemsSource="{Binding CardListView, UpdateSourceTrigger=PropertyChanged}" AutoGenerateColumns="False" >
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="カード名" Binding="{Binding CardName}"></DataGridTextColumn>
+                    <DataGridTextColumn Header="攻援値" Binding="{Binding Attack}"></DataGridTextColumn>
+                    <DataGridTextColumn Header="守援値" Binding="{Binding Defence}"></DataGridTextColumn>
+                    <DataGridTextColumn Header="補正攻援値" Binding="{Binding CorrectedAttack, UpdateSourceTrigger=PropertyChanged}" x:Name="CorrectedAttacks"></DataGridTextColumn>
+                    <DataGridTextColumn Header="補正守援値" Binding="{Binding CorrectedDefence, UpdateSourceTrigger=PropertyChanged}" x:Name="CorrectedDefences"></DataGridTextColumn>
+                </DataGrid.Columns>
+                <DataGrid.RowStyle>
+                    <Style TargetType="DataGridRow">
+                        <Setter Property="Background" Value="LightBlue" />
+                        <Style.Triggers>
+                            <DataTrigger Binding="{Binding Path=Attribute}" Value="Cool">
+                                <Setter Property="Background" Value="LightBlue"/>
+                            </DataTrigger>
+                            <DataTrigger Binding="{Binding Path=Attribute}" Value="Pop">
+                                <Setter Property="Background" Value="#FFFFD485"/>
+                            </DataTrigger>
+                            <DataTrigger Binding="{Binding Path=Attribute}" Value="Sweet">
+                                <Setter Property="Background" Value="LightPink"/>
+                            </DataTrigger>
+                        </Style.Triggers>
+                    </Style>
+                </DataGrid.RowStyle>
+            </DataGrid>
+        </StackPanel>
+    </ScrollViewer>
+
+</UserControl>
+	

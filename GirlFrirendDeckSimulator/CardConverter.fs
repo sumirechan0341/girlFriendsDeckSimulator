@@ -40,7 +40,7 @@ module CardConverter =
             | ParseRegex "ﾐﾗｰｶﾞｰﾙ." _
                  -> CardType.Mirror
             | ParseRegex "ﾊﾞｰｽﾃﾞｰｶﾞｰﾙ|誕生日\d+" _
-                -> CardType.BirthDay
+                -> CardType.Birthday
             | ParseRegex "仲良し|×ｱﾆﾒ仲良し" _
                 -> CardType.Friends
             | _ -> CardType.Common

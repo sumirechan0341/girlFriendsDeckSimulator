@@ -11,6 +11,6 @@ module Girl =
         grade: Grade
         classRoom: option<string> // 〇年〇組
         selectionBonuses: SelectionBonus[]
-        birthDay: DateTime
+        birthday: option<DateTime>
     }
     

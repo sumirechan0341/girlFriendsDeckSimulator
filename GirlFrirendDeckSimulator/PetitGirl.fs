@@ -4,15 +4,18 @@ open Mode
 
 module PetitGirl =
     type PetitCheerType =
-        | AttributeCheerType of attrType: AttributeType * mode: Mode * effectNum: int
-        | AllAttributeCheerType of mode: Mode * effectNum: int
-        | GradeCheerType of grade: int * effectNum: int
-        | FavoriteCheerType of effectNum: int
-        | DatingCheerType of effectNum: int
-        | SelfCheerType of effectNum: int
-        | TouchCheerType of effectNum: int
-        | BirthDayCheerType of effectNum: int
-        | FacilityBuildUpType of effectNum: int
+        | AttributeCheerType of attrType: AttributeType * mode: Mode * effectNum: float
+        | AllAttributeCheerType of mode: Mode * effectNum: float
+        | GradeCheerType of grade: int * effectNum: float
+        | FavoriteCheerType of effectNum: float
+        | DatingCheerType of effectNum: float
+        | SelfCheerType of effectNum: float
+        | TouchCheerType of effectNum: float
+        | BirthdayCheerType of effectNum: float
+        | FacilityBuildUpType of effectNum: float
+        | GalIncomeUpType of effectNum: float
+        | LikeabilityUpType of effectNum: float
+        | DeckCostDownType of effectNum: float
 
     type PetitSkillType =
         | AttributeSkillType of attrType: AttributeType * mode: Mode * skillNum: int

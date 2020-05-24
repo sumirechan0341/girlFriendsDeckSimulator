@@ -23,7 +23,7 @@ module Club =
         | President = 0
         | VisePresident = 1
         | AttackCaptain = 2
-        | DeffenceCaptain = 3
+        | DefenceCaptain = 3
         | Member = 4
 
     let getAllClubRoleTypes = Enum.GetValues(typeof<Role>)

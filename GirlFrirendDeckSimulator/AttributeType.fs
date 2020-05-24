@@ -15,4 +15,5 @@ module SkillAttributeType =
         | Pop
         | Sweet
         | All
+        | Combination of attr1: SkillAttributeType * attr2: SkillAttributeType
 

@@ -67,7 +67,7 @@ module SkillTypeConverter =
 
     let fromString(skillTypeStr) =
         let separater = "の"
-        let attributeRegex = "(COOL|COOLタイプ|POP|POPタイプ|SWEET|SWEETタイプ|全タイプ)"
+        let attributeRegex = "(COOL|COOLタイプ|POP|POPタイプ|SWEET|SWEETタイプ|全タイプ|(?:(?:COOL|COOLタイプ|POP|POPタイプ|SWEET|SWEETタイプ)&(?:COOL|COOLタイプ|POP|POPタイプ|SWEET|SWEETタイプ)))"
         let skillTargetRegex = "(主(?:センバツ|ｾﾝﾊﾞﾂ)|副(?:センバツ|ｾﾝﾊﾞﾂ)上位(?:\d+)人|主(?:センバツ|ｾﾝﾊﾞﾂ)全員&副(?:センバツ|ｾﾝﾊﾞﾂ)1人)"
         let modeRegex = "(攻援|守援|攻守)" 
         let skillEffectRegex = "((?:(?:ｳﾙﾄﾗ|ウルトラ)特大|(?:超スーパー|超ｽｰﾊﾟｰ)特大|(?:スーパー|ｽｰﾊﾟｰ)特大|特大|大|中|小)(?:(?:～(?:(?:ｳﾙﾄﾗ|ウルトラ)特大|(?:超スーパー|超ｽｰﾊﾟｰ)特大|(?:スーパー|ｽｰﾊﾟｰ)特大|特大|大|中|小))?))"
@@ -82,11 +82,12 @@ module SkillTypeConverter =
             + skillEffectRegex 
             + skillTypeModeRegex 
             + skillEnchantLevelRegex + "?"
-//        System.Console.WriteLine(List.tail [ for x in Regex(pattern1).Match("COOLタイプの攻守スーパー特大UP").Groups -> x.Value ])
+
         match skillTypeStr with
+        | "" -> None
         | ParseRegex pattern1 [attribute; skillTarget; mode; skillEffect; skillTypeMode; skillEnchantLevel] 
                 ->  
-                    {
+                    Some {
                         attribute = if(String.IsNullOrEmpty(attribute) |> not) then SkillAttributeTypeConverter.fromString(attribute) else SkillAttributeType.All;
                         target = if(String.IsNullOrEmpty(attribute) |> not) then SkillTargetConverter.fromString(skillTarget) else if(skillTypeMode = "UP") then SkillTarget.Front else SkillTarget.OpponentFront;
                         effect = SkillEffectConverter.fromString(skillEffect);

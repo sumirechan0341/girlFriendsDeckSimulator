@@ -6,7 +6,7 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>04e42208-b3db-4f42-b0a8-cba9dc6b4fb0</ProjectGuid>
-    <OutputType>WinExe</OutputType>
+    <OutputType>Exe</OutputType>
     <RootNamespace>GirlFrirendDeckSimulator</RootNamespace>
     <AssemblyName>GirlFrirendDeckSimulator</AssemblyName>
     <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
@@ -66,7 +66,6 @@
     <Compile Include="PetitGirl.fs" />
     <Compile Include="Player.fs" />
     <Compile Include="EventType.fs" />
-    <Compile Include="PlayerViewModel.fs" />
     <Compile Include="Girl.fs" />
     <Compile Include="SkilType.fs" />
     <Compile Include="Card.fs" />
@@ -81,12 +80,22 @@
     <Compile Include="ModeConverter.fs" />
     <Compile Include="SkillTypeConverter.fs" />
     <Compile Include="CardFactory.fs" />
-    <Compile Include="PetitGirlCheerConverter.fs" />
+    <Compile Include="PetitGirlFactory.fs" />
+    <Compile Include="PlayerParameterViewModel.fs" />
+    <Compile Include="CalcBonus.fs" />
+    <Compile Include="CardView.fs" />
     <Compile Include="DeckEditViewModel.fs" />
+    <Compile Include="PetitGirlCheerConverter.fs" />
+    <Compile Include="MainWindowViewModel.fs" />
+    <Compile Include="XamlLoader.fs" />
     <None Include="CardList.json" />
+    <None Include="PetitGirl.json" />
+    <Content Include="CardListBackUp.txt" />
     <None Include="GirlInfo.json" />
-    <Resource Include="PlayerParameterWindow.xaml" />
-    <Resource Include="DeckEditWindow.xaml" />
+    <None Include="BonusSetting.json" />
+    <Resource Include="PlayerParameterTab.xaml" />
+    <Resource Include="DeckEditTab.xaml" />
+    <Resource Include="MainWindow.xaml" />
     <Compile Include="Program.fs" />
   </ItemGroup>
   <ItemGroup>
@@ -107,6 +116,7 @@
     <Reference Include="PresentationFramework" />
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Data" />
     <Reference Include="System.Numerics" />
     <Reference Include="System.ValueTuple">
       <HintPath>..\packages\System.ValueTuple.4.3.0\lib\netstandard1.0\System.ValueTuple.dll</HintPath>
@@ -115,6 +125,7 @@
     <Reference Include="System.Xaml" />
     <Reference Include="System.Xml" />
     <Reference Include="System.Xml.Linq" />
+    <Reference Include="UIAutomationTypes" />
     <Reference Include="WindowsBase" />
   </ItemGroup>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

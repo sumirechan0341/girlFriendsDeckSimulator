@@ -1,0 +1,189 @@
+﻿{	
+	"basicBonusSettings": {
+		"attributeBonus": 5,
+		"birthdayBonus": 20,
+		"dateBonus": {
+			"ur": 100,
+			"ssr": 80,
+			"sr": 50,
+			"hr": 30,
+			"r": 20
+		},
+		"touchBonus": 20
+	},
+	"clubBonusSettings": {
+		"clubTypeBonus": 10,
+		"facilityBonus": 2,
+		"RoleBonusSettings": {
+			"presidenBonus": {
+				"attack": 2,
+				"defence": 2
+			},
+			"vicePresidenBonus": {
+				"attack": 2,
+				"defence": 2
+			},
+			"attackCaptainBonus": {
+				"attack": 5,
+				"defence": 0
+			},
+			"defenceCaptainBonus": {
+				"attack": 0,
+				"defence": 5
+			}
+		}
+	},
+	"cheerBonusSettings": {
+		"selfCheer": {
+			"selfAttackAndDefenceUltraUp": 60,
+			"selfAttackUltraUp": 50,
+			"selfDefenceUltraUp": 50,
+			"selfAttackAndDefenceExtraSuperUp": 40,
+			"selfAttackExtraSuperUp": 40,
+			"selfDefenceExtraSuperUp": 40,
+			"selfAttackAndDefenceSuperUp": 30,
+			"selfAttackSuperUp": 35,
+			"selfDefenceSuperUp": 35,
+			"selfAttackAndDefenceExtraLargeUp": 25,
+			"selfAttackExtraLargeUp": 25,
+			"selfDefenceExtraLargeUp": 25,
+			"selfAttackAndDefenceLargeUp": 15,
+			"selfAttackLargeUp": 20,
+			"selfDefenceLargeUp": 20,
+			"selfAttackAndDefenceMiddleUp": 10,
+			"selfAttackMiddleUp": 10,
+			"selfDefenceMiddleUp": 10,
+			"selfAttackAndDefenceSmallUp": 5,
+			"selfAttackSmallUp": 5,
+			"selfDefenceSmallUp": 5
+		},
+		"attributeCheer": {
+			"attributeAttackAndDefenceExtraSuperUp": 33,
+			"attributeAttackExtraSuperUp": 35,
+			"attributeDefenceExtraSuperUp": 35,
+			"attributeAttackAndDefenceSuperUp": 28,
+			"attributeAttackSuperUp": 30,
+			"attributeDefenceSuperUp": 30,
+			"attributeAttackAndDefenceExtraLargeUp": 22,
+			"attributeAttackAndDefenceExtraLargeUpPlus1": 21,
+			"attributeAttackExtraLargeUp": 20,
+			"attributeDefenceExtraLargeUp": 20,
+			"attributeAttackAndDefenceLargeUp": 15,
+			"attributeAttackLargeUp": 13,
+			"attributeDefenceLargeUp": 13,
+			"attributeAttackAndDefenceMiddleUp": 8,
+			"attributeAttackMiddleUp": 10,
+			"attributeDefenceMiddleUp": 10,
+			"attributeAttackAndDefenceSmallUp": 5,
+			"attributeAttackSmallUp": 5,
+			"attributeDefenceSmallUp": 5
+		},
+		"combiAttributeCheer": {
+			"combiAttributeAttackAndDefenceExtraLargeUp": 20,
+			"combiAttributeAttackExtraLargeUp": 20,
+			"combiAttributeDefenceExtraLargeUp": 20,
+			"combiAttributeAttackAndDefenceLargeUp": 14,
+			"combiAttributeAttackLargeUp": 19,
+			"combiAttributeDefenceLargeUp": 19,
+			"combiAttributeAttackAndDefenceMiddleUp": 7,
+			"combiAttributeAttackMiddleUp": 9,
+			"combiAttributeDefenceMiddleUp": 9,
+			"combiAttributeAttackAndDefenceSmallUp": 5,
+			"combiAttributeAttackSmallUp": 5,
+			"combiAttributeDefenceSmallUp": 5
+		},
+		"allAttributeCheer": {
+			"allAttributeAttackAndDefenceExtraSuperUp": 30,
+			"allAttributeAttackExtraSuperUp": 30,
+			"allAttributeDefenceExtraSuperUp": 30,
+			"allAttributeAttackAndDefenceSuperUp": 25,
+			"allAttributeAttackSuperUp": 25,
+			"allAttributeDefenceSuperUp": 25,
+			"allAttributeAttackAndDefenceExtraLargeUp": 22,
+			"allAttributeAttackExtraLargeUp": 22,
+			"allAttributeDefenceExtraLargeUp": 22,
+			"allAttributeAttackAndDefenceLargeUp": 11,
+			"allAttributeAttackLargeUp": 15,
+			"allAttributeDefenceLargeUp": 15,
+			"allAttributeAttackAndDefenceMiddleUp": 6,
+			"allAttributeAttackMiddleUp": 8,
+			"allAttributeDefenceMiddleUp": 8,
+			"allAttributeAttackAndDefenceSmallUp": 5,
+			"allAttributeAttackSmallUp": 5,
+			"allAttributeDefenceSmallUp": 5
+		},
+		"sameGirlCheer": {
+			"sameGirlAttackAndDefenceExtraSuperUp": 35,
+			"sameGirlAttackExtraSuperUp": 35,
+			"sameGirlDefenceExtraSuperUp": 35,
+			"sameGirlAttackAndDefenceSuperUp": 30,
+			"sameGirlAttackSuperUp": 30,
+			"sameGirlDefenceSuperUp": 30,
+			"sameGirlAttackAndDefenceExtraLargeUp": 25,
+			"sameGirlAttackExtraLargeUp": 25,
+			"sameGirlDefenceExtraLargeUp": 25,
+			"sameGirlAttackAndDefenceLargeUp": 20,
+			"sameGirlAttackLargeUp": 20,
+			"sameGirlDefenceLargeUp": 20,
+			"sameGirlAttackAndDefenceMiddleUp": 15,
+			"sameGirlAttackMiddleUp": 15,
+			"sameGirlDefenceMiddleUp": 15,
+			"sameGirlAttackAndDefenceSmallUp": 10,
+			"sameGirlAttackSmallUp": 10,
+			"sameGirlDefenceSmallUp": 10
+		}, 
+		"backDeckCheer": {
+			"attributeBackDeckAttackExtraLargeUp": 21,
+			"attributeBackDeckDefenceExtraLargeUp": 21,
+			"attributeBackDeckAttackLargeUp": 16,
+			"attributeBackDeckDefenceLargeUp": 16,
+			"attributeBackDeckAttackMiddleUp": 9,
+			"attributeBackDeckDefenceMiddleUp": 9,
+			"attributeBackDeckAttackSmallUp": 5,
+			"attributeBackDeckDefenceSmallUp": 5,
+			"allAttributeBackDeckAttackExtraLargeUp": 21,
+			"allAttributeBackDeckDefenceExtraLargeUp": 21,
+			"allAttributeBackDeckAttackLargeUp": 11,
+			"allAttributeBackDeckDefenceLargeUp": 11,
+			"allAttributeBackDeckAttackMiddleUp": 9,
+			"allAttributeBackDeckDefenceMiddleUp": 9,
+			"allAttributeBackDeckAttackSmallUp": 5,
+			"allAttributeBackDeckDefenceSmallUp": 5
+		}, 
+		"debuffCheer": {
+			"attributeDefenceExtraSuperDown": 40,
+			"attributeDefenceSuperDown": 30,
+			"attributeDefenceExtraLargeDown": 25,
+			"attributeDefenceLargeDown": 18,
+			"attributeDefenceMiddleDown": 10,
+			"attributeDefenceSmallDown": 5,
+			"allAttributeDefenceExtraSuperDown": 40,
+			"allAttributeDefenceSuperDown": 30,
+			"allAttributeDefenceExtraLargeDown": 20,
+			"allAttributeDefenceLargeDown": 15,
+			"allAttributeDefenceMiddleDown": 8,
+			"allAttributeDefenceSmallDown": 5
+		}
+	},
+	"selectionBonusSettings": {
+		"NormalSelectionBonusSettings": {
+			"level1": 3,
+			"level2": 8,
+			"level3": 13,
+			"level4": 18,
+			"level5": 23
+		},
+		"ShiningSplashBonusSettings": {
+			"level1": 3,
+			"level2": 5,
+			"level3": 7,
+			"level4": 9,
+			"level5": 11
+		},
+		"preciousFriendBonusSettings": {
+			"level1": 5,
+			"level2": 10,
+			"level3": 15
+		}
+	}
+}

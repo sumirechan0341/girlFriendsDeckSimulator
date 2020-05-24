@@ -4,8 +4,12 @@ open Club
 open System.ComponentModel
 open Player
 open System.Runtime.CompilerServices
+open System.Windows
+open GirlFactory
+open Card
+open Girl
 
-type PlayerViewModel() =
+type PlayerParameterViewModel() =
     member val ClubTypes = getAllClubTypes
     member val AttributeTypes = getAllAttributeTypes
     member val ClubRoleTypes = getAllClubRoleTypes
@@ -22,3 +26,7 @@ type PlayerViewModel() =
     member val SelectedClubRoleType = Role.Member with get, set
     member val AttackCost = 20 with get, set
     member val BackDeckNum = 52 with get, set
+    member val BirhtdaySettingGirl = "指定なし" with get, set
+    member val GirlList = girlFactroyFromJson |> Seq.filter(fun g -> g.birthday.IsSome) |> Seq.map(fun g -> g.name) |> Seq.append (seq{"指定なし"}) with get, set
+
+    member _.OnTargetUpdated(sender, args) = MessageBox.Show("event fire")
