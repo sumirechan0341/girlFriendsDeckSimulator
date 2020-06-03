@@ -74,7 +74,6 @@ module SkillTypeConverter =
         let skillTypeModeRegex = "(UP|DOWN)"
         let skillEnchantLevelRegex = "(\+\d+)"
 
-        // pattern1 COOLの主ｾﾝﾊﾞﾂ全員&副ｾﾝﾊﾞﾂ1人の攻援ｽｰﾊﾟｰ特大UP
         let pattern1 = 
             "(?:" + attributeRegex + separater + ")" + "?" 
             + "(?:" + skillTargetRegex + separater + ")" + "?" 
@@ -95,106 +94,6 @@ module SkillTypeConverter =
                         skillMode = SkillModeConverter.fromString(skillTypeMode);
                         skillEnchantLevel = if(String.IsNullOrEmpty(skillEnchantLevel) |> not) then skillEnchantLevel |> int else 0;
                     }
-        
-        //| ParseRegex pattern2 [attribute; skillTarget; mode; skillEffect; skillUpDown] 
-        //        -> {
-        //                attribute = SkillAttributeTypeConverter.fromString(attribute);
-        //                target = SkillTargetConverter.fromString(skillTarget);
-        //                effect = SkillEffectConverter.fromString(skillEffect);
-        //                mode = ModeConverter.fromString(mode);
-        //                skillMode = SkillModeConverter.fromString(skillUpDown);
-        //                skillEnchantLevel = 0;
-        //            }
-        //| ParseRegex pattern3 [skillTarget; mode; skillEffect; skillUpDown] 
-        //        -> {
-        //                attribute = SkillAttributeType.All;
-        //                target = SkillTargetConverter.fromString(skillTarget);
-        //                effect = SkillEffectConverter.fromString(skillEffect);
-        //                mode = ModeConverter.fromString(mode);
-        //                skillMode = SkillModeConverter.fromString(skillUpDown);
-        //                skillEnchantLevel = 0;
-        //            }
-        //| ParseRegex pattern4 [skillTarget; mode; skillEffect; skillUpDown] 
-        //        -> {
-        //                attribute = SkillAttributeType.All;
-        //                target = SkillTargetConverter.fromString(skillTarget);
-        //                effect = SkillEffectConverter.fromString(skillEffect);
-        //                mode = ModeConverter.fromString(mode);
-        //                skillMode = SkillModeConverter.fromString(skillUpDown);
-        //                skillEnchantLevel = 0;
-        //            }
-        //| ParseRegex pattern5 [attribute; mode; skillEffect; skillUpDown] 
-        //        -> {
-        //                attribute = SkillAttributeTypeConverter.fromString(attribute);
-        //                target = if(skillUpDown = "UP") then SkillTarget.Front else SkillTarget.OpponentFront;
-        //                effect = SkillEffectConverter.fromString(skillEffect);
-        //                mode = ModeConverter.fromString(mode);
-        //                skillMode = SkillModeConverter.fromString(skillUpDown);
-        //                skillEnchantLevel = 0;
-        //            }
-        //| ParseRegex pattern6 [attribute; mode; skillEffect; skillUpDown] 
-        //        -> {
-        //                attribute = SkillAttributeTypeConverter.fromString(attribute);
-        //                target = if(skillUpDown = "UP") then SkillTarget.Front else SkillTarget.OpponentFront;
-        //                effect = SkillEffectConverter.fromString(skillEffect);
-        //                mode = ModeConverter.fromString(mode);
-        //                skillMode = SkillModeConverter.fromString(skillUpDown);
-        //                skillEnchantLevel = 0;
-        //            }
-        //| ParseRegex pattern7 [attribute; skillTarget; mode; skillEffect; skillUpDown; skillEnchantLevel] 
-        //        -> {
-        //                attribute = SkillAttributeTypeConverter.fromString(attribute);
-        //                target = SkillTargetConverter.fromString(skillTarget);
-        //                effect = SkillEffectConverter.fromString(skillEffect);
-        //                mode = ModeConverter.fromString(mode);
-        //                skillMode = SkillModeConverter.fromString(skillUpDown);
-        //                skillEnchantLevel = skillEnchantLevel |> int
-        //            }
-        //| ParseRegex pattern8 [attribute; skillTarget; mode; skillEffect; skillUpDown; skillEnchantLevel] 
-        //        -> {
-        //                attribute = SkillAttributeTypeConverter.fromString(attribute);
-        //                target = SkillTargetConverter.fromString(skillTarget);
-        //                effect = SkillEffectConverter.fromString(skillEffect);
-        //                mode = ModeConverter.fromString(mode);
-        //                skillMode = SkillModeConverter.fromString(skillUpDown);
-        //                skillEnchantLevel = skillEnchantLevel |> int
-        //            }
-        //| ParseRegex pattern9 [skillTarget; mode; skillEffect; skillUpDown; skillEnchantLevel] 
-        //        -> {
-        //                attribute = SkillAttributeType.All;
-        //                target = SkillTargetConverter.fromString(skillTarget);
-        //                effect = SkillEffectConverter.fromString(skillEffect);
-        //                mode = ModeConverter.fromString(mode);
-        //                skillMode = SkillModeConverter.fromString(skillUpDown);
-        //                skillEnchantLevel = skillEnchantLevel |> int
-        //            }
-        //| ParseRegex pattern10 [skillTarget; mode; skillEffect; skillUpDown; skillEnchantLevel] 
-        //        -> {
-        //                attribute = SkillAttributeType.All;
-        //                target = SkillTargetConverter.fromString(skillTarget);
-        //                effect = SkillEffectConverter.fromString(skillEffect);
-        //                mode = ModeConverter.fromString(mode);
-        //                skillMode = SkillModeConverter.fromString(skillUpDown);
-        //                skillEnchantLevel = skillEnchantLevel |> int
-        //            }
-        //| ParseRegex pattern11 [attribute; mode; skillEffect; skillUpDown; skillEnchantLevel] 
-        //        -> {
-        //                attribute = SkillAttributeTypeConverter.fromString(attribute);
-        //                target = if(skillUpDown = "UP") then SkillTarget.Front else SkillTarget.OpponentFront;
-        //                effect = SkillEffectConverter.fromString(skillEffect);
-        //                mode = ModeConverter.fromString(mode);
-        //                skillMode = SkillModeConverter.fromString(skillUpDown);
-        //                skillEnchantLevel = skillEnchantLevel |> int
-        //            }
-        //| ParseRegex pattern12 [attribute; mode; skillEffect; skillUpDown; skillEnchantLevel] 
-        //        -> {
-        //                attribute = SkillAttributeTypeConverter.fromString(attribute);
-        //                target = if(skillUpDown = "UP") then SkillTarget.Front else SkillTarget.OpponentFront;
-        //                effect = SkillEffectConverter.fromString(skillEffect);
-        //                mode = ModeConverter.fromString(mode);
-        //                skillMode = SkillModeConverter.fromString(skillUpDown);
-        //                skillEnchantLevel = skillEnchantLevel |> int
-        //            }
     
          
 

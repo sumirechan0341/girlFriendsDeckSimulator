@@ -26,6 +26,18 @@ module ClubTypeConverter =
         | "文化部(日本)" -> ClubType.JapaneseCultureClub
         | "未所属" -> ClubType.NoClub
 
+module FacilityConverter =
+    let toString facility: string =
+        match facility with
+        | Facility.WhiteBoard -> "ホワイトボード"
+        | Facility.Television -> "テレビ"
+        | Facility.Locker -> "ロッカー"
+
+    let fromString(facilityStr): Facility = 
+        match facilityStr with
+        | "ホワイトボード" | "ﾎﾜｲﾄﾎﾞｰﾄﾞ" -> Facility.WhiteBoard
+        | "テレビ" | "ﾃﾚﾋﾞ" -> Facility.Television
+        | "ロッカー" | "ﾛｯｶｰ" -> Facility.Locker
 
 
 type ClubTypeConverter() =

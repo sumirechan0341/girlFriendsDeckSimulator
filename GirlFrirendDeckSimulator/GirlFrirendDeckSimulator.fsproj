@@ -63,8 +63,8 @@
     <Compile Include="Mode.fs" />
     <Compile Include="Grade.fs" />
     <Compile Include="SelectionBonus.fs" />
-    <Compile Include="PetitGirl.fs" />
     <Compile Include="Player.fs" />
+    <Compile Include="PetitGirl.fs" />
     <Compile Include="EventType.fs" />
     <Compile Include="Girl.fs" />
     <Compile Include="SkilType.fs" />
@@ -80,12 +80,14 @@
     <Compile Include="ModeConverter.fs" />
     <Compile Include="SkillTypeConverter.fs" />
     <Compile Include="CardFactory.fs" />
+    <Compile Include="PetitGirlConverter.fs" />
     <Compile Include="PetitGirlFactory.fs" />
     <Compile Include="PlayerParameterViewModel.fs" />
     <Compile Include="CalcBonus.fs" />
     <Compile Include="CardView.fs" />
+    <Compile Include="PetitGirlView.fs" />
+    <Compile Include="PetitDeckEditViewModel.fs" />
     <Compile Include="DeckEditViewModel.fs" />
-    <Compile Include="PetitGirlCheerConverter.fs" />
     <Compile Include="MainWindowViewModel.fs" />
     <Compile Include="XamlLoader.fs" />
     <None Include="CardList.json" />
@@ -95,6 +97,7 @@
     <None Include="BonusSetting.json" />
     <Resource Include="PlayerParameterTab.xaml" />
     <Resource Include="DeckEditTab.xaml" />
+    <Resource Include="PetitDeckEditTab.xaml" />
     <Resource Include="MainWindow.xaml" />
     <Compile Include="Program.fs" />
   </ItemGroup>

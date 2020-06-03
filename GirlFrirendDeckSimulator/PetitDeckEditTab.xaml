@@ -1,0 +1,193 @@
+﻿<UserControl
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:c="clr-namespace:GirlFriendDeckSimulator;assembly=GirlFrirendDeckSimulator"
+xmlns:d="http://schemas.microsoft.com/expression/blend/2008" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" mc:Ignorable="d"
+>
+    <UserControl.DataContext>
+        <c:PetitDeckEditViewModel/>
+    </UserControl.DataContext>
+
+    <Grid ShowGridLines="True">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        <StackPanel Grid.Column="0" Grid.Row="0">
+            <TextBlock Text="{Binding Path=TotalAttack, UpdateSourceTrigger=PropertyChanged}"></TextBlock>
+            <TextBlock Text="{Binding Path=TotalDefence, UpdateSourceTrigger=PropertyChanged}"></TextBlock>
+        </StackPanel>
+        <DataGrid x:Name="PetitGirlDeck1" ItemsSource="{Binding PetitGirlDeck1, UpdateSourceTrigger=PropertyChanged}" AutoGenerateColumns="False" Grid.Column="0" Grid.Row="1">
+            <DataGrid.Resources>
+                <SolidColorBrush x:Key="{x:Static SystemColors.HighlightBrushKey}" Color="LightGreen"/>
+                <SolidColorBrush x:Key="{x:Static SystemColors.HighlightTextBrushKey}" Color="Black"/>
+            </DataGrid.Resources>
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="ぷちガール" Binding="{Binding PetitGirlName}" IsReadOnly="True"/>
+                <DataGridTextColumn Header="属性" Binding="{Binding AttributeType}" IsReadOnly="True"/>
+                <DataGridTextColumn Header="攻援力" Binding="{Binding Attack}" IsReadOnly="False"/>
+                <DataGridTextColumn Header="守援力" Binding="{Binding Defence}" IsReadOnly="False"/>
+                <DataGridTextColumn Header="本命設定" Binding="{Binding IsFavoriteGirl}" IsReadOnly="False"/>
+                <DataGridTextColumn Header="応援力効果1" Binding="{Binding PetitCheerEffect1}" IsReadOnly="True"/>
+                <DataGridTextColumn Header="応援力効果2" Binding="{Binding PetitCheerEffect2}" IsReadOnly="True"/>
+                <DataGridTextColumn Header="応援力効果3" Binding="{Binding PetitCheerEffect3}" IsReadOnly="True"/>
+                <DataGridTextColumn Header="応援力効果4" Binding="{Binding PetitCheerEffect4}" IsReadOnly="True"/>
+                <DataGridTextColumn Header="スキル効果" Binding="{Binding PetitSkillEffect}" IsReadOnly="True"/>
+                <DataGridTextColumn Header="センバツボーナス" Binding="{Binding PetitSelectionBonus}" IsReadOnly="True"/>
+            </DataGrid.Columns>
+            <DataGrid.RowStyle>
+                <Style TargetType="{x:Type DataGridRow}">
+                    <Setter Property="Background" Value="LightBlue" />
+                    <Style.Triggers>
+                        <DataTrigger Binding="{Binding Attribute}" Value="Cool">
+                            <Setter Property="Background" Value="LightBlue"/>
+                        </DataTrigger>
+                        <DataTrigger Binding="{Binding Attribute}" Value="Pop">
+                            <Setter Property="Background" Value="#FFFFD485"/>
+                        </DataTrigger>
+                        <DataTrigger Binding="{Binding Attribute}" Value="Sweet">
+                            <Setter Property="Background" Value="LightPink"/>
+                        </DataTrigger>
+                    </Style.Triggers>
+                </Style>
+            </DataGrid.RowStyle>
+        </DataGrid>
+
+        <DataGrid x:Name="PetitGirlDeck2" ItemsSource="{Binding PetitGirlDeck2, UpdateSourceTrigger=PropertyChanged}" AutoGenerateColumns="False" Grid.Column="0" Grid.Row="2">
+            <DataGrid.Resources>
+                <SolidColorBrush x:Key="{x:Static SystemColors.HighlightBrushKey}" Color="LightGreen"/>
+                <SolidColorBrush x:Key="{x:Static SystemColors.HighlightTextBrushKey}" Color="Black"/>
+            </DataGrid.Resources>
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="ぷちガール" Binding="{Binding PetitGirlName}" IsReadOnly="True"/>
+                <DataGridTextColumn Header="攻援力" Binding="{Binding Attack}" IsReadOnly="False"/>
+                <DataGridTextColumn Header="守援力" Binding="{Binding Defence}" IsReadOnly="False"/>
+                <DataGridTextColumn Header="応援力効果1" Binding="{Binding PetitCheerEffect1}" IsReadOnly="True"/>
+                <DataGridTextColumn Header="応援力効果2" Binding="{Binding PetitCheerEffect2}" IsReadOnly="True"/>
+                <DataGridTextColumn Header="応援力効果3" Binding="{Binding PetitCheerEffect3}" IsReadOnly="True"/>
+                <DataGridTextColumn Header="応援力効果4" Binding="{Binding PetitCheerEffect4}" IsReadOnly="True"/>
+                <DataGridTextColumn Header="スキル効果" Binding="{Binding PetitSkillEffect}" IsReadOnly="True"/>
+                <DataGridTextColumn Header="センバツボーナス" Binding="{Binding PetitSelectionBonus}" IsReadOnly="True"/>
+            </DataGrid.Columns>
+            <DataGrid.RowStyle>
+                <Style TargetType="{x:Type DataGridRow}">
+                    <Setter Property="Background" Value="LightBlue" />
+                    <Style.Triggers>
+                        <DataTrigger Binding="{Binding Attribute}" Value="Cool">
+                            <Setter Property="Background" Value="LightBlue"/>
+                        </DataTrigger>
+                        <DataTrigger Binding="{Binding Attribute}" Value="Pop">
+                            <Setter Property="Background" Value="#FFFFD485"/>
+                        </DataTrigger>
+                        <DataTrigger Binding="{Binding Attribute}" Value="Sweet">
+                            <Setter Property="Background" Value="LightPink"/>
+                        </DataTrigger>
+                    </Style.Triggers>
+                </Style>
+            </DataGrid.RowStyle>
+        </DataGrid>
+        <DataGrid x:Name="PetitGirlDeck3" ItemsSource="{Binding PetitGirlDeck3, UpdateSourceTrigger=PropertyChanged}" AutoGenerateColumns="False" Grid.Column="0" Grid.Row="3">
+            <DataGrid.Resources>
+                <SolidColorBrush x:Key="{x:Static SystemColors.HighlightBrushKey}" Color="LightGreen"/>
+                <SolidColorBrush x:Key="{x:Static SystemColors.HighlightTextBrushKey}" Color="Black"/>
+            </DataGrid.Resources>
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="ぷちガール" Binding="{Binding PetitGirlName}" IsReadOnly="True"/>
+                <DataGridTextColumn Header="攻援力" Binding="{Binding Attack}" IsReadOnly="False"/>
+                <DataGridTextColumn Header="守援力" Binding="{Binding Defence}" IsReadOnly="False"/>
+                <DataGridTextColumn Header="応援力効果1" Binding="{Binding PetitCheerEffect1}" IsReadOnly="True"/>
+                <DataGridTextColumn Header="応援力効果2" Binding="{Binding PetitCheerEffect2}" IsReadOnly="True"/>
+                <DataGridTextColumn Header="応援力効果3" Binding="{Binding PetitCheerEffect3}" IsReadOnly="True"/>
+                <DataGridTextColumn Header="応援力効果4" Binding="{Binding PetitCheerEffect4}" IsReadOnly="True"/>
+                <DataGridTextColumn Header="スキル効果" Binding="{Binding PetitSkillEffect}" IsReadOnly="True"/>
+                <DataGridTextColumn Header="センバツボーナス" Binding="{Binding PetitSelectionBonus}" IsReadOnly="True"/>
+            </DataGrid.Columns>
+            <DataGrid.RowStyle>
+                <Style TargetType="{x:Type DataGridRow}">
+                    <Setter Property="Background" Value="LightBlue" />
+                    <Style.Triggers>
+                        <DataTrigger Binding="{Binding Attribute}" Value="Cool">
+                            <Setter Property="Background" Value="LightBlue"/>
+                        </DataTrigger>
+                        <DataTrigger Binding="{Binding Attribute}" Value="Pop">
+                            <Setter Property="Background" Value="#FFFFD485"/>
+                        </DataTrigger>
+                        <DataTrigger Binding="{Binding Attribute}" Value="Sweet">
+                            <Setter Property="Background" Value="LightPink"/>
+                        </DataTrigger>
+                    </Style.Triggers>
+                </Style>
+            </DataGrid.RowStyle>
+        </DataGrid>
+        <StackPanel Grid.Column="1" Grid.Row="1">
+            <Button x:Name="InPetitDeck1Button" ClickMode="Press">
+                &lt;
+            </Button>
+            <Button x:Name="OutPetitDeck1Button" ClickMode="Press">
+                &gt;
+            </Button>
+        </StackPanel>
+        <StackPanel Grid.Column="1" Grid.Row="2">
+            <Button x:Name="InPetitDeck2Button" ClickMode="Press">
+                &lt;
+            </Button>
+            <Button x:Name="OutPetitDeck2Button" ClickMode="Press">
+                &gt;
+            </Button>
+        </StackPanel>
+        <StackPanel Grid.Column="1" Grid.Row="3">
+            <Button x:Name="InPetitDeck3Button" ClickMode="Press">
+                &lt;
+            </Button>
+            <Button x:Name="OutPetitDeck3Button" ClickMode="Press">
+                &gt;
+            </Button>
+        </StackPanel>
+
+        <DataGrid Grid.Column="2" Grid.RowSpan="4" x:Name="PetitGirlListBox" ItemsSource="{Binding PetitGirlList, UpdateSourceTrigger=PropertyChanged}" AutoGenerateColumns="False">
+            <DataGrid.Resources>
+                <SolidColorBrush x:Key="{x:Static SystemColors.HighlightBrushKey}" Color="LightGreen"/>
+                <SolidColorBrush x:Key="{x:Static SystemColors.HighlightTextBrushKey}" Color="Black"/>
+            </DataGrid.Resources>
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="ぷちガール" Binding="{Binding PetitGirlName}" IsReadOnly="True"/>
+                <DataGridTextColumn Header="攻援力" Binding="{Binding Attack}" IsReadOnly="False"/>
+                <DataGridTextColumn Header="守援力" Binding="{Binding Defence}" IsReadOnly="False"/>
+                <DataGridTextColumn Header="応援力効果1" Binding="{Binding PetitCheerEffect1}" IsReadOnly="True"/>
+                <DataGridTextColumn Header="応援力効果2" Binding="{Binding PetitCheerEffect2}" IsReadOnly="True"/>
+                <DataGridTextColumn Header="応援力効果3" Binding="{Binding PetitCheerEffect3}" IsReadOnly="True"/>
+                <DataGridTextColumn Header="応援力効果4" Binding="{Binding PetitCheerEffect4}" IsReadOnly="True"/>
+                <DataGridTextColumn Header="スキル効果" Binding="{Binding PetitSkillEffect}" IsReadOnly="True"/>
+                <DataGridTextColumn Header="センバツボーナス" Binding="{Binding PetitSelectionBonus}" IsReadOnly="True"/>
+            </DataGrid.Columns>
+            <DataGrid.RowStyle>
+                <Style TargetType="{x:Type DataGridRow}">
+                    <Setter Property="Background" Value="LightBlue" />
+                    <Style.Triggers>
+                        <DataTrigger Binding="{Binding Attribute}" Value="Cool">
+                            <Setter Property="Background" Value="LightBlue"/>
+                        </DataTrigger>
+                        <DataTrigger Binding="{Binding Attribute}" Value="Pop">
+                            <Setter Property="Background" Value="#FFFFD485"/>
+                        </DataTrigger>
+                        <DataTrigger Binding="{Binding Attribute}" Value="Sweet">
+                            <Setter Property="Background" Value="LightPink"/>
+                        </DataTrigger>
+                    </Style.Triggers>
+                </Style>
+            </DataGrid.RowStyle>
+        </DataGrid>
+
+    </Grid>
+
+    
+
+</UserControl>
+	

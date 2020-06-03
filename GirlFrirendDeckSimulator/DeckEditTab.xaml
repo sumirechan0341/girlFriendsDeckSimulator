@@ -7,38 +7,101 @@
         <c:DeckEditViewModel/>
     </UserControl.DataContext>
 
-    <ScrollViewer HorizontalScrollBarVisibility="Auto">
-        <StackPanel HorizontalAlignment="Left" Height="900" Margin="150,20,10,10" VerticalAlignment="Top" Width="505">
-            <StackPanel.Resources>
-                <c:CardConverter x:Key="cardConverter"/>
-            </StackPanel.Resources>
-            <DataGrid x:Name="GirlListBox" ItemsSource="{Binding CardListView, UpdateSourceTrigger=PropertyChanged}" AutoGenerateColumns="False" >
-                <DataGrid.Columns>
-                    <DataGridTextColumn Header="カード名" Binding="{Binding CardName}"></DataGridTextColumn>
-                    <DataGridTextColumn Header="攻援値" Binding="{Binding Attack}"></DataGridTextColumn>
-                    <DataGridTextColumn Header="守援値" Binding="{Binding Defence}"></DataGridTextColumn>
-                    <DataGridTextColumn Header="補正攻援値" Binding="{Binding CorrectedAttack, UpdateSourceTrigger=PropertyChanged}" x:Name="CorrectedAttacks"></DataGridTextColumn>
-                    <DataGridTextColumn Header="補正守援値" Binding="{Binding CorrectedDefence, UpdateSourceTrigger=PropertyChanged}" x:Name="CorrectedDefences"></DataGridTextColumn>
-                </DataGrid.Columns>
-                <DataGrid.RowStyle>
-                    <Style TargetType="DataGridRow">
-                        <Setter Property="Background" Value="LightBlue" />
-                        <Style.Triggers>
-                            <DataTrigger Binding="{Binding Path=Attribute}" Value="Cool">
-                                <Setter Property="Background" Value="LightBlue"/>
-                            </DataTrigger>
-                            <DataTrigger Binding="{Binding Path=Attribute}" Value="Pop">
-                                <Setter Property="Background" Value="#FFFFD485"/>
-                            </DataTrigger>
-                            <DataTrigger Binding="{Binding Path=Attribute}" Value="Sweet">
-                                <Setter Property="Background" Value="LightPink"/>
-                            </DataTrigger>
-                        </Style.Triggers>
-                    </Style>
-                </DataGrid.RowStyle>
-            </DataGrid>
-        </StackPanel>
-    </ScrollViewer>
 
+    <Grid>
+        <Grid.Resources>
+            <SolidColorBrush x:Key="{x:Static SystemColors.HighlightBrushKey}" Color="LightGreen"/>
+            <SolidColorBrush x:Key="{x:Static SystemColors.HighlightTextBrushKey}" Color="Black"/>
+            <c:CardConverter x:Key="cardConverter"/>
+            <Style x:Key="DataGridRowStyle" TargetType="DataGridRow">
+                <Setter Property="Template">
+                    <Setter.Value>
+                        <ControlTemplate TargetType="DataGridRow">
+                            <Border Name="_Border"
+                                    Padding="2"
+                                    SnapsToDevicePixels="true">
+                                <ContentPresenter />
+                            </Border>
+                            <ControlTemplate.Triggers>
+                                <Trigger Property="IsSelected" Value="true">
+                                    <Setter TargetName="_Border" Property="Background" Value="LightGreen"/>
+                                    <Setter Property="Foreground" Value="LightGreen"/>
+                                </Trigger>
+                            </ControlTemplate.Triggers>
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
+            </Style>
+        </Grid.Resources>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="4*"/>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="8*"/>
+        </Grid.RowDefinitions>
+        <DataGrid Grid.Row="0" x:Name="FrontDeckGirlList" ItemsSource="{Binding FrontDeck, UpdateSourceTrigger=PropertyChanged}" AutoGenerateColumns="False">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="カード名" Binding="{Binding CardName}" IsReadOnly="True"></DataGridTextColumn>
+                <DataGridTextColumn Header="属性" Binding="{Binding Attribute}" IsReadOnly="True"></DataGridTextColumn>
+                <DataGridTextColumn Header="攻援力" Binding="{Binding Attack, UpdateSourceTrigger=PropertyChanged}" IsReadOnly="False"></DataGridTextColumn>
+                <DataGridTextColumn Header="守援力" Binding="{Binding Defence}" IsReadOnly="False"></DataGridTextColumn>
+                <DataGridTextColumn Header="補正攻援力" Binding="{Binding CorrectedAttack, UpdateSourceTrigger=PropertyChanged}" IsReadOnly="True"></DataGridTextColumn>
+                <DataGridTextColumn Header="補正守援力" Binding="{Binding CorrectedDefence, UpdateSourceTrigger=PropertyChanged}" IsReadOnly="True"></DataGridTextColumn>
+                <DataGridCheckBoxColumn Header="本命設定" Binding="{Binding IsFavoriteGirl, UpdateSourceTrigger=PropertyChanged}" IsReadOnly="False" ></DataGridCheckBoxColumn>
+            </DataGrid.Columns>
+            <DataGrid.RowStyle>
+                <Style TargetType="DataGridRow">
+                    <Style.Triggers>
+                        <DataTrigger Binding="{Binding Path=Attribute}" Value="Cool">
+                            <Setter Property="Background" Value="LightBlue"/>
+                        </DataTrigger>
+                        <DataTrigger Binding="{Binding Path=Attribute}" Value="Pop">
+                            <Setter Property="Background" Value="#FFFFD485"/>
+                        </DataTrigger>
+                        <DataTrigger Binding="{Binding Path=Attribute}" Value="Sweet">
+                            <Setter Property="Background" Value="LightPink"/>
+                        </DataTrigger>
+                    </Style.Triggers>
+                </Style>
+            </DataGrid.RowStyle>
+        </DataGrid>
+        <StackPanel Grid.Row="1">
+            <Button x:Name="InFronDeckButton" ClickMode="Press">
+                ∧
+            </Button>
+            <Button x:Name="OutFrontDeckButton" ClickMode="Press">
+                ∨
+            </Button>
+        </StackPanel>
+        <DataGrid Grid.Row="2" x:Name="GirlListBox" ItemsSource="{Binding CardListView, UpdateSourceTrigger=PropertyChanged}" AutoGenerateColumns="False" >
+            
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="カード名" Binding="{Binding CardName}" IsReadOnly="True"></DataGridTextColumn>
+                <DataGridTextColumn Header="属性" Binding="{Binding Attribute}" IsReadOnly="True"></DataGridTextColumn>
+                <DataGridTextColumn Header="攻援力" Binding="{Binding Attack, UpdateSourceTrigger=PropertyChanged}" IsReadOnly="False"></DataGridTextColumn>
+                <DataGridTextColumn Header="守援力" Binding="{Binding Defence}" IsReadOnly="False"></DataGridTextColumn>
+                <DataGridTextColumn Header="補正攻援力" Binding="{Binding CorrectedAttack, UpdateSourceTrigger=PropertyChanged}" x:Name="CorrectedAttacks" IsReadOnly="True"></DataGridTextColumn>
+                <DataGridTextColumn Header="補正守援力" Binding="{Binding CorrectedDefence, UpdateSourceTrigger=PropertyChanged}" x:Name="CorrectedDefences" IsReadOnly="True"></DataGridTextColumn>
+                <DataGridCheckBoxColumn Header="本命設定" Binding="{Binding IsFavoriteGirl, UpdateSourceTrigger=PropertyChanged}" x:Name="FavoriteGirlCheckBox" IsReadOnly="False" ></DataGridCheckBoxColumn>
+                
+            </DataGrid.Columns>
+            <DataGrid.RowStyle>
+                <Style TargetType="DataGridRow">
+                    <Style.Triggers>
+                        <DataTrigger Binding="{Binding Path=Attribute}" Value="Cool">
+                            <Setter Property="Background" Value="LightBlue"/>
+                        </DataTrigger>
+                        <DataTrigger Binding="{Binding Path=Attribute}" Value="Pop">
+                            <Setter Property="Background" Value="#FFFFD485"/>
+                        </DataTrigger>
+                        <DataTrigger Binding="{Binding Path=Attribute}" Value="Sweet">
+                            <Setter Property="Background" Value="LightPink"/>
+                        </DataTrigger>
+                    </Style.Triggers>
+                </Style>
+            </DataGrid.RowStyle>
+        </DataGrid>
+
+
+    </Grid>
 </UserControl>
 	

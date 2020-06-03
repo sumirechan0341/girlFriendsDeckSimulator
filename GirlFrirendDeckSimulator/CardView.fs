@@ -25,10 +25,17 @@ module CardView =
 
     type CardView (c: Card, p) =
         let correctedVals = calcBonus(c, p)
-        member val CardName = "[" + c.eventName + "]" + c.girl.name with get, set
+        member val CardName = 
+            (match c.eventName with
+            | None -> c.girl.name
+            | Some(evName) -> "[" + evName + "]" + c.girl.name) with get, set
         member val Attack = c.attack with get, set
         member val Defence = c.defence with get, set
         member val Attribute = c.attribute with get, set
         member val CorrectedAttack = correctedVals.CorrectedAttack with get, set
         member val CorrectedDefence = correctedVals.CorrectedDefence with get, set
+        member val IsFavoriteGirl = false with get, set
+        
         new (c) = CardView(c, PlayerParameterViewModel())
+
+

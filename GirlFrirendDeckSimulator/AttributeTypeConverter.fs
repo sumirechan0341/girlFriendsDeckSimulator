@@ -2,6 +2,7 @@
 open AttributeType
 open SkillAttributeType
 open Converter
+
 module AttributeTypeConverter =
     let toString(attrType: AttributeType): string =
         match attrType with
@@ -22,22 +23,18 @@ type AttributeTypeConverter() =
     inherit ConverterBase(AttributeTypeConverter.toString >> (fun s -> s :> obj) |> convert, AttributeTypeConverter.fromString >> (fun a -> a :> obj) |> convert)
 
 module SkillAttributeTypeConverter =
-    let toString(skillAttrType: SkillAttributeType): string =
+    let rec toString(skillAttrType: SkillAttributeType): string =
         match skillAttrType with
         | SkillAttributeType.Cool -> "COOL"
         | SkillAttributeType.Pop -> "POP"
         | SkillAttributeType.Sweet -> "SWEET"
         | SkillAttributeType.All -> "全タイプ"
+        | SkillAttributeType.Combination(attr1, attr2) -> toString(attr1) + "&" + toString(attr2)
 
-    let fromString(skillAttrTypeStr) =
+    let rec fromString(skillAttrTypeStr) =
         match skillAttrTypeStr with
-        | "COOL" -> SkillAttributeType.Cool
-        | "POP" -> SkillAttributeType.Pop
-        | "SWEET" -> SkillAttributeType.Sweet
-        | "COOLタイプ" -> SkillAttributeType.Cool
-        | "POPタイプ" -> SkillAttributeType.Pop
-        | "SWEETタイプ" -> SkillAttributeType.Sweet
-        | "全タイプ" -> SkillAttributeType.All
-
-
-
+        | "COOL" | "COOLタイプ" | "COOLﾀｲﾌﾟ" -> SkillAttributeType.Cool
+        | "POP" | "POPタイプ" | "POPﾀｲﾌﾟ" -> SkillAttributeType.Pop
+        | "SWEET" | "SWEETタイプ" | "SWEETﾀｲﾌﾟ" -> SkillAttributeType.Sweet
+        | "全タイプ" | "全ﾀｲﾌﾟ" -> SkillAttributeType.All
+        | combiAttrStr -> SkillAttributeType.Combination(fromString(combiAttrStr.Split('&').[0]), fromString(combiAttrStr.Split('&').[1]))

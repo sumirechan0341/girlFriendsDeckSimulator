@@ -1,31 +1,50 @@
 ﻿namespace GirlFriendDeckSimulator
-open AttributeType
+open SkillAttributeType
 open Mode
+open Club
+open Grade
+open SelectionBonus
+open AttributeType
 
 module PetitGirl =
-    type PetitCheerType =
-        | AttributeCheerType of attrType: AttributeType * mode: Mode * effectNum: float
-        | AllAttributeCheerType of mode: Mode * effectNum: float
-        | GradeCheerType of grade: int * effectNum: float
-        | FavoriteCheerType of effectNum: float
-        | DatingCheerType of effectNum: float
-        | SelfCheerType of effectNum: float
-        | TouchCheerType of effectNum: float
-        | BirthdayCheerType of effectNum: float
-        | FacilityBuildUpType of effectNum: float
-        | GalIncomeUpType of effectNum: float
-        | LikeabilityUpType of effectNum: float
-        | DeckCostDownType of effectNum: float
+    type EffectDegree = Large | Middle | Small
+    type PetitCheerType = 
+        | AttributeCheerType of skillAttrType: SkillAttributeType * mode: Mode
+        | GradeCheerType of grade: Grade * mode: Mode
+        | FavoriteCheerType of mode: Mode
+        | DatingCheerType of mode: Mode
+        | SameGirlCheerType of mode: Mode
+        | TouchCheerType
+        | BirthdayCheerType of mode: Mode
+        | FacilityBuildUpType of targetFacility: Facility
+        | GalIncomeUpType
+        | LikeabilityUpType
+        | DeckCostDownType
+        | ExpIncomeUpType
+
+    type PetitCheerEffect = {
+        petitCheerType: PetitCheerType;
+        effectNum: float
+    }
 
     type PetitSkillType =
-        | AttributeSkillType of attrType: AttributeType * mode: Mode * skillNum: int
-        | AllAttributeSkillType of mode: Mode * skillNum: int
+        | AttributeSkillType of skillAttrType: SkillAttributeType * mode: Mode
+    
+    type PetitSkillEffect = 
+        {
+            petitSkillType: PetitSkillType;
+            effectNum: float
+        }       
 
-    type PetitGirl(girlName, petitCheerTypes, petitSkillType, ?selectionBonus, ?eventName) =
-        let girlName: string = girlName
-        let eventName: Option<string> = eventName
-        let petitCheerTypes: PetitCheerType[] = petitCheerTypes
-        let petitSkillType: PetitSkillType = petitSkillType
-        let selectionBonus: Option<string> = selectionBonus
+    type PetitGirl = {
+        girlName: string
+        eventName: option<string>
+        attribute: AttributeType
+        attack: int
+        defence: int
+        petitCheerEffects: PetitCheerEffect[]
+        petitSkillEffect: option<PetitSkillEffect>
+        selectionBonus: option<SelectionBonus>
+    }
         
         

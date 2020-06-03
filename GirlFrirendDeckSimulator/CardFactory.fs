@@ -10,7 +10,10 @@ module CardFactory =
         let cardElements = CardElements.Parse(cardJson)
         {
             girl = getGirlByName(cardElements.GirlName);
-            eventName = cardElements.EventName;
+            eventName = 
+                match cardElements.EventName with
+                | "" -> None
+                | _ -> Some(cardElements.EventName) 
             attribute = AttributeTypeConverter.fromString(cardElements.Attribute);
             rarity = RarityConverter.fromString(cardElements.Rarity);
             attack = cardElements.Attack;

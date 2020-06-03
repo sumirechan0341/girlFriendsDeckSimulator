@@ -27,7 +27,7 @@ module CalcBonus =
             | AttributeType.Cool -> playerParametersViewModel.CoolColon
             | AttributeType.Pop -> playerParametersViewModel.PopColon
             | AttributeType.Sweet -> playerParametersViewModel.SweetColon
-        let whiteBoardBonus = if playerParametersViewModel.ExistWhiteBoard && card.attribute = AttributeType.Cool
+        let whiteBoardBonus = if playerParametersViewModel.ExistWhiteboard && card.attribute = AttributeType.Cool
                                 then bonusSeetings.ClubBonusSettings.FacilityBonus
                                 else 0
         let televisionBonus = if playerParametersViewModel.ExistTelevision && card.attribute = AttributeType.Pop

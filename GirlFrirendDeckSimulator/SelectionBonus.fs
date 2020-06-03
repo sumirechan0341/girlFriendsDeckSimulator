@@ -3,7 +3,7 @@ open Mode
 open System
 module SelectionBonus =
     type SelectionBonus(selectionBonusName: string) =
-        let selectionBonusName = selectionBonusName
+        member val SelectionBonusName = selectionBonusName
         
         member _.getSelectionBonusId() =
             match selectionBonusName with

@@ -15,7 +15,7 @@ module Card =
 
     type Card = {
         girl: Girl
-        eventName: string
+        eventName: option<string>
         attribute: AttributeType
         rarity: Rarity
         attack: int

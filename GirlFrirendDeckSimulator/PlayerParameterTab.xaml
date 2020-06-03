@@ -96,7 +96,7 @@
             </TextBox.Text>
         </TextBox>
         <TextBlock Text="部活設備"/>
-        <CheckBox Content="ホワイトボード" IsChecked="{Binding Path=ExistWhiteBoard}"  />
+        <CheckBox Content="ホワイトボード" IsChecked="{Binding Path=ExistWhiteboard}"  />
         <CheckBox Content="テレビ" IsChecked="{Binding Path=ExistTelevision}"  />
         <CheckBox Content="ロッカー" IsChecked="{Binding Path=ExistLocker}"  />
         <TextBlock Text="役職"/>
