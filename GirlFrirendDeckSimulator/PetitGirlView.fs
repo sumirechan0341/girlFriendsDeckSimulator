@@ -1,7 +1,7 @@
 ﻿namespace GirlFriendDeckSimulator
 open PetitGirl
 open System.Collections
-
+open System
 module PetitGirlView =
     type PetitGirlView(petitGirl: PetitGirl) =
         member val petitGirl = petitGirl
@@ -32,8 +32,19 @@ module PetitGirlView =
             (match petitGirl.petitSkillEffect with
             | None -> ""
             | Some(petitSkillEffect) -> PetitSkillTypeConverter.toString(petitSkillEffect.petitSkillType) + " : " + petitSkillEffect.effectNum.ToString() + "%") with get, set
-        member val PetitSelectionBonus =
-            match petitGirl.selectionBonus with
-            | None -> ""
-            | Some(selectionBonus) -> selectionBonus.SelectionBonusName
+        member val PetitSelectionBonus1 =
+            if Array.length petitGirl.selectionBonus > 0
+            then petitGirl.selectionBonus.[0].SelectionBonusName
+            else ""
+        member val PetitSelectionBonus2 =
+            if Array.length petitGirl.selectionBonus = 2
+            then petitGirl.selectionBonus.[1].SelectionBonusName
+            else ""
         member val Attribute = petitGirl.attribute
+
+        interface IEquatable<PetitGirlView> with
+            member this.Equals(other) =
+                this.petitGirl.girlName = other.petitGirl.girlName &&
+                this.petitGirl.eventName = other.petitGirl.eventName &&
+                this.petitGirl.attack = other.petitGirl.attack &&
+                this.petitGirl.defence = other.petitGirl.defence

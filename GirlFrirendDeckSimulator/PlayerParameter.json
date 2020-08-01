@@ -1,0 +1,14 @@
+{
+  "playerName": "チトセ",
+  "attributeType": "COOL",
+  "clubType": "帰宅部",
+  "attackCost": 2700,
+  "coolColon": 6.2,
+  "popColon": 2,
+  "sweetColon": 0,
+  "existWhiteboard": true,
+  "existTelevision": true,
+  "existLocker": true,
+  "assignedRole": "攻キャプテン",
+  "backDeckNum": 52
+}

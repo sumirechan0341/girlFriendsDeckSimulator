@@ -65,6 +65,14 @@ module SkillTypeConverter =
         then Some (List.tail [ for x in m.Groups -> x.Value ])
         else None
 
+    let toString(skillType: SkillType) =
+        SkillAttributeTypeConverter.toString(skillType.attribute) + 
+        "の" + 
+        SkillTargetConverter.toString(skillType.target) +
+        ModeConverter.toString(skillType.mode) +
+        SkillEffectConverter.toString(skillType.effect) +
+        SkillModeConverter.toString(skillType.skillMode) +
+        if skillType.skillEnchantLevel = 0 then "" else "+" + skillType.skillEnchantLevel.ToString() 
     let fromString(skillTypeStr) =
         let separater = "の"
         let attributeRegex = "(COOL|COOLタイプ|POP|POPタイプ|SWEET|SWEETタイプ|全タイプ|(?:(?:COOL|COOLタイプ|POP|POPタイプ|SWEET|SWEETタイプ)&(?:COOL|COOLタイプ|POP|POPタイプ|SWEET|SWEETタイプ)))"
@@ -75,7 +83,7 @@ module SkillTypeConverter =
         let skillEnchantLevelRegex = "(\+\d+)"
 
         let pattern1 = 
-            "(?:" + attributeRegex + separater + ")" + "?" 
+            "(?:" + attributeRegex + ")" + "?" + "(?:" + separater + ")" + "?" 
             + "(?:" + skillTargetRegex + separater + ")" + "?" 
             + modeRegex 
             + skillEffectRegex 
@@ -87,8 +95,19 @@ module SkillTypeConverter =
         | ParseRegex pattern1 [attribute; skillTarget; mode; skillEffect; skillTypeMode; skillEnchantLevel] 
                 ->  
                     Some {
-                        attribute = if(String.IsNullOrEmpty(attribute) |> not) then SkillAttributeTypeConverter.fromString(attribute) else SkillAttributeType.All;
-                        target = if(String.IsNullOrEmpty(attribute) |> not) then SkillTargetConverter.fromString(skillTarget) else if(skillTypeMode = "UP") then SkillTarget.Front else SkillTarget.OpponentFront;
+                        attribute = 
+                            if String.IsNullOrEmpty(attribute) |> not 
+                                then SkillAttributeTypeConverter.fromString(attribute) 
+                                else SkillAttributeType.All;
+                        target = 
+                            if String.IsNullOrEmpty(skillTarget) |> not
+                                then
+                                    SkillTargetConverter.fromString(skillTarget) 
+                                else if skillTypeMode = "UP" 
+                                    then 
+                                        SkillTarget.Front 
+                                    else 
+                                        SkillTarget.OpponentFront;
                         effect = SkillEffectConverter.fromString(skillEffect);
                         mode = ModeConverter.fromString(mode);
                         skillMode = SkillModeConverter.fromString(skillTypeMode);

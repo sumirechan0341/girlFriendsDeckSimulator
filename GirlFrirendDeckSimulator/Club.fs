@@ -15,7 +15,7 @@ module Club =
     let getAllClubTypes = Enum.GetValues(typeof<ClubType>)
 
     type Facility = 
-        | WhiteBoard = 'C'
+        | Whiteboard = 'C'
         | Television = 'P'
         | Locker = 'S'
 

@@ -61,6 +61,7 @@
     <Compile Include="AttributeType.fs" />
     <Compile Include="Club.fs" />
     <Compile Include="Mode.fs" />
+    <Compile Include="EffectNumType.fs" />
     <Compile Include="Grade.fs" />
     <Compile Include="SelectionBonus.fs" />
     <Compile Include="Player.fs" />
@@ -69,39 +70,53 @@
     <Compile Include="Girl.fs" />
     <Compile Include="SkilType.fs" />
     <Compile Include="Card.fs" />
+    <Compile Include="PreciousScene.fs" />
     <Compile Include="ColonFormRule.fs" />
     <Compile Include="Converter.fs" />
     <Compile Include="ClubRoleTypeConverter.fs" />
+    <Compile Include="EffectNumTypeConverter.fs" />
     <Compile Include="GradeConverter.fs" />
     <Compile Include="AttributeTypeConverter.fs" />
     <Compile Include="ClubTypeConverter.fs" />
+    <Compile Include="EventTypeConverter.fs" />
     <Compile Include="CardConverter.fs" />
     <Compile Include="GirlFactory.fs" />
     <Compile Include="ModeConverter.fs" />
+    <Compile Include="SceneEffectConverter.fs" />
     <Compile Include="SkillTypeConverter.fs" />
     <Compile Include="CardFactory.fs" />
+    <Compile Include="PreciousSceneFactory.fs" />
     <Compile Include="PetitGirlConverter.fs" />
     <Compile Include="PetitGirlFactory.fs" />
     <Compile Include="PlayerParameterViewModel.fs" />
-    <Compile Include="CalcBonus.fs" />
+    <Compile Include="PreciousSceneView.fs" />
     <Compile Include="CardView.fs" />
+    <Compile Include="SpecialBonusEditViewModel.fs" />
     <Compile Include="PetitGirlView.fs" />
     <Compile Include="PetitDeckEditViewModel.fs" />
     <Compile Include="DeckEditViewModel.fs" />
-    <Compile Include="MainWindowViewModel.fs" />
-    <Compile Include="XamlLoader.fs" />
+    <Compile Include="CalcBonus.fs" />
     <None Include="CardList.json" />
     <None Include="PetitGirl.json" />
-    <Content Include="CardListBackUp.txt" />
     <None Include="GirlInfo.json" />
-    <None Include="BonusSetting.json" />
+    <None Include="Setting.json" />
     <Resource Include="PlayerParameterTab.xaml" />
     <Resource Include="DeckEditTab.xaml" />
     <Resource Include="PetitDeckEditTab.xaml" />
+    <Resource Include="SpecialBonusEditTab.xaml" />
     <Resource Include="MainWindow.xaml" />
     <Compile Include="Program.fs" />
   </ItemGroup>
   <ItemGroup>
+    <Reference Include="Aether">
+      <HintPath>..\packages\Aether.8.2.0\lib\net45\Aether.dll</HintPath>
+    </Reference>
+    <Reference Include="FParsec">
+      <HintPath>..\packages\FParsec.1.0.3\lib\net40-client\FParsec.dll</HintPath>
+    </Reference>
+    <Reference Include="FParsecCS">
+      <HintPath>..\packages\FParsec.1.0.3\lib\net40-client\FParsecCS.dll</HintPath>
+    </Reference>
     <Reference Include="FSharp.Core">
       <HintPath>..\packages\FSharp.Core.4.7.1\lib\net45\FSharp.Core.dll</HintPath>
     </Reference>
@@ -122,7 +137,6 @@
     <Reference Include="System.Data" />
     <Reference Include="System.Numerics" />
     <Reference Include="System.ValueTuple">
-      <HintPath>..\packages\System.ValueTuple.4.3.0\lib\netstandard1.0\System.ValueTuple.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="System.Xaml" />

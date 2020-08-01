@@ -3,9 +3,13 @@ open Mode
 open System
 module SelectionBonus =
     type SelectionBonus(selectionBonusName: string) =
+        interface IComparable with
+            member this.CompareTo(other: obj) =
+                this.getSelectionBonusId.CompareTo((other:?>SelectionBonus).getSelectionBonusId)
+                
         member val SelectionBonusName = selectionBonusName
         
-        member _.getSelectionBonusId() =
+        member _.getSelectionBonusId =
             match selectionBonusName with
             | "生活指導" -> 0
             | "★☆部長バースト☆★" -> 1
@@ -43,7 +47,7 @@ module SelectionBonus =
             | "Precious★Friend" -> 33
             | _ -> failwith "サポートされていないセンバツボーナスが含まれています。"
 
-        member _.getSelectionBonusMode() =
+        member _.getSelectionBonusMode =
             match selectionBonusName with
             | "生活指導" -> AttackAndDefence
             | "★☆部長バースト☆★" -> AttackAndDefence
@@ -80,3 +84,41 @@ module SelectionBonus =
             | "Other☆School☆Girls" -> AttackAndDefence
             | "Precious★Friend" -> AttackAndDefence
             | _ -> failwith "サポートされていないセンバツボーナスが含まれています。"
+
+    let getAllSelectionBonus =
+        Array.map (SelectionBonus) [|
+            "生活指導";
+            "★☆部長バースト☆★";
+            "！ゴールドフィンガーズ！";
+            "おかえりby帰宅部応援団";
+            "Ｌｅｔ’ｓ 精神集中♪";
+            "応援五重奏";
+            "☆ミラクルパフォーマンス★";
+            "マニアックトルネード";
+            "スポーティーザッパー";
+            "ファイターチアーズ！";
+            "委員会ペンタゴン";
+            "☆コスメティックパワー☆";
+            "ザ・コレクターズパワー";
+            "クリエイティブ魂";
+            "ロンリーガールズレクイエム";
+            "歴史より愛をこめて";
+            "算術スクレイパー";
+            "シーフードランデブー";
+            "♪ＮＯＴスイーツ女子パワー♪";
+            "↑ＮＯＴ肉食女子パワー↑";
+            "セクシーガールズ★キッス";
+            "↑スレンダーズボルケーノ↑";
+            "グラマラスソウル";
+            "クールビューティーフラッシュ";
+            "ミクロズ☆チアフル";
+            "センター★サポート";
+            "ふわふわらっぴんぐ";
+            "ライク★アニマル★チアーズ";
+            "未知への探究心";
+            "シャイニング★スプラッシュ";
+            "JUMP↑JUMP↑JUMP";
+            "にゅーろん★くりぃむそふと";
+            "Other☆School☆Girls";
+            "Precious★Friend";
+        |]

@@ -4,16 +4,17 @@ open Club
 module Player = 
     type Player = { 
         PlayerName: string;
-        AttrType: AttributeType;
+        AttributeType: AttributeType;
         ClubType: ClubType;
         AttackCost: int;
         CoolColon: float;
         PopColon: float; 
         SweetColon: float; 
-        ExistWhiteBoard: bool; 
+        ExistWhiteboard: bool; 
         ExistTelevision: bool; 
         ExistLocker: bool;
-        AssignedRole: Role
+        AssignedRole: Role;
+        BackDeckNum: int
     }
     
 

@@ -72,3 +72,18 @@ module PetitSkillTypeConverter =
         
         match petitSkillStr with
         | ParseRegex attributeSkillPattern [skillAttr; mode] -> AttributeSkillType(SkillAttributeTypeConverter.fromString(skillAttr), ModeConverter.fromString(mode))
+
+module PetitGirlRarityConverter =
+    let toString(petitGirlRarity) =
+        match petitGirlRarity with
+        | SSR -> "SSR"
+        | SR -> "SR"
+        | HR -> "HR"
+        | R -> "R"
+
+    let fromString(petitGirlRarityStr) =
+        match petitGirlRarityStr with
+        | "SSR" -> SSR
+        | "SR" -> SR
+        | "HR" -> HR
+        | "R" -> R

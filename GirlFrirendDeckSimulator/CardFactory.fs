@@ -4,6 +4,7 @@ open FSharp.Data
 open System.IO
 open GirlFactory
 open CardConverter
+open System
 module CardFactory =
     type CardElements = JsonProvider<""" {"girlName":"上条るい","eventName":"あの頃は…","rarity":"UR","attribute":"COOL","isExed":true,"attack":32744,"defence":27698,"cost":23,"skillLevel":15,"skillType":"COOLの主ｾﾝﾊﾞﾂ全員&副ｾﾝﾊﾞﾂ1人の攻援ｽｰﾊﾟｰ特大UP"} """>
     let cardFactoryFromJson(cardJson) = 
@@ -22,8 +23,10 @@ module CardFactory =
             isEXed = cardElements.IsExed;
             cost = cardElements.Cost;
             skillType =  SkillTypeConverter.fromString(cardElements.SkillType);
-            skillLevel = cardElements.SkillLevel
+            skillLevel = cardElements.SkillLevel;
+            cardJson = cardElements.JsonValue
         }
-    //jsonの末尾に改行とかあると失敗する
-    // なんとかするかも
-    let cardList = Seq.map(cardFactoryFromJson) (File.ReadLines("..\..\CardList.json"))
+
+    let cardList = 
+        Seq.map(cardFactoryFromJson) <| 
+        Seq.filter (String.IsNullOrWhiteSpace >> not) (File.ReadLines(".\CardList.txt"))

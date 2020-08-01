@@ -12,3 +12,6 @@ module ModeConverter =
         | "攻援" -> Attack
         | "守援" -> Defence
         | "攻守" -> AttackAndDefence
+
+type ModeConverter() =
+    inherit ConverterBase(ModeConverter.toString >> (fun s -> s :> obj) |> convert, ModeConverter.fromString >> (fun m -> m :> obj) |> convert)

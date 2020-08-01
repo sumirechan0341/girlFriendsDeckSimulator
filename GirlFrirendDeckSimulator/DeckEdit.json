@@ -1,0 +1,22 @@
+{
+  "frontDeck": [
+    {
+      "card": {
+        "girlName": "真白透子",
+        "eventName": "特別な想い",
+        "rarity": "SSR",
+        "attribute": "COOL",
+        "isExed": true,
+        "attack": 31655,
+        "defence": 25688,
+        "cost": 24,
+        "skillLevel": 14,
+        "skillType": "COOLの主ｾﾝﾊﾞﾂ全員&副ｾﾝﾊﾞﾂ1人の攻援特大UP"
+      },
+      "strap1": 0,
+      "strap2": 0,
+      "strap3": 0,
+      "strap4": 0
+    }
+  ]
+}

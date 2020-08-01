@@ -8,10 +8,10 @@ open System.Text.RegularExpressions
 
 module GirlFactory =
     
-    type GirlInfo = JsonProvider<"./GirlInfo.json">
+    type GirlInfo = JsonProvider<".\GirlInfo.json">
     
     let girlFactroyFromJson: seq<Girl> = 
-        let girlInfo = GirlInfo.Parse(File.ReadAllText("..\..\GirlInfo.json"))
+        let girlInfo = GirlInfo.Parse(File.ReadAllText(".\GirlInfo.json"))
         seq {
             for girl in girlInfo do 
             {   name = girl.Name

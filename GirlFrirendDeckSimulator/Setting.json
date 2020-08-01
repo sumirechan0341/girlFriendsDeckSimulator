@@ -1,4 +1,41 @@
 ﻿{	
+	"eventFactorSetting": {
+		"raid": 0.5,
+		"hunters": 0.8,
+		"coolTrio": {
+			"cool": 1.0,
+			"pop": 0.7,
+			"sweet": 1.3
+		},
+		"popTrio": {
+			"cool": 1.3,
+			"pop": 1.0,
+			"sweet": 0.7
+		},
+		"sweetTrio": {
+			"cool": 0.7,
+			"pop": 1.3,
+			"sweet": 1.0
+		},
+		"coolMega": {
+			"cool": 1.0,
+			"pop": 0.8,
+			"sweet": 1.2
+		},
+		"popMega": {
+			"cool": 1.2,
+			"pop": 1.0,
+			"sweet": 0.8
+		},
+		"sweetMega": {
+			"cool": 0.8,
+			"pop": 1.2,
+			"sweet": 1.0
+		},
+		"charisma": 0.8,
+		"battle": 0.8,
+		"memorialStory": 0.5
+	},
 	"basicBonusSettings": {
 		"attributeBonus": 5,
 		"birthdayBonus": 20,
@@ -7,7 +44,9 @@
 			"ssr": 80,
 			"sr": 50,
 			"hr": 30,
-			"r": 20
+			"r": 20,
+			"hn": 10,
+			"n": 5
 		},
 		"touchBonus": 20
 	},
@@ -33,8 +72,8 @@
 			}
 		}
 	},
-	"cheerBonusSettings": {
-		"selfCheer": {
+	"skillBonusSettings": {
+		"selfSkill": {
 			"selfAttackAndDefenceUltraUp": 60,
 			"selfAttackUltraUp": 50,
 			"selfDefenceUltraUp": 50,
@@ -57,7 +96,7 @@
 			"selfAttackSmallUp": 5,
 			"selfDefenceSmallUp": 5
 		},
-		"attributeCheer": {
+		"attributeSkill": {
 			"attributeAttackAndDefenceExtraSuperUp": 33,
 			"attributeAttackExtraSuperUp": 35,
 			"attributeDefenceExtraSuperUp": 35,
@@ -78,7 +117,7 @@
 			"attributeAttackSmallUp": 5,
 			"attributeDefenceSmallUp": 5
 		},
-		"combiAttributeCheer": {
+		"combiAttributeSkill": {
 			"combiAttributeAttackAndDefenceExtraLargeUp": 20,
 			"combiAttributeAttackExtraLargeUp": 20,
 			"combiAttributeDefenceExtraLargeUp": 20,
@@ -92,7 +131,7 @@
 			"combiAttributeAttackSmallUp": 5,
 			"combiAttributeDefenceSmallUp": 5
 		},
-		"allAttributeCheer": {
+		"allAttributeSkill": {
 			"allAttributeAttackAndDefenceExtraSuperUp": 30,
 			"allAttributeAttackExtraSuperUp": 30,
 			"allAttributeDefenceExtraSuperUp": 30,
@@ -112,7 +151,7 @@
 			"allAttributeAttackSmallUp": 5,
 			"allAttributeDefenceSmallUp": 5
 		},
-		"sameGirlCheer": {
+		"sameGirlSkill": {
 			"sameGirlAttackAndDefenceExtraSuperUp": 35,
 			"sameGirlAttackExtraSuperUp": 35,
 			"sameGirlDefenceExtraSuperUp": 35,
@@ -132,7 +171,7 @@
 			"sameGirlAttackSmallUp": 10,
 			"sameGirlDefenceSmallUp": 10
 		}, 
-		"backDeckCheer": {
+		"backDeckSkill": {
 			"attributeBackDeckAttackExtraLargeUp": 21,
 			"attributeBackDeckDefenceExtraLargeUp": 21,
 			"attributeBackDeckAttackLargeUp": 16,
@@ -150,7 +189,7 @@
 			"allAttributeBackDeckAttackSmallUp": 5,
 			"allAttributeBackDeckDefenceSmallUp": 5
 		}, 
-		"debuffCheer": {
+		"debuffSkill": {
 			"attributeDefenceExtraSuperDown": 40,
 			"attributeDefenceSuperDown": 30,
 			"attributeDefenceExtraLargeDown": 25,
@@ -163,7 +202,8 @@
 			"allAttributeDefenceLargeDown": 15,
 			"allAttributeDefenceMiddleDown": 8,
 			"allAttributeDefenceSmallDown": 5
-		}
+		},
+		"skillRaisedProbability": 0.3
 	},
 	"selectionBonusSettings": {
 		"NormalSelectionBonusSettings": {
@@ -171,7 +211,10 @@
 			"level2": 8,
 			"level3": 13,
 			"level4": 18,
-			"level5": 23
+			"level5": 23,
+			"level6": 28,
+			"level7": 33,
+			"level8": 38
 		},
 		"ShiningSplashBonusSettings": {
 			"level1": 3,
@@ -184,6 +227,64 @@
 			"level1": 5,
 			"level2": 10,
 			"level3": 15
+		}
+	},
+	"specialBonus": {
+		"raid": {
+			"normal": {
+				"first": {
+					"r": [90000, 180000, 360000],
+					"hr": [350000, 700000, 1400000],
+					"sr": [900000, 1800000, 3600000],
+					"previousCard": [240000, 480000, 960000]
+				},
+				"second": {
+					"r": [18000, 36000, 72000],
+					"hr": [70000, 140000, 280000],
+					"sr": [180000, 360000, 720000],
+					"previousCard": [48000, 96000, 192000]
+				}
+			},
+			"superRare": {
+				"first": {
+					"r": [120000, 240000, 480000],
+					"hr": [500000, 1000000, 2000000],
+					"sr": [1450000, 2900000, 5800000],
+					"previousCard": [330000, 660000, 1650000]
+				},
+				"second": {
+					"r": [24000, 48000, 96000],
+					"hr": [100000, 200000, 400000],
+					"sr": [290000, 580000, 1160000],
+					"previousCard": [67000, 134000, 335000]
+				}
+			},
+			"trio": {
+				"first": {
+					"sr": [200000, 400000, 900000]
+				},
+				"second": {
+					"sr": [40000, 80000, 180000]
+				}
+			},
+			"mega": {
+				"first": {
+					"sr": [22000, 44000, 110000]
+				},
+				"second": {
+					"sr": [4500, 9000, 22500]
+				}
+			}
+		},
+		"memorialStory": {
+			"ur": {
+				"baseFactor": 1.63,
+				"gradient": 0.005
+			},
+			"ssr": {
+				"baseFactor": 1.5,
+				"gradient": 0.008889
+			}
 		}
 	}
 }

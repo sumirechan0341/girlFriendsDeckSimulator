@@ -33,7 +33,7 @@ module CardConverter =
 
         let fromEventName(eventName: string) =
             match eventName with
-            | ParseRegex "ｷﾗｶﾞｰﾙ" _
+            | ParseRegex "ｷﾗ★ｶﾞｰﾙ" _
                  -> CardType.Kira
             | ParseRegex "ｽｲｯﾁｶﾞｰﾙ" _
                  -> CardType.Switch
@@ -44,6 +44,15 @@ module CardConverter =
             | ParseRegex "仲良し|×ｱﾆﾒ仲良し" _
                 -> CardType.Friends
             | _ -> CardType.Common
+
+        let fromString(cardTypeStr: string) =
+            match cardTypeStr with
+            | "キラ" -> CardType.Kira
+            | "スイッチ" -> CardType.Switch
+            | "ミラー" -> CardType.Mirror
+            | "バースデー" -> CardType.Birthday
+            | "仲良し" -> CardType.Friends
+
 
     let toString(card: Card) =
         card.girl.name + " " + card.attack.ToString()

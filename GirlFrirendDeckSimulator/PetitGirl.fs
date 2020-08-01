@@ -5,6 +5,7 @@ open Club
 open Grade
 open SelectionBonus
 open AttributeType
+open FSharp.Data
 
 module PetitGirl =
     type EffectDegree = Large | Middle | Small
@@ -24,7 +25,8 @@ module PetitGirl =
 
     type PetitCheerEffect = {
         petitCheerType: PetitCheerType;
-        effectNum: float
+        effectNum: float;
+        targetPetitGirlName: option<string>
     }
 
     type PetitSkillType =
@@ -35,16 +37,23 @@ module PetitGirl =
             petitSkillType: PetitSkillType;
             effectNum: float
         }       
+    type PetitGirlRarity = 
+        SSR
+        | SR
+        | HR
+        | R
 
     type PetitGirl = {
         girlName: string
         eventName: option<string>
         attribute: AttributeType
+        rarity: PetitGirlRarity
         attack: int
         defence: int
         petitCheerEffects: PetitCheerEffect[]
         petitSkillEffect: option<PetitSkillEffect>
-        selectionBonus: option<SelectionBonus>
+        selectionBonus: SelectionBonus[]
+        petitGirlJson: JsonValue
     }
         
         

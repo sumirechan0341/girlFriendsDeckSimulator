@@ -7,12 +7,12 @@
         <c:DeckEditViewModel/>
     </UserControl.DataContext>
 
-
     <Grid>
         <Grid.Resources>
             <SolidColorBrush x:Key="{x:Static SystemColors.HighlightBrushKey}" Color="LightGreen"/>
             <SolidColorBrush x:Key="{x:Static SystemColors.HighlightTextBrushKey}" Color="Black"/>
-            <c:CardConverter x:Key="cardConverter"/>
+            <c:EventTypeConverter x:Key="eventTypeConverter"/>
+            <c:ModeConverter x:Key="modeConverter"/>
             <Style x:Key="DataGridRowStyle" TargetType="DataGridRow">
                 <Setter Property="Template">
                     <Setter.Value>
@@ -34,19 +34,149 @@
             </Style>
         </Grid.Resources>
         <Grid.RowDefinitions>
-            <RowDefinition Height="4*"/>
             <RowDefinition Height="1*"/>
-            <RowDefinition Height="8*"/>
+            <RowDefinition Height="2*"/>
+            <RowDefinition Height="0.5*"/>
+            <RowDefinition Height="3*"/>
+            <RowDefinition Height="0.5*"/>
+            <RowDefinition Height="6*"/>
+            <RowDefinition Height="0.5*"/>
+            <RowDefinition Height="3*"/>
         </Grid.RowDefinitions>
-        <DataGrid Grid.Row="0" x:Name="FrontDeckGirlList" ItemsSource="{Binding FrontDeck, UpdateSourceTrigger=PropertyChanged}" AutoGenerateColumns="False">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="5*"/>
+            <ColumnDefinition Width="5*"/>
+            <ColumnDefinition Width="5*"/>
+            <ColumnDefinition Width="1*"/>
+            <ColumnDefinition Width="1*"/>
+            <ColumnDefinition Width="5*"/>
+            <ColumnDefinition Width="5*"/>
+            <ColumnDefinition Width="5*"/>
+        </Grid.ColumnDefinitions>
+        
+        <StackPanel Grid.Column="0" Grid.Row="0">
+            <TextBlock>イベント設定</TextBlock>
+            <ComboBox x:Name="EventTypeComboBox" ItemsSource="{Binding Path=Events}" SelectedValue ="{Binding Path=SelectedEventType, UpdateSourceTrigger=PropertyChanged}">
+                <ComboBox.ItemTemplate>
+                    <DataTemplate>
+                        <TextBlock Text="{Binding Converter={StaticResource eventTypeConverter}}"/>
+                    </DataTemplate>
+                </ComboBox.ItemTemplate>
+            </ComboBox>
+        </StackPanel>
+        <StackPanel Grid.Row="0" Grid.Column="1">
+            <TextBlock>攻守設定</TextBlock>
+            <ComboBox x:Name="ModeComboBox" ItemsSource="{Binding Path=Modes}" SelectedValue ="{Binding Path=SelectedMode, UpdateSourceTrigger=PropertyChanged}">
+                <ComboBox.ItemTemplate>
+                    <DataTemplate>
+                        <TextBlock Text="{Binding Converter={StaticResource modeConverter}}"/>
+                    </DataTemplate>
+                </ComboBox.ItemTemplate>
+            </ComboBox>
+        </StackPanel>
+        <StackPanel Grid.Row="0" Grid.Column="2" Grid.ColumnSpan="2">
+            <TextBlock>誕生日設定</TextBlock>
+            <ComboBox x:Name="BirthdayGirlSettingComboBox" ItemsSource="{Binding GirlList, NotifyOnTargetUpdated=True, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" SelectedValue ="{Binding BirthdaySettingGirl, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}">
+            </ComboBox>
+        </StackPanel>
+        
+        <StackPanel Grid.Row="0" Grid.Column="5">
+            <TextBlock FontSize="16">総攻援: <Run Text="{Binding TotalAttack}"/></TextBlock>
+            <TextBlock FontSize="16">総守援: <Run Text="{Binding TotalDefence}"/></TextBlock>
+        </StackPanel>
+        <StackPanel Grid.Row="0" Grid.Column="6">
+            <TextBlock FontSize="16">予想ダメージ量: <Run Text="{Binding EstimatedDamage}"/></TextBlock>
+
+        </StackPanel>
+        <StackPanel Grid.Row="0" Grid.Column="7">
+            <Button x:Name="CalcDamageExpectationButton" ClickMode="Press">
+                ダメージ期待値を計算する
+            </Button>
+            <TextBlock FontSize="16">ダメージ期待値: <Run Text="{Binding DamageExpectation, StringFormat=N0}"/></TextBlock>
+
+        </StackPanel>
+        <WrapPanel Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="4">
+            <StackPanel Margin="5, 0, 5, 0">
+                <TextBlock Margin="0, 0, 1, 0">
+                    属性で検索
+                </TextBlock>
+                <ComboBox x:Name="AttributeFilterComboBox" ItemsSource="{Binding AllAttributes}" SelectedItem="{Binding SelectedFilterAttribute}">
+                </ComboBox>
+            </StackPanel>
+            <StackPanel Margin="5, 0, 5, 0">
+                <TextBlock Margin="0, 0, 1, 0">
+                    カード種類で検索
+                </TextBlock>
+                <ComboBox x:Name="CardTypeFilterComboBox" ItemsSource="{Binding AllCardTypes}" SelectedItem="{Binding SelectedFilterCardType}">
+                </ComboBox>
+            </StackPanel>
+            <StackPanel Margin="5, 0, 5, 0">
+                <TextBlock Margin="0, 0, 1, 0">
+                    ガール名で検索
+                </TextBlock>
+                <ComboBox x:Name="GirlFilterComboBox" ItemsSource="{Binding GirlList}" SelectedItem="{Binding SelectedFilterGirl}">
+                </ComboBox>
+            </StackPanel>
+            <StackPanel Margin="5, 0, 5, 0">
+                <TextBlock Margin="0, 0, 1, 0">
+                    センバツボーナスで検索
+                </TextBlock>
+                <ComboBox x:Name="SelectionBonusFilterComboBox" ItemsSource="{Binding AllSelectionBonus}" SelectedItem="{Binding SelectedFilterSelectionBonus}">
+                </ComboBox>
+            </StackPanel>
+            <StackPanel Margin="5, 0, 5, 0">
+                <TextBlock Margin="0, 0, 1, 0">
+                    レア度で検索
+                </TextBlock>
+                <ComboBox x:Name="RarityFilterComboBox" ItemsSource="{Binding AllRarities}" SelectedItem="{Binding SelectedFilterRarity}">
+                </ComboBox>
+            </StackPanel>
+        </WrapPanel>
+        <ListView x:Name="SelectionBonusBox" Grid.Row="1" Grid.Column="5" Grid.ColumnSpan="3" ItemsSource="{Binding SelectionBonusInfoViews, UpdateSourceTrigger=PropertyChanged}" BorderThickness="0">
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Text="{Binding SelectionBonusInfo}"/>
+                    </StackPanel>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+            <ListView.ItemContainerStyle>
+                <Style TargetType="ListViewItem">
+                    <Style.Triggers>
+                        <DataTrigger Binding="{Binding Path=IsIntoDeck}" Value="True">
+                            <Setter Property="Background" Value="LightPink" />
+                        </DataTrigger>
+                        <DataTrigger Binding="{Binding Path=IsOutOfDeck}" Value="True">
+                            <Setter Property="Background" Value="LightBlue" />
+                        </DataTrigger>
+                    </Style.Triggers>
+                </Style>
+            </ListView.ItemContainerStyle>
+        </ListView>
+
+        <TextBlock Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="3">
+            主センバツ
+        </TextBlock>
+        
+        <DataGrid Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="3" x:Name="FrontDeckGirlList" ItemsSource="{Binding FrontDeck, UpdateSourceTrigger=PropertyChanged}" AutoGenerateColumns="False">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="カード名" Binding="{Binding CardName}" IsReadOnly="True"></DataGridTextColumn>
                 <DataGridTextColumn Header="属性" Binding="{Binding Attribute}" IsReadOnly="True"></DataGridTextColumn>
-                <DataGridTextColumn Header="攻援力" Binding="{Binding Attack, UpdateSourceTrigger=PropertyChanged}" IsReadOnly="False"></DataGridTextColumn>
-                <DataGridTextColumn Header="守援力" Binding="{Binding Defence}" IsReadOnly="False"></DataGridTextColumn>
+                <DataGridTextColumn Header="レア度" Binding="{Binding Rarity}" IsReadOnly="True"></DataGridTextColumn>
+                <DataGridTextColumn Header="攻援力" Binding="{Binding Attack, UpdateSourceTrigger=PropertyChanged}" IsReadOnly="True"></DataGridTextColumn>
+                <DataGridTextColumn Header="守援力" Binding="{Binding Defence}" IsReadOnly="True"></DataGridTextColumn>
                 <DataGridTextColumn Header="補正攻援力" Binding="{Binding CorrectedAttack, UpdateSourceTrigger=PropertyChanged}" IsReadOnly="True"></DataGridTextColumn>
                 <DataGridTextColumn Header="補正守援力" Binding="{Binding CorrectedDefence, UpdateSourceTrigger=PropertyChanged}" IsReadOnly="True"></DataGridTextColumn>
-                <DataGridCheckBoxColumn Header="本命設定" Binding="{Binding IsFavoriteGirl, UpdateSourceTrigger=PropertyChanged}" IsReadOnly="False" ></DataGridCheckBoxColumn>
+                <DataGridTextColumn Header="声援" Binding="{Binding SkillType}" IsReadOnly="True"></DataGridTextColumn>
+                <DataGridTextColumn x:Name="FrontSkillLevelText" Header="声援Lv" Binding="{Binding SkillLevel}" IsReadOnly="False"></DataGridTextColumn>
+                <DataGridCheckBoxColumn Header="声援発動" Binding="{Binding IsTriggeredSkillBonus, UpdateSourceTrigger=PropertyChanged}" IsReadOnly="False" ></DataGridCheckBoxColumn>
+                <DataGridCheckBoxColumn Header="本命設定" Binding="{Binding IsFavoriteCard, UpdateSourceTrigger=PropertyChanged}" IsReadOnly="False" ></DataGridCheckBoxColumn>
+                <DataGridCheckBoxColumn Header="デート設定" Binding="{Binding IsDatingCard, UpdateSourceTrigger=PropertyChanged}" IsReadOnly="False" ></DataGridCheckBoxColumn>
+                <DataGridCheckBoxColumn Header="タッチボーナス" Binding="{Binding IsTouched, UpdateSourceTrigger=PropertyChanged}" IsReadOnly="False" ></DataGridCheckBoxColumn>
+                <DataGridTextColumn x:Name="Strap1Text" Header="ストラップ1" Binding="{Binding Strap1Str, UpdateSourceTrigger=PropertyChanged}" IsReadOnly="False"></DataGridTextColumn>
+                <DataGridTextColumn x:Name="Strap2Text" Header="ストラップ2" Binding="{Binding Strap2Str, UpdateSourceTrigger=PropertyChanged}" IsReadOnly="False"></DataGridTextColumn>
+                <DataGridTextColumn x:Name="Strap3Text" Header="ストラップ3" Binding="{Binding Strap3Str, UpdateSourceTrigger=PropertyChanged}" IsReadOnly="False"></DataGridTextColumn>
+                <DataGridTextColumn x:Name="Strap4Text" Header="ストラップ4" Binding="{Binding Strap4Str, UpdateSourceTrigger=PropertyChanged}" IsReadOnly="False"></DataGridTextColumn>
             </DataGrid.Columns>
             <DataGrid.RowStyle>
                 <Style TargetType="DataGridRow">
@@ -64,25 +194,34 @@
                 </Style>
             </DataGrid.RowStyle>
         </DataGrid>
-        <StackPanel Grid.Row="1">
-            <Button x:Name="InFronDeckButton" ClickMode="Press">
-                ∧
-            </Button>
-            <Button x:Name="OutFrontDeckButton" ClickMode="Press">
-                ∨
+        <StackPanel Grid.Row="3" Grid.Column="3" VerticalAlignment="Center">
+            <Button x:Name="InFrontDeckButton" ClickMode="Press">
+                &lt;
             </Button>
         </StackPanel>
-        <DataGrid Grid.Row="2" x:Name="GirlListBox" ItemsSource="{Binding CardListView, UpdateSourceTrigger=PropertyChanged}" AutoGenerateColumns="False" >
-            
+        <StackPanel Grid.Row="3" Grid.Column="4" VerticalAlignment="Center">
+            <Button x:Name="OutFrontDeckButton" ClickMode="Press">
+                &gt;
+            </Button>
+        </StackPanel>
+        <TextBlock Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="3">
+            副センバツ
+        </TextBlock>
+        <DataGrid Grid.Row="5" Grid.Column="0" Grid.ColumnSpan="3" x:Name="BackDeckList" ItemsSource="{Binding BackDeck, UpdateSourceTrigger=PropertyChanged}" AutoGenerateColumns="False" >
             <DataGrid.Columns>
+                <DataGridTextColumn Header="Index" Binding="{Binding Index}" IsReadOnly="True"></DataGridTextColumn>
                 <DataGridTextColumn Header="カード名" Binding="{Binding CardName}" IsReadOnly="True"></DataGridTextColumn>
                 <DataGridTextColumn Header="属性" Binding="{Binding Attribute}" IsReadOnly="True"></DataGridTextColumn>
+                <DataGridTextColumn Header="レア度" Binding="{Binding Rarity}" IsReadOnly="True"></DataGridTextColumn>
                 <DataGridTextColumn Header="攻援力" Binding="{Binding Attack, UpdateSourceTrigger=PropertyChanged}" IsReadOnly="False"></DataGridTextColumn>
                 <DataGridTextColumn Header="守援力" Binding="{Binding Defence}" IsReadOnly="False"></DataGridTextColumn>
                 <DataGridTextColumn Header="補正攻援力" Binding="{Binding CorrectedAttack, UpdateSourceTrigger=PropertyChanged}" x:Name="CorrectedAttacks" IsReadOnly="True"></DataGridTextColumn>
                 <DataGridTextColumn Header="補正守援力" Binding="{Binding CorrectedDefence, UpdateSourceTrigger=PropertyChanged}" x:Name="CorrectedDefences" IsReadOnly="True"></DataGridTextColumn>
-                <DataGridCheckBoxColumn Header="本命設定" Binding="{Binding IsFavoriteGirl, UpdateSourceTrigger=PropertyChanged}" x:Name="FavoriteGirlCheckBox" IsReadOnly="False" ></DataGridCheckBoxColumn>
-                
+                <DataGridTextColumn Header="声援" Binding="{Binding SkillType}" IsReadOnly="True"></DataGridTextColumn>
+                <DataGridTextColumn x:Name="SkillLevelText" Header="声援Lv" Binding="{Binding SkillLevel}" IsReadOnly="False"></DataGridTextColumn>
+                <DataGridCheckBoxColumn x:Name="FavoriteCardCheckBox" Header="本命設定" Binding="{Binding IsFavoriteCard, UpdateSourceTrigger=PropertyChanged}" IsReadOnly="False" ></DataGridCheckBoxColumn>
+                <DataGridCheckBoxColumn x:Name="DatingCardCheckBox" Header="デート設定" Binding="{Binding IsDatingCard, UpdateSourceTrigger=PropertyChanged}" IsReadOnly="False" ></DataGridCheckBoxColumn>
+                <DataGridCheckBoxColumn x:Name="TouchBonusCheckBox" Header="タッチボーナス" Binding="{Binding IsTouched, UpdateSourceTrigger=PropertyChanged}" IsReadOnly="False" ></DataGridCheckBoxColumn>
             </DataGrid.Columns>
             <DataGrid.RowStyle>
                 <Style TargetType="DataGridRow">
@@ -101,6 +240,119 @@
             </DataGrid.RowStyle>
         </DataGrid>
 
+        <TextBlock Grid.Column="0" Grid.Row="6" Grid.ColumnSpan="3">
+            設定済みプレシャスシーン
+        </TextBlock>
+        <DataGrid Grid.Column="0" Grid.Row="7" Grid.ColumnSpan="3" x:Name="SelectedPreciousSceneListBox" ItemsSource="{Binding SelectedPreciousSceneList, UpdateSourceTrigger=PropertyChanged}" AutoGenerateColumns="False" >
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="シーン名" Binding="{Binding SceneName}" IsReadOnly="True"></DataGridTextColumn>
+                <DataGridTextColumn Header="レベル" Binding="{Binding Level}" IsReadOnly="True"></DataGridTextColumn>
+                <DataGridTextColumn Header="シーン効果" Binding="{Binding SceneEffect}" IsReadOnly="True"></DataGridTextColumn>
+                <DataGridTextColumn Header="最大効果値" Binding="{Binding EffectMax}" IsReadOnly="True"></DataGridTextColumn>
+            </DataGrid.Columns>
+            <DataGrid.RowStyle>
+                <Style TargetType="DataGridRow">
+                    <Style.Triggers>
+                        <DataTrigger Binding="{Binding Path=TargetAttribute}" Value="COOL">
+                            <Setter Property="Background" Value="LightBlue"/>
+                        </DataTrigger>
+                        <DataTrigger Binding="{Binding Path=TargetAttribute}" Value="POP">
+                            <Setter Property="Background" Value="#FFFFD485"/>
+                        </DataTrigger>
+                        <DataTrigger Binding="{Binding Path=TargetAttribute}" Value="SWEET">
+                            <Setter Property="Background" Value="LightPink"/>
+                        </DataTrigger>
+                        <DataTrigger Binding="{Binding Path=TargetAttribute}" Value="全タイプ">
+                            <Setter Property="Background" Value="Violet"/>
+                        </DataTrigger>
+                    </Style.Triggers>
+                </Style>
+            </DataGrid.RowStyle>
+        </DataGrid>
+        <StackPanel Grid.Column="3" Grid.Row="5" VerticalAlignment="Center">
+            <Button x:Name="InBackDeckButton" ClickMode="Press">
+                &lt;
+            </Button>
+        </StackPanel>
+        <StackPanel Grid.Column="4" Grid.Row="5" VerticalAlignment="Center">
+            <Button x:Name="OutBackDeckButton" ClickMode="Press">
+                &gt;
+            </Button>
+        </StackPanel>
+        <TextBlock Grid.Row="2" Grid.Column="5" Grid.ColumnSpan="3">
+            所持カード一覧
+        </TextBlock>
+        <DataGrid Grid.Row="3" Grid.RowSpan="3" Grid.Column="5" Grid.ColumnSpan="3" x:Name="GirlListBox" ItemsSource="{Binding CardListView, UpdateSourceTrigger=PropertyChanged}" AutoGenerateColumns="False" >
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Index" Binding="{Binding Index}" IsReadOnly="True"></DataGridTextColumn>
+                <DataGridTextColumn Header="カード名" Binding="{Binding CardName}" IsReadOnly="True"></DataGridTextColumn>
+                <DataGridTextColumn Header="属性" Binding="{Binding Attribute}" IsReadOnly="True"></DataGridTextColumn>
+                <DataGridTextColumn Header="レア度" Binding="{Binding Rarity}" IsReadOnly="True"></DataGridTextColumn>
+                <DataGridTextColumn Header="攻援力" Binding="{Binding Attack, UpdateSourceTrigger=PropertyChanged}" IsReadOnly="False"></DataGridTextColumn>
+                <DataGridTextColumn Header="守援力" Binding="{Binding Defence}" IsReadOnly="False"></DataGridTextColumn>
+                <DataGridTextColumn Header="補正攻援力" Binding="{Binding CorrectedAttack, UpdateSourceTrigger=PropertyChanged}" IsReadOnly="True"></DataGridTextColumn>
+                <DataGridTextColumn Header="補正守援力" Binding="{Binding CorrectedDefence, UpdateSourceTrigger=PropertyChanged}" IsReadOnly="True"></DataGridTextColumn>
+                <DataGridTextColumn Header="声援" Binding="{Binding SkillType}" IsReadOnly="True"></DataGridTextColumn>
+                <DataGridTextColumn Header="声援Lv" Binding="{Binding SkillLevel}" IsReadOnly="False"></DataGridTextColumn>
+                <DataGridCheckBoxColumn Header="本命設定" Binding="{Binding IsFavoriteCard, UpdateSourceTrigger=PropertyChanged}" IsReadOnly="False" ></DataGridCheckBoxColumn>
+                <DataGridCheckBoxColumn Header="デート設定" Binding="{Binding IsDatingCard, UpdateSourceTrigger=PropertyChanged}" IsReadOnly="False" ></DataGridCheckBoxColumn>
+                <DataGridCheckBoxColumn Header="タッチボーナス" Binding="{Binding IsTouched, UpdateSourceTrigger=PropertyChanged}" IsReadOnly="False" ></DataGridCheckBoxColumn>
+            </DataGrid.Columns>
+            <DataGrid.RowStyle>
+                <Style TargetType="DataGridRow">
+                    <Style.Triggers>
+                        <DataTrigger Binding="{Binding Path=Attribute}" Value="Cool">
+                            <Setter Property="Background" Value="LightBlue"/>
+                        </DataTrigger>
+                        <DataTrigger Binding="{Binding Path=Attribute}" Value="Pop">
+                            <Setter Property="Background" Value="#FFFFD485"/>
+                        </DataTrigger>
+                        <DataTrigger Binding="{Binding Path=Attribute}" Value="Sweet">
+                            <Setter Property="Background" Value="LightPink"/>
+                        </DataTrigger>
+                    </Style.Triggers>
+                </Style>
+            </DataGrid.RowStyle>
+        </DataGrid>
+        <TextBlock Grid.Row="6" Grid.Column="5" Grid.ColumnSpan="3">
+            所持プレシャスシーン一覧
+        </TextBlock>
+        <StackPanel Grid.Column="3" Grid.Row="7" VerticalAlignment="Center">
+            <Button x:Name="SceneInBackDeckButton" ClickMode="Press">
+                &lt;
+            </Button>
+        </StackPanel>
+        <StackPanel Grid.Column="4" Grid.Row="7" VerticalAlignment="Center">
+            <Button x:Name="SceneOutBackDeckButton" ClickMode="Press">
+                &gt;
+            </Button>
+        </StackPanel>
+        <DataGrid Grid.Row="7" Grid.Column="5" Grid.ColumnSpan="3" x:Name="PreciousSceneListBox" ItemsSource="{Binding PreciousSceneListView, UpdateSourceTrigger=PropertyChanged}" AutoGenerateColumns="False" >
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="シーン名" Binding="{Binding SceneName}" IsReadOnly="True"></DataGridTextColumn>
+                <DataGridTextColumn Header="レベル" Binding="{Binding Level}" IsReadOnly="True"></DataGridTextColumn>
+                <DataGridTextColumn Header="シーン効果" Binding="{Binding SceneEffect}" IsReadOnly="True"></DataGridTextColumn>
+                <DataGridTextColumn Header="最大効果値" Binding="{Binding EffectMax}" IsReadOnly="True"></DataGridTextColumn>
+            </DataGrid.Columns>
+            <DataGrid.RowStyle>
+                <Style TargetType="DataGridRow">
+                    <Style.Triggers>
+                        <DataTrigger Binding="{Binding Path=TargetAttribute}" Value="COOL">
+                            <Setter Property="Background" Value="LightBlue"/>
+                        </DataTrigger>
+                        <DataTrigger Binding="{Binding Path=TargetAttribute}" Value="POP">
+                            <Setter Property="Background" Value="#FFFFD485"/>
+                        </DataTrigger>
+                        <DataTrigger Binding="{Binding Path=TargetAttribute}" Value="SWEET">
+                            <Setter Property="Background" Value="LightPink"/>
+                        </DataTrigger>
+                        <DataTrigger Binding="{Binding Path=TargetAttribute}" Value="全タイプ">
+                            <Setter Property="Background" Value="Violet"/>
+                        </DataTrigger>
+                    </Style.Triggers>
+                </Style>
+            </DataGrid.RowStyle>
+        </DataGrid>
 
     </Grid>
 </UserControl>

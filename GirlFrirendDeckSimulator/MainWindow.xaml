@@ -4,19 +4,7 @@
     xmlns:c="clr-namespace:GirlFriendDeckSimulator;assembly=GirlFrirendDeckSimulator"
     Title="GirlFriendDeckSimulator"
 >
-    <Window.DataContext>
-        <c:MainWindowViewModel/>
-    </Window.DataContext>
     <TabControl x:Name="TabControl">
-        <!--<TabItem Header="プレイヤー情報" x:Name="playerParameterTab">
-            <Grid>
-                <c:XamlLoader XamlPath="PlayerParameterTab.xaml" />
-            </Grid>
-        </TabItem>
-        <TabItem Header="デッキ編集" x:Name="deckEditTab">
-            <Grid>
-                <c:XamlLoader XamlPath="DeckEditTab.xaml"/>
-            </Grid>
-        </TabItem>-->
+        
     </TabControl>
 </Window>

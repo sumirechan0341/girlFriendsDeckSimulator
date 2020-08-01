@@ -1,0 +1,1088 @@
+{
+  "petitDeck1": [
+    {
+      "girlName": "上条るい",
+      "eventName": "Myフレンド",
+      "rarity": "SR",
+      "attribute": "COOL",
+      "attack": 18025,
+      "defence": 18025,
+      "petitCheerEffects": [
+        {
+          "CheerType": "全ﾀｲﾌﾟの攻守大UP",
+          "CheerEffectNum": 12,
+          "CheerEffectMode": "UP"
+        },
+        {
+          "CheerType": "全ﾀｲﾌﾟの攻守小UP",
+          "CheerEffectNum": 3,
+          "CheerEffectMode": "UP"
+        },
+        {
+          "CheerType": "本命ｶﾞｰﾙの攻守UP",
+          "CheerEffectNum": 11,
+          "CheerEffectMode": "UP"
+        },
+        {
+          "CheerType": "ﾎﾜｲﾄﾎﾞｰﾄﾞの効果UP",
+          "CheerEffectNum": 120,
+          "CheerEffectMode": "UP"
+        }
+      ],
+      "petitSkillEffect": {
+        "petitSkillEffectType": "COOLﾀｲﾌﾟのぷちｶﾞｰﾙ攻守UP",
+        "petitSkillEffectNum": 25,
+        "petitSkillEffectMode": "UP"
+      },
+      "selectionBonus": "Ｌｅｔ’ｓ 精神集中♪"
+    },
+    {
+      "girlName": "上条るい",
+      "eventName": "ﾊﾞﾆｰｶﾞｰﾙ20",
+      "rarity": "SR",
+      "attribute": "COOL",
+      "attack": 14274,
+      "defence": 12421,
+      "petitCheerEffects": [
+        {
+          "CheerType": "COOLﾀｲﾌﾟの攻援UP",
+          "CheerEffectNum": 9.5,
+          "CheerEffectMode": "UP"
+        },
+        {
+          "CheerType": "本命ｶﾞｰﾙの攻守UP",
+          "CheerEffectNum": 11,
+          "CheerEffectMode": "UP"
+        },
+        {
+          "CheerType": "ﾃﾞｰﾄ中のｶﾞｰﾙの攻守UP",
+          "CheerEffectNum": 11,
+          "CheerEffectMode": "UP"
+        },
+        {
+          "CheerType": "ﾎﾜｲﾄﾎﾞｰﾄﾞの効果UP",
+          "CheerEffectNum": 120,
+          "CheerEffectMode": "UP"
+        }
+      ],
+      "petitSkillEffect": {
+        "petitSkillEffectType": "COOLﾀｲﾌﾟのぷちｶﾞｰﾙ攻守UP",
+        "petitSkillEffectNum": 24,
+        "petitSkillEffectMode": "UP"
+      },
+      "selectionBonus": "Ｌｅｔ’ｓ 精神集中♪"
+    },
+    {
+      "girlName": "上条るい",
+      "eventName": "ﾊﾞﾆｰｶﾞｰﾙ20",
+      "rarity": "SR",
+      "attribute": "COOL",
+      "attack": 14274,
+      "defence": 12421,
+      "petitCheerEffects": [
+        {
+          "CheerType": "COOLﾀｲﾌﾟの攻援UP",
+          "CheerEffectNum": 9.5,
+          "CheerEffectMode": "UP"
+        },
+        {
+          "CheerType": "本命ｶﾞｰﾙの攻守UP",
+          "CheerEffectNum": 11,
+          "CheerEffectMode": "UP"
+        },
+        {
+          "CheerType": "ﾃﾞｰﾄ中のｶﾞｰﾙの攻守UP",
+          "CheerEffectNum": 11,
+          "CheerEffectMode": "UP"
+        },
+        {
+          "CheerType": "ﾎﾜｲﾄﾎﾞｰﾄﾞの効果UP",
+          "CheerEffectNum": 120,
+          "CheerEffectMode": "UP"
+        }
+      ],
+      "petitSkillEffect": {
+        "petitSkillEffectType": "COOLﾀｲﾌﾟのぷちｶﾞｰﾙ攻守UP",
+        "petitSkillEffectNum": 24,
+        "petitSkillEffectMode": "UP"
+      },
+      "selectionBonus": "Ｌｅｔ’ｓ 精神集中♪"
+    },
+    {
+      "girlName": "夏目真尋",
+      "eventName": "ﾊﾟｼﾞｬﾏ20",
+      "rarity": "SR",
+      "attribute": "COOL",
+      "attack": 15954,
+      "defence": 13883,
+      "petitCheerEffects": [
+        {
+          "CheerType": "COOLﾀｲﾌﾟの攻援UP",
+          "CheerEffectNum": 9.5,
+          "CheerEffectMode": "UP"
+        },
+        {
+          "CheerType": "本命ｶﾞｰﾙの攻守UP",
+          "CheerEffectNum": 11,
+          "CheerEffectMode": "UP"
+        },
+        {
+          "CheerType": "ﾃﾞｰﾄ中のｶﾞｰﾙの攻守UP",
+          "CheerEffectNum": 11,
+          "CheerEffectMode": "UP"
+        },
+        {
+          "CheerType": "ﾎﾜｲﾄﾎﾞｰﾄﾞの効果UP",
+          "CheerEffectNum": 120,
+          "CheerEffectMode": "UP"
+        }
+      ],
+      "petitSkillEffect": {
+        "petitSkillEffectType": "COOLﾀｲﾌﾟのぷちｶﾞｰﾙ攻守UP",
+        "petitSkillEffectNum": 22,
+        "petitSkillEffectMode": "UP"
+      },
+      "selectionBonus": "ロンリーガールズレクイエム"
+    },
+    {
+      "girlName": "真白透子",
+      "eventName": "和装花嫁19",
+      "rarity": "SR",
+      "attribute": "COOL",
+      "attack": 15539,
+      "defence": 13468,
+      "petitCheerEffects": [
+        {
+          "CheerType": "2年生の攻援UP",
+          "CheerEffectNum": 9.5,
+          "CheerEffectMode": "UP"
+        },
+        {
+          "CheerType": "本命ｶﾞｰﾙの攻守UP",
+          "CheerEffectNum": 11,
+          "CheerEffectMode": "UP"
+        },
+        {
+          "CheerType": "ﾃﾞｰﾄ中のｶﾞｰﾙの攻守UP",
+          "CheerEffectNum": 11,
+          "CheerEffectMode": "UP"
+        },
+        {
+          "CheerType": "ﾎﾜｲﾄﾎﾞｰﾄﾞの効果UP",
+          "CheerEffectNum": 120,
+          "CheerEffectMode": "UP"
+        }
+      ],
+      "petitSkillEffect": {
+        "petitSkillEffectType": "COOLﾀｲﾌﾟのぷちｶﾞｰﾙ攻守UP",
+        "petitSkillEffectNum": 22,
+        "petitSkillEffectMode": "UP"
+      },
+      "selectionBonus": "算術スクレイパー"
+    },
+    {
+      "girlName": "鴫野睦",
+      "eventName": "おうちｾｰﾀｰ19",
+      "rarity": "SR",
+      "attribute": "COOL",
+      "attack": 15330,
+      "defence": 13259,
+      "petitCheerEffects": [
+        {
+          "CheerType": "COOLﾀｲﾌﾟの攻援UP",
+          "CheerEffectNum": 9.5,
+          "CheerEffectMode": "UP"
+        },
+        {
+          "CheerType": "本命ｶﾞｰﾙの攻守UP",
+          "CheerEffectNum": 11,
+          "CheerEffectMode": "UP"
+        },
+        {
+          "CheerType": "誕生日のｶﾞｰﾙの攻守UP",
+          "CheerEffectNum": 19,
+          "CheerEffectMode": "UP"
+        },
+        {
+          "CheerType": "ﾎﾜｲﾄﾎﾞｰﾄﾞの効果UP",
+          "CheerEffectNum": 120,
+          "CheerEffectMode": "UP"
+        }
+      ],
+      "petitSkillEffect": {
+        "petitSkillEffectType": "COOLﾀｲﾌﾟのぷちｶﾞｰﾙ攻守UP",
+        "petitSkillEffectNum": 22,
+        "petitSkillEffectMode": "UP"
+      },
+      "selectionBonus": "歴史より愛をこめて"
+    },
+    {
+      "girlName": "鴫野睦",
+      "eventName": "おうちｾｰﾀｰ19",
+      "rarity": "SR",
+      "attribute": "COOL",
+      "attack": 15330,
+      "defence": 13259,
+      "petitCheerEffects": [
+        {
+          "CheerType": "COOLﾀｲﾌﾟの攻援UP",
+          "CheerEffectNum": 9.5,
+          "CheerEffectMode": "UP"
+        },
+        {
+          "CheerType": "本命ｶﾞｰﾙの攻守UP",
+          "CheerEffectNum": 11,
+          "CheerEffectMode": "UP"
+        },
+        {
+          "CheerType": "誕生日のｶﾞｰﾙの攻守UP",
+          "CheerEffectNum": 19,
+          "CheerEffectMode": "UP"
+        },
+        {
+          "CheerType": "ﾎﾜｲﾄﾎﾞｰﾄﾞの効果UP",
+          "CheerEffectNum": 120,
+          "CheerEffectMode": "UP"
+        }
+      ],
+      "petitSkillEffect": {
+        "petitSkillEffectType": "COOLﾀｲﾌﾟのぷちｶﾞｰﾙ攻守UP",
+        "petitSkillEffectNum": 22,
+        "petitSkillEffectMode": "UP"
+      },
+      "selectionBonus": "歴史より愛をこめて"
+    },
+    {
+      "girlName": "重藤秋穂",
+      "eventName": "水泳教室19",
+      "rarity": "SR",
+      "attribute": "COOL",
+      "attack": 15124,
+      "defence": 13053,
+      "petitCheerEffects": [
+        {
+          "CheerType": "3年生の攻援UP",
+          "CheerEffectNum": 9.5,
+          "CheerEffectMode": "UP"
+        },
+        {
+          "CheerType": "本命ｶﾞｰﾙの攻守UP",
+          "CheerEffectNum": 11,
+          "CheerEffectMode": "UP"
+        },
+        {
+          "CheerType": "ﾃﾞｰﾄ中のｶﾞｰﾙの攻守UP",
+          "CheerEffectNum": 11,
+          "CheerEffectMode": "UP"
+        },
+        {
+          "CheerType": "ﾀｯﾁﾎﾞｰﾅｽの効果UP",
+          "CheerEffectNum": 11,
+          "CheerEffectMode": "UP"
+        }
+      ],
+      "petitSkillEffect": {
+        "petitSkillEffectType": "COOLﾀｲﾌﾟのぷちｶﾞｰﾙ攻守UP",
+        "petitSkillEffectNum": 20,
+        "petitSkillEffectMode": "UP"
+      },
+      "selectionBonus": "★☆部長バースト☆★"
+    },
+    {
+      "girlName": "重藤秋穂",
+      "eventName": "Yｼｬﾂ19",
+      "rarity": "SR",
+      "attribute": "COOL",
+      "attack": 14915,
+      "defence": 12844,
+      "petitCheerEffects": [
+        {
+          "CheerType": "COOLﾀｲﾌﾟの攻援UP",
+          "CheerEffectNum": 9.5,
+          "CheerEffectMode": "UP"
+        },
+        {
+          "CheerType": "本命ｶﾞｰﾙの攻守UP",
+          "CheerEffectNum": 11,
+          "CheerEffectMode": "UP"
+        },
+        {
+          "CheerType": "誕生日のｶﾞｰﾙの攻守UP",
+          "CheerEffectNum": 19,
+          "CheerEffectMode": "UP"
+        },
+        {
+          "CheerType": "ﾎﾜｲﾄﾎﾞｰﾄﾞの効果UP",
+          "CheerEffectNum": 120,
+          "CheerEffectMode": "UP"
+        }
+      ],
+      "petitSkillEffect": {
+        "petitSkillEffectType": "COOLﾀｲﾌﾟのぷちｶﾞｰﾙ攻守UP",
+        "petitSkillEffectNum": 20,
+        "petitSkillEffectMode": "UP"
+      },
+      "selectionBonus": "ロンリーガールズレクイエム"
+    },
+    {
+      "girlName": "村上文緒",
+      "eventName": "夕涼み19",
+      "rarity": "SR",
+      "attribute": "COOL",
+      "attack": 14915,
+      "defence": 12844,
+      "petitCheerEffects": [
+        {
+          "CheerType": "COOLﾀｲﾌﾟの攻援UP",
+          "CheerEffectNum": 9.5,
+          "CheerEffectMode": "UP"
+        },
+        {
+          "CheerType": "本命ｶﾞｰﾙの攻守UP",
+          "CheerEffectNum": 11,
+          "CheerEffectMode": "UP"
+        },
+        {
+          "CheerType": "ﾀｯﾁﾎﾞｰﾅｽの効果UP",
+          "CheerEffectNum": 11,
+          "CheerEffectMode": "UP"
+        },
+        {
+          "CheerType": "誕生日のｶﾞｰﾙの攻守UP",
+          "CheerEffectNum": 19,
+          "CheerEffectMode": "UP"
+        }
+      ],
+      "petitSkillEffect": {
+        "petitSkillEffectType": "COOLﾀｲﾌﾟのぷちｶﾞｰﾙ攻守UP",
+        "petitSkillEffectNum": 20,
+        "petitSkillEffectMode": "UP"
+      },
+      "selectionBonus": "委員会ペンタゴン"
+    }
+  ],
+  "petitDeck2": [
+    {
+      "girlName": "篠宮りさ",
+      "eventName": "Myフレンド",
+      "rarity": "SR",
+      "attribute": "POP",
+      "attack": 14229,
+      "defence": 14229,
+      "petitCheerEffects": [
+        {
+          "CheerType": "全ﾀｲﾌﾟの攻守大UP",
+          "CheerEffectNum": 12,
+          "CheerEffectMode": "UP"
+        },
+        {
+          "CheerType": "本命ｶﾞｰﾙの攻守UP",
+          "CheerEffectNum": 11,
+          "CheerEffectMode": "UP"
+        },
+        {
+          "CheerType": "ﾃﾞｰﾄ中のｶﾞｰﾙの攻守UP",
+          "CheerEffectNum": 11,
+          "CheerEffectMode": "UP"
+        },
+        {
+          "CheerType": "ﾎﾜｲﾄﾎﾞｰﾄﾞの効果UP",
+          "CheerEffectNum": 120,
+          "CheerEffectMode": "UP"
+        }
+      ],
+      "petitSkillEffect": {
+        "petitSkillEffectType": "POPﾀｲﾌﾟのぷちｶﾞｰﾙ攻守UP",
+        "petitSkillEffectNum": 25,
+        "petitSkillEffectMode": "UP"
+      },
+      "selectionBonus": "委員会ペンタゴン"
+    },
+    {
+      "girlName": "櫻井明音",
+      "eventName": "ゴスロリ20",
+      "rarity": "SR",
+      "attribute": "POP",
+      "attack": 14274,
+      "defence": 12421,
+      "petitCheerEffects": [
+        {
+          "CheerType": "POPﾀｲﾌﾟの攻援UP",
+          "CheerEffectNum": 9.5,
+          "CheerEffectMode": "UP"
+        },
+        {
+          "CheerType": "本命ｶﾞｰﾙの攻守UP",
+          "CheerEffectNum": 11,
+          "CheerEffectMode": "UP"
+        },
+        {
+          "CheerType": "ﾃﾞｰﾄ中のｶﾞｰﾙの攻守UP",
+          "CheerEffectNum": 11,
+          "CheerEffectMode": "UP"
+        },
+        {
+          "CheerType": "ﾃﾚﾋﾞの効果UP",
+          "CheerEffectNum": 120,
+          "CheerEffectMode": "UP"
+        }
+      ],
+      "petitSkillEffect": {
+        "petitSkillEffectType": "POPﾀｲﾌﾟのぷちｶﾞｰﾙ攻守UP",
+        "petitSkillEffectNum": 24,
+        "petitSkillEffectMode": "UP"
+      },
+      "selectionBonus": "セクシーガールズ★キッス"
+    },
+    {
+      "girlName": "葉月柚子",
+      "eventName": "猫コス20",
+      "rarity": "SR",
+      "attribute": "POP",
+      "attack": 12759,
+      "defence": 11121,
+      "petitCheerEffects": [
+        {
+          "CheerType": "POPﾀｲﾌﾟの攻援UP",
+          "CheerEffectNum": 9.5,
+          "CheerEffectMode": "UP"
+        },
+        {
+          "CheerType": "本命ｶﾞｰﾙの攻守UP",
+          "CheerEffectNum": 11,
+          "CheerEffectMode": "UP"
+        },
+        {
+          "CheerType": "誕生日のｶﾞｰﾙの攻守UP",
+          "CheerEffectNum": 19,
+          "CheerEffectMode": "UP"
+        },
+        {
+          "CheerType": "ﾃﾚﾋﾞの効果UP",
+          "CheerEffectNum": 120,
+          "CheerEffectMode": "UP"
+        }
+      ],
+      "petitSkillEffect": {
+        "petitSkillEffectType": "POPﾀｲﾌﾟのぷちｶﾞｰﾙ攻守UP",
+        "petitSkillEffectNum": 24,
+        "petitSkillEffectMode": "UP"
+      },
+      "selectionBonus": "スポーティーザッパー"
+    },
+    {
+      "girlName": "戸村美知留",
+      "eventName": "ｽﾊﾟﾘｿﾞｰﾄ20",
+      "rarity": "SR",
+      "attribute": "POP",
+      "attack": 15954,
+      "defence": 13883,
+      "petitCheerEffects": [
+        {
+          "CheerType": "POPﾀｲﾌﾟの攻援UP",
+          "CheerEffectNum": 9.5,
+          "CheerEffectMode": "UP"
+        },
+        {
+          "CheerType": "本命ｶﾞｰﾙの攻守UP",
+          "CheerEffectNum": 11,
+          "CheerEffectMode": "UP"
+        },
+        {
+          "CheerType": "誕生日のｶﾞｰﾙの攻守UP",
+          "CheerEffectNum": 19,
+          "CheerEffectMode": "UP"
+        },
+        {
+          "CheerType": "ﾃﾚﾋﾞの効果UP",
+          "CheerEffectNum": 120,
+          "CheerEffectMode": "UP"
+        }
+      ],
+      "petitSkillEffect": {
+        "petitSkillEffectType": "POPﾀｲﾌﾟのぷちｶﾞｰﾙ攻守UP",
+        "petitSkillEffectNum": 22,
+        "petitSkillEffectMode": "UP"
+      },
+      "selectionBonus": "セクシーガールズ★キッス"
+    },
+    {
+      "girlName": "戸村美知留",
+      "eventName": "ｽﾊﾟﾘｿﾞｰﾄ20",
+      "rarity": "SR",
+      "attribute": "POP",
+      "attack": 15954,
+      "defence": 13883,
+      "petitCheerEffects": [
+        {
+          "CheerType": "POPﾀｲﾌﾟの攻援UP",
+          "CheerEffectNum": 9.5,
+          "CheerEffectMode": "UP"
+        },
+        {
+          "CheerType": "本命ｶﾞｰﾙの攻守UP",
+          "CheerEffectNum": 11,
+          "CheerEffectMode": "UP"
+        },
+        {
+          "CheerType": "誕生日のｶﾞｰﾙの攻守UP",
+          "CheerEffectNum": 19,
+          "CheerEffectMode": "UP"
+        },
+        {
+          "CheerType": "ﾃﾚﾋﾞの効果UP",
+          "CheerEffectNum": 120,
+          "CheerEffectMode": "UP"
+        }
+      ],
+      "petitSkillEffect": {
+        "petitSkillEffectType": "POPﾀｲﾌﾟのぷちｶﾞｰﾙ攻守UP",
+        "petitSkillEffectNum": 22,
+        "petitSkillEffectMode": "UP"
+      },
+      "selectionBonus": "セクシーガールズ★キッス"
+    },
+    {
+      "girlName": "花房優輝",
+      "eventName": "晩餐会19",
+      "rarity": "SR",
+      "attribute": "POP",
+      "attack": 15539,
+      "defence": 13468,
+      "petitCheerEffects": [
+        {
+          "CheerType": "POPﾀｲﾌﾟの攻援UP",
+          "CheerEffectNum": 9.5,
+          "CheerEffectMode": "UP"
+        },
+        {
+          "CheerType": "本命ｶﾞｰﾙの攻守UP",
+          "CheerEffectNum": 11,
+          "CheerEffectMode": "UP"
+        },
+        {
+          "CheerType": "ﾃﾞｰﾄ中のｶﾞｰﾙの攻守UP",
+          "CheerEffectNum": 11,
+          "CheerEffectMode": "UP"
+        },
+        {
+          "CheerType": "ﾃﾚﾋﾞの効果UP",
+          "CheerEffectNum": 120,
+          "CheerEffectMode": "UP"
+        }
+      ],
+      "petitSkillEffect": {
+        "petitSkillEffectType": "POPﾀｲﾌﾟのぷちｶﾞｰﾙ攻守UP",
+        "petitSkillEffectNum": 22,
+        "petitSkillEffectMode": "UP"
+      },
+      "selectionBonus": "ライク★アニマル★チアーズ"
+    },
+    {
+      "girlName": "篠宮りさ",
+      "eventName": "秘湯めぐり19",
+      "rarity": "SR",
+      "attribute": "POP",
+      "attack": 15539,
+      "defence": 13468,
+      "petitCheerEffects": [
+        {
+          "CheerType": "POPﾀｲﾌﾟの攻援UP",
+          "CheerEffectNum": 9.5,
+          "CheerEffectMode": "UP"
+        },
+        {
+          "CheerType": "本命ｶﾞｰﾙの攻守UP",
+          "CheerEffectNum": 11,
+          "CheerEffectMode": "UP"
+        },
+        {
+          "CheerType": "ﾃﾞｰﾄ中のｶﾞｰﾙの攻守UP",
+          "CheerEffectNum": 11,
+          "CheerEffectMode": "UP"
+        },
+        {
+          "CheerType": "ﾃﾚﾋﾞの効果UP",
+          "CheerEffectNum": 120,
+          "CheerEffectMode": "UP"
+        }
+      ],
+      "petitSkillEffect": {
+        "petitSkillEffectType": "POPﾀｲﾌﾟのぷちｶﾞｰﾙ攻守UP",
+        "petitSkillEffectNum": 22,
+        "petitSkillEffectMode": "UP"
+      },
+      "selectionBonus": "委員会ペンタゴン"
+    },
+    {
+      "girlName": "相楽エミ",
+      "eventName": "テニス19",
+      "rarity": "SR",
+      "attribute": "POP",
+      "attack": 14915,
+      "defence": 12844,
+      "petitCheerEffects": [
+        {
+          "CheerType": "POPﾀｲﾌﾟの攻援UP",
+          "CheerEffectNum": 9.5,
+          "CheerEffectMode": "UP"
+        },
+        {
+          "CheerType": "本命ｶﾞｰﾙの攻守UP",
+          "CheerEffectNum": 11,
+          "CheerEffectMode": "UP"
+        },
+        {
+          "CheerType": "ﾃﾞｰﾄ中のｶﾞｰﾙの攻守UP",
+          "CheerEffectNum": 11,
+          "CheerEffectMode": "UP"
+        },
+        {
+          "CheerType": "ﾃﾚﾋﾞの効果UP",
+          "CheerEffectNum": 120,
+          "CheerEffectMode": "UP"
+        }
+      ],
+      "petitSkillEffect": {
+        "petitSkillEffectType": "POPﾀｲﾌﾟのぷちｶﾞｰﾙ攻守UP",
+        "petitSkillEffectNum": 20,
+        "petitSkillEffectMode": "UP"
+      },
+      "selectionBonus": "☆ミラクルパフォーマンス★"
+    },
+    {
+      "girlName": "九重忍",
+      "eventName": "振袖19",
+      "rarity": "SR",
+      "attribute": "POP",
+      "attack": 14502,
+      "defence": 12431,
+      "petitCheerEffects": [
+        {
+          "CheerType": "POPﾀｲﾌﾟの攻援UP",
+          "CheerEffectNum": 9.5,
+          "CheerEffectMode": "UP"
+        },
+        {
+          "CheerType": "本命ｶﾞｰﾙの攻守UP",
+          "CheerEffectNum": 11,
+          "CheerEffectMode": "UP"
+        },
+        {
+          "CheerType": "誕生日のｶﾞｰﾙの攻守UP",
+          "CheerEffectNum": 19,
+          "CheerEffectMode": "UP"
+        },
+        {
+          "CheerType": "ﾃﾚﾋﾞの効果UP",
+          "CheerEffectNum": 120,
+          "CheerEffectMode": "UP"
+        }
+      ],
+      "petitSkillEffect": {
+        "petitSkillEffectType": "POPﾀｲﾌﾟのぷちｶﾞｰﾙ攻守UP",
+        "petitSkillEffectNum": 20,
+        "petitSkillEffectMode": "UP"
+      },
+      "selectionBonus": "セクシーガールズ★キッス"
+    },
+    {
+      "girlName": "甘利燈",
+      "eventName": "ﾒｲﾄﾞ体験20",
+      "rarity": "SR",
+      "attribute": "POP",
+      "attack": 14090,
+      "defence": 12234,
+      "petitCheerEffects": [
+        {
+          "CheerType": "POPﾀｲﾌﾟの攻援UP",
+          "CheerEffectNum": 9.5,
+          "CheerEffectMode": "UP"
+        },
+        {
+          "CheerType": "本命ｶﾞｰﾙの攻守UP",
+          "CheerEffectNum": 11,
+          "CheerEffectMode": "UP"
+        },
+        {
+          "CheerType": "ﾃﾞｰﾄ中のｶﾞｰﾙの攻守UP",
+          "CheerEffectNum": 11,
+          "CheerEffectMode": "UP"
+        },
+        {
+          "CheerType": "ﾃﾚﾋﾞの効果UP",
+          "CheerEffectNum": 120,
+          "CheerEffectMode": "UP"
+        }
+      ],
+      "petitSkillEffect": {
+        "petitSkillEffectType": "POPﾀｲﾌﾟのぷちｶﾞｰﾙ攻守UP",
+        "petitSkillEffectNum": 22,
+        "petitSkillEffectMode": "UP"
+      },
+      "selectionBonus": "シーフードランデブー"
+    }
+  ],
+  "petitDeck3": [
+    {
+      "girlName": "アネット・O・唐澤",
+      "eventName": "Myフレンド",
+      "rarity": "SR",
+      "attribute": "SWEET",
+      "attack": 18025,
+      "defence": 18025,
+      "petitCheerEffects": [
+        {
+          "CheerType": "全ﾀｲﾌﾟの攻守大UP",
+          "CheerEffectNum": 12,
+          "CheerEffectMode": "UP"
+        },
+        {
+          "CheerType": "本命ｶﾞｰﾙの攻守UP",
+          "CheerEffectNum": 11,
+          "CheerEffectMode": "UP"
+        },
+        {
+          "CheerType": "ﾃﾞｰﾄ中のｶﾞｰﾙの攻守UP",
+          "CheerEffectNum": 11,
+          "CheerEffectMode": "UP"
+        },
+        {
+          "CheerType": "ﾎﾜｲﾄﾎﾞｰﾄﾞの効果UP",
+          "CheerEffectNum": 120,
+          "CheerEffectMode": "UP"
+        }
+      ],
+      "petitSkillEffect": {
+        "petitSkillEffectType": "SWEETﾀｲﾌﾟのぷちｶﾞｰﾙ攻守UP",
+        "petitSkillEffectNum": 25,
+        "petitSkillEffectMode": "UP"
+      },
+      "selectionBonus": "セクシーガールズ★キッス"
+    },
+    {
+      "girlName": "クロエ・ルメール",
+      "eventName": "ﾁｬｲﾅﾄﾞﾚｽ20",
+      "rarity": "SR",
+      "attribute": "SWEET",
+      "attack": 14461,
+      "defence": 12604,
+      "petitCheerEffects": [
+        {
+          "CheerType": "SWEETﾀｲﾌﾟの攻援UP",
+          "CheerEffectNum": 9.5,
+          "CheerEffectMode": "UP"
+        },
+        {
+          "CheerType": "本命ｶﾞｰﾙの攻守UP",
+          "CheerEffectNum": 11,
+          "CheerEffectMode": "UP"
+        },
+        {
+          "CheerType": "誕生日のｶﾞｰﾙの攻守UP",
+          "CheerEffectNum": 19,
+          "CheerEffectMode": "UP"
+        },
+        {
+          "CheerType": "ﾛｯｶｰの効果UP",
+          "CheerEffectNum": 120,
+          "CheerEffectMode": "UP"
+        }
+      ],
+      "petitSkillEffect": {
+        "petitSkillEffectType": "SWEETﾀｲﾌﾟのぷちｶﾞｰﾙ攻守UP",
+        "petitSkillEffectNum": 24,
+        "petitSkillEffectMode": "UP"
+      },
+      "selectionBonus": "シーフードランデブー"
+    },
+    {
+      "girlName": "三嶋ゆらら",
+      "eventName": "ﾊﾞﾚﾝﾀｲﾝ20",
+      "rarity": "SR",
+      "attribute": "SWEET",
+      "attack": 15748,
+      "defence": 13674,
+      "petitCheerEffects": [
+        {
+          "CheerType": "SWEETﾀｲﾌﾟの攻援UP",
+          "CheerEffectNum": 9.5,
+          "CheerEffectMode": "UP"
+        },
+        {
+          "CheerType": "本命ｶﾞｰﾙの攻守UP",
+          "CheerEffectNum": 11,
+          "CheerEffectMode": "UP"
+        },
+        {
+          "CheerType": "ﾃﾞｰﾄ中のｶﾞｰﾙの攻守UP",
+          "CheerEffectNum": 11,
+          "CheerEffectMode": "UP"
+        },
+        {
+          "CheerType": "ﾛｯｶｰの効果UP",
+          "CheerEffectNum": 120,
+          "CheerEffectMode": "UP"
+        }
+      ],
+      "petitSkillEffect": {
+        "petitSkillEffectType": "SWEETﾀｲﾌﾟのぷちｶﾞｰﾙ攻守UP",
+        "petitSkillEffectNum": 22,
+        "petitSkillEffectMode": "UP"
+      },
+      "selectionBonus": "★☆部長バースト☆★"
+    },
+    {
+      "girlName": "小日向いちご",
+      "eventName": "ｸﾘｽﾏｽ19",
+      "rarity": "SR",
+      "attribute": "SWEET",
+      "attack": 15539,
+      "defence": 13468,
+      "petitCheerEffects": [
+        {
+          "CheerType": "SWEETﾀｲﾌﾟの攻援UP",
+          "CheerEffectNum": 9.5,
+          "CheerEffectMode": "UP"
+        },
+        {
+          "CheerType": "本命ｶﾞｰﾙの攻守UP",
+          "CheerEffectNum": 11,
+          "CheerEffectMode": "UP"
+        },
+        {
+          "CheerType": "誕生日のｶﾞｰﾙの攻守UP",
+          "CheerEffectNum": 19,
+          "CheerEffectMode": "UP"
+        },
+        {
+          "CheerType": "ﾛｯｶｰの効果UP",
+          "CheerEffectNum": 120,
+          "CheerEffectMode": "UP"
+        }
+      ],
+      "petitSkillEffect": {
+        "petitSkillEffectType": "SWEETﾀｲﾌﾟのぷちｶﾞｰﾙ攻守UP",
+        "petitSkillEffectNum": 22,
+        "petitSkillEffectMode": "UP"
+      },
+      "selectionBonus": "ふわふわらっぴんぐ"
+    },
+    {
+      "girlName": "加賀美茉莉",
+      "eventName": "ﾅｲﾄﾌﾟｰﾙ19",
+      "rarity": "SR",
+      "attribute": "SWEET",
+      "attack": 15330,
+      "defence": 13259,
+      "petitCheerEffects": [
+        {
+          "CheerType": "SWEETﾀｲﾌﾟの攻援UP",
+          "CheerEffectNum": 9.5,
+          "CheerEffectMode": "UP"
+        },
+        {
+          "CheerType": "本命ｶﾞｰﾙの攻守UP",
+          "CheerEffectNum": 11,
+          "CheerEffectMode": "UP"
+        },
+        {
+          "CheerType": "誕生日のｶﾞｰﾙの攻守UP",
+          "CheerEffectNum": 19,
+          "CheerEffectMode": "UP"
+        },
+        {
+          "CheerType": "ﾛｯｶｰの効果UP",
+          "CheerEffectNum": 120,
+          "CheerEffectMode": "UP"
+        }
+      ],
+      "petitSkillEffect": {
+        "petitSkillEffectType": "SWEETﾀｲﾌﾟのぷちｶﾞｰﾙ攻守UP",
+        "petitSkillEffectNum": 20,
+        "petitSkillEffectMode": "UP"
+      },
+      "selectionBonus": "スポーティーザッパー"
+    },
+    {
+      "girlName": "アネット・O・唐澤",
+      "eventName": "猫コス19",
+      "rarity": "SR",
+      "attribute": "SWEET",
+      "attack": 14915,
+      "defence": 12844,
+      "petitCheerEffects": [
+        {
+          "CheerType": "3年生の攻援UP",
+          "CheerEffectNum": 9.5,
+          "CheerEffectMode": "UP"
+        },
+        {
+          "CheerType": "本命ｶﾞｰﾙの攻守UP",
+          "CheerEffectNum": 11,
+          "CheerEffectMode": "UP"
+        },
+        {
+          "CheerType": "ﾃﾞｰﾄ中のｶﾞｰﾙの攻守UP",
+          "CheerEffectNum": 11,
+          "CheerEffectMode": "UP"
+        },
+        {
+          "CheerType": "ﾛｯｶｰの効果UP",
+          "CheerEffectNum": 120,
+          "CheerEffectMode": "UP"
+        }
+      ],
+      "petitSkillEffect": {
+        "petitSkillEffectType": "SWEETﾀｲﾌﾟのぷちｶﾞｰﾙ攻守UP",
+        "petitSkillEffectNum": 20,
+        "petitSkillEffectMode": "UP"
+      },
+      "selectionBonus": "セクシーガールズ★キッス"
+    },
+    {
+      "girlName": "風町陽歌",
+      "eventName": "ﾊﾞﾆｰｶﾞｰﾙ19",
+      "rarity": "SR",
+      "attribute": "SWEET",
+      "attack": 14711,
+      "defence": 12640,
+      "petitCheerEffects": [
+        {
+          "CheerType": "SWEETﾀｲﾌﾟの攻援UP",
+          "CheerEffectNum": 9.5,
+          "CheerEffectMode": "UP"
+        },
+        {
+          "CheerType": "本命ｶﾞｰﾙの攻守UP",
+          "CheerEffectNum": 11,
+          "CheerEffectMode": "UP"
+        },
+        {
+          "CheerType": "ﾃﾞｰﾄ中のｶﾞｰﾙの攻守UP",
+          "CheerEffectNum": 11,
+          "CheerEffectMode": "UP"
+        },
+        {
+          "CheerType": "ﾀｯﾁﾎﾞｰﾅｽの効果UP",
+          "CheerEffectNum": 11,
+          "CheerEffectMode": "UP"
+        }
+      ],
+      "petitSkillEffect": {
+        "petitSkillEffectType": "SWEETﾀｲﾌﾟのぷちｶﾞｰﾙ攻守UP",
+        "petitSkillEffectNum": 20,
+        "petitSkillEffectMode": "UP"
+      },
+      "selectionBonus": "ふわふわらっぴんぐ"
+    },
+    {
+      "girlName": "風町陽歌",
+      "eventName": "ﾊﾞﾆｰｶﾞｰﾙ19",
+      "rarity": "SR",
+      "attribute": "SWEET",
+      "attack": 14711,
+      "defence": 12640,
+      "petitCheerEffects": [
+        {
+          "CheerType": "SWEETﾀｲﾌﾟの攻援UP",
+          "CheerEffectNum": 9.5,
+          "CheerEffectMode": "UP"
+        },
+        {
+          "CheerType": "本命ｶﾞｰﾙの攻守UP",
+          "CheerEffectNum": 11,
+          "CheerEffectMode": "UP"
+        },
+        {
+          "CheerType": "ﾃﾞｰﾄ中のｶﾞｰﾙの攻守UP",
+          "CheerEffectNum": 11,
+          "CheerEffectMode": "UP"
+        },
+        {
+          "CheerType": "ﾀｯﾁﾎﾞｰﾅｽの効果UP",
+          "CheerEffectNum": 11,
+          "CheerEffectMode": "UP"
+        }
+      ],
+      "petitSkillEffect": {
+        "petitSkillEffectType": "SWEETﾀｲﾌﾟのぷちｶﾞｰﾙ攻守UP",
+        "petitSkillEffectNum": 20,
+        "petitSkillEffectMode": "UP"
+      },
+      "selectionBonus": "ふわふわらっぴんぐ"
+    },
+    {
+      "girlName": "朝比奈桃子",
+      "eventName": "ﾁｬｲﾅﾄﾞﾚｽ19",
+      "rarity": "SR",
+      "attribute": "SWEET",
+      "attack": 14502,
+      "defence": 12431,
+      "petitCheerEffects": [
+        {
+          "CheerType": "SWEETﾀｲﾌﾟの攻援UP",
+          "CheerEffectNum": 9.5,
+          "CheerEffectMode": "UP"
+        },
+        {
+          "CheerType": "本命ｶﾞｰﾙの攻守UP",
+          "CheerEffectNum": 11,
+          "CheerEffectMode": "UP"
+        },
+        {
+          "CheerType": "誕生日のｶﾞｰﾙの攻守UP",
+          "CheerEffectNum": 19,
+          "CheerEffectMode": "UP"
+        },
+        {
+          "CheerType": "ﾛｯｶｰの効果UP",
+          "CheerEffectNum": 120,
+          "CheerEffectMode": "UP"
+        }
+      ],
+      "petitSkillEffect": {
+        "petitSkillEffectType": "SWEETﾀｲﾌﾟのぷちｶﾞｰﾙ攻守UP",
+        "petitSkillEffectNum": 20,
+        "petitSkillEffectMode": "UP"
+      },
+      "selectionBonus": "にゅーろん★くりぃむそふと"
+    },
+    {
+      "girlName": "柊真琴",
+      "eventName": "秘湯めぐり18",
+      "rarity": "SR",
+      "attribute": "SWEET",
+      "attack": 14296,
+      "defence": 12225,
+      "petitCheerEffects": [
+        {
+          "CheerType": "SWEETﾀｲﾌﾟの攻援UP",
+          "CheerEffectNum": 9.5,
+          "CheerEffectMode": "UP"
+        },
+        {
+          "CheerType": "本命ｶﾞｰﾙの攻守UP",
+          "CheerEffectNum": 11,
+          "CheerEffectMode": "UP"
+        },
+        {
+          "CheerType": "ﾀｯﾁﾎﾞｰﾅｽの効果UP",
+          "CheerEffectNum": 11,
+          "CheerEffectMode": "UP"
+        },
+        {
+          "CheerType": "誕生日のｶﾞｰﾙの攻守UP",
+          "CheerEffectNum": 19,
+          "CheerEffectMode": "UP"
+        }
+      ],
+      "petitSkillEffect": {
+        "petitSkillEffectType": "SWEETﾀｲﾌﾟのぷちｶﾞｰﾙ攻守UP",
+        "petitSkillEffectNum": 17,
+        "petitSkillEffectMode": "UP"
+      },
+      "selectionBonus": "ふわふわらっぴんぐ"
+    }
+  ]
+}
