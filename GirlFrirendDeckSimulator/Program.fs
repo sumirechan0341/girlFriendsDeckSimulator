@@ -223,7 +223,6 @@ let main argv =
                 * Math.Pow(1.0 - (settings.SkillBonusSettings.SkillRaisedProbability |> float), deckEditViewModel.FrontDeck.Count - 1 - triggeredIndexList.Length |> float)
             
             expectation <- expectation + (calcDamage(deckEditViewModel.FrontDeck, deckEditViewModel.BackDeck, petitDeckEditViewModel.TotalAttack, petitDeckEditViewModel.TotalDefence, playerParameterViewModel.AttackCost, deckEditViewModel.SelectedEventType, deckEditViewModel.SelectedMode) |> float) * triggeredProbability
-            Console.WriteLine(calcDamage(deckEditViewModel.FrontDeck, deckEditViewModel.BackDeck, petitDeckEditViewModel.TotalAttack, petitDeckEditViewModel.TotalDefence, playerParameterViewModel.AttackCost, deckEditViewModel.SelectedEventType, deckEditViewModel.SelectedMode))
         for (index, isTriggeredSkillBonus) in Array.indexed isTriggeredSkillBonusList do
             deckEditViewModel.FrontDeck.[index].IsTriggeredSkillBonus <- isTriggeredSkillBonus
 

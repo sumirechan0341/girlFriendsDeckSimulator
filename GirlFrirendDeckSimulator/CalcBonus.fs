@@ -455,7 +455,7 @@ module CalcBonus =
                                 let target = snd targetPair
                                 //let isInFrontDeck = fst targetPair
                                 //let backDeckFactor = if isInFrontDeck then 1.0 else 0.8
-                                let backDeckFactor = 0.8 // ここではなくボーナス計算時にデートとともに0.8倍の補正をかけｋる
+                                let backDeckFactor = 1.0 // ここではなくボーナス計算時にデートとともに0.8倍の補正をかける
                                 match skill.attribute with
                                 | SkillAttributeType.Cool ->
                                     if target.Card.attribute = AttributeType.Cool
@@ -1673,6 +1673,9 @@ module CalcBonus =
                 |]
             )
 
+        Console.WriteLine("")
+        Console.WriteLine("")
+        Console.WriteLine("---------------------------------")
         let attackBonusWithStrapsAndSceneAndBackDeckFactor =
             Console.WriteLine("声援")
             for v in triggeredAttackSkillBonus do
@@ -1684,9 +1687,6 @@ module CalcBonus =
         let attackBonusWithStrapsAndBackDeckFactor = [|birthdayBonus|]
         let defenceBonusWithStrapsAndBackDeckFactor = [|birthdayBonus|]
         let attackBonusWithStrapsAndScene =  
-            Console.WriteLine("")
-            Console.WriteLine("")
-            Console.WriteLine("---------------------------------")
             match ev with
             | MemorialStory -> 
                 Console.WriteLine(card.girl.name + ": " + Option.defaultValue "" card.eventName)
@@ -1717,7 +1717,6 @@ module CalcBonus =
             | otherwise ->
                 Console.WriteLine(card.girl.name + ": " + Option.defaultValue "" card.eventName)
                 printfn "属性: %f, 部一致: %f, コロン: %f, ホワイトボード: %f, テレビ: %f, ロッカー: %f, 役職: %f, ぷち: %f" attrBonus clubTypeBonus colonBonus whiteboardBonus televisionBonus lockerBonus clubRoleAttackBonus petitCheerEffectAttackBonus
-                Console.WriteLine([|attrBonus; clubTypeBonus; colonBonus; whiteboardBonus; televisionBonus; lockerBonus; clubRoleAttackBonus; petitCheerEffectAttackBonus|])
                 [|attrBonus; clubTypeBonus; colonBonus; whiteboardBonus; televisionBonus; lockerBonus; clubRoleAttackBonus; petitCheerEffectAttackBonus|] 
                 
         let defenceBonusWithStrapsAndScene = 
