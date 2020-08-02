@@ -40,10 +40,10 @@ module CalcBonus =
         
 
         let settings = Settings.Parse(File.ReadAllText(".\Setting.json"))
-        for frontCard in checkSkillTriggeredCards do
-            if frontCard.IsTriggeredSkillBonus
+        for skillRaiseFrontCard in checkSkillTriggeredCards do
+            if skillRaiseFrontCard.IsTriggeredSkillBonus
             then
-                match frontCard.Card.skillType with
+                match skillRaiseFrontCard.Card.skillType with
                 | None -> 0 |> ignore
                 | Some(skill) ->
                     match skill.skillMode with
@@ -60,95 +60,96 @@ module CalcBonus =
                                         | SkillType.Effect.ExtraSuper ->
                                             match skill.mode with
                                             | Mode.Attack ->
-                                                frontCard.AppliedAttackSkillBonus.Add(settings.SkillBonusSettings.AttributeSkill.AttributeAttackExtraSuperUp + frontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float)
+                                                frontCard.AppliedAttackSkillBonus.Add(settings.SkillBonusSettings.AttributeSkill.AttributeAttackExtraSuperUp + skillRaiseFrontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float)
                                             | Mode.Defence ->
-                                                frontCard.AppliedDefenceSkillBonus.Add(settings.SkillBonusSettings.AttributeSkill.AttributeDefenceExtraSuperUp + frontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float)
+                                                frontCard.AppliedDefenceSkillBonus.Add(settings.SkillBonusSettings.AttributeSkill.AttributeDefenceExtraSuperUp + skillRaiseFrontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float)
                                             | Mode.AttackAndDefence ->
-                                                frontCard.AppliedAttackSkillBonus.Add(settings.SkillBonusSettings.AttributeSkill.AttributeAttackAndDefenceExtraSuperUp + frontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float)
-                                                frontCard.AppliedDefenceSkillBonus.Add(settings.SkillBonusSettings.AttributeSkill.AttributeAttackAndDefenceExtraSuperUp + frontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float)
+                                                frontCard.AppliedAttackSkillBonus.Add(settings.SkillBonusSettings.AttributeSkill.AttributeAttackAndDefenceExtraSuperUp + skillRaiseFrontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float)
+                                                frontCard.AppliedDefenceSkillBonus.Add(settings.SkillBonusSettings.AttributeSkill.AttributeAttackAndDefenceExtraSuperUp + skillRaiseFrontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float)
                                         | SkillType.Effect.Super ->
                                             match skill.mode with
                                             | Mode.Attack ->
-                                                frontCard.AppliedAttackSkillBonus.Add(settings.SkillBonusSettings.AttributeSkill.AttributeAttackSuperUp + frontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float)
+                                                frontCard.AppliedAttackSkillBonus.Add(settings.SkillBonusSettings.AttributeSkill.AttributeAttackSuperUp + skillRaiseFrontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float)
                                             | Mode.Defence ->
-                                                frontCard.AppliedDefenceSkillBonus.Add(settings.SkillBonusSettings.AttributeSkill.AttributeDefenceSuperUp + frontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float)
+                                                frontCard.AppliedDefenceSkillBonus.Add(settings.SkillBonusSettings.AttributeSkill.AttributeDefenceSuperUp + skillRaiseFrontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float)
                                             | Mode.AttackAndDefence ->
-                                                frontCard.AppliedAttackSkillBonus.Add(settings.SkillBonusSettings.AttributeSkill.AttributeAttackAndDefenceSuperUp + frontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float)
-                                                frontCard.AppliedDefenceSkillBonus.Add(settings.SkillBonusSettings.AttributeSkill.AttributeAttackAndDefenceSuperUp + frontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float) 
+                                                Console.WriteLine(skill.skillEnchantLevel)
+                                                frontCard.AppliedAttackSkillBonus.Add(settings.SkillBonusSettings.AttributeSkill.AttributeAttackAndDefenceSuperUp + skillRaiseFrontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float)
+                                                frontCard.AppliedDefenceSkillBonus.Add(settings.SkillBonusSettings.AttributeSkill.AttributeAttackAndDefenceSuperUp + skillRaiseFrontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float) 
                                         | SkillType.Effect.ExtraLarge ->
                                             match skill.mode with
                                             | Mode.Attack ->
-                                                frontCard.AppliedAttackSkillBonus.Add(settings.SkillBonusSettings.AttributeSkill.AttributeAttackExtraLargeUp + frontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float)
+                                                frontCard.AppliedAttackSkillBonus.Add(settings.SkillBonusSettings.AttributeSkill.AttributeAttackExtraLargeUp + skillRaiseFrontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float)
                                             | Mode.Defence ->
-                                                frontCard.AppliedDefenceSkillBonus.Add(settings.SkillBonusSettings.AttributeSkill.AttributeDefenceExtraLargeUp + frontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float)
+                                                frontCard.AppliedDefenceSkillBonus.Add(settings.SkillBonusSettings.AttributeSkill.AttributeDefenceExtraLargeUp + skillRaiseFrontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float)
                                             | Mode.AttackAndDefence ->
-                                                frontCard.AppliedAttackSkillBonus.Add(settings.SkillBonusSettings.AttributeSkill.AttributeAttackAndDefenceExtraLargeUp + frontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float)
-                                                frontCard.AppliedDefenceSkillBonus.Add(settings.SkillBonusSettings.AttributeSkill.AttributeAttackAndDefenceExtraLargeUp + frontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float)
+                                                frontCard.AppliedAttackSkillBonus.Add(settings.SkillBonusSettings.AttributeSkill.AttributeAttackAndDefenceExtraLargeUp + skillRaiseFrontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float)
+                                                frontCard.AppliedDefenceSkillBonus.Add(settings.SkillBonusSettings.AttributeSkill.AttributeAttackAndDefenceExtraLargeUp + skillRaiseFrontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float)
                                         | SkillType.Effect.Large ->
                                             match skill.mode with
                                             | Mode.Attack ->
-                                                frontCard.AppliedAttackSkillBonus.Add(settings.SkillBonusSettings.AttributeSkill.AttributeAttackLargeUp + frontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float)
+                                                frontCard.AppliedAttackSkillBonus.Add(settings.SkillBonusSettings.AttributeSkill.AttributeAttackLargeUp + skillRaiseFrontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float)
                                             | Mode.Defence ->
-                                                frontCard.AppliedDefenceSkillBonus.Add(settings.SkillBonusSettings.AttributeSkill.AttributeDefenceLargeUp + frontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float)
+                                                frontCard.AppliedDefenceSkillBonus.Add(settings.SkillBonusSettings.AttributeSkill.AttributeDefenceLargeUp + skillRaiseFrontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float)
                                             | Mode.AttackAndDefence ->
-                                                frontCard.AppliedAttackSkillBonus.Add(settings.SkillBonusSettings.AttributeSkill.AttributeAttackAndDefenceLargeUp + frontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float)
-                                                frontCard.AppliedDefenceSkillBonus.Add(settings.SkillBonusSettings.AttributeSkill.AttributeAttackAndDefenceLargeUp + frontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float)
+                                                frontCard.AppliedAttackSkillBonus.Add(settings.SkillBonusSettings.AttributeSkill.AttributeAttackAndDefenceLargeUp + skillRaiseFrontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float)
+                                                frontCard.AppliedDefenceSkillBonus.Add(settings.SkillBonusSettings.AttributeSkill.AttributeAttackAndDefenceLargeUp + skillRaiseFrontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float)
                                         | SkillType.Effect.Middle ->
                                             match skill.mode with
                                             | Mode.Attack ->
-                                                frontCard.AppliedAttackSkillBonus.Add(settings.SkillBonusSettings.AttributeSkill.AttributeAttackMiddleUp + frontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float)
+                                                frontCard.AppliedAttackSkillBonus.Add(settings.SkillBonusSettings.AttributeSkill.AttributeAttackMiddleUp + skillRaiseFrontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float)
                                             | Mode.Defence ->
-                                                frontCard.AppliedDefenceSkillBonus.Add(settings.SkillBonusSettings.AttributeSkill.AttributeDefenceMiddleUp + frontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float)
+                                                frontCard.AppliedDefenceSkillBonus.Add(settings.SkillBonusSettings.AttributeSkill.AttributeDefenceMiddleUp + skillRaiseFrontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float)
                                             | Mode.AttackAndDefence ->
-                                                frontCard.AppliedAttackSkillBonus.Add(settings.SkillBonusSettings.AttributeSkill.AttributeAttackAndDefenceMiddleUp + frontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float)
-                                                frontCard.AppliedDefenceSkillBonus.Add(settings.SkillBonusSettings.AttributeSkill.AttributeAttackAndDefenceMiddleUp + frontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float)
+                                                frontCard.AppliedAttackSkillBonus.Add(settings.SkillBonusSettings.AttributeSkill.AttributeAttackAndDefenceMiddleUp + skillRaiseFrontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float)
+                                                frontCard.AppliedDefenceSkillBonus.Add(settings.SkillBonusSettings.AttributeSkill.AttributeAttackAndDefenceMiddleUp + skillRaiseFrontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float)
                                         | SkillType.Effect.Small ->
                                             match skill.mode with
                                             | Mode.Attack ->
-                                                frontCard.AppliedAttackSkillBonus.Add(settings.SkillBonusSettings.AttributeSkill.AttributeAttackSmallUp + frontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float)
+                                                frontCard.AppliedAttackSkillBonus.Add(settings.SkillBonusSettings.AttributeSkill.AttributeAttackSmallUp + skillRaiseFrontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float)
                                             | Mode.Defence ->
-                                                frontCard.AppliedDefenceSkillBonus.Add(settings.SkillBonusSettings.AttributeSkill.AttributeDefenceSmallUp + frontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float)
+                                                frontCard.AppliedDefenceSkillBonus.Add(settings.SkillBonusSettings.AttributeSkill.AttributeDefenceSmallUp + skillRaiseFrontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float)
                                             | Mode.AttackAndDefence ->
-                                                frontCard.AppliedAttackSkillBonus.Add(settings.SkillBonusSettings.AttributeSkill.AttributeAttackAndDefenceSmallUp + frontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float)
-                                                frontCard.AppliedDefenceSkillBonus.Add(settings.SkillBonusSettings.AttributeSkill.AttributeAttackAndDefenceSmallUp + frontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float)
+                                                frontCard.AppliedAttackSkillBonus.Add(settings.SkillBonusSettings.AttributeSkill.AttributeAttackAndDefenceSmallUp + skillRaiseFrontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float)
+                                                frontCard.AppliedDefenceSkillBonus.Add(settings.SkillBonusSettings.AttributeSkill.AttributeAttackAndDefenceSmallUp + skillRaiseFrontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float)
                                         | SkillType.Effect.Random(skillMin, skillMax) ->
                                             match skill.mode with
                                             | Mode.Attack ->
                                                 match skillMin with
                                                 | Middle -> // 中から特大    
-                                                    frontCard.AppliedAttackSkillBonus.Add(settings.SkillBonusSettings.AttributeSkill.AttributeAttackLargeUp + frontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float)
+                                                    frontCard.AppliedAttackSkillBonus.Add(settings.SkillBonusSettings.AttributeSkill.AttributeAttackLargeUp + skillRaiseFrontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float)
                                                     //暫定的に大Upに
                                                 | Large -> // 大からスーパー特大
-                                                    frontCard.AppliedAttackSkillBonus.Add(settings.SkillBonusSettings.AttributeSkill.AttributeAttackExtraLargeUp + frontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float)
+                                                    frontCard.AppliedAttackSkillBonus.Add(settings.SkillBonusSettings.AttributeSkill.AttributeAttackExtraLargeUp + skillRaiseFrontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float)
                                                     // 暫定的に特大Upに
                                                 | ExtraLarge -> // 特大から超スーパー特大
-                                                    frontCard.AppliedAttackSkillBonus.Add(settings.SkillBonusSettings.AttributeSkill.AttributeAttackSuperUp + frontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float)
+                                                    frontCard.AppliedAttackSkillBonus.Add(settings.SkillBonusSettings.AttributeSkill.AttributeAttackSuperUp + skillRaiseFrontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float)
                                                     //暫定的にスーパー特大Upに
                                                 // 大から特大もいる あとで実装
                                             | Mode.Defence ->
                                                 match skillMin with
                                                 | Middle -> // 中から特大    
-                                                    frontCard.AppliedDefenceSkillBonus.Add(settings.SkillBonusSettings.AttributeSkill.AttributeDefenceLargeUp + frontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float)
+                                                    frontCard.AppliedDefenceSkillBonus.Add(settings.SkillBonusSettings.AttributeSkill.AttributeDefenceLargeUp + skillRaiseFrontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float)
                                                     //暫定的に大Upに
                                                 | Large -> // 大からスーパー特大
-                                                    frontCard.AppliedDefenceSkillBonus.Add(settings.SkillBonusSettings.AttributeSkill.AttributeDefenceExtraLargeUp + frontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float)
+                                                    frontCard.AppliedDefenceSkillBonus.Add(settings.SkillBonusSettings.AttributeSkill.AttributeDefenceExtraLargeUp + skillRaiseFrontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float)
                                                     // 暫定的に特大Upに
                                                 | ExtraLarge -> // 特大から超スーパー特大
-                                                    frontCard.AppliedDefenceSkillBonus.Add(settings.SkillBonusSettings.AttributeSkill.AttributeDefenceSuperUp + frontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float)
+                                                    frontCard.AppliedDefenceSkillBonus.Add(settings.SkillBonusSettings.AttributeSkill.AttributeDefenceSuperUp + skillRaiseFrontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float)
                                                     //暫定的にスーパー特大Upに
                                             | Mode.AttackAndDefence ->
                                                 match skillMin with
                                                 | Middle -> // 中から特大    
-                                                    frontCard.AppliedAttackSkillBonus.Add(settings.SkillBonusSettings.AttributeSkill.AttributeAttackAndDefenceLargeUp + frontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float)
-                                                    frontCard.AppliedDefenceSkillBonus.Add(settings.SkillBonusSettings.AttributeSkill.AttributeAttackAndDefenceLargeUp + frontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float)
+                                                    frontCard.AppliedAttackSkillBonus.Add(settings.SkillBonusSettings.AttributeSkill.AttributeAttackAndDefenceLargeUp + skillRaiseFrontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float)
+                                                    frontCard.AppliedDefenceSkillBonus.Add(settings.SkillBonusSettings.AttributeSkill.AttributeAttackAndDefenceLargeUp + skillRaiseFrontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float)
                                                     //暫定的に大Upに
                                                 | Large -> // 大からスーパー特大
-                                                    frontCard.AppliedAttackSkillBonus.Add(settings.SkillBonusSettings.AttributeSkill.AttributeAttackAndDefenceExtraLargeUp + frontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float)
-                                                    frontCard.AppliedDefenceSkillBonus.Add(settings.SkillBonusSettings.AttributeSkill.AttributeAttackAndDefenceExtraLargeUp + frontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float)
+                                                    frontCard.AppliedAttackSkillBonus.Add(settings.SkillBonusSettings.AttributeSkill.AttributeAttackAndDefenceExtraLargeUp + skillRaiseFrontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float)
+                                                    frontCard.AppliedDefenceSkillBonus.Add(settings.SkillBonusSettings.AttributeSkill.AttributeAttackAndDefenceExtraLargeUp + skillRaiseFrontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float)
                                                     // 暫定的に特大Upに
                                                 | ExtraLarge -> // 特大から超スーパー特大
-                                                    frontCard.AppliedAttackSkillBonus.Add(settings.SkillBonusSettings.AttributeSkill.AttributeAttackAndDefenceSuperUp + frontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float)
-                                                    frontCard.AppliedDefenceSkillBonus.Add(settings.SkillBonusSettings.AttributeSkill.AttributeAttackAndDefenceSuperUp + frontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float)
+                                                    frontCard.AppliedAttackSkillBonus.Add(settings.SkillBonusSettings.AttributeSkill.AttributeAttackAndDefenceSuperUp + skillRaiseFrontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float)
+                                                    frontCard.AppliedDefenceSkillBonus.Add(settings.SkillBonusSettings.AttributeSkill.AttributeAttackAndDefenceSuperUp + skillRaiseFrontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float)
                                                     //暫定的にスーパー特大Upに
                                     else 0 |> ignore
                                 | SkillAttributeType.Pop ->
@@ -158,95 +159,95 @@ module CalcBonus =
                                         | SkillType.Effect.ExtraSuper ->
                                             match skill.mode with
                                             | Mode.Attack ->
-                                                frontCard.AppliedAttackSkillBonus.Add(settings.SkillBonusSettings.AttributeSkill.AttributeAttackExtraSuperUp + frontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float)
+                                                frontCard.AppliedAttackSkillBonus.Add(settings.SkillBonusSettings.AttributeSkill.AttributeAttackExtraSuperUp + skillRaiseFrontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float)
                                             | Mode.Defence ->
-                                                frontCard.AppliedDefenceSkillBonus.Add(settings.SkillBonusSettings.AttributeSkill.AttributeDefenceExtraSuperUp + frontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float)
+                                                frontCard.AppliedDefenceSkillBonus.Add(settings.SkillBonusSettings.AttributeSkill.AttributeDefenceExtraSuperUp + skillRaiseFrontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float)
                                             | Mode.AttackAndDefence ->
-                                                frontCard.AppliedAttackSkillBonus.Add(settings.SkillBonusSettings.AttributeSkill.AttributeAttackAndDefenceExtraSuperUp + frontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float)
-                                                frontCard.AppliedDefenceSkillBonus.Add(settings.SkillBonusSettings.AttributeSkill.AttributeAttackAndDefenceExtraSuperUp + frontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float)
+                                                frontCard.AppliedAttackSkillBonus.Add(settings.SkillBonusSettings.AttributeSkill.AttributeAttackAndDefenceExtraSuperUp + skillRaiseFrontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float)
+                                                frontCard.AppliedDefenceSkillBonus.Add(settings.SkillBonusSettings.AttributeSkill.AttributeAttackAndDefenceExtraSuperUp + skillRaiseFrontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float)
                                         | SkillType.Effect.Super ->
                                             match skill.mode with
                                             | Mode.Attack ->
-                                                frontCard.AppliedAttackSkillBonus.Add(settings.SkillBonusSettings.AttributeSkill.AttributeAttackSuperUp + frontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float)
+                                                frontCard.AppliedAttackSkillBonus.Add(settings.SkillBonusSettings.AttributeSkill.AttributeAttackSuperUp + skillRaiseFrontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float)
                                             | Mode.Defence ->
-                                                frontCard.AppliedDefenceSkillBonus.Add(settings.SkillBonusSettings.AttributeSkill.AttributeDefenceSuperUp + frontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float)
+                                                frontCard.AppliedDefenceSkillBonus.Add(settings.SkillBonusSettings.AttributeSkill.AttributeDefenceSuperUp + skillRaiseFrontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float)
                                             | Mode.AttackAndDefence ->
-                                                frontCard.AppliedAttackSkillBonus.Add(settings.SkillBonusSettings.AttributeSkill.AttributeAttackAndDefenceSuperUp + frontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float)
-                                                frontCard.AppliedDefenceSkillBonus.Add(settings.SkillBonusSettings.AttributeSkill.AttributeAttackAndDefenceSuperUp + frontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float) 
+                                                frontCard.AppliedAttackSkillBonus.Add(settings.SkillBonusSettings.AttributeSkill.AttributeAttackAndDefenceSuperUp + skillRaiseFrontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float)
+                                                frontCard.AppliedDefenceSkillBonus.Add(settings.SkillBonusSettings.AttributeSkill.AttributeAttackAndDefenceSuperUp + skillRaiseFrontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float) 
                                         | SkillType.Effect.ExtraLarge ->
                                             match skill.mode with
                                             | Mode.Attack ->
-                                                frontCard.AppliedAttackSkillBonus.Add(settings.SkillBonusSettings.AttributeSkill.AttributeAttackExtraLargeUp + frontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float)
+                                                frontCard.AppliedAttackSkillBonus.Add(settings.SkillBonusSettings.AttributeSkill.AttributeAttackExtraLargeUp + skillRaiseFrontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float)
                                             | Mode.Defence ->
-                                                frontCard.AppliedDefenceSkillBonus.Add(settings.SkillBonusSettings.AttributeSkill.AttributeDefenceExtraLargeUp + frontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float)
+                                                frontCard.AppliedDefenceSkillBonus.Add(settings.SkillBonusSettings.AttributeSkill.AttributeDefenceExtraLargeUp + skillRaiseFrontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float)
                                             | Mode.AttackAndDefence ->
-                                                frontCard.AppliedAttackSkillBonus.Add(settings.SkillBonusSettings.AttributeSkill.AttributeAttackAndDefenceExtraLargeUp + frontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float)
-                                                frontCard.AppliedDefenceSkillBonus.Add(settings.SkillBonusSettings.AttributeSkill.AttributeAttackAndDefenceExtraLargeUp + frontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float)
+                                                frontCard.AppliedAttackSkillBonus.Add(settings.SkillBonusSettings.AttributeSkill.AttributeAttackAndDefenceExtraLargeUp + skillRaiseFrontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float)
+                                                frontCard.AppliedDefenceSkillBonus.Add(settings.SkillBonusSettings.AttributeSkill.AttributeAttackAndDefenceExtraLargeUp + skillRaiseFrontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float)
                                         | SkillType.Effect.Large ->
                                             match skill.mode with
                                             | Mode.Attack ->
-                                                frontCard.AppliedAttackSkillBonus.Add(settings.SkillBonusSettings.AttributeSkill.AttributeAttackLargeUp + frontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float)
+                                                frontCard.AppliedAttackSkillBonus.Add(settings.SkillBonusSettings.AttributeSkill.AttributeAttackLargeUp + skillRaiseFrontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float)
                                             | Mode.Defence ->
-                                                frontCard.AppliedDefenceSkillBonus.Add(settings.SkillBonusSettings.AttributeSkill.AttributeDefenceLargeUp + frontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float)
+                                                frontCard.AppliedDefenceSkillBonus.Add(settings.SkillBonusSettings.AttributeSkill.AttributeDefenceLargeUp + skillRaiseFrontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float)
                                             | Mode.AttackAndDefence ->
-                                                frontCard.AppliedAttackSkillBonus.Add(settings.SkillBonusSettings.AttributeSkill.AttributeAttackAndDefenceLargeUp + frontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float)
-                                                frontCard.AppliedDefenceSkillBonus.Add(settings.SkillBonusSettings.AttributeSkill.AttributeAttackAndDefenceLargeUp + frontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float)
+                                                frontCard.AppliedAttackSkillBonus.Add(settings.SkillBonusSettings.AttributeSkill.AttributeAttackAndDefenceLargeUp + skillRaiseFrontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float)
+                                                frontCard.AppliedDefenceSkillBonus.Add(settings.SkillBonusSettings.AttributeSkill.AttributeAttackAndDefenceLargeUp + skillRaiseFrontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float)
                                         | SkillType.Effect.Middle ->
                                             match skill.mode with
                                             | Mode.Attack ->
-                                                frontCard.AppliedAttackSkillBonus.Add(settings.SkillBonusSettings.AttributeSkill.AttributeAttackMiddleUp + frontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float)
+                                                frontCard.AppliedAttackSkillBonus.Add(settings.SkillBonusSettings.AttributeSkill.AttributeAttackMiddleUp + skillRaiseFrontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float)
                                             | Mode.Defence ->
-                                                frontCard.AppliedDefenceSkillBonus.Add(settings.SkillBonusSettings.AttributeSkill.AttributeDefenceMiddleUp + frontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float)
+                                                frontCard.AppliedDefenceSkillBonus.Add(settings.SkillBonusSettings.AttributeSkill.AttributeDefenceMiddleUp + skillRaiseFrontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float)
                                             | Mode.AttackAndDefence ->
-                                                frontCard.AppliedAttackSkillBonus.Add(settings.SkillBonusSettings.AttributeSkill.AttributeAttackAndDefenceMiddleUp + frontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float)
-                                                frontCard.AppliedDefenceSkillBonus.Add(settings.SkillBonusSettings.AttributeSkill.AttributeAttackAndDefenceMiddleUp + frontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float)
+                                                frontCard.AppliedAttackSkillBonus.Add(settings.SkillBonusSettings.AttributeSkill.AttributeAttackAndDefenceMiddleUp + skillRaiseFrontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float)
+                                                frontCard.AppliedDefenceSkillBonus.Add(settings.SkillBonusSettings.AttributeSkill.AttributeAttackAndDefenceMiddleUp + skillRaiseFrontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float)
                                         | SkillType.Effect.Small ->
                                             match skill.mode with
                                             | Mode.Attack ->
-                                                frontCard.AppliedAttackSkillBonus.Add(settings.SkillBonusSettings.AttributeSkill.AttributeAttackSmallUp + frontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float)
+                                                frontCard.AppliedAttackSkillBonus.Add(settings.SkillBonusSettings.AttributeSkill.AttributeAttackSmallUp + skillRaiseFrontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float)
                                             | Mode.Defence ->
-                                                frontCard.AppliedDefenceSkillBonus.Add(settings.SkillBonusSettings.AttributeSkill.AttributeDefenceSmallUp + frontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float)
+                                                frontCard.AppliedDefenceSkillBonus.Add(settings.SkillBonusSettings.AttributeSkill.AttributeDefenceSmallUp + skillRaiseFrontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float)
                                             | Mode.AttackAndDefence ->
-                                                frontCard.AppliedAttackSkillBonus.Add(settings.SkillBonusSettings.AttributeSkill.AttributeAttackAndDefenceSmallUp + frontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float)
-                                                frontCard.AppliedDefenceSkillBonus.Add(settings.SkillBonusSettings.AttributeSkill.AttributeAttackAndDefenceSmallUp + frontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float)
+                                                frontCard.AppliedAttackSkillBonus.Add(settings.SkillBonusSettings.AttributeSkill.AttributeAttackAndDefenceSmallUp + skillRaiseFrontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float)
+                                                frontCard.AppliedDefenceSkillBonus.Add(settings.SkillBonusSettings.AttributeSkill.AttributeAttackAndDefenceSmallUp + skillRaiseFrontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float)
                                         | SkillType.Effect.Random(skillMin, skillMax) ->
                                             match skill.mode with
                                             | Mode.Attack ->
                                                 match skillMin with
                                                 | Middle -> // 中から特大    
-                                                    frontCard.AppliedAttackSkillBonus.Add(settings.SkillBonusSettings.AttributeSkill.AttributeAttackLargeUp + frontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float)
+                                                    frontCard.AppliedAttackSkillBonus.Add(settings.SkillBonusSettings.AttributeSkill.AttributeAttackLargeUp + skillRaiseFrontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float)
                                                     //暫定的に大UPに
                                                 | Large -> // 大からスーパー特大
-                                                    frontCard.AppliedAttackSkillBonus.Add(settings.SkillBonusSettings.AttributeSkill.AttributeAttackExtraLargeUp + frontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float)
+                                                    frontCard.AppliedAttackSkillBonus.Add(settings.SkillBonusSettings.AttributeSkill.AttributeAttackExtraLargeUp + skillRaiseFrontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float)
                                                     // 暫定的に特大UPに
                                                 | ExtraLarge -> // 特大から超スーパー特大
-                                                    frontCard.AppliedAttackSkillBonus.Add(settings.SkillBonusSettings.AttributeSkill.AttributeAttackSuperUp + frontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float)
+                                                    frontCard.AppliedAttackSkillBonus.Add(settings.SkillBonusSettings.AttributeSkill.AttributeAttackSuperUp + skillRaiseFrontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float)
                                                     //暫定的にスーパー特大UPに
                                                 // 大から特大もいる あとで実装
                                             | Mode.Defence ->
                                                 match skillMin with
                                                 | Middle -> // 中から特大    
-                                                    frontCard.AppliedDefenceSkillBonus.Add(settings.SkillBonusSettings.AttributeSkill.AttributeDefenceLargeUp + frontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float)
+                                                    frontCard.AppliedDefenceSkillBonus.Add(settings.SkillBonusSettings.AttributeSkill.AttributeDefenceLargeUp + skillRaiseFrontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float)
                                                     //暫定的に大UPに
                                                 | Large -> // 大からスーパー特大
-                                                    frontCard.AppliedDefenceSkillBonus.Add(settings.SkillBonusSettings.AttributeSkill.AttributeDefenceExtraLargeUp + frontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float)
+                                                    frontCard.AppliedDefenceSkillBonus.Add(settings.SkillBonusSettings.AttributeSkill.AttributeDefenceExtraLargeUp + skillRaiseFrontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float)
                                                     // 暫定的に特大UPに
                                                 | ExtraLarge -> // 特大から超スーパー特大
-                                                    frontCard.AppliedDefenceSkillBonus.Add(settings.SkillBonusSettings.AttributeSkill.AttributeDefenceSuperUp + frontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float)
+                                                    frontCard.AppliedDefenceSkillBonus.Add(settings.SkillBonusSettings.AttributeSkill.AttributeDefenceSuperUp + skillRaiseFrontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float)
                                                     //暫定的にスーパー特大UPに
                                             | Mode.AttackAndDefence ->
                                                 match skillMin with
                                                 | Middle -> // 中から特大    
-                                                    frontCard.AppliedAttackSkillBonus.Add(settings.SkillBonusSettings.AttributeSkill.AttributeAttackAndDefenceLargeUp + frontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float)
-                                                    frontCard.AppliedDefenceSkillBonus.Add(settings.SkillBonusSettings.AttributeSkill.AttributeAttackAndDefenceLargeUp + frontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float)
+                                                    frontCard.AppliedAttackSkillBonus.Add(settings.SkillBonusSettings.AttributeSkill.AttributeAttackAndDefenceLargeUp + skillRaiseFrontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float)
+                                                    frontCard.AppliedDefenceSkillBonus.Add(settings.SkillBonusSettings.AttributeSkill.AttributeAttackAndDefenceLargeUp + skillRaiseFrontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float)
                                                     //暫定的に大UPに
                                                 | Large -> // 大からスーパー特大
-                                                    frontCard.AppliedAttackSkillBonus.Add(settings.SkillBonusSettings.AttributeSkill.AttributeAttackAndDefenceExtraLargeUp + frontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float)
-                                                    frontCard.AppliedDefenceSkillBonus.Add(settings.SkillBonusSettings.AttributeSkill.AttributeAttackAndDefenceExtraLargeUp + frontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float)
+                                                    frontCard.AppliedAttackSkillBonus.Add(settings.SkillBonusSettings.AttributeSkill.AttributeAttackAndDefenceExtraLargeUp + skillRaiseFrontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float)
+                                                    frontCard.AppliedDefenceSkillBonus.Add(settings.SkillBonusSettings.AttributeSkill.AttributeAttackAndDefenceExtraLargeUp + skillRaiseFrontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float)
                                                     // 暫定的に特大UPに
                                                 | ExtraLarge -> // 特大から超スーパー特大
-                                                    frontCard.AppliedAttackSkillBonus.Add(settings.SkillBonusSettings.AttributeSkill.AttributeAttackAndDefenceSuperUp + frontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float)
-                                                    frontCard.AppliedDefenceSkillBonus.Add(settings.SkillBonusSettings.AttributeSkill.AttributeAttackAndDefenceSuperUp + frontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float)
+                                                    frontCard.AppliedAttackSkillBonus.Add(settings.SkillBonusSettings.AttributeSkill.AttributeAttackAndDefenceSuperUp + skillRaiseFrontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float)
+                                                    frontCard.AppliedDefenceSkillBonus.Add(settings.SkillBonusSettings.AttributeSkill.AttributeAttackAndDefenceSuperUp + skillRaiseFrontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float)
                                                     //暫定的にスーパー特大UPに
                                     else 0 |> ignore
                                 | SkillAttributeType.Sweet ->
@@ -256,95 +257,95 @@ module CalcBonus =
                                         | SkillType.Effect.ExtraSuper ->
                                             match skill.mode with
                                             | Mode.Attack ->
-                                                frontCard.AppliedAttackSkillBonus.Add(settings.SkillBonusSettings.AttributeSkill.AttributeAttackExtraSuperUp + frontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float)
+                                                frontCard.AppliedAttackSkillBonus.Add(settings.SkillBonusSettings.AttributeSkill.AttributeAttackExtraSuperUp + skillRaiseFrontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float)
                                             | Mode.Defence ->
-                                                frontCard.AppliedDefenceSkillBonus.Add(settings.SkillBonusSettings.AttributeSkill.AttributeDefenceExtraSuperUp + frontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float)
+                                                frontCard.AppliedDefenceSkillBonus.Add(settings.SkillBonusSettings.AttributeSkill.AttributeDefenceExtraSuperUp + skillRaiseFrontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float)
                                             | Mode.AttackAndDefence ->
-                                                frontCard.AppliedAttackSkillBonus.Add(settings.SkillBonusSettings.AttributeSkill.AttributeAttackAndDefenceExtraSuperUp + frontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float)
-                                                frontCard.AppliedDefenceSkillBonus.Add(settings.SkillBonusSettings.AttributeSkill.AttributeAttackAndDefenceExtraSuperUp + frontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float)
+                                                frontCard.AppliedAttackSkillBonus.Add(settings.SkillBonusSettings.AttributeSkill.AttributeAttackAndDefenceExtraSuperUp + skillRaiseFrontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float)
+                                                frontCard.AppliedDefenceSkillBonus.Add(settings.SkillBonusSettings.AttributeSkill.AttributeAttackAndDefenceExtraSuperUp + skillRaiseFrontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float)
                                         | SkillType.Effect.Super ->
                                             match skill.mode with
                                             | Mode.Attack ->
-                                                frontCard.AppliedAttackSkillBonus.Add(settings.SkillBonusSettings.AttributeSkill.AttributeAttackSuperUp + frontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float)
+                                                frontCard.AppliedAttackSkillBonus.Add(settings.SkillBonusSettings.AttributeSkill.AttributeAttackSuperUp + skillRaiseFrontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float)
                                             | Mode.Defence ->
-                                                frontCard.AppliedDefenceSkillBonus.Add(settings.SkillBonusSettings.AttributeSkill.AttributeDefenceSuperUp + frontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float)
+                                                frontCard.AppliedDefenceSkillBonus.Add(settings.SkillBonusSettings.AttributeSkill.AttributeDefenceSuperUp + skillRaiseFrontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float)
                                             | Mode.AttackAndDefence ->
-                                                frontCard.AppliedAttackSkillBonus.Add(settings.SkillBonusSettings.AttributeSkill.AttributeAttackAndDefenceSuperUp + frontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float)
-                                                frontCard.AppliedDefenceSkillBonus.Add(settings.SkillBonusSettings.AttributeSkill.AttributeAttackAndDefenceSuperUp + frontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float) 
+                                                frontCard.AppliedAttackSkillBonus.Add(settings.SkillBonusSettings.AttributeSkill.AttributeAttackAndDefenceSuperUp + skillRaiseFrontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float)
+                                                frontCard.AppliedDefenceSkillBonus.Add(settings.SkillBonusSettings.AttributeSkill.AttributeAttackAndDefenceSuperUp + skillRaiseFrontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float) 
                                         | SkillType.Effect.ExtraLarge ->
                                             match skill.mode with
                                             | Mode.Attack ->
-                                                frontCard.AppliedAttackSkillBonus.Add(settings.SkillBonusSettings.AttributeSkill.AttributeAttackExtraLargeUp + frontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float)
+                                                frontCard.AppliedAttackSkillBonus.Add(settings.SkillBonusSettings.AttributeSkill.AttributeAttackExtraLargeUp + skillRaiseFrontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float)
                                             | Mode.Defence ->
-                                                frontCard.AppliedDefenceSkillBonus.Add(settings.SkillBonusSettings.AttributeSkill.AttributeDefenceExtraLargeUp + frontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float)
+                                                frontCard.AppliedDefenceSkillBonus.Add(settings.SkillBonusSettings.AttributeSkill.AttributeDefenceExtraLargeUp + skillRaiseFrontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float)
                                             | Mode.AttackAndDefence ->
-                                                frontCard.AppliedAttackSkillBonus.Add(settings.SkillBonusSettings.AttributeSkill.AttributeAttackAndDefenceExtraLargeUp + frontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float)
-                                                frontCard.AppliedDefenceSkillBonus.Add(settings.SkillBonusSettings.AttributeSkill.AttributeAttackAndDefenceExtraLargeUp + frontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float)
+                                                frontCard.AppliedAttackSkillBonus.Add(settings.SkillBonusSettings.AttributeSkill.AttributeAttackAndDefenceExtraLargeUp + skillRaiseFrontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float)
+                                                frontCard.AppliedDefenceSkillBonus.Add(settings.SkillBonusSettings.AttributeSkill.AttributeAttackAndDefenceExtraLargeUp + skillRaiseFrontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float)
                                         | SkillType.Effect.Large ->
                                             match skill.mode with
                                             | Mode.Attack ->
-                                                frontCard.AppliedAttackSkillBonus.Add(settings.SkillBonusSettings.AttributeSkill.AttributeAttackLargeUp + frontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float)
+                                                frontCard.AppliedAttackSkillBonus.Add(settings.SkillBonusSettings.AttributeSkill.AttributeAttackLargeUp + skillRaiseFrontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float)
                                             | Mode.Defence ->
-                                                frontCard.AppliedDefenceSkillBonus.Add(settings.SkillBonusSettings.AttributeSkill.AttributeDefenceLargeUp + frontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float)
+                                                frontCard.AppliedDefenceSkillBonus.Add(settings.SkillBonusSettings.AttributeSkill.AttributeDefenceLargeUp + skillRaiseFrontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float)
                                             | Mode.AttackAndDefence ->
-                                                frontCard.AppliedAttackSkillBonus.Add(settings.SkillBonusSettings.AttributeSkill.AttributeAttackAndDefenceLargeUp + frontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float)
-                                                frontCard.AppliedDefenceSkillBonus.Add(settings.SkillBonusSettings.AttributeSkill.AttributeAttackAndDefenceLargeUp + frontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float)
+                                                frontCard.AppliedAttackSkillBonus.Add(settings.SkillBonusSettings.AttributeSkill.AttributeAttackAndDefenceLargeUp + skillRaiseFrontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float)
+                                                frontCard.AppliedDefenceSkillBonus.Add(settings.SkillBonusSettings.AttributeSkill.AttributeAttackAndDefenceLargeUp + skillRaiseFrontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float)
                                         | SkillType.Effect.Middle ->
                                             match skill.mode with
                                             | Mode.Attack ->
-                                                frontCard.AppliedAttackSkillBonus.Add(settings.SkillBonusSettings.AttributeSkill.AttributeAttackMiddleUp + frontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float)
+                                                frontCard.AppliedAttackSkillBonus.Add(settings.SkillBonusSettings.AttributeSkill.AttributeAttackMiddleUp + skillRaiseFrontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float)
                                             | Mode.Defence ->
-                                                frontCard.AppliedDefenceSkillBonus.Add(settings.SkillBonusSettings.AttributeSkill.AttributeDefenceMiddleUp + frontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float)
+                                                frontCard.AppliedDefenceSkillBonus.Add(settings.SkillBonusSettings.AttributeSkill.AttributeDefenceMiddleUp + skillRaiseFrontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float)
                                             | Mode.AttackAndDefence ->
-                                                frontCard.AppliedAttackSkillBonus.Add(settings.SkillBonusSettings.AttributeSkill.AttributeAttackAndDefenceMiddleUp + frontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float)
-                                                frontCard.AppliedDefenceSkillBonus.Add(settings.SkillBonusSettings.AttributeSkill.AttributeAttackAndDefenceMiddleUp + frontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float)
+                                                frontCard.AppliedAttackSkillBonus.Add(settings.SkillBonusSettings.AttributeSkill.AttributeAttackAndDefenceMiddleUp + skillRaiseFrontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float)
+                                                frontCard.AppliedDefenceSkillBonus.Add(settings.SkillBonusSettings.AttributeSkill.AttributeAttackAndDefenceMiddleUp + skillRaiseFrontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float)
                                         | SkillType.Effect.Small ->
                                             match skill.mode with
                                             | Mode.Attack ->
-                                                frontCard.AppliedAttackSkillBonus.Add(settings.SkillBonusSettings.AttributeSkill.AttributeAttackSmallUp + frontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float)
+                                                frontCard.AppliedAttackSkillBonus.Add(settings.SkillBonusSettings.AttributeSkill.AttributeAttackSmallUp + skillRaiseFrontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float)
                                             | Mode.Defence ->
-                                                frontCard.AppliedDefenceSkillBonus.Add(settings.SkillBonusSettings.AttributeSkill.AttributeDefenceSmallUp + frontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float)
+                                                frontCard.AppliedDefenceSkillBonus.Add(settings.SkillBonusSettings.AttributeSkill.AttributeDefenceSmallUp + skillRaiseFrontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float)
                                             | Mode.AttackAndDefence ->
-                                                frontCard.AppliedAttackSkillBonus.Add(settings.SkillBonusSettings.AttributeSkill.AttributeAttackAndDefenceSmallUp + frontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float)
-                                                frontCard.AppliedDefenceSkillBonus.Add(settings.SkillBonusSettings.AttributeSkill.AttributeAttackAndDefenceSmallUp + frontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float)
+                                                frontCard.AppliedAttackSkillBonus.Add(settings.SkillBonusSettings.AttributeSkill.AttributeAttackAndDefenceSmallUp + skillRaiseFrontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float)
+                                                frontCard.AppliedDefenceSkillBonus.Add(settings.SkillBonusSettings.AttributeSkill.AttributeAttackAndDefenceSmallUp + skillRaiseFrontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float)
                                         | SkillType.Effect.Random(skillMin, skillMax) ->
                                             match skill.mode with
                                             | Mode.Attack ->
                                                 match skillMin with
                                                 | Middle -> // 中から特大    
-                                                    frontCard.AppliedAttackSkillBonus.Add(settings.SkillBonusSettings.AttributeSkill.AttributeAttackLargeUp + frontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float)
+                                                    frontCard.AppliedAttackSkillBonus.Add(settings.SkillBonusSettings.AttributeSkill.AttributeAttackLargeUp + skillRaiseFrontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float)
                                                     //暫定的に大UPに
                                                 | Large -> // 大からスーパー特大
-                                                    frontCard.AppliedAttackSkillBonus.Add(settings.SkillBonusSettings.AttributeSkill.AttributeAttackExtraLargeUp + frontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float)
+                                                    frontCard.AppliedAttackSkillBonus.Add(settings.SkillBonusSettings.AttributeSkill.AttributeAttackExtraLargeUp + skillRaiseFrontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float)
                                                     // 暫定的に特大UPに
                                                 | ExtraLarge -> // 特大から超スーパー特大
-                                                    frontCard.AppliedAttackSkillBonus.Add(settings.SkillBonusSettings.AttributeSkill.AttributeAttackSuperUp + frontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float)
+                                                    frontCard.AppliedAttackSkillBonus.Add(settings.SkillBonusSettings.AttributeSkill.AttributeAttackSuperUp + skillRaiseFrontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float)
                                                     //暫定的にスーパー特大UPに
                                                 // 大から特大もいる あとで実装
                                             | Mode.Defence ->
                                                 match skillMin with
                                                 | Middle -> // 中から特大    
-                                                    frontCard.AppliedDefenceSkillBonus.Add(settings.SkillBonusSettings.AttributeSkill.AttributeDefenceLargeUp + frontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float)
+                                                    frontCard.AppliedDefenceSkillBonus.Add(settings.SkillBonusSettings.AttributeSkill.AttributeDefenceLargeUp + skillRaiseFrontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float)
                                                     //暫定的に大UPに
                                                 | Large -> // 大からスーパー特大
-                                                    frontCard.AppliedDefenceSkillBonus.Add(settings.SkillBonusSettings.AttributeSkill.AttributeDefenceExtraLargeUp + frontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float)
+                                                    frontCard.AppliedDefenceSkillBonus.Add(settings.SkillBonusSettings.AttributeSkill.AttributeDefenceExtraLargeUp + skillRaiseFrontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float)
                                                     // 暫定的に特大UPに
                                                 | ExtraLarge -> // 特大から超スーパー特大
-                                                    frontCard.AppliedDefenceSkillBonus.Add(settings.SkillBonusSettings.AttributeSkill.AttributeDefenceSuperUp + frontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float)
+                                                    frontCard.AppliedDefenceSkillBonus.Add(settings.SkillBonusSettings.AttributeSkill.AttributeDefenceSuperUp + skillRaiseFrontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float)
                                                     //暫定的にスーパー特大UPに
                                             | Mode.AttackAndDefence ->
                                                 match skillMin with
                                                 | Middle -> // 中から特大    
-                                                    frontCard.AppliedAttackSkillBonus.Add(settings.SkillBonusSettings.AttributeSkill.AttributeAttackAndDefenceLargeUp + frontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float)
-                                                    frontCard.AppliedDefenceSkillBonus.Add(settings.SkillBonusSettings.AttributeSkill.AttributeAttackAndDefenceLargeUp + frontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float)
+                                                    frontCard.AppliedAttackSkillBonus.Add(settings.SkillBonusSettings.AttributeSkill.AttributeAttackAndDefenceLargeUp + skillRaiseFrontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float)
+                                                    frontCard.AppliedDefenceSkillBonus.Add(settings.SkillBonusSettings.AttributeSkill.AttributeAttackAndDefenceLargeUp + skillRaiseFrontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float)
                                                     //暫定的に大UPに
                                                 | Large -> // 大からスーパー特大
-                                                    frontCard.AppliedAttackSkillBonus.Add(settings.SkillBonusSettings.AttributeSkill.AttributeAttackAndDefenceExtraLargeUp + frontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float)
-                                                    frontCard.AppliedDefenceSkillBonus.Add(settings.SkillBonusSettings.AttributeSkill.AttributeAttackAndDefenceExtraLargeUp + frontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float)
+                                                    frontCard.AppliedAttackSkillBonus.Add(settings.SkillBonusSettings.AttributeSkill.AttributeAttackAndDefenceExtraLargeUp + skillRaiseFrontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float)
+                                                    frontCard.AppliedDefenceSkillBonus.Add(settings.SkillBonusSettings.AttributeSkill.AttributeAttackAndDefenceExtraLargeUp + skillRaiseFrontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float)
                                                     // 暫定的に特大UPに
                                                 | ExtraLarge -> // 特大から超スーパー特大
-                                                    frontCard.AppliedAttackSkillBonus.Add(settings.SkillBonusSettings.AttributeSkill.AttributeAttackAndDefenceSuperUp + frontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float)
-                                                    frontCard.AppliedDefenceSkillBonus.Add(settings.SkillBonusSettings.AttributeSkill.AttributeAttackAndDefenceSuperUp + frontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float)
+                                                    frontCard.AppliedAttackSkillBonus.Add(settings.SkillBonusSettings.AttributeSkill.AttributeAttackAndDefenceSuperUp + skillRaiseFrontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float)
+                                                    frontCard.AppliedDefenceSkillBonus.Add(settings.SkillBonusSettings.AttributeSkill.AttributeAttackAndDefenceSuperUp + skillRaiseFrontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float)
                                                     //暫定的にスーパー特大UPに
                                     else 0 |> ignore
                                 | SkillAttributeType.All ->                              
@@ -352,95 +353,95 @@ module CalcBonus =
                                     | SkillType.Effect.ExtraSuper ->
                                         match skill.mode with
                                         | Mode.Attack ->
-                                            frontCard.AppliedAttackSkillBonus.Add(settings.SkillBonusSettings.AllAttributeSkill.AllAttributeAttackExtraSuperUp + frontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float)
+                                            frontCard.AppliedAttackSkillBonus.Add(settings.SkillBonusSettings.AllAttributeSkill.AllAttributeAttackExtraSuperUp + skillRaiseFrontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float)
                                         | Mode.Defence ->
-                                            frontCard.AppliedDefenceSkillBonus.Add(settings.SkillBonusSettings.AllAttributeSkill.AllAttributeDefenceExtraSuperUp + frontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float)
+                                            frontCard.AppliedDefenceSkillBonus.Add(settings.SkillBonusSettings.AllAttributeSkill.AllAttributeDefenceExtraSuperUp + skillRaiseFrontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float)
                                         | Mode.AttackAndDefence ->
-                                            frontCard.AppliedAttackSkillBonus.Add(settings.SkillBonusSettings.AllAttributeSkill.AllAttributeAttackAndDefenceExtraSuperUp + frontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float)
-                                            frontCard.AppliedDefenceSkillBonus.Add(settings.SkillBonusSettings.AllAttributeSkill.AllAttributeAttackAndDefenceExtraSuperUp + frontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float)
+                                            frontCard.AppliedAttackSkillBonus.Add(settings.SkillBonusSettings.AllAttributeSkill.AllAttributeAttackAndDefenceExtraSuperUp + skillRaiseFrontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float)
+                                            frontCard.AppliedDefenceSkillBonus.Add(settings.SkillBonusSettings.AllAttributeSkill.AllAttributeAttackAndDefenceExtraSuperUp + skillRaiseFrontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float)
                                     | SkillType.Effect.Super ->
                                         match skill.mode with
                                         | Mode.Attack ->
-                                            frontCard.AppliedAttackSkillBonus.Add(settings.SkillBonusSettings.AllAttributeSkill.AllAttributeAttackSuperUp + frontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float)
+                                            frontCard.AppliedAttackSkillBonus.Add(settings.SkillBonusSettings.AllAttributeSkill.AllAttributeAttackSuperUp + skillRaiseFrontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float)
                                         | Mode.Defence ->
-                                            frontCard.AppliedDefenceSkillBonus.Add(settings.SkillBonusSettings.AllAttributeSkill.AllAttributeDefenceSuperUp + frontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float)
+                                            frontCard.AppliedDefenceSkillBonus.Add(settings.SkillBonusSettings.AllAttributeSkill.AllAttributeDefenceSuperUp + skillRaiseFrontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float)
                                         | Mode.AttackAndDefence ->
-                                            frontCard.AppliedAttackSkillBonus.Add(settings.SkillBonusSettings.AllAttributeSkill.AllAttributeAttackAndDefenceSuperUp + frontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float)
-                                            frontCard.AppliedDefenceSkillBonus.Add(settings.SkillBonusSettings.AllAttributeSkill.AllAttributeAttackAndDefenceSuperUp + frontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float) 
+                                            frontCard.AppliedAttackSkillBonus.Add(settings.SkillBonusSettings.AllAttributeSkill.AllAttributeAttackAndDefenceSuperUp + skillRaiseFrontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float)
+                                            frontCard.AppliedDefenceSkillBonus.Add(settings.SkillBonusSettings.AllAttributeSkill.AllAttributeAttackAndDefenceSuperUp + skillRaiseFrontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float) 
                                     | SkillType.Effect.ExtraLarge ->
                                         match skill.mode with
                                         | Mode.Attack ->
-                                            frontCard.AppliedAttackSkillBonus.Add(settings.SkillBonusSettings.AllAttributeSkill.AllAttributeAttackExtraLargeUp + frontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float)
+                                            frontCard.AppliedAttackSkillBonus.Add(settings.SkillBonusSettings.AllAttributeSkill.AllAttributeAttackExtraLargeUp + skillRaiseFrontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float)
                                         | Mode.Defence ->
-                                            frontCard.AppliedDefenceSkillBonus.Add(settings.SkillBonusSettings.AllAttributeSkill.AllAttributeDefenceExtraLargeUp + frontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float)
+                                            frontCard.AppliedDefenceSkillBonus.Add(settings.SkillBonusSettings.AllAttributeSkill.AllAttributeDefenceExtraLargeUp + skillRaiseFrontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float)
                                         | Mode.AttackAndDefence ->
-                                            frontCard.AppliedAttackSkillBonus.Add(settings.SkillBonusSettings.AllAttributeSkill.AllAttributeAttackAndDefenceExtraLargeUp + frontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float)
-                                            frontCard.AppliedDefenceSkillBonus.Add(settings.SkillBonusSettings.AllAttributeSkill.AllAttributeAttackAndDefenceExtraLargeUp + frontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float)
+                                            frontCard.AppliedAttackSkillBonus.Add(settings.SkillBonusSettings.AllAttributeSkill.AllAttributeAttackAndDefenceExtraLargeUp + skillRaiseFrontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float)
+                                            frontCard.AppliedDefenceSkillBonus.Add(settings.SkillBonusSettings.AllAttributeSkill.AllAttributeAttackAndDefenceExtraLargeUp + skillRaiseFrontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float)
                                     | SkillType.Effect.Large ->
                                         match skill.mode with
                                         | Mode.Attack ->
-                                            frontCard.AppliedAttackSkillBonus.Add(settings.SkillBonusSettings.AllAttributeSkill.AllAttributeAttackLargeUp + frontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float)
+                                            frontCard.AppliedAttackSkillBonus.Add(settings.SkillBonusSettings.AllAttributeSkill.AllAttributeAttackLargeUp + skillRaiseFrontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float)
                                         | Mode.Defence ->
-                                            frontCard.AppliedDefenceSkillBonus.Add(settings.SkillBonusSettings.AllAttributeSkill.AllAttributeDefenceLargeUp + frontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float)
+                                            frontCard.AppliedDefenceSkillBonus.Add(settings.SkillBonusSettings.AllAttributeSkill.AllAttributeDefenceLargeUp + skillRaiseFrontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float)
                                         | Mode.AttackAndDefence ->
-                                            frontCard.AppliedAttackSkillBonus.Add(settings.SkillBonusSettings.AllAttributeSkill.AllAttributeAttackAndDefenceLargeUp + frontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float)
-                                            frontCard.AppliedDefenceSkillBonus.Add(settings.SkillBonusSettings.AllAttributeSkill.AllAttributeAttackAndDefenceLargeUp + frontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float)
+                                            frontCard.AppliedAttackSkillBonus.Add(settings.SkillBonusSettings.AllAttributeSkill.AllAttributeAttackAndDefenceLargeUp + skillRaiseFrontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float)
+                                            frontCard.AppliedDefenceSkillBonus.Add(settings.SkillBonusSettings.AllAttributeSkill.AllAttributeAttackAndDefenceLargeUp + skillRaiseFrontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float)
                                     | SkillType.Effect.Middle ->
                                         match skill.mode with
                                         | Mode.Attack ->
-                                            frontCard.AppliedAttackSkillBonus.Add(settings.SkillBonusSettings.AllAttributeSkill.AllAttributeAttackMiddleUp + frontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float)
+                                            frontCard.AppliedAttackSkillBonus.Add(settings.SkillBonusSettings.AllAttributeSkill.AllAttributeAttackMiddleUp + skillRaiseFrontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float)
                                         | Mode.Defence ->
-                                            frontCard.AppliedDefenceSkillBonus.Add(settings.SkillBonusSettings.AllAttributeSkill.AllAttributeDefenceMiddleUp + frontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float)
+                                            frontCard.AppliedDefenceSkillBonus.Add(settings.SkillBonusSettings.AllAttributeSkill.AllAttributeDefenceMiddleUp + skillRaiseFrontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float)
                                         | Mode.AttackAndDefence ->
-                                            frontCard.AppliedAttackSkillBonus.Add(settings.SkillBonusSettings.AllAttributeSkill.AllAttributeAttackAndDefenceMiddleUp + frontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float)
-                                            frontCard.AppliedDefenceSkillBonus.Add(settings.SkillBonusSettings.AllAttributeSkill.AllAttributeAttackAndDefenceMiddleUp + frontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float)
+                                            frontCard.AppliedAttackSkillBonus.Add(settings.SkillBonusSettings.AllAttributeSkill.AllAttributeAttackAndDefenceMiddleUp + skillRaiseFrontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float)
+                                            frontCard.AppliedDefenceSkillBonus.Add(settings.SkillBonusSettings.AllAttributeSkill.AllAttributeAttackAndDefenceMiddleUp + skillRaiseFrontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float)
                                     | SkillType.Effect.Small ->
                                         match skill.mode with
                                         | Mode.Attack ->
-                                            frontCard.AppliedAttackSkillBonus.Add(settings.SkillBonusSettings.AllAttributeSkill.AllAttributeAttackSmallUp + frontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float)
+                                            frontCard.AppliedAttackSkillBonus.Add(settings.SkillBonusSettings.AllAttributeSkill.AllAttributeAttackSmallUp + skillRaiseFrontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float)
                                         | Mode.Defence ->
-                                            frontCard.AppliedDefenceSkillBonus.Add(settings.SkillBonusSettings.AllAttributeSkill.AllAttributeDefenceSmallUp + frontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float)
+                                            frontCard.AppliedDefenceSkillBonus.Add(settings.SkillBonusSettings.AllAttributeSkill.AllAttributeDefenceSmallUp + skillRaiseFrontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float)
                                         | Mode.AttackAndDefence ->
-                                            frontCard.AppliedAttackSkillBonus.Add(settings.SkillBonusSettings.AllAttributeSkill.AllAttributeAttackAndDefenceSmallUp + frontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float)
-                                            frontCard.AppliedDefenceSkillBonus.Add(settings.SkillBonusSettings.AllAttributeSkill.AllAttributeAttackAndDefenceSmallUp + frontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float)
+                                            frontCard.AppliedAttackSkillBonus.Add(settings.SkillBonusSettings.AllAttributeSkill.AllAttributeAttackAndDefenceSmallUp + skillRaiseFrontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float)
+                                            frontCard.AppliedDefenceSkillBonus.Add(settings.SkillBonusSettings.AllAttributeSkill.AllAttributeAttackAndDefenceSmallUp + skillRaiseFrontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float)
                                     | SkillType.Effect.Random(skillMin, skillMax) ->
                                         match skill.mode with
                                         | Mode.Attack ->
                                             match skillMin with
                                             | Middle -> // 中から特大    
-                                                frontCard.AppliedAttackSkillBonus.Add(settings.SkillBonusSettings.AllAttributeSkill.AllAttributeAttackLargeUp + frontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float)
+                                                frontCard.AppliedAttackSkillBonus.Add(settings.SkillBonusSettings.AllAttributeSkill.AllAttributeAttackLargeUp + skillRaiseFrontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float)
                                                 //暫定的に大UPに
                                             | Large -> // 大からスーパー特大
-                                                frontCard.AppliedAttackSkillBonus.Add(settings.SkillBonusSettings.AllAttributeSkill.AllAttributeAttackExtraLargeUp + frontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float)
+                                                frontCard.AppliedAttackSkillBonus.Add(settings.SkillBonusSettings.AllAttributeSkill.AllAttributeAttackExtraLargeUp + skillRaiseFrontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float)
                                                 // 暫定的に特大UPに
                                             | ExtraLarge -> // 特大から超スーパー特大
-                                                frontCard.AppliedAttackSkillBonus.Add(settings.SkillBonusSettings.AllAttributeSkill.AllAttributeAttackSuperUp + frontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float)
+                                                frontCard.AppliedAttackSkillBonus.Add(settings.SkillBonusSettings.AllAttributeSkill.AllAttributeAttackSuperUp + skillRaiseFrontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float)
                                                 //暫定的にスーパー特大UPに
                                             // 大から特大もいる あとで実装
                                         | Mode.Defence ->
                                             match skillMin with
                                             | Middle -> // 中から特大    
-                                                frontCard.AppliedDefenceSkillBonus.Add(settings.SkillBonusSettings.AllAttributeSkill.AllAttributeDefenceLargeUp + frontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float)
+                                                frontCard.AppliedDefenceSkillBonus.Add(settings.SkillBonusSettings.AllAttributeSkill.AllAttributeDefenceLargeUp + skillRaiseFrontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float)
                                                 //暫定的に大UPに
                                             | Large -> // 大からスーパー特大
-                                                frontCard.AppliedDefenceSkillBonus.Add(settings.SkillBonusSettings.AllAttributeSkill.AllAttributeDefenceExtraLargeUp + frontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float)
+                                                frontCard.AppliedDefenceSkillBonus.Add(settings.SkillBonusSettings.AllAttributeSkill.AllAttributeDefenceExtraLargeUp + skillRaiseFrontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float)
                                                 // 暫定的に特大UPに
                                             | ExtraLarge -> // 特大から超スーパー特大
-                                                frontCard.AppliedDefenceSkillBonus.Add(settings.SkillBonusSettings.AllAttributeSkill.AllAttributeDefenceSuperUp + frontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float)
+                                                frontCard.AppliedDefenceSkillBonus.Add(settings.SkillBonusSettings.AllAttributeSkill.AllAttributeDefenceSuperUp + skillRaiseFrontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float)
                                                 //暫定的にスーパー特大UPに
                                         | Mode.AttackAndDefence ->
                                             match skillMin with
                                             | Middle -> // 中から特大    
-                                                frontCard.AppliedAttackSkillBonus.Add(settings.SkillBonusSettings.AllAttributeSkill.AllAttributeAttackAndDefenceLargeUp + frontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float)
-                                                frontCard.AppliedDefenceSkillBonus.Add(settings.SkillBonusSettings.AllAttributeSkill.AllAttributeAttackAndDefenceLargeUp + frontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float)
+                                                frontCard.AppliedAttackSkillBonus.Add(settings.SkillBonusSettings.AllAttributeSkill.AllAttributeAttackAndDefenceLargeUp + skillRaiseFrontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float)
+                                                frontCard.AppliedDefenceSkillBonus.Add(settings.SkillBonusSettings.AllAttributeSkill.AllAttributeAttackAndDefenceLargeUp + skillRaiseFrontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float)
                                                 //暫定的に大UPに
                                             | Large -> // 大からスーパー特大
-                                                frontCard.AppliedAttackSkillBonus.Add(settings.SkillBonusSettings.AllAttributeSkill.AllAttributeAttackAndDefenceExtraLargeUp + frontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float)
-                                                frontCard.AppliedDefenceSkillBonus.Add(settings.SkillBonusSettings.AllAttributeSkill.AllAttributeAttackAndDefenceExtraLargeUp + frontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float)
+                                                frontCard.AppliedAttackSkillBonus.Add(settings.SkillBonusSettings.AllAttributeSkill.AllAttributeAttackAndDefenceExtraLargeUp + skillRaiseFrontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float)
+                                                frontCard.AppliedDefenceSkillBonus.Add(settings.SkillBonusSettings.AllAttributeSkill.AllAttributeAttackAndDefenceExtraLargeUp + skillRaiseFrontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float)
                                                 // 暫定的に特大UPに
                                             | ExtraLarge -> // 特大から超スーパー特大
-                                                frontCard.AppliedAttackSkillBonus.Add(settings.SkillBonusSettings.AllAttributeSkill.AllAttributeAttackAndDefenceSuperUp + frontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float)
-                                                frontCard.AppliedDefenceSkillBonus.Add(settings.SkillBonusSettings.AllAttributeSkill.AllAttributeAttackAndDefenceSuperUp + frontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float)
+                                                frontCard.AppliedAttackSkillBonus.Add(settings.SkillBonusSettings.AllAttributeSkill.AllAttributeAttackAndDefenceSuperUp + skillRaiseFrontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float)
+                                                frontCard.AppliedDefenceSkillBonus.Add(settings.SkillBonusSettings.AllAttributeSkill.AllAttributeAttackAndDefenceSuperUp + skillRaiseFrontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float)
                                                 //暫定的にスーパー特大UPに
                                     
                         | SkillTarget.FrontAndBack1 ->
@@ -464,95 +465,95 @@ module CalcBonus =
                                         | SkillType.Effect.ExtraSuper ->
                                             match skill.mode with
                                             | Mode.Attack ->
-                                                target.AppliedAttackSkillBonus.Add(settings.SkillBonusSettings.AttributeSkill.AttributeAttackExtraSuperUp + frontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float |> (*) backDeckFactor)
+                                                target.AppliedAttackSkillBonus.Add(settings.SkillBonusSettings.AttributeSkill.AttributeAttackExtraSuperUp + skillRaiseFrontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float |> (*) backDeckFactor)
                                             | Mode.Defence ->
-                                                target.AppliedDefenceSkillBonus.Add(settings.SkillBonusSettings.AttributeSkill.AttributeDefenceExtraSuperUp + frontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float |> (*) backDeckFactor)
+                                                target.AppliedDefenceSkillBonus.Add(settings.SkillBonusSettings.AttributeSkill.AttributeDefenceExtraSuperUp + skillRaiseFrontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float |> (*) backDeckFactor)
                                             | Mode.AttackAndDefence ->
-                                                target.AppliedAttackSkillBonus.Add(settings.SkillBonusSettings.AttributeSkill.AttributeAttackAndDefenceExtraSuperUp + frontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float |> (*) backDeckFactor)
-                                                target.AppliedDefenceSkillBonus.Add(settings.SkillBonusSettings.AttributeSkill.AttributeAttackAndDefenceExtraSuperUp + frontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float |> (*) backDeckFactor)
+                                                target.AppliedAttackSkillBonus.Add(settings.SkillBonusSettings.AttributeSkill.AttributeAttackAndDefenceExtraSuperUp + skillRaiseFrontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float |> (*) backDeckFactor)
+                                                target.AppliedDefenceSkillBonus.Add(settings.SkillBonusSettings.AttributeSkill.AttributeAttackAndDefenceExtraSuperUp + skillRaiseFrontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float |> (*) backDeckFactor)
                                         | SkillType.Effect.Super ->
                                             match skill.mode with
                                             | Mode.Attack ->
-                                                target.AppliedAttackSkillBonus.Add(settings.SkillBonusSettings.AttributeSkill.AttributeAttackSuperUp + frontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float |> (*) backDeckFactor)
+                                                target.AppliedAttackSkillBonus.Add(settings.SkillBonusSettings.AttributeSkill.AttributeAttackSuperUp + skillRaiseFrontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float |> (*) backDeckFactor)
                                             | Mode.Defence ->
-                                                target.AppliedDefenceSkillBonus.Add(settings.SkillBonusSettings.AttributeSkill.AttributeDefenceSuperUp + frontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float |> (*) backDeckFactor)
+                                                target.AppliedDefenceSkillBonus.Add(settings.SkillBonusSettings.AttributeSkill.AttributeDefenceSuperUp + skillRaiseFrontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float |> (*) backDeckFactor)
                                             | Mode.AttackAndDefence ->
-                                                target.AppliedAttackSkillBonus.Add(settings.SkillBonusSettings.AttributeSkill.AttributeAttackAndDefenceSuperUp + frontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float |> (*) backDeckFactor)
-                                                target.AppliedDefenceSkillBonus.Add(settings.SkillBonusSettings.AttributeSkill.AttributeAttackAndDefenceSuperUp + frontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float |> (*) backDeckFactor) 
+                                                target.AppliedAttackSkillBonus.Add(settings.SkillBonusSettings.AttributeSkill.AttributeAttackAndDefenceSuperUp + skillRaiseFrontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float |> (*) backDeckFactor)
+                                                target.AppliedDefenceSkillBonus.Add(settings.SkillBonusSettings.AttributeSkill.AttributeAttackAndDefenceSuperUp + skillRaiseFrontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float |> (*) backDeckFactor) 
                                         | SkillType.Effect.ExtraLarge ->
                                             match skill.mode with
                                             | Mode.Attack ->
-                                                target.AppliedAttackSkillBonus.Add(settings.SkillBonusSettings.AttributeSkill.AttributeAttackExtraLargeUp + frontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float |> (*) backDeckFactor)
+                                                target.AppliedAttackSkillBonus.Add(settings.SkillBonusSettings.AttributeSkill.AttributeAttackExtraLargeUp + skillRaiseFrontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float |> (*) backDeckFactor)
                                             | Mode.Defence ->
-                                                target.AppliedDefenceSkillBonus.Add(settings.SkillBonusSettings.AttributeSkill.AttributeDefenceExtraLargeUp + frontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float |> (*) backDeckFactor)
+                                                target.AppliedDefenceSkillBonus.Add(settings.SkillBonusSettings.AttributeSkill.AttributeDefenceExtraLargeUp + skillRaiseFrontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float |> (*) backDeckFactor)
                                             | Mode.AttackAndDefence ->
-                                                target.AppliedAttackSkillBonus.Add(settings.SkillBonusSettings.AttributeSkill.AttributeAttackAndDefenceExtraLargeUpPlus1 + frontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float |> (*) backDeckFactor)
-                                                target.AppliedDefenceSkillBonus.Add(settings.SkillBonusSettings.AttributeSkill.AttributeAttackAndDefenceExtraLargeUpPlus1 + frontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float |> (*) backDeckFactor)
+                                                target.AppliedAttackSkillBonus.Add(settings.SkillBonusSettings.AttributeSkill.AttributeAttackAndDefenceExtraLargeUpPlus1 + skillRaiseFrontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float |> (*) backDeckFactor)
+                                                target.AppliedDefenceSkillBonus.Add(settings.SkillBonusSettings.AttributeSkill.AttributeAttackAndDefenceExtraLargeUpPlus1 + skillRaiseFrontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float |> (*) backDeckFactor)
                                         | SkillType.Effect.Large ->
                                             match skill.mode with
                                             | Mode.Attack ->
-                                                target.AppliedAttackSkillBonus.Add(settings.SkillBonusSettings.AttributeSkill.AttributeAttackLargeUp + frontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float |> (*) backDeckFactor)
+                                                target.AppliedAttackSkillBonus.Add(settings.SkillBonusSettings.AttributeSkill.AttributeAttackLargeUp + skillRaiseFrontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float |> (*) backDeckFactor)
                                             | Mode.Defence ->
-                                                target.AppliedDefenceSkillBonus.Add(settings.SkillBonusSettings.AttributeSkill.AttributeDefenceLargeUp + frontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float |> (*) backDeckFactor)
+                                                target.AppliedDefenceSkillBonus.Add(settings.SkillBonusSettings.AttributeSkill.AttributeDefenceLargeUp + skillRaiseFrontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float |> (*) backDeckFactor)
                                             | Mode.AttackAndDefence ->
-                                                target.AppliedAttackSkillBonus.Add(settings.SkillBonusSettings.AttributeSkill.AttributeAttackAndDefenceLargeUp + frontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float |> (*) backDeckFactor)
-                                                target.AppliedDefenceSkillBonus.Add(settings.SkillBonusSettings.AttributeSkill.AttributeAttackAndDefenceLargeUp + frontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float |> (*) backDeckFactor)
+                                                target.AppliedAttackSkillBonus.Add(settings.SkillBonusSettings.AttributeSkill.AttributeAttackAndDefenceLargeUp + skillRaiseFrontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float |> (*) backDeckFactor)
+                                                target.AppliedDefenceSkillBonus.Add(settings.SkillBonusSettings.AttributeSkill.AttributeAttackAndDefenceLargeUp + skillRaiseFrontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float |> (*) backDeckFactor)
                                         | SkillType.Effect.Middle ->
                                             match skill.mode with
                                             | Mode.Attack ->
-                                                target.AppliedAttackSkillBonus.Add(settings.SkillBonusSettings.AttributeSkill.AttributeAttackMiddleUp + frontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float |> (*) backDeckFactor)
+                                                target.AppliedAttackSkillBonus.Add(settings.SkillBonusSettings.AttributeSkill.AttributeAttackMiddleUp + skillRaiseFrontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float |> (*) backDeckFactor)
                                             | Mode.Defence ->
-                                                target.AppliedDefenceSkillBonus.Add(settings.SkillBonusSettings.AttributeSkill.AttributeDefenceMiddleUp + frontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float |> (*) backDeckFactor)
+                                                target.AppliedDefenceSkillBonus.Add(settings.SkillBonusSettings.AttributeSkill.AttributeDefenceMiddleUp + skillRaiseFrontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float |> (*) backDeckFactor)
                                             | Mode.AttackAndDefence ->
-                                                target.AppliedAttackSkillBonus.Add(settings.SkillBonusSettings.AttributeSkill.AttributeAttackAndDefenceMiddleUp + frontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float |> (*) backDeckFactor)
-                                                target.AppliedDefenceSkillBonus.Add(settings.SkillBonusSettings.AttributeSkill.AttributeAttackAndDefenceMiddleUp + frontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float |> (*) backDeckFactor)
+                                                target.AppliedAttackSkillBonus.Add(settings.SkillBonusSettings.AttributeSkill.AttributeAttackAndDefenceMiddleUp + skillRaiseFrontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float |> (*) backDeckFactor)
+                                                target.AppliedDefenceSkillBonus.Add(settings.SkillBonusSettings.AttributeSkill.AttributeAttackAndDefenceMiddleUp + skillRaiseFrontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float |> (*) backDeckFactor)
                                         | SkillType.Effect.Small ->
                                             match skill.mode with
                                             | Mode.Attack ->
-                                                target.AppliedAttackSkillBonus.Add(settings.SkillBonusSettings.AttributeSkill.AttributeAttackSmallUp + frontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float |> (*) backDeckFactor)
+                                                target.AppliedAttackSkillBonus.Add(settings.SkillBonusSettings.AttributeSkill.AttributeAttackSmallUp + skillRaiseFrontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float |> (*) backDeckFactor)
                                             | Mode.Defence ->
-                                                target.AppliedDefenceSkillBonus.Add(settings.SkillBonusSettings.AttributeSkill.AttributeDefenceSmallUp + frontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float |> (*) backDeckFactor)
+                                                target.AppliedDefenceSkillBonus.Add(settings.SkillBonusSettings.AttributeSkill.AttributeDefenceSmallUp + skillRaiseFrontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float |> (*) backDeckFactor)
                                             | Mode.AttackAndDefence ->
-                                                target.AppliedAttackSkillBonus.Add(settings.SkillBonusSettings.AttributeSkill.AttributeAttackAndDefenceSmallUp + frontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float |> (*) backDeckFactor)
-                                                target.AppliedDefenceSkillBonus.Add(settings.SkillBonusSettings.AttributeSkill.AttributeAttackAndDefenceSmallUp + frontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float |> (*) backDeckFactor)
+                                                target.AppliedAttackSkillBonus.Add(settings.SkillBonusSettings.AttributeSkill.AttributeAttackAndDefenceSmallUp + skillRaiseFrontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float |> (*) backDeckFactor)
+                                                target.AppliedDefenceSkillBonus.Add(settings.SkillBonusSettings.AttributeSkill.AttributeAttackAndDefenceSmallUp + skillRaiseFrontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float |> (*) backDeckFactor)
                                         | SkillType.Effect.Random(skillMin, skillMax) ->
                                             match skill.mode with
                                             | Mode.Attack ->
                                                 match skillMin with
                                                 | Middle -> // 中から特大    
-                                                    target.AppliedAttackSkillBonus.Add(settings.SkillBonusSettings.AttributeSkill.AttributeAttackLargeUp + frontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float |> (*) backDeckFactor)
+                                                    target.AppliedAttackSkillBonus.Add(settings.SkillBonusSettings.AttributeSkill.AttributeAttackLargeUp + skillRaiseFrontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float |> (*) backDeckFactor)
                                                     //暫定的に大Upに
                                                 | Large -> // 大からスーパー特大
-                                                    target.AppliedAttackSkillBonus.Add(settings.SkillBonusSettings.AttributeSkill.AttributeAttackExtraLargeUp + frontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float |> (*) backDeckFactor)
+                                                    target.AppliedAttackSkillBonus.Add(settings.SkillBonusSettings.AttributeSkill.AttributeAttackExtraLargeUp + skillRaiseFrontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float |> (*) backDeckFactor)
                                                     // 暫定的に特大Upに
                                                 | ExtraLarge -> // 特大から超スーパー特大
-                                                    target.AppliedAttackSkillBonus.Add(settings.SkillBonusSettings.AttributeSkill.AttributeAttackSuperUp + frontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float |> (*) backDeckFactor)
+                                                    target.AppliedAttackSkillBonus.Add(settings.SkillBonusSettings.AttributeSkill.AttributeAttackSuperUp + skillRaiseFrontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float |> (*) backDeckFactor)
                                                     //暫定的にスーパー特大Upに
                                                 // 大から特大もいる あとで実装
                                             | Mode.Defence ->
                                                 match skillMin with
                                                 | Middle -> // 中から特大    
-                                                    target.AppliedDefenceSkillBonus.Add(settings.SkillBonusSettings.AttributeSkill.AttributeDefenceLargeUp + frontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float |> (*) backDeckFactor)
+                                                    target.AppliedDefenceSkillBonus.Add(settings.SkillBonusSettings.AttributeSkill.AttributeDefenceLargeUp + skillRaiseFrontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float |> (*) backDeckFactor)
                                                     //暫定的に大Upに
                                                 | Large -> // 大からスーパー特大
-                                                    target.AppliedDefenceSkillBonus.Add(settings.SkillBonusSettings.AttributeSkill.AttributeDefenceExtraLargeUp + frontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float |> (*) backDeckFactor)
+                                                    target.AppliedDefenceSkillBonus.Add(settings.SkillBonusSettings.AttributeSkill.AttributeDefenceExtraLargeUp + skillRaiseFrontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float |> (*) backDeckFactor)
                                                     // 暫定的に特大Upに
                                                 | ExtraLarge -> // 特大から超スーパー特大
-                                                    target.AppliedDefenceSkillBonus.Add(settings.SkillBonusSettings.AttributeSkill.AttributeDefenceSuperUp + frontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float |> (*) backDeckFactor)
+                                                    target.AppliedDefenceSkillBonus.Add(settings.SkillBonusSettings.AttributeSkill.AttributeDefenceSuperUp + skillRaiseFrontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float |> (*) backDeckFactor)
                                                     //暫定的にスーパー特大Upに
                                             | Mode.AttackAndDefence ->
                                                 match skillMin with
                                                 | Middle -> // 中から特大    
-                                                    target.AppliedAttackSkillBonus.Add(settings.SkillBonusSettings.AttributeSkill.AttributeAttackAndDefenceLargeUp + frontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float |> (*) backDeckFactor)
-                                                    target.AppliedDefenceSkillBonus.Add(settings.SkillBonusSettings.AttributeSkill.AttributeAttackAndDefenceLargeUp + frontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float |> (*) backDeckFactor)
+                                                    target.AppliedAttackSkillBonus.Add(settings.SkillBonusSettings.AttributeSkill.AttributeAttackAndDefenceLargeUp + skillRaiseFrontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float |> (*) backDeckFactor)
+                                                    target.AppliedDefenceSkillBonus.Add(settings.SkillBonusSettings.AttributeSkill.AttributeAttackAndDefenceLargeUp + skillRaiseFrontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float |> (*) backDeckFactor)
                                                     //暫定的に大Upに
                                                 | Large -> // 大からスーパー特大
-                                                    target.AppliedAttackSkillBonus.Add(settings.SkillBonusSettings.AttributeSkill.AttributeAttackAndDefenceExtraLargeUpPlus1 + frontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float |> (*) backDeckFactor)
-                                                    target.AppliedDefenceSkillBonus.Add(settings.SkillBonusSettings.AttributeSkill.AttributeAttackAndDefenceExtraLargeUpPlus1 + frontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float |> (*) backDeckFactor)
+                                                    target.AppliedAttackSkillBonus.Add(settings.SkillBonusSettings.AttributeSkill.AttributeAttackAndDefenceExtraLargeUpPlus1 + skillRaiseFrontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float |> (*) backDeckFactor)
+                                                    target.AppliedDefenceSkillBonus.Add(settings.SkillBonusSettings.AttributeSkill.AttributeAttackAndDefenceExtraLargeUpPlus1 + skillRaiseFrontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float |> (*) backDeckFactor)
                                                     // 暫定的に特大Upに
                                                 | ExtraLarge -> // 特大から超スーパー特大
-                                                    target.AppliedAttackSkillBonus.Add(settings.SkillBonusSettings.AttributeSkill.AttributeAttackAndDefenceSuperUp + frontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float |> (*) backDeckFactor)
-                                                    target.AppliedDefenceSkillBonus.Add(settings.SkillBonusSettings.AttributeSkill.AttributeAttackAndDefenceSuperUp + frontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float |> (*) backDeckFactor)
+                                                    target.AppliedAttackSkillBonus.Add(settings.SkillBonusSettings.AttributeSkill.AttributeAttackAndDefenceSuperUp + skillRaiseFrontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float |> (*) backDeckFactor)
+                                                    target.AppliedDefenceSkillBonus.Add(settings.SkillBonusSettings.AttributeSkill.AttributeAttackAndDefenceSuperUp + skillRaiseFrontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float |> (*) backDeckFactor)
                                                     //暫定的にスーパー特大Upに
                                     else 0 |> ignore
                                 | SkillAttributeType.Pop ->
@@ -562,95 +563,95 @@ module CalcBonus =
                                         | SkillType.Effect.ExtraSuper ->
                                             match skill.mode with
                                             | Mode.Attack ->
-                                                target.AppliedAttackSkillBonus.Add(settings.SkillBonusSettings.AttributeSkill.AttributeAttackExtraSuperUp + frontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float |> (*) backDeckFactor)
+                                                target.AppliedAttackSkillBonus.Add(settings.SkillBonusSettings.AttributeSkill.AttributeAttackExtraSuperUp + skillRaiseFrontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float |> (*) backDeckFactor)
                                             | Mode.Defence ->
-                                                target.AppliedDefenceSkillBonus.Add(settings.SkillBonusSettings.AttributeSkill.AttributeDefenceExtraSuperUp + frontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float |> (*) backDeckFactor)
+                                                target.AppliedDefenceSkillBonus.Add(settings.SkillBonusSettings.AttributeSkill.AttributeDefenceExtraSuperUp + skillRaiseFrontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float |> (*) backDeckFactor)
                                             | Mode.AttackAndDefence ->
-                                                target.AppliedAttackSkillBonus.Add(settings.SkillBonusSettings.AttributeSkill.AttributeAttackAndDefenceExtraSuperUp + frontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float |> (*) backDeckFactor)
-                                                target.AppliedDefenceSkillBonus.Add(settings.SkillBonusSettings.AttributeSkill.AttributeAttackAndDefenceExtraSuperUp + frontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float |> (*) backDeckFactor)
+                                                target.AppliedAttackSkillBonus.Add(settings.SkillBonusSettings.AttributeSkill.AttributeAttackAndDefenceExtraSuperUp + skillRaiseFrontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float |> (*) backDeckFactor)
+                                                target.AppliedDefenceSkillBonus.Add(settings.SkillBonusSettings.AttributeSkill.AttributeAttackAndDefenceExtraSuperUp + skillRaiseFrontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float |> (*) backDeckFactor)
                                         | SkillType.Effect.Super ->
                                             match skill.mode with
                                             | Mode.Attack ->
-                                                target.AppliedAttackSkillBonus.Add(settings.SkillBonusSettings.AttributeSkill.AttributeAttackSuperUp + frontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float |> (*) backDeckFactor)
+                                                target.AppliedAttackSkillBonus.Add(settings.SkillBonusSettings.AttributeSkill.AttributeAttackSuperUp + skillRaiseFrontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float |> (*) backDeckFactor)
                                             | Mode.Defence ->
-                                                target.AppliedDefenceSkillBonus.Add(settings.SkillBonusSettings.AttributeSkill.AttributeDefenceSuperUp + frontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float |> (*) backDeckFactor)
+                                                target.AppliedDefenceSkillBonus.Add(settings.SkillBonusSettings.AttributeSkill.AttributeDefenceSuperUp + skillRaiseFrontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float |> (*) backDeckFactor)
                                             | Mode.AttackAndDefence ->
-                                                target.AppliedAttackSkillBonus.Add(settings.SkillBonusSettings.AttributeSkill.AttributeAttackAndDefenceSuperUp + frontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float |> (*) backDeckFactor)
-                                                target.AppliedDefenceSkillBonus.Add(settings.SkillBonusSettings.AttributeSkill.AttributeAttackAndDefenceSuperUp + frontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float |> (*) backDeckFactor) 
+                                                target.AppliedAttackSkillBonus.Add(settings.SkillBonusSettings.AttributeSkill.AttributeAttackAndDefenceSuperUp + skillRaiseFrontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float |> (*) backDeckFactor)
+                                                target.AppliedDefenceSkillBonus.Add(settings.SkillBonusSettings.AttributeSkill.AttributeAttackAndDefenceSuperUp + skillRaiseFrontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float |> (*) backDeckFactor) 
                                         | SkillType.Effect.ExtraLarge ->
                                             match skill.mode with
                                             | Mode.Attack ->
-                                                target.AppliedAttackSkillBonus.Add(settings.SkillBonusSettings.AttributeSkill.AttributeAttackExtraLargeUp + frontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float |> (*) backDeckFactor)
+                                                target.AppliedAttackSkillBonus.Add(settings.SkillBonusSettings.AttributeSkill.AttributeAttackExtraLargeUp + skillRaiseFrontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float |> (*) backDeckFactor)
                                             | Mode.Defence ->
-                                                target.AppliedDefenceSkillBonus.Add(settings.SkillBonusSettings.AttributeSkill.AttributeDefenceExtraLargeUp + frontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float |> (*) backDeckFactor)
+                                                target.AppliedDefenceSkillBonus.Add(settings.SkillBonusSettings.AttributeSkill.AttributeDefenceExtraLargeUp + skillRaiseFrontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float |> (*) backDeckFactor)
                                             | Mode.AttackAndDefence ->
-                                                target.AppliedAttackSkillBonus.Add(settings.SkillBonusSettings.AttributeSkill.AttributeAttackAndDefenceExtraLargeUpPlus1 + frontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float |> (*) backDeckFactor)
-                                                target.AppliedDefenceSkillBonus.Add(settings.SkillBonusSettings.AttributeSkill.AttributeAttackAndDefenceExtraLargeUpPlus1 + frontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float |> (*) backDeckFactor)
+                                                target.AppliedAttackSkillBonus.Add(settings.SkillBonusSettings.AttributeSkill.AttributeAttackAndDefenceExtraLargeUpPlus1 + skillRaiseFrontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float |> (*) backDeckFactor)
+                                                target.AppliedDefenceSkillBonus.Add(settings.SkillBonusSettings.AttributeSkill.AttributeAttackAndDefenceExtraLargeUpPlus1 + skillRaiseFrontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float |> (*) backDeckFactor)
                                         | SkillType.Effect.Large ->
                                             match skill.mode with
                                             | Mode.Attack ->
-                                                target.AppliedAttackSkillBonus.Add(settings.SkillBonusSettings.AttributeSkill.AttributeAttackLargeUp + frontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float |> (*) backDeckFactor)
+                                                target.AppliedAttackSkillBonus.Add(settings.SkillBonusSettings.AttributeSkill.AttributeAttackLargeUp + skillRaiseFrontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float |> (*) backDeckFactor)
                                             | Mode.Defence ->
-                                                target.AppliedDefenceSkillBonus.Add(settings.SkillBonusSettings.AttributeSkill.AttributeDefenceLargeUp + frontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float |> (*) backDeckFactor)
+                                                target.AppliedDefenceSkillBonus.Add(settings.SkillBonusSettings.AttributeSkill.AttributeDefenceLargeUp + skillRaiseFrontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float |> (*) backDeckFactor)
                                             | Mode.AttackAndDefence ->
-                                                target.AppliedAttackSkillBonus.Add(settings.SkillBonusSettings.AttributeSkill.AttributeAttackAndDefenceLargeUp + frontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float |> (*) backDeckFactor)
-                                                target.AppliedDefenceSkillBonus.Add(settings.SkillBonusSettings.AttributeSkill.AttributeAttackAndDefenceLargeUp + frontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float |> (*) backDeckFactor)
+                                                target.AppliedAttackSkillBonus.Add(settings.SkillBonusSettings.AttributeSkill.AttributeAttackAndDefenceLargeUp + skillRaiseFrontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float |> (*) backDeckFactor)
+                                                target.AppliedDefenceSkillBonus.Add(settings.SkillBonusSettings.AttributeSkill.AttributeAttackAndDefenceLargeUp + skillRaiseFrontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float |> (*) backDeckFactor)
                                         | SkillType.Effect.Middle ->
                                             match skill.mode with
                                             | Mode.Attack ->
-                                                target.AppliedAttackSkillBonus.Add(settings.SkillBonusSettings.AttributeSkill.AttributeAttackMiddleUp + frontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float |> (*) backDeckFactor)
+                                                target.AppliedAttackSkillBonus.Add(settings.SkillBonusSettings.AttributeSkill.AttributeAttackMiddleUp + skillRaiseFrontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float |> (*) backDeckFactor)
                                             | Mode.Defence ->
-                                                target.AppliedDefenceSkillBonus.Add(settings.SkillBonusSettings.AttributeSkill.AttributeDefenceMiddleUp + frontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float |> (*) backDeckFactor)
+                                                target.AppliedDefenceSkillBonus.Add(settings.SkillBonusSettings.AttributeSkill.AttributeDefenceMiddleUp + skillRaiseFrontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float |> (*) backDeckFactor)
                                             | Mode.AttackAndDefence ->
-                                                target.AppliedAttackSkillBonus.Add(settings.SkillBonusSettings.AttributeSkill.AttributeAttackAndDefenceMiddleUp + frontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float |> (*) backDeckFactor)
-                                                target.AppliedDefenceSkillBonus.Add(settings.SkillBonusSettings.AttributeSkill.AttributeAttackAndDefenceMiddleUp + frontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float |> (*) backDeckFactor)
+                                                target.AppliedAttackSkillBonus.Add(settings.SkillBonusSettings.AttributeSkill.AttributeAttackAndDefenceMiddleUp + skillRaiseFrontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float |> (*) backDeckFactor)
+                                                target.AppliedDefenceSkillBonus.Add(settings.SkillBonusSettings.AttributeSkill.AttributeAttackAndDefenceMiddleUp + skillRaiseFrontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float |> (*) backDeckFactor)
                                         | SkillType.Effect.Small ->
                                             match skill.mode with
                                             | Mode.Attack ->
-                                                target.AppliedAttackSkillBonus.Add(settings.SkillBonusSettings.AttributeSkill.AttributeAttackSmallUp + frontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float |> (*) backDeckFactor)
+                                                target.AppliedAttackSkillBonus.Add(settings.SkillBonusSettings.AttributeSkill.AttributeAttackSmallUp + skillRaiseFrontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float |> (*) backDeckFactor)
                                             | Mode.Defence ->
-                                                target.AppliedDefenceSkillBonus.Add(settings.SkillBonusSettings.AttributeSkill.AttributeDefenceSmallUp + frontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float |> (*) backDeckFactor)
+                                                target.AppliedDefenceSkillBonus.Add(settings.SkillBonusSettings.AttributeSkill.AttributeDefenceSmallUp + skillRaiseFrontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float |> (*) backDeckFactor)
                                             | Mode.AttackAndDefence ->
-                                                target.AppliedAttackSkillBonus.Add(settings.SkillBonusSettings.AttributeSkill.AttributeAttackAndDefenceSmallUp + frontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float |> (*) backDeckFactor)
-                                                target.AppliedDefenceSkillBonus.Add(settings.SkillBonusSettings.AttributeSkill.AttributeAttackAndDefenceSmallUp + frontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float |> (*) backDeckFactor)
+                                                target.AppliedAttackSkillBonus.Add(settings.SkillBonusSettings.AttributeSkill.AttributeAttackAndDefenceSmallUp + skillRaiseFrontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float |> (*) backDeckFactor)
+                                                target.AppliedDefenceSkillBonus.Add(settings.SkillBonusSettings.AttributeSkill.AttributeAttackAndDefenceSmallUp + skillRaiseFrontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float |> (*) backDeckFactor)
                                         | SkillType.Effect.Random(skillMin, skillMax) ->
                                             match skill.mode with
                                             | Mode.Attack ->
                                                 match skillMin with
                                                 | Middle -> // 中から特大    
-                                                    target.AppliedAttackSkillBonus.Add(settings.SkillBonusSettings.AttributeSkill.AttributeAttackLargeUp + frontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float |> (*) backDeckFactor)
+                                                    target.AppliedAttackSkillBonus.Add(settings.SkillBonusSettings.AttributeSkill.AttributeAttackLargeUp + skillRaiseFrontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float |> (*) backDeckFactor)
                                                     //暫定的に大UPに
                                                 | Large -> // 大からスーパー特大
-                                                    target.AppliedAttackSkillBonus.Add(settings.SkillBonusSettings.AttributeSkill.AttributeAttackExtraLargeUp + frontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float |> (*) backDeckFactor)
+                                                    target.AppliedAttackSkillBonus.Add(settings.SkillBonusSettings.AttributeSkill.AttributeAttackExtraLargeUp + skillRaiseFrontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float |> (*) backDeckFactor)
                                                     // 暫定的に特大UPに
                                                 | ExtraLarge -> // 特大から超スーパー特大
-                                                    target.AppliedAttackSkillBonus.Add(settings.SkillBonusSettings.AttributeSkill.AttributeAttackSuperUp + frontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float |> (*) backDeckFactor)
+                                                    target.AppliedAttackSkillBonus.Add(settings.SkillBonusSettings.AttributeSkill.AttributeAttackSuperUp + skillRaiseFrontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float |> (*) backDeckFactor)
                                                     //暫定的にスーパー特大UPに
                                                 // 大から特大もいる あとで実装
                                             | Mode.Defence ->
                                                 match skillMin with
                                                 | Middle -> // 中から特大    
-                                                    target.AppliedDefenceSkillBonus.Add(settings.SkillBonusSettings.AttributeSkill.AttributeDefenceLargeUp + frontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float |> (*) backDeckFactor)
+                                                    target.AppliedDefenceSkillBonus.Add(settings.SkillBonusSettings.AttributeSkill.AttributeDefenceLargeUp + skillRaiseFrontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float |> (*) backDeckFactor)
                                                     //暫定的に大UPに
                                                 | Large -> // 大からスーパー特大
-                                                    target.AppliedDefenceSkillBonus.Add(settings.SkillBonusSettings.AttributeSkill.AttributeDefenceExtraLargeUp + frontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float |> (*) backDeckFactor)
+                                                    target.AppliedDefenceSkillBonus.Add(settings.SkillBonusSettings.AttributeSkill.AttributeDefenceExtraLargeUp + skillRaiseFrontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float |> (*) backDeckFactor)
                                                     // 暫定的に特大UPに
                                                 | ExtraLarge -> // 特大から超スーパー特大
-                                                    target.AppliedDefenceSkillBonus.Add(settings.SkillBonusSettings.AttributeSkill.AttributeDefenceSuperUp + frontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float |> (*) backDeckFactor)
+                                                    target.AppliedDefenceSkillBonus.Add(settings.SkillBonusSettings.AttributeSkill.AttributeDefenceSuperUp + skillRaiseFrontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float |> (*) backDeckFactor)
                                                     //暫定的にスーパー特大UPに
                                             | Mode.AttackAndDefence ->
                                                 match skillMin with
                                                 | Middle -> // 中から特大    
-                                                    target.AppliedAttackSkillBonus.Add(settings.SkillBonusSettings.AttributeSkill.AttributeAttackAndDefenceLargeUp + frontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float |> (*) backDeckFactor)
-                                                    target.AppliedDefenceSkillBonus.Add(settings.SkillBonusSettings.AttributeSkill.AttributeAttackAndDefenceLargeUp + frontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float |> (*) backDeckFactor)
+                                                    target.AppliedAttackSkillBonus.Add(settings.SkillBonusSettings.AttributeSkill.AttributeAttackAndDefenceLargeUp + skillRaiseFrontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float |> (*) backDeckFactor)
+                                                    target.AppliedDefenceSkillBonus.Add(settings.SkillBonusSettings.AttributeSkill.AttributeAttackAndDefenceLargeUp + skillRaiseFrontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float |> (*) backDeckFactor)
                                                     //暫定的に大UPに
                                                 | Large -> // 大からスーパー特大
-                                                    target.AppliedAttackSkillBonus.Add(settings.SkillBonusSettings.AttributeSkill.AttributeAttackAndDefenceExtraLargeUpPlus1 + frontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float |> (*) backDeckFactor)
-                                                    target.AppliedDefenceSkillBonus.Add(settings.SkillBonusSettings.AttributeSkill.AttributeAttackAndDefenceExtraLargeUpPlus1 + frontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float |> (*) backDeckFactor)
+                                                    target.AppliedAttackSkillBonus.Add(settings.SkillBonusSettings.AttributeSkill.AttributeAttackAndDefenceExtraLargeUpPlus1 + skillRaiseFrontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float |> (*) backDeckFactor)
+                                                    target.AppliedDefenceSkillBonus.Add(settings.SkillBonusSettings.AttributeSkill.AttributeAttackAndDefenceExtraLargeUpPlus1 + skillRaiseFrontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float |> (*) backDeckFactor)
                                                     // 暫定的に特大UPに
                                                 | ExtraLarge -> // 特大から超スーパー特大
-                                                    target.AppliedAttackSkillBonus.Add(settings.SkillBonusSettings.AttributeSkill.AttributeAttackAndDefenceSuperUp + frontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float |> (*) backDeckFactor)
-                                                    target.AppliedDefenceSkillBonus.Add(settings.SkillBonusSettings.AttributeSkill.AttributeAttackAndDefenceSuperUp + frontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float |> (*) backDeckFactor)
+                                                    target.AppliedAttackSkillBonus.Add(settings.SkillBonusSettings.AttributeSkill.AttributeAttackAndDefenceSuperUp + skillRaiseFrontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float |> (*) backDeckFactor)
+                                                    target.AppliedDefenceSkillBonus.Add(settings.SkillBonusSettings.AttributeSkill.AttributeAttackAndDefenceSuperUp + skillRaiseFrontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float |> (*) backDeckFactor)
                                                     //暫定的にスーパー特大UPに
                                     else 0 |> ignore
                                 | SkillAttributeType.Sweet ->
@@ -660,95 +661,95 @@ module CalcBonus =
                                         | SkillType.Effect.ExtraSuper ->
                                             match skill.mode with
                                             | Mode.Attack ->
-                                                target.AppliedAttackSkillBonus.Add(settings.SkillBonusSettings.AttributeSkill.AttributeAttackExtraSuperUp + frontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float |> (*) backDeckFactor)
+                                                target.AppliedAttackSkillBonus.Add(settings.SkillBonusSettings.AttributeSkill.AttributeAttackExtraSuperUp + skillRaiseFrontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float |> (*) backDeckFactor)
                                             | Mode.Defence ->
-                                                target.AppliedDefenceSkillBonus.Add(settings.SkillBonusSettings.AttributeSkill.AttributeDefenceExtraSuperUp + frontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float |> (*) backDeckFactor)
+                                                target.AppliedDefenceSkillBonus.Add(settings.SkillBonusSettings.AttributeSkill.AttributeDefenceExtraSuperUp + skillRaiseFrontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float |> (*) backDeckFactor)
                                             | Mode.AttackAndDefence ->
-                                                target.AppliedAttackSkillBonus.Add(settings.SkillBonusSettings.AttributeSkill.AttributeAttackAndDefenceExtraSuperUp + frontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float |> (*) backDeckFactor)
-                                                target.AppliedDefenceSkillBonus.Add(settings.SkillBonusSettings.AttributeSkill.AttributeAttackAndDefenceExtraSuperUp + frontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float |> (*) backDeckFactor)
+                                                target.AppliedAttackSkillBonus.Add(settings.SkillBonusSettings.AttributeSkill.AttributeAttackAndDefenceExtraSuperUp + skillRaiseFrontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float |> (*) backDeckFactor)
+                                                target.AppliedDefenceSkillBonus.Add(settings.SkillBonusSettings.AttributeSkill.AttributeAttackAndDefenceExtraSuperUp + skillRaiseFrontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float |> (*) backDeckFactor)
                                         | SkillType.Effect.Super ->
                                             match skill.mode with
                                             | Mode.Attack ->
-                                                target.AppliedAttackSkillBonus.Add(settings.SkillBonusSettings.AttributeSkill.AttributeAttackSuperUp + frontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float |> (*) backDeckFactor)
+                                                target.AppliedAttackSkillBonus.Add(settings.SkillBonusSettings.AttributeSkill.AttributeAttackSuperUp + skillRaiseFrontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float |> (*) backDeckFactor)
                                             | Mode.Defence ->
-                                                target.AppliedDefenceSkillBonus.Add(settings.SkillBonusSettings.AttributeSkill.AttributeDefenceSuperUp + frontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float |> (*) backDeckFactor)
+                                                target.AppliedDefenceSkillBonus.Add(settings.SkillBonusSettings.AttributeSkill.AttributeDefenceSuperUp + skillRaiseFrontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float |> (*) backDeckFactor)
                                             | Mode.AttackAndDefence ->
-                                                target.AppliedAttackSkillBonus.Add(settings.SkillBonusSettings.AttributeSkill.AttributeAttackAndDefenceSuperUp + frontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float |> (*) backDeckFactor)
-                                                target.AppliedDefenceSkillBonus.Add(settings.SkillBonusSettings.AttributeSkill.AttributeAttackAndDefenceSuperUp + frontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float |> (*) backDeckFactor) 
+                                                target.AppliedAttackSkillBonus.Add(settings.SkillBonusSettings.AttributeSkill.AttributeAttackAndDefenceSuperUp + skillRaiseFrontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float |> (*) backDeckFactor)
+                                                target.AppliedDefenceSkillBonus.Add(settings.SkillBonusSettings.AttributeSkill.AttributeAttackAndDefenceSuperUp + skillRaiseFrontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float |> (*) backDeckFactor) 
                                         | SkillType.Effect.ExtraLarge ->
                                             match skill.mode with
                                             | Mode.Attack ->
-                                                target.AppliedAttackSkillBonus.Add(settings.SkillBonusSettings.AttributeSkill.AttributeAttackExtraLargeUp + frontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float |> (*) backDeckFactor)
+                                                target.AppliedAttackSkillBonus.Add(settings.SkillBonusSettings.AttributeSkill.AttributeAttackExtraLargeUp + skillRaiseFrontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float |> (*) backDeckFactor)
                                             | Mode.Defence ->
-                                                target.AppliedDefenceSkillBonus.Add(settings.SkillBonusSettings.AttributeSkill.AttributeDefenceExtraLargeUp + frontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float |> (*) backDeckFactor)
+                                                target.AppliedDefenceSkillBonus.Add(settings.SkillBonusSettings.AttributeSkill.AttributeDefenceExtraLargeUp + skillRaiseFrontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float |> (*) backDeckFactor)
                                             | Mode.AttackAndDefence ->
-                                                target.AppliedAttackSkillBonus.Add(settings.SkillBonusSettings.AttributeSkill.AttributeAttackAndDefenceExtraLargeUpPlus1 + frontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float |> (*) backDeckFactor)
-                                                target.AppliedDefenceSkillBonus.Add(settings.SkillBonusSettings.AttributeSkill.AttributeAttackAndDefenceExtraLargeUpPlus1 + frontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float |> (*) backDeckFactor)
+                                                target.AppliedAttackSkillBonus.Add(settings.SkillBonusSettings.AttributeSkill.AttributeAttackAndDefenceExtraLargeUpPlus1 + skillRaiseFrontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float |> (*) backDeckFactor)
+                                                target.AppliedDefenceSkillBonus.Add(settings.SkillBonusSettings.AttributeSkill.AttributeAttackAndDefenceExtraLargeUpPlus1 + skillRaiseFrontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float |> (*) backDeckFactor)
                                         | SkillType.Effect.Large ->
                                             match skill.mode with
                                             | Mode.Attack ->
-                                                target.AppliedAttackSkillBonus.Add(settings.SkillBonusSettings.AttributeSkill.AttributeAttackLargeUp + frontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float |> (*) backDeckFactor)
+                                                target.AppliedAttackSkillBonus.Add(settings.SkillBonusSettings.AttributeSkill.AttributeAttackLargeUp + skillRaiseFrontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float |> (*) backDeckFactor)
                                             | Mode.Defence ->
-                                                target.AppliedDefenceSkillBonus.Add(settings.SkillBonusSettings.AttributeSkill.AttributeDefenceLargeUp + frontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float |> (*) backDeckFactor)
+                                                target.AppliedDefenceSkillBonus.Add(settings.SkillBonusSettings.AttributeSkill.AttributeDefenceLargeUp + skillRaiseFrontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float |> (*) backDeckFactor)
                                             | Mode.AttackAndDefence ->
-                                                target.AppliedAttackSkillBonus.Add(settings.SkillBonusSettings.AttributeSkill.AttributeAttackAndDefenceLargeUp + frontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float |> (*) backDeckFactor)
-                                                target.AppliedDefenceSkillBonus.Add(settings.SkillBonusSettings.AttributeSkill.AttributeAttackAndDefenceLargeUp + frontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float |> (*) backDeckFactor)
+                                                target.AppliedAttackSkillBonus.Add(settings.SkillBonusSettings.AttributeSkill.AttributeAttackAndDefenceLargeUp + skillRaiseFrontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float |> (*) backDeckFactor)
+                                                target.AppliedDefenceSkillBonus.Add(settings.SkillBonusSettings.AttributeSkill.AttributeAttackAndDefenceLargeUp + skillRaiseFrontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float |> (*) backDeckFactor)
                                         | SkillType.Effect.Middle ->
                                             match skill.mode with
                                             | Mode.Attack ->
-                                                target.AppliedAttackSkillBonus.Add(settings.SkillBonusSettings.AttributeSkill.AttributeAttackMiddleUp + frontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float |> (*) backDeckFactor)
+                                                target.AppliedAttackSkillBonus.Add(settings.SkillBonusSettings.AttributeSkill.AttributeAttackMiddleUp + skillRaiseFrontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float |> (*) backDeckFactor)
                                             | Mode.Defence ->
-                                                target.AppliedDefenceSkillBonus.Add(settings.SkillBonusSettings.AttributeSkill.AttributeDefenceMiddleUp + frontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float |> (*) backDeckFactor)
+                                                target.AppliedDefenceSkillBonus.Add(settings.SkillBonusSettings.AttributeSkill.AttributeDefenceMiddleUp + skillRaiseFrontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float |> (*) backDeckFactor)
                                             | Mode.AttackAndDefence ->
-                                                target.AppliedAttackSkillBonus.Add(settings.SkillBonusSettings.AttributeSkill.AttributeAttackAndDefenceMiddleUp + frontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float |> (*) backDeckFactor)
-                                                target.AppliedDefenceSkillBonus.Add(settings.SkillBonusSettings.AttributeSkill.AttributeAttackAndDefenceMiddleUp + frontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float |> (*) backDeckFactor)
+                                                target.AppliedAttackSkillBonus.Add(settings.SkillBonusSettings.AttributeSkill.AttributeAttackAndDefenceMiddleUp + skillRaiseFrontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float |> (*) backDeckFactor)
+                                                target.AppliedDefenceSkillBonus.Add(settings.SkillBonusSettings.AttributeSkill.AttributeAttackAndDefenceMiddleUp + skillRaiseFrontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float |> (*) backDeckFactor)
                                         | SkillType.Effect.Small ->
                                             match skill.mode with
                                             | Mode.Attack ->
-                                                target.AppliedAttackSkillBonus.Add(settings.SkillBonusSettings.AttributeSkill.AttributeAttackSmallUp + frontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float |> (*) backDeckFactor)
+                                                target.AppliedAttackSkillBonus.Add(settings.SkillBonusSettings.AttributeSkill.AttributeAttackSmallUp + skillRaiseFrontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float |> (*) backDeckFactor)
                                             | Mode.Defence ->
-                                                target.AppliedDefenceSkillBonus.Add(settings.SkillBonusSettings.AttributeSkill.AttributeDefenceSmallUp + frontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float |> (*) backDeckFactor)
+                                                target.AppliedDefenceSkillBonus.Add(settings.SkillBonusSettings.AttributeSkill.AttributeDefenceSmallUp + skillRaiseFrontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float |> (*) backDeckFactor)
                                             | Mode.AttackAndDefence ->
-                                                target.AppliedAttackSkillBonus.Add(settings.SkillBonusSettings.AttributeSkill.AttributeAttackAndDefenceSmallUp + frontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float |> (*) backDeckFactor)
-                                                target.AppliedDefenceSkillBonus.Add(settings.SkillBonusSettings.AttributeSkill.AttributeAttackAndDefenceSmallUp + frontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float |> (*) backDeckFactor)
+                                                target.AppliedAttackSkillBonus.Add(settings.SkillBonusSettings.AttributeSkill.AttributeAttackAndDefenceSmallUp + skillRaiseFrontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float |> (*) backDeckFactor)
+                                                target.AppliedDefenceSkillBonus.Add(settings.SkillBonusSettings.AttributeSkill.AttributeAttackAndDefenceSmallUp + skillRaiseFrontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float |> (*) backDeckFactor)
                                         | SkillType.Effect.Random(skillMin, skillMax) ->
                                             match skill.mode with
                                             | Mode.Attack ->
                                                 match skillMin with
                                                 | Middle -> // 中から特大    
-                                                    target.AppliedAttackSkillBonus.Add(settings.SkillBonusSettings.AttributeSkill.AttributeAttackLargeUp + frontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float |> (*) backDeckFactor)
+                                                    target.AppliedAttackSkillBonus.Add(settings.SkillBonusSettings.AttributeSkill.AttributeAttackLargeUp + skillRaiseFrontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float |> (*) backDeckFactor)
                                                     //暫定的に大UPに
                                                 | Large -> // 大からスーパー特大
-                                                    target.AppliedAttackSkillBonus.Add(settings.SkillBonusSettings.AttributeSkill.AttributeAttackExtraLargeUp + frontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float |> (*) backDeckFactor)
+                                                    target.AppliedAttackSkillBonus.Add(settings.SkillBonusSettings.AttributeSkill.AttributeAttackExtraLargeUp + skillRaiseFrontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float |> (*) backDeckFactor)
                                                     // 暫定的に特大UPに
                                                 | ExtraLarge -> // 特大から超スーパー特大
-                                                    target.AppliedAttackSkillBonus.Add(settings.SkillBonusSettings.AttributeSkill.AttributeAttackSuperUp + frontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float |> (*) backDeckFactor)
+                                                    target.AppliedAttackSkillBonus.Add(settings.SkillBonusSettings.AttributeSkill.AttributeAttackSuperUp + skillRaiseFrontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float |> (*) backDeckFactor)
                                                     //暫定的にスーパー特大UPに
                                                 // 大から特大もいる あとで実装
                                             | Mode.Defence ->
                                                 match skillMin with
                                                 | Middle -> // 中から特大    
-                                                    target.AppliedDefenceSkillBonus.Add(settings.SkillBonusSettings.AttributeSkill.AttributeDefenceLargeUp + frontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float |> (*) backDeckFactor)
+                                                    target.AppliedDefenceSkillBonus.Add(settings.SkillBonusSettings.AttributeSkill.AttributeDefenceLargeUp + skillRaiseFrontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float |> (*) backDeckFactor)
                                                     //暫定的に大UPに
                                                 | Large -> // 大からスーパー特大
-                                                    target.AppliedDefenceSkillBonus.Add(settings.SkillBonusSettings.AttributeSkill.AttributeDefenceExtraLargeUp + frontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float |> (*) backDeckFactor)
+                                                    target.AppliedDefenceSkillBonus.Add(settings.SkillBonusSettings.AttributeSkill.AttributeDefenceExtraLargeUp + skillRaiseFrontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float |> (*) backDeckFactor)
                                                     // 暫定的に特大UPに
                                                 | ExtraLarge -> // 特大から超スーパー特大
-                                                    target.AppliedDefenceSkillBonus.Add(settings.SkillBonusSettings.AttributeSkill.AttributeDefenceSuperUp + frontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float |> (*) backDeckFactor)
+                                                    target.AppliedDefenceSkillBonus.Add(settings.SkillBonusSettings.AttributeSkill.AttributeDefenceSuperUp + skillRaiseFrontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float |> (*) backDeckFactor)
                                                     //暫定的にスーパー特大UPに
                                             | Mode.AttackAndDefence ->
                                                 match skillMin with
                                                 | Middle -> // 中から特大    
-                                                    target.AppliedAttackSkillBonus.Add(settings.SkillBonusSettings.AttributeSkill.AttributeAttackAndDefenceLargeUp + frontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float |> (*) backDeckFactor)
-                                                    target.AppliedDefenceSkillBonus.Add(settings.SkillBonusSettings.AttributeSkill.AttributeAttackAndDefenceLargeUp + frontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float |> (*) backDeckFactor)
+                                                    target.AppliedAttackSkillBonus.Add(settings.SkillBonusSettings.AttributeSkill.AttributeAttackAndDefenceLargeUp + skillRaiseFrontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float |> (*) backDeckFactor)
+                                                    target.AppliedDefenceSkillBonus.Add(settings.SkillBonusSettings.AttributeSkill.AttributeAttackAndDefenceLargeUp + skillRaiseFrontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float |> (*) backDeckFactor)
                                                     //暫定的に大UPに
                                                 | Large -> // 大からスーパー特大
-                                                    target.AppliedAttackSkillBonus.Add(settings.SkillBonusSettings.AttributeSkill.AttributeAttackAndDefenceExtraLargeUpPlus1 + frontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float |> (*) backDeckFactor)
-                                                    target.AppliedDefenceSkillBonus.Add(settings.SkillBonusSettings.AttributeSkill.AttributeAttackAndDefenceExtraLargeUpPlus1 + frontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float |> (*) backDeckFactor)
+                                                    target.AppliedAttackSkillBonus.Add(settings.SkillBonusSettings.AttributeSkill.AttributeAttackAndDefenceExtraLargeUpPlus1 + skillRaiseFrontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float |> (*) backDeckFactor)
+                                                    target.AppliedDefenceSkillBonus.Add(settings.SkillBonusSettings.AttributeSkill.AttributeAttackAndDefenceExtraLargeUpPlus1 + skillRaiseFrontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float |> (*) backDeckFactor)
                                                     // 暫定的に特大UPに
                                                 | ExtraLarge -> // 特大から超スーパー特大
-                                                    target.AppliedAttackSkillBonus.Add(settings.SkillBonusSettings.AttributeSkill.AttributeAttackAndDefenceSuperUp + frontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float |> (*) backDeckFactor)
-                                                    target.AppliedDefenceSkillBonus.Add(settings.SkillBonusSettings.AttributeSkill.AttributeAttackAndDefenceSuperUp + frontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float |> (*) backDeckFactor)
+                                                    target.AppliedAttackSkillBonus.Add(settings.SkillBonusSettings.AttributeSkill.AttributeAttackAndDefenceSuperUp + skillRaiseFrontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float |> (*) backDeckFactor)
+                                                    target.AppliedDefenceSkillBonus.Add(settings.SkillBonusSettings.AttributeSkill.AttributeAttackAndDefenceSuperUp + skillRaiseFrontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float |> (*) backDeckFactor)
                                                     //暫定的にスーパー特大UPに
                                     else 0 |> ignore
                                 | SkillAttributeType.All ->                              
@@ -756,95 +757,95 @@ module CalcBonus =
                                     | SkillType.Effect.ExtraSuper ->
                                         match skill.mode with
                                         | Mode.Attack ->
-                                            target.AppliedAttackSkillBonus.Add(settings.SkillBonusSettings.AllAttributeSkill.AllAttributeAttackExtraSuperUp + frontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float |> (*) backDeckFactor)
+                                            target.AppliedAttackSkillBonus.Add(settings.SkillBonusSettings.AllAttributeSkill.AllAttributeAttackExtraSuperUp + skillRaiseFrontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float |> (*) backDeckFactor)
                                         | Mode.Defence ->
-                                            target.AppliedDefenceSkillBonus.Add(settings.SkillBonusSettings.AllAttributeSkill.AllAttributeDefenceExtraSuperUp + frontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float |> (*) backDeckFactor)
+                                            target.AppliedDefenceSkillBonus.Add(settings.SkillBonusSettings.AllAttributeSkill.AllAttributeDefenceExtraSuperUp + skillRaiseFrontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float |> (*) backDeckFactor)
                                         | Mode.AttackAndDefence ->
-                                            target.AppliedAttackSkillBonus.Add(settings.SkillBonusSettings.AllAttributeSkill.AllAttributeAttackAndDefenceExtraSuperUp + frontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float |> (*) backDeckFactor)
-                                            target.AppliedDefenceSkillBonus.Add(settings.SkillBonusSettings.AllAttributeSkill.AllAttributeAttackAndDefenceExtraSuperUp + frontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float |> (*) backDeckFactor)
+                                            target.AppliedAttackSkillBonus.Add(settings.SkillBonusSettings.AllAttributeSkill.AllAttributeAttackAndDefenceExtraSuperUp + skillRaiseFrontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float |> (*) backDeckFactor)
+                                            target.AppliedDefenceSkillBonus.Add(settings.SkillBonusSettings.AllAttributeSkill.AllAttributeAttackAndDefenceExtraSuperUp + skillRaiseFrontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float |> (*) backDeckFactor)
                                     | SkillType.Effect.Super ->
                                         match skill.mode with
                                         | Mode.Attack ->
-                                            target.AppliedAttackSkillBonus.Add(settings.SkillBonusSettings.AllAttributeSkill.AllAttributeAttackSuperUp + frontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float |> (*) backDeckFactor)
+                                            target.AppliedAttackSkillBonus.Add(settings.SkillBonusSettings.AllAttributeSkill.AllAttributeAttackSuperUp + skillRaiseFrontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float |> (*) backDeckFactor)
                                         | Mode.Defence ->
-                                            target.AppliedDefenceSkillBonus.Add(settings.SkillBonusSettings.AllAttributeSkill.AllAttributeDefenceSuperUp + frontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float |> (*) backDeckFactor)
+                                            target.AppliedDefenceSkillBonus.Add(settings.SkillBonusSettings.AllAttributeSkill.AllAttributeDefenceSuperUp + skillRaiseFrontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float |> (*) backDeckFactor)
                                         | Mode.AttackAndDefence ->
-                                            target.AppliedAttackSkillBonus.Add(settings.SkillBonusSettings.AllAttributeSkill.AllAttributeAttackAndDefenceSuperUp + frontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float |> (*) backDeckFactor)
-                                            target.AppliedDefenceSkillBonus.Add(settings.SkillBonusSettings.AllAttributeSkill.AllAttributeAttackAndDefenceSuperUp + frontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float |> (*) backDeckFactor) 
+                                            target.AppliedAttackSkillBonus.Add(settings.SkillBonusSettings.AllAttributeSkill.AllAttributeAttackAndDefenceSuperUp + skillRaiseFrontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float |> (*) backDeckFactor)
+                                            target.AppliedDefenceSkillBonus.Add(settings.SkillBonusSettings.AllAttributeSkill.AllAttributeAttackAndDefenceSuperUp + skillRaiseFrontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float |> (*) backDeckFactor) 
                                     | SkillType.Effect.ExtraLarge ->
                                         match skill.mode with
                                         | Mode.Attack ->
-                                            target.AppliedAttackSkillBonus.Add(settings.SkillBonusSettings.AllAttributeSkill.AllAttributeAttackExtraLargeUp + frontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float |> (*) backDeckFactor)
+                                            target.AppliedAttackSkillBonus.Add(settings.SkillBonusSettings.AllAttributeSkill.AllAttributeAttackExtraLargeUp + skillRaiseFrontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float |> (*) backDeckFactor)
                                         | Mode.Defence ->
-                                            target.AppliedDefenceSkillBonus.Add(settings.SkillBonusSettings.AllAttributeSkill.AllAttributeDefenceExtraLargeUp + frontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float |> (*) backDeckFactor)
+                                            target.AppliedDefenceSkillBonus.Add(settings.SkillBonusSettings.AllAttributeSkill.AllAttributeDefenceExtraLargeUp + skillRaiseFrontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float |> (*) backDeckFactor)
                                         | Mode.AttackAndDefence ->
-                                            target.AppliedAttackSkillBonus.Add(settings.SkillBonusSettings.AllAttributeSkill.AllAttributeAttackAndDefenceExtraLargeUp + frontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float |> (*) backDeckFactor)
-                                            target.AppliedDefenceSkillBonus.Add(settings.SkillBonusSettings.AllAttributeSkill.AllAttributeAttackAndDefenceExtraLargeUp + frontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float |> (*) backDeckFactor)
+                                            target.AppliedAttackSkillBonus.Add(settings.SkillBonusSettings.AllAttributeSkill.AllAttributeAttackAndDefenceExtraLargeUp + skillRaiseFrontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float |> (*) backDeckFactor)
+                                            target.AppliedDefenceSkillBonus.Add(settings.SkillBonusSettings.AllAttributeSkill.AllAttributeAttackAndDefenceExtraLargeUp + skillRaiseFrontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float |> (*) backDeckFactor)
                                     | SkillType.Effect.Large ->
                                         match skill.mode with
                                         | Mode.Attack ->
-                                            target.AppliedAttackSkillBonus.Add(settings.SkillBonusSettings.AllAttributeSkill.AllAttributeAttackLargeUp + frontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float |> (*) backDeckFactor)
+                                            target.AppliedAttackSkillBonus.Add(settings.SkillBonusSettings.AllAttributeSkill.AllAttributeAttackLargeUp + skillRaiseFrontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float |> (*) backDeckFactor)
                                         | Mode.Defence ->
-                                            target.AppliedDefenceSkillBonus.Add(settings.SkillBonusSettings.AllAttributeSkill.AllAttributeDefenceLargeUp + frontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float |> (*) backDeckFactor)
+                                            target.AppliedDefenceSkillBonus.Add(settings.SkillBonusSettings.AllAttributeSkill.AllAttributeDefenceLargeUp + skillRaiseFrontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float |> (*) backDeckFactor)
                                         | Mode.AttackAndDefence ->
-                                            target.AppliedAttackSkillBonus.Add(settings.SkillBonusSettings.AllAttributeSkill.AllAttributeAttackAndDefenceLargeUp + frontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float |> (*) backDeckFactor)
-                                            target.AppliedDefenceSkillBonus.Add(settings.SkillBonusSettings.AllAttributeSkill.AllAttributeAttackAndDefenceLargeUp + frontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float |> (*) backDeckFactor)
+                                            target.AppliedAttackSkillBonus.Add(settings.SkillBonusSettings.AllAttributeSkill.AllAttributeAttackAndDefenceLargeUp + skillRaiseFrontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float |> (*) backDeckFactor)
+                                            target.AppliedDefenceSkillBonus.Add(settings.SkillBonusSettings.AllAttributeSkill.AllAttributeAttackAndDefenceLargeUp + skillRaiseFrontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float |> (*) backDeckFactor)
                                     | SkillType.Effect.Middle ->
                                         match skill.mode with
                                         | Mode.Attack ->
-                                            target.AppliedAttackSkillBonus.Add(settings.SkillBonusSettings.AllAttributeSkill.AllAttributeAttackMiddleUp + frontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float |> (*) backDeckFactor)
+                                            target.AppliedAttackSkillBonus.Add(settings.SkillBonusSettings.AllAttributeSkill.AllAttributeAttackMiddleUp + skillRaiseFrontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float |> (*) backDeckFactor)
                                         | Mode.Defence ->
-                                            target.AppliedDefenceSkillBonus.Add(settings.SkillBonusSettings.AllAttributeSkill.AllAttributeDefenceMiddleUp + frontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float |> (*) backDeckFactor)
+                                            target.AppliedDefenceSkillBonus.Add(settings.SkillBonusSettings.AllAttributeSkill.AllAttributeDefenceMiddleUp + skillRaiseFrontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float |> (*) backDeckFactor)
                                         | Mode.AttackAndDefence ->
-                                            target.AppliedAttackSkillBonus.Add(settings.SkillBonusSettings.AllAttributeSkill.AllAttributeAttackAndDefenceMiddleUp + frontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float |> (*) backDeckFactor)
-                                            target.AppliedDefenceSkillBonus.Add(settings.SkillBonusSettings.AllAttributeSkill.AllAttributeAttackAndDefenceMiddleUp + frontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float |> (*) backDeckFactor)
+                                            target.AppliedAttackSkillBonus.Add(settings.SkillBonusSettings.AllAttributeSkill.AllAttributeAttackAndDefenceMiddleUp + skillRaiseFrontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float |> (*) backDeckFactor)
+                                            target.AppliedDefenceSkillBonus.Add(settings.SkillBonusSettings.AllAttributeSkill.AllAttributeAttackAndDefenceMiddleUp + skillRaiseFrontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float |> (*) backDeckFactor)
                                     | SkillType.Effect.Small ->
                                         match skill.mode with
                                         | Mode.Attack ->
-                                            target.AppliedAttackSkillBonus.Add(settings.SkillBonusSettings.AllAttributeSkill.AllAttributeAttackSmallUp + frontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float |> (*) backDeckFactor)
+                                            target.AppliedAttackSkillBonus.Add(settings.SkillBonusSettings.AllAttributeSkill.AllAttributeAttackSmallUp + skillRaiseFrontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float |> (*) backDeckFactor)
                                         | Mode.Defence ->
-                                            target.AppliedDefenceSkillBonus.Add(settings.SkillBonusSettings.AllAttributeSkill.AllAttributeDefenceSmallUp + frontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float |> (*) backDeckFactor)
+                                            target.AppliedDefenceSkillBonus.Add(settings.SkillBonusSettings.AllAttributeSkill.AllAttributeDefenceSmallUp + skillRaiseFrontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float |> (*) backDeckFactor)
                                         | Mode.AttackAndDefence ->
-                                            target.AppliedAttackSkillBonus.Add(settings.SkillBonusSettings.AllAttributeSkill.AllAttributeAttackAndDefenceSmallUp + frontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float |> (*) backDeckFactor)
-                                            target.AppliedDefenceSkillBonus.Add(settings.SkillBonusSettings.AllAttributeSkill.AllAttributeAttackAndDefenceSmallUp + frontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float |> (*) backDeckFactor)
+                                            target.AppliedAttackSkillBonus.Add(settings.SkillBonusSettings.AllAttributeSkill.AllAttributeAttackAndDefenceSmallUp + skillRaiseFrontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float |> (*) backDeckFactor)
+                                            target.AppliedDefenceSkillBonus.Add(settings.SkillBonusSettings.AllAttributeSkill.AllAttributeAttackAndDefenceSmallUp + skillRaiseFrontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float |> (*) backDeckFactor)
                                     | SkillType.Effect.Random(skillMin, skillMax) ->
                                         match skill.mode with
                                         | Mode.Attack ->
                                             match skillMin with
                                             | Middle -> // 中から特大    
-                                                target.AppliedAttackSkillBonus.Add(settings.SkillBonusSettings.AllAttributeSkill.AllAttributeAttackLargeUp + frontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float |> (*) backDeckFactor)
+                                                target.AppliedAttackSkillBonus.Add(settings.SkillBonusSettings.AllAttributeSkill.AllAttributeAttackLargeUp + skillRaiseFrontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float |> (*) backDeckFactor)
                                                 //暫定的に大UPに
                                             | Large -> // 大からスーパー特大
-                                                target.AppliedAttackSkillBonus.Add(settings.SkillBonusSettings.AllAttributeSkill.AllAttributeAttackExtraLargeUp + frontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float |> (*) backDeckFactor)
+                                                target.AppliedAttackSkillBonus.Add(settings.SkillBonusSettings.AllAttributeSkill.AllAttributeAttackExtraLargeUp + skillRaiseFrontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float |> (*) backDeckFactor)
                                                 // 暫定的に特大UPに
                                             | ExtraLarge -> // 特大から超スーパー特大
-                                                target.AppliedAttackSkillBonus.Add(settings.SkillBonusSettings.AllAttributeSkill.AllAttributeAttackSuperUp + frontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float |> (*) backDeckFactor)
+                                                target.AppliedAttackSkillBonus.Add(settings.SkillBonusSettings.AllAttributeSkill.AllAttributeAttackSuperUp + skillRaiseFrontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float |> (*) backDeckFactor)
                                                 //暫定的にスーパー特大UPに
                                             // 大から特大もいる あとで実装
                                         | Mode.Defence ->
                                             match skillMin with
                                             | Middle -> // 中から特大    
-                                                target.AppliedDefenceSkillBonus.Add(settings.SkillBonusSettings.AllAttributeSkill.AllAttributeDefenceLargeUp + frontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float |> (*) backDeckFactor)
+                                                target.AppliedDefenceSkillBonus.Add(settings.SkillBonusSettings.AllAttributeSkill.AllAttributeDefenceLargeUp + skillRaiseFrontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float |> (*) backDeckFactor)
                                                 //暫定的に大UPに
                                             | Large -> // 大からスーパー特大
-                                                target.AppliedDefenceSkillBonus.Add(settings.SkillBonusSettings.AllAttributeSkill.AllAttributeDefenceExtraLargeUp + frontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float |> (*) backDeckFactor)
+                                                target.AppliedDefenceSkillBonus.Add(settings.SkillBonusSettings.AllAttributeSkill.AllAttributeDefenceExtraLargeUp + skillRaiseFrontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float |> (*) backDeckFactor)
                                                 // 暫定的に特大UPに
                                             | ExtraLarge -> // 特大から超スーパー特大
-                                                target.AppliedDefenceSkillBonus.Add(settings.SkillBonusSettings.AllAttributeSkill.AllAttributeDefenceSuperUp + frontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float |> (*) backDeckFactor)
+                                                target.AppliedDefenceSkillBonus.Add(settings.SkillBonusSettings.AllAttributeSkill.AllAttributeDefenceSuperUp + skillRaiseFrontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float |> (*) backDeckFactor)
                                                 //暫定的にスーパー特大UPに
                                         | Mode.AttackAndDefence ->
                                             match skillMin with
                                             | Middle -> // 中から特大    
-                                                target.AppliedAttackSkillBonus.Add(settings.SkillBonusSettings.AllAttributeSkill.AllAttributeAttackAndDefenceLargeUp + frontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float |> (*) backDeckFactor)
-                                                target.AppliedDefenceSkillBonus.Add(settings.SkillBonusSettings.AllAttributeSkill.AllAttributeAttackAndDefenceLargeUp + frontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float |> (*) backDeckFactor)
+                                                target.AppliedAttackSkillBonus.Add(settings.SkillBonusSettings.AllAttributeSkill.AllAttributeAttackAndDefenceLargeUp + skillRaiseFrontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float |> (*) backDeckFactor)
+                                                target.AppliedDefenceSkillBonus.Add(settings.SkillBonusSettings.AllAttributeSkill.AllAttributeAttackAndDefenceLargeUp + skillRaiseFrontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float |> (*) backDeckFactor)
                                                 //暫定的に大UPに
                                             | Large -> // 大からスーパー特大
-                                                target.AppliedAttackSkillBonus.Add(settings.SkillBonusSettings.AllAttributeSkill.AllAttributeAttackAndDefenceExtraLargeUp + frontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float |> (*) backDeckFactor)
-                                                target.AppliedDefenceSkillBonus.Add(settings.SkillBonusSettings.AllAttributeSkill.AllAttributeAttackAndDefenceExtraLargeUp + frontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float |> (*) backDeckFactor)
+                                                target.AppliedAttackSkillBonus.Add(settings.SkillBonusSettings.AllAttributeSkill.AllAttributeAttackAndDefenceExtraLargeUp + skillRaiseFrontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float |> (*) backDeckFactor)
+                                                target.AppliedDefenceSkillBonus.Add(settings.SkillBonusSettings.AllAttributeSkill.AllAttributeAttackAndDefenceExtraLargeUp + skillRaiseFrontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float |> (*) backDeckFactor)
                                                 // 暫定的に特大UPに
                                             | ExtraLarge -> // 特大から超スーパー特大
-                                                target.AppliedAttackSkillBonus.Add(settings.SkillBonusSettings.AllAttributeSkill.AllAttributeAttackAndDefenceSuperUp + frontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float |> (*) backDeckFactor)
-                                                target.AppliedDefenceSkillBonus.Add(settings.SkillBonusSettings.AllAttributeSkill.AllAttributeAttackAndDefenceSuperUp + frontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float |> (*) backDeckFactor)
+                                                target.AppliedAttackSkillBonus.Add(settings.SkillBonusSettings.AllAttributeSkill.AllAttributeAttackAndDefenceSuperUp + skillRaiseFrontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float |> (*) backDeckFactor)
+                                                target.AppliedDefenceSkillBonus.Add(settings.SkillBonusSettings.AllAttributeSkill.AllAttributeAttackAndDefenceSuperUp + skillRaiseFrontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float |> (*) backDeckFactor)
                                                 //暫定的にスーパー特大UPに
                         | SkillTarget.Back(n) ->
                             let backTopN = backDeck.ToArray() |> Array.sortBy(fun cardView -> cardView.Attack) |> Array.filter(fun cardView -> skill.attribute.isAppliableOn(cardView.Card.attribute)) |> Array.truncate(n)                         
@@ -859,38 +860,38 @@ module CalcBonus =
                                         | SkillType.Effect.ExtraLarge ->
                                             match skill.mode with
                                             | Mode.Attack ->
-                                                target.AppliedAttackSkillBonus.Add(settings.SkillBonusSettings.BackDeckSkill.AttributeBackDeckAttackExtraLargeUp + frontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float |> (*) backDeckFactor)
+                                                target.AppliedAttackSkillBonus.Add(settings.SkillBonusSettings.BackDeckSkill.AttributeBackDeckAttackExtraLargeUp + skillRaiseFrontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float |> (*) backDeckFactor)
                                             | Mode.Defence ->
-                                                target.AppliedDefenceSkillBonus.Add(settings.SkillBonusSettings.BackDeckSkill.AttributeBackDeckDefenceExtraLargeUp + frontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float |> (*) backDeckFactor)
+                                                target.AppliedDefenceSkillBonus.Add(settings.SkillBonusSettings.BackDeckSkill.AttributeBackDeckDefenceExtraLargeUp + skillRaiseFrontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float |> (*) backDeckFactor)
                                         | SkillType.Effect.Large ->
                                             match skill.mode with
                                             | Mode.Attack ->
-                                                target.AppliedAttackSkillBonus.Add(settings.SkillBonusSettings.BackDeckSkill.AttributeBackDeckAttackLargeUp + frontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float |> (*) backDeckFactor)
+                                                target.AppliedAttackSkillBonus.Add(settings.SkillBonusSettings.BackDeckSkill.AttributeBackDeckAttackLargeUp + skillRaiseFrontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float |> (*) backDeckFactor)
                                             | Mode.Defence ->
-                                                target.AppliedDefenceSkillBonus.Add(settings.SkillBonusSettings.BackDeckSkill.AttributeBackDeckDefenceLargeUp + frontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float |> (*) backDeckFactor)
+                                                target.AppliedDefenceSkillBonus.Add(settings.SkillBonusSettings.BackDeckSkill.AttributeBackDeckDefenceLargeUp + skillRaiseFrontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float |> (*) backDeckFactor)
                                         | SkillType.Effect.Middle ->
                                             match skill.mode with
                                             | Mode.Attack ->
-                                                target.AppliedAttackSkillBonus.Add(settings.SkillBonusSettings.BackDeckSkill.AttributeBackDeckAttackMiddleUp + frontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float |> (*) backDeckFactor)
+                                                target.AppliedAttackSkillBonus.Add(settings.SkillBonusSettings.BackDeckSkill.AttributeBackDeckAttackMiddleUp + skillRaiseFrontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float |> (*) backDeckFactor)
                                             | Mode.Defence ->
-                                                target.AppliedDefenceSkillBonus.Add(settings.SkillBonusSettings.BackDeckSkill.AttributeBackDeckDefenceMiddleUp + frontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float |> (*) backDeckFactor)
+                                                target.AppliedDefenceSkillBonus.Add(settings.SkillBonusSettings.BackDeckSkill.AttributeBackDeckDefenceMiddleUp + skillRaiseFrontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float |> (*) backDeckFactor)
                                         | SkillType.Effect.Small ->
                                             match skill.mode with
                                             | Mode.Attack ->
-                                                target.AppliedAttackSkillBonus.Add(settings.SkillBonusSettings.BackDeckSkill.AttributeBackDeckAttackSmallUp + frontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float |> (*) backDeckFactor)
+                                                target.AppliedAttackSkillBonus.Add(settings.SkillBonusSettings.BackDeckSkill.AttributeBackDeckAttackSmallUp + skillRaiseFrontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float |> (*) backDeckFactor)
                                             | Mode.Defence ->
-                                                target.AppliedDefenceSkillBonus.Add(settings.SkillBonusSettings.BackDeckSkill.AttributeBackDeckDefenceSmallUp + frontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float |> (*) backDeckFactor)
+                                                target.AppliedDefenceSkillBonus.Add(settings.SkillBonusSettings.BackDeckSkill.AttributeBackDeckDefenceSmallUp + skillRaiseFrontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float |> (*) backDeckFactor)
                                         | SkillType.Effect.Random(skillMin, skillMax) ->
                                             match skill.mode with
                                             | Mode.Attack ->
                                                 match skillMin with
                                                 | Middle -> // 中から特大    
-                                                    target.AppliedAttackSkillBonus.Add(settings.SkillBonusSettings.BackDeckSkill.AttributeBackDeckAttackLargeUp + frontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float |> (*) backDeckFactor)
+                                                    target.AppliedAttackSkillBonus.Add(settings.SkillBonusSettings.BackDeckSkill.AttributeBackDeckAttackLargeUp + skillRaiseFrontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float |> (*) backDeckFactor)
                                                     //暫定的に大UPに
                                             | Mode.Defence ->
                                                 match skillMin with
                                                 | Middle -> // 中から特大    
-                                                    target.AppliedDefenceSkillBonus.Add(settings.SkillBonusSettings.BackDeckSkill.AttributeBackDeckDefenceLargeUp + frontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float |> (*) backDeckFactor)
+                                                    target.AppliedDefenceSkillBonus.Add(settings.SkillBonusSettings.BackDeckSkill.AttributeBackDeckDefenceLargeUp + skillRaiseFrontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float |> (*) backDeckFactor)
                                                     //暫定的に大UPに
                                     else 0 |> ignore
                                 | SkillAttributeType.Pop ->
@@ -900,38 +901,38 @@ module CalcBonus =
                                         | SkillType.Effect.ExtraLarge ->
                                             match skill.mode with
                                             | Mode.Attack ->
-                                                target.AppliedAttackSkillBonus.Add(settings.SkillBonusSettings.BackDeckSkill.AttributeBackDeckAttackExtraLargeUp + frontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float |> (*) backDeckFactor)
+                                                target.AppliedAttackSkillBonus.Add(settings.SkillBonusSettings.BackDeckSkill.AttributeBackDeckAttackExtraLargeUp + skillRaiseFrontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float |> (*) backDeckFactor)
                                             | Mode.Defence ->
-                                                target.AppliedDefenceSkillBonus.Add(settings.SkillBonusSettings.BackDeckSkill.AttributeBackDeckDefenceExtraLargeUp + frontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float |> (*) backDeckFactor)
+                                                target.AppliedDefenceSkillBonus.Add(settings.SkillBonusSettings.BackDeckSkill.AttributeBackDeckDefenceExtraLargeUp + skillRaiseFrontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float |> (*) backDeckFactor)
                                         | SkillType.Effect.Large ->
                                             match skill.mode with
                                             | Mode.Attack ->
-                                                target.AppliedAttackSkillBonus.Add(settings.SkillBonusSettings.BackDeckSkill.AttributeBackDeckAttackLargeUp + frontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float |> (*) backDeckFactor)
+                                                target.AppliedAttackSkillBonus.Add(settings.SkillBonusSettings.BackDeckSkill.AttributeBackDeckAttackLargeUp + skillRaiseFrontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float |> (*) backDeckFactor)
                                             | Mode.Defence ->
-                                                target.AppliedDefenceSkillBonus.Add(settings.SkillBonusSettings.BackDeckSkill.AttributeBackDeckDefenceLargeUp + frontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float |> (*) backDeckFactor)
+                                                target.AppliedDefenceSkillBonus.Add(settings.SkillBonusSettings.BackDeckSkill.AttributeBackDeckDefenceLargeUp + skillRaiseFrontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float |> (*) backDeckFactor)
                                         | SkillType.Effect.Middle ->
                                             match skill.mode with
                                             | Mode.Attack ->
-                                                target.AppliedAttackSkillBonus.Add(settings.SkillBonusSettings.BackDeckSkill.AttributeBackDeckAttackMiddleUp + frontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float |> (*) backDeckFactor)
+                                                target.AppliedAttackSkillBonus.Add(settings.SkillBonusSettings.BackDeckSkill.AttributeBackDeckAttackMiddleUp + skillRaiseFrontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float |> (*) backDeckFactor)
                                             | Mode.Defence ->
-                                                target.AppliedDefenceSkillBonus.Add(settings.SkillBonusSettings.BackDeckSkill.AttributeBackDeckDefenceMiddleUp + frontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float |> (*) backDeckFactor)
+                                                target.AppliedDefenceSkillBonus.Add(settings.SkillBonusSettings.BackDeckSkill.AttributeBackDeckDefenceMiddleUp + skillRaiseFrontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float |> (*) backDeckFactor)
                                         | SkillType.Effect.Small ->
                                             match skill.mode with
                                             | Mode.Attack ->
-                                                target.AppliedAttackSkillBonus.Add(settings.SkillBonusSettings.BackDeckSkill.AttributeBackDeckAttackSmallUp + frontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float |> (*) backDeckFactor)
+                                                target.AppliedAttackSkillBonus.Add(settings.SkillBonusSettings.BackDeckSkill.AttributeBackDeckAttackSmallUp + skillRaiseFrontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float |> (*) backDeckFactor)
                                             | Mode.Defence ->
-                                                target.AppliedDefenceSkillBonus.Add(settings.SkillBonusSettings.BackDeckSkill.AttributeBackDeckDefenceSmallUp + frontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float |> (*) backDeckFactor)
+                                                target.AppliedDefenceSkillBonus.Add(settings.SkillBonusSettings.BackDeckSkill.AttributeBackDeckDefenceSmallUp + skillRaiseFrontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float |> (*) backDeckFactor)
                                         | SkillType.Effect.Random(skillMin, skillMax) ->
                                             match skill.mode with
                                             | Mode.Attack ->
                                                 match skillMin with
                                                 | Middle -> // 中から特大    
-                                                    target.AppliedAttackSkillBonus.Add(settings.SkillBonusSettings.BackDeckSkill.AttributeBackDeckAttackLargeUp + frontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float |> (*) backDeckFactor)
+                                                    target.AppliedAttackSkillBonus.Add(settings.SkillBonusSettings.BackDeckSkill.AttributeBackDeckAttackLargeUp + skillRaiseFrontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float |> (*) backDeckFactor)
                                                     //暫定的に大UPに
                                             | Mode.Defence ->
                                                 match skillMin with
                                                 | Middle -> // 中から特大    
-                                                    target.AppliedDefenceSkillBonus.Add(settings.SkillBonusSettings.BackDeckSkill.AttributeBackDeckDefenceLargeUp + frontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float |> (*) backDeckFactor)
+                                                    target.AppliedDefenceSkillBonus.Add(settings.SkillBonusSettings.BackDeckSkill.AttributeBackDeckDefenceLargeUp + skillRaiseFrontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float |> (*) backDeckFactor)
                                                     //暫定的に大UPに
                                     else 0 |> ignore
                                 | SkillAttributeType.Sweet ->
@@ -941,38 +942,38 @@ module CalcBonus =
                                         | SkillType.Effect.ExtraLarge ->
                                             match skill.mode with
                                             | Mode.Attack ->
-                                                target.AppliedAttackSkillBonus.Add(settings.SkillBonusSettings.BackDeckSkill.AttributeBackDeckAttackExtraLargeUp + frontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float |> (*) backDeckFactor)
+                                                target.AppliedAttackSkillBonus.Add(settings.SkillBonusSettings.BackDeckSkill.AttributeBackDeckAttackExtraLargeUp + skillRaiseFrontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float |> (*) backDeckFactor)
                                             | Mode.Defence ->
-                                                target.AppliedDefenceSkillBonus.Add(settings.SkillBonusSettings.BackDeckSkill.AttributeBackDeckDefenceExtraLargeUp + frontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float |> (*) backDeckFactor)
+                                                target.AppliedDefenceSkillBonus.Add(settings.SkillBonusSettings.BackDeckSkill.AttributeBackDeckDefenceExtraLargeUp + skillRaiseFrontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float |> (*) backDeckFactor)
                                         | SkillType.Effect.Large ->
                                             match skill.mode with
                                             | Mode.Attack ->
-                                                target.AppliedAttackSkillBonus.Add(settings.SkillBonusSettings.BackDeckSkill.AttributeBackDeckAttackLargeUp + frontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float |> (*) backDeckFactor)
+                                                target.AppliedAttackSkillBonus.Add(settings.SkillBonusSettings.BackDeckSkill.AttributeBackDeckAttackLargeUp + skillRaiseFrontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float |> (*) backDeckFactor)
                                             | Mode.Defence ->
-                                                target.AppliedDefenceSkillBonus.Add(settings.SkillBonusSettings.BackDeckSkill.AttributeBackDeckDefenceLargeUp + frontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float |> (*) backDeckFactor)
+                                                target.AppliedDefenceSkillBonus.Add(settings.SkillBonusSettings.BackDeckSkill.AttributeBackDeckDefenceLargeUp + skillRaiseFrontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float |> (*) backDeckFactor)
                                         | SkillType.Effect.Middle ->
                                             match skill.mode with
                                             | Mode.Attack ->
-                                                target.AppliedAttackSkillBonus.Add(settings.SkillBonusSettings.BackDeckSkill.AttributeBackDeckAttackMiddleUp + frontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float |> (*) backDeckFactor)
+                                                target.AppliedAttackSkillBonus.Add(settings.SkillBonusSettings.BackDeckSkill.AttributeBackDeckAttackMiddleUp + skillRaiseFrontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float |> (*) backDeckFactor)
                                             | Mode.Defence ->
-                                                target.AppliedDefenceSkillBonus.Add(settings.SkillBonusSettings.BackDeckSkill.AttributeBackDeckDefenceMiddleUp + frontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float |> (*) backDeckFactor)
+                                                target.AppliedDefenceSkillBonus.Add(settings.SkillBonusSettings.BackDeckSkill.AttributeBackDeckDefenceMiddleUp + skillRaiseFrontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float |> (*) backDeckFactor)
                                         | SkillType.Effect.Small ->
                                             match skill.mode with
                                             | Mode.Attack ->
-                                                target.AppliedAttackSkillBonus.Add(settings.SkillBonusSettings.BackDeckSkill.AttributeBackDeckAttackSmallUp + frontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float |> (*) backDeckFactor)
+                                                target.AppliedAttackSkillBonus.Add(settings.SkillBonusSettings.BackDeckSkill.AttributeBackDeckAttackSmallUp + skillRaiseFrontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float |> (*) backDeckFactor)
                                             | Mode.Defence ->
-                                                target.AppliedDefenceSkillBonus.Add(settings.SkillBonusSettings.BackDeckSkill.AttributeBackDeckDefenceSmallUp + frontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float |> (*) backDeckFactor)
+                                                target.AppliedDefenceSkillBonus.Add(settings.SkillBonusSettings.BackDeckSkill.AttributeBackDeckDefenceSmallUp + skillRaiseFrontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float |> (*) backDeckFactor)
                                         | SkillType.Effect.Random(skillMin, skillMax) ->
                                             match skill.mode with
                                             | Mode.Attack ->
                                                 match skillMin with
                                                 | Middle -> // 中から特大    
-                                                    target.AppliedAttackSkillBonus.Add(settings.SkillBonusSettings.BackDeckSkill.AttributeBackDeckAttackLargeUp + frontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float |> (*) backDeckFactor)
+                                                    target.AppliedAttackSkillBonus.Add(settings.SkillBonusSettings.BackDeckSkill.AttributeBackDeckAttackLargeUp + skillRaiseFrontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float |> (*) backDeckFactor)
                                                     //暫定的に大UPに
                                             | Mode.Defence ->
                                                 match skillMin with
                                                 | Middle -> // 中から特大    
-                                                    target.AppliedDefenceSkillBonus.Add(settings.SkillBonusSettings.BackDeckSkill.AttributeBackDeckDefenceLargeUp + frontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float |> (*) backDeckFactor)
+                                                    target.AppliedDefenceSkillBonus.Add(settings.SkillBonusSettings.BackDeckSkill.AttributeBackDeckDefenceLargeUp + skillRaiseFrontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float |> (*) backDeckFactor)
                                                     //暫定的に大UPに
                                     else 0 |> ignore
                                 | SkillAttributeType.All ->                              
@@ -980,41 +981,41 @@ module CalcBonus =
                                     | SkillType.Effect.ExtraLarge ->
                                         match skill.mode with
                                         | Mode.Attack ->
-                                            target.AppliedAttackSkillBonus.Add(settings.SkillBonusSettings.BackDeckSkill.AllAttributeBackDeckAttackExtraLargeUp + frontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float |> (*) backDeckFactor)
+                                            target.AppliedAttackSkillBonus.Add(settings.SkillBonusSettings.BackDeckSkill.AllAttributeBackDeckAttackExtraLargeUp + skillRaiseFrontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float |> (*) backDeckFactor)
                                         | Mode.Defence ->
-                                            target.AppliedDefenceSkillBonus.Add(settings.SkillBonusSettings.BackDeckSkill.AllAttributeBackDeckDefenceExtraLargeUp + frontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float |> (*) backDeckFactor)
+                                            target.AppliedDefenceSkillBonus.Add(settings.SkillBonusSettings.BackDeckSkill.AllAttributeBackDeckDefenceExtraLargeUp + skillRaiseFrontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float |> (*) backDeckFactor)
                                     | SkillType.Effect.Large ->
                                         match skill.mode with
                                         | Mode.Attack ->
-                                            target.AppliedAttackSkillBonus.Add(settings.SkillBonusSettings.BackDeckSkill.AllAttributeBackDeckAttackLargeUp + frontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float |> (*) backDeckFactor)
+                                            target.AppliedAttackSkillBonus.Add(settings.SkillBonusSettings.BackDeckSkill.AllAttributeBackDeckAttackLargeUp + skillRaiseFrontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float |> (*) backDeckFactor)
                                         | Mode.Defence ->
-                                            target.AppliedDefenceSkillBonus.Add(settings.SkillBonusSettings.BackDeckSkill.AllAttributeBackDeckDefenceLargeUp + frontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float |> (*) backDeckFactor)
+                                            target.AppliedDefenceSkillBonus.Add(settings.SkillBonusSettings.BackDeckSkill.AllAttributeBackDeckDefenceLargeUp + skillRaiseFrontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float |> (*) backDeckFactor)
                                     | SkillType.Effect.Middle ->
                                         match skill.mode with
                                         | Mode.Attack ->
-                                            target.AppliedAttackSkillBonus.Add(settings.SkillBonusSettings.BackDeckSkill.AllAttributeBackDeckAttackMiddleUp + frontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float |> (*) backDeckFactor)
+                                            target.AppliedAttackSkillBonus.Add(settings.SkillBonusSettings.BackDeckSkill.AllAttributeBackDeckAttackMiddleUp + skillRaiseFrontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float |> (*) backDeckFactor)
                                         | Mode.Defence ->
-                                            target.AppliedDefenceSkillBonus.Add(settings.SkillBonusSettings.BackDeckSkill.AllAttributeBackDeckDefenceMiddleUp + frontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float |> (*) backDeckFactor)
+                                            target.AppliedDefenceSkillBonus.Add(settings.SkillBonusSettings.BackDeckSkill.AllAttributeBackDeckDefenceMiddleUp + skillRaiseFrontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float |> (*) backDeckFactor)
                                     | SkillType.Effect.Small ->
                                         match skill.mode with
                                         | Mode.Attack ->
-                                            target.AppliedAttackSkillBonus.Add(settings.SkillBonusSettings.BackDeckSkill.AllAttributeBackDeckAttackSmallUp + frontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float |> (*) backDeckFactor)
+                                            target.AppliedAttackSkillBonus.Add(settings.SkillBonusSettings.BackDeckSkill.AllAttributeBackDeckAttackSmallUp + skillRaiseFrontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float |> (*) backDeckFactor)
                                         | Mode.Defence ->
-                                            target.AppliedDefenceSkillBonus.Add(settings.SkillBonusSettings.BackDeckSkill.AllAttributeBackDeckDefenceSmallUp + frontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float |> (*) backDeckFactor)
+                                            target.AppliedDefenceSkillBonus.Add(settings.SkillBonusSettings.BackDeckSkill.AllAttributeBackDeckDefenceSmallUp + skillRaiseFrontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float |> (*) backDeckFactor)
                                     | SkillType.Effect.Random(skillMin, skillMax) ->
                                         match skill.mode with
                                         | Mode.Attack ->
                                             match skillMin with
                                             | Middle -> // 中から特大    
-                                                target.AppliedAttackSkillBonus.Add(settings.SkillBonusSettings.BackDeckSkill.AllAttributeBackDeckAttackLargeUp + frontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float |> (*) backDeckFactor)
+                                                target.AppliedAttackSkillBonus.Add(settings.SkillBonusSettings.BackDeckSkill.AllAttributeBackDeckAttackLargeUp + skillRaiseFrontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float |> (*) backDeckFactor)
                                                 //暫定的に大UPに
                                         | Mode.Defence ->
                                             match skillMin with
                                             | Middle -> // 中から特大    
-                                                target.AppliedDefenceSkillBonus.Add(settings.SkillBonusSettings.BackDeckSkill.AllAttributeBackDeckDefenceLargeUp + frontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float |> (*) backDeckFactor)
+                                                target.AppliedDefenceSkillBonus.Add(settings.SkillBonusSettings.BackDeckSkill.AllAttributeBackDeckDefenceLargeUp + skillRaiseFrontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float |> (*) backDeckFactor)
                                                 //暫定的に大UPに
                         | SkillTarget.SameGirl ->
-                            let targetGirl = frontCard.Card.girl.name
+                            let targetGirl = skillRaiseFrontCard.Card.girl.name
                             let backDeckTargets = Array.filter (fun (cardView: CardView) -> cardView.Card.girl.name = targetGirl) <| backDeck.ToArray()
                             let frontDeckTargets = 
                                 Array.filter (fun (cardView: CardViewWithStrap) -> cardView.Card.girl.name = targetGirl) (frontDeck.ToArray()) 
@@ -1027,199 +1028,199 @@ module CalcBonus =
                                 | SkillType.Effect.ExtraSuper ->
                                     match skill.mode with
                                     | Mode.Attack ->
-                                        target.AppliedAttackSkillBonus.Add(settings.SkillBonusSettings.SameGirlSkill.SameGirlAttackExtraSuperUp + frontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float |> (*) backDeckFactor)
+                                        target.AppliedAttackSkillBonus.Add(settings.SkillBonusSettings.SameGirlSkill.SameGirlAttackExtraSuperUp + skillRaiseFrontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float |> (*) backDeckFactor)
                                     | Mode.Defence ->
-                                        target.AppliedDefenceSkillBonus.Add(settings.SkillBonusSettings.SameGirlSkill.SameGirlDefenceExtraSuperUp + frontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float |> (*) backDeckFactor)
+                                        target.AppliedDefenceSkillBonus.Add(settings.SkillBonusSettings.SameGirlSkill.SameGirlDefenceExtraSuperUp + skillRaiseFrontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float |> (*) backDeckFactor)
                                     | Mode.AttackAndDefence ->
-                                        target.AppliedAttackSkillBonus.Add(settings.SkillBonusSettings.SameGirlSkill.SameGirlAttackAndDefenceExtraSuperUp + frontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float |> (*) backDeckFactor)
-                                        target.AppliedDefenceSkillBonus.Add(settings.SkillBonusSettings.SameGirlSkill.SameGirlAttackAndDefenceExtraSuperUp + frontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float |> (*) backDeckFactor)
+                                        target.AppliedAttackSkillBonus.Add(settings.SkillBonusSettings.SameGirlSkill.SameGirlAttackAndDefenceExtraSuperUp + skillRaiseFrontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float |> (*) backDeckFactor)
+                                        target.AppliedDefenceSkillBonus.Add(settings.SkillBonusSettings.SameGirlSkill.SameGirlAttackAndDefenceExtraSuperUp + skillRaiseFrontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float |> (*) backDeckFactor)
                                 | SkillType.Effect.Super ->
                                     match skill.mode with
                                     | Mode.Attack ->
-                                        target.AppliedAttackSkillBonus.Add(settings.SkillBonusSettings.SameGirlSkill.SameGirlAttackSuperUp + frontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float |> (*) backDeckFactor)
+                                        target.AppliedAttackSkillBonus.Add(settings.SkillBonusSettings.SameGirlSkill.SameGirlAttackSuperUp + skillRaiseFrontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float |> (*) backDeckFactor)
                                     | Mode.Defence ->
-                                        target.AppliedDefenceSkillBonus.Add(settings.SkillBonusSettings.SameGirlSkill.SameGirlDefenceSuperUp + frontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float |> (*) backDeckFactor)
+                                        target.AppliedDefenceSkillBonus.Add(settings.SkillBonusSettings.SameGirlSkill.SameGirlDefenceSuperUp + skillRaiseFrontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float |> (*) backDeckFactor)
                                     | Mode.AttackAndDefence ->
-                                        target.AppliedAttackSkillBonus.Add(settings.SkillBonusSettings.SameGirlSkill.SameGirlAttackAndDefenceSuperUp + frontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float |> (*) backDeckFactor)
-                                        target.AppliedDefenceSkillBonus.Add(settings.SkillBonusSettings.SameGirlSkill.SameGirlAttackAndDefenceSuperUp + frontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float |> (*) backDeckFactor) 
+                                        target.AppliedAttackSkillBonus.Add(settings.SkillBonusSettings.SameGirlSkill.SameGirlAttackAndDefenceSuperUp + skillRaiseFrontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float |> (*) backDeckFactor)
+                                        target.AppliedDefenceSkillBonus.Add(settings.SkillBonusSettings.SameGirlSkill.SameGirlAttackAndDefenceSuperUp + skillRaiseFrontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float |> (*) backDeckFactor) 
                                 | SkillType.Effect.ExtraLarge ->
                                     match skill.mode with
                                     | Mode.Attack ->
-                                        target.AppliedAttackSkillBonus.Add(settings.SkillBonusSettings.SameGirlSkill.SameGirlAttackExtraLargeUp + frontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float |> (*) backDeckFactor)
+                                        target.AppliedAttackSkillBonus.Add(settings.SkillBonusSettings.SameGirlSkill.SameGirlAttackExtraLargeUp + skillRaiseFrontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float |> (*) backDeckFactor)
                                     | Mode.Defence ->
-                                        target.AppliedDefenceSkillBonus.Add(settings.SkillBonusSettings.SameGirlSkill.SameGirlDefenceExtraLargeUp + frontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float |> (*) backDeckFactor)
+                                        target.AppliedDefenceSkillBonus.Add(settings.SkillBonusSettings.SameGirlSkill.SameGirlDefenceExtraLargeUp + skillRaiseFrontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float |> (*) backDeckFactor)
                                     | Mode.AttackAndDefence ->
-                                        target.AppliedAttackSkillBonus.Add(settings.SkillBonusSettings.SameGirlSkill.SameGirlAttackAndDefenceExtraLargeUp + frontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float |> (*) backDeckFactor)
-                                        target.AppliedDefenceSkillBonus.Add(settings.SkillBonusSettings.SameGirlSkill.SameGirlAttackAndDefenceExtraLargeUp + frontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float |> (*) backDeckFactor)
+                                        target.AppliedAttackSkillBonus.Add(settings.SkillBonusSettings.SameGirlSkill.SameGirlAttackAndDefenceExtraLargeUp + skillRaiseFrontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float |> (*) backDeckFactor)
+                                        target.AppliedDefenceSkillBonus.Add(settings.SkillBonusSettings.SameGirlSkill.SameGirlAttackAndDefenceExtraLargeUp + skillRaiseFrontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float |> (*) backDeckFactor)
                                 | SkillType.Effect.Large ->
                                     match skill.mode with
                                     | Mode.Attack ->
-                                        target.AppliedAttackSkillBonus.Add(settings.SkillBonusSettings.SameGirlSkill.SameGirlAttackLargeUp + frontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float |> (*) backDeckFactor)
+                                        target.AppliedAttackSkillBonus.Add(settings.SkillBonusSettings.SameGirlSkill.SameGirlAttackLargeUp + skillRaiseFrontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float |> (*) backDeckFactor)
                                     | Mode.Defence ->
-                                        target.AppliedDefenceSkillBonus.Add(settings.SkillBonusSettings.SameGirlSkill.SameGirlDefenceLargeUp + frontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float |> (*) backDeckFactor)
+                                        target.AppliedDefenceSkillBonus.Add(settings.SkillBonusSettings.SameGirlSkill.SameGirlDefenceLargeUp + skillRaiseFrontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float |> (*) backDeckFactor)
                                     | Mode.AttackAndDefence ->
-                                        target.AppliedAttackSkillBonus.Add(settings.SkillBonusSettings.SameGirlSkill.SameGirlAttackAndDefenceLargeUp + frontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float |> (*) backDeckFactor)
-                                        target.AppliedDefenceSkillBonus.Add(settings.SkillBonusSettings.SameGirlSkill.SameGirlAttackAndDefenceLargeUp + frontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float |> (*) backDeckFactor)
+                                        target.AppliedAttackSkillBonus.Add(settings.SkillBonusSettings.SameGirlSkill.SameGirlAttackAndDefenceLargeUp + skillRaiseFrontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float |> (*) backDeckFactor)
+                                        target.AppliedDefenceSkillBonus.Add(settings.SkillBonusSettings.SameGirlSkill.SameGirlAttackAndDefenceLargeUp + skillRaiseFrontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float |> (*) backDeckFactor)
                                 | SkillType.Effect.Middle ->
                                     match skill.mode with
                                     | Mode.Attack ->
-                                        target.AppliedAttackSkillBonus.Add(settings.SkillBonusSettings.SameGirlSkill.SameGirlAttackMiddleUp + frontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float |> (*) backDeckFactor)
+                                        target.AppliedAttackSkillBonus.Add(settings.SkillBonusSettings.SameGirlSkill.SameGirlAttackMiddleUp + skillRaiseFrontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float |> (*) backDeckFactor)
                                     | Mode.Defence ->
-                                        target.AppliedDefenceSkillBonus.Add(settings.SkillBonusSettings.SameGirlSkill.SameGirlDefenceMiddleUp + frontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float |> (*) backDeckFactor)
+                                        target.AppliedDefenceSkillBonus.Add(settings.SkillBonusSettings.SameGirlSkill.SameGirlDefenceMiddleUp + skillRaiseFrontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float |> (*) backDeckFactor)
                                     | Mode.AttackAndDefence ->
-                                        target.AppliedAttackSkillBonus.Add(settings.SkillBonusSettings.SameGirlSkill.SameGirlAttackAndDefenceMiddleUp + frontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float |> (*) backDeckFactor)
-                                        target.AppliedDefenceSkillBonus.Add(settings.SkillBonusSettings.SameGirlSkill.SameGirlAttackAndDefenceMiddleUp + frontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float |> (*) backDeckFactor)
+                                        target.AppliedAttackSkillBonus.Add(settings.SkillBonusSettings.SameGirlSkill.SameGirlAttackAndDefenceMiddleUp + skillRaiseFrontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float |> (*) backDeckFactor)
+                                        target.AppliedDefenceSkillBonus.Add(settings.SkillBonusSettings.SameGirlSkill.SameGirlAttackAndDefenceMiddleUp + skillRaiseFrontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float |> (*) backDeckFactor)
                                 | SkillType.Effect.Small ->
                                     match skill.mode with
                                     | Mode.Attack ->
-                                        target.AppliedAttackSkillBonus.Add(settings.SkillBonusSettings.SameGirlSkill.SameGirlAttackSmallUp + frontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float |> (*) backDeckFactor)
+                                        target.AppliedAttackSkillBonus.Add(settings.SkillBonusSettings.SameGirlSkill.SameGirlAttackSmallUp + skillRaiseFrontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float |> (*) backDeckFactor)
                                     | Mode.Defence ->
-                                        target.AppliedDefenceSkillBonus.Add(settings.SkillBonusSettings.SameGirlSkill.SameGirlDefenceSmallUp + frontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float |> (*) backDeckFactor)
+                                        target.AppliedDefenceSkillBonus.Add(settings.SkillBonusSettings.SameGirlSkill.SameGirlDefenceSmallUp + skillRaiseFrontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float |> (*) backDeckFactor)
                                     | Mode.AttackAndDefence ->
-                                        target.AppliedAttackSkillBonus.Add(settings.SkillBonusSettings.SameGirlSkill.SameGirlAttackAndDefenceSmallUp + frontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float |> (*) backDeckFactor)
-                                        target.AppliedDefenceSkillBonus.Add(settings.SkillBonusSettings.SameGirlSkill.SameGirlAttackAndDefenceSmallUp + frontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float |> (*) backDeckFactor)
+                                        target.AppliedAttackSkillBonus.Add(settings.SkillBonusSettings.SameGirlSkill.SameGirlAttackAndDefenceSmallUp + skillRaiseFrontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float |> (*) backDeckFactor)
+                                        target.AppliedDefenceSkillBonus.Add(settings.SkillBonusSettings.SameGirlSkill.SameGirlAttackAndDefenceSmallUp + skillRaiseFrontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float |> (*) backDeckFactor)
                                 | SkillType.Effect.Random(skillMin, skillMax) ->
                                     match skill.mode with
                                     | Mode.Attack ->
                                         match skillMin with
                                         | Middle -> // 中から特大    
-                                            target.AppliedAttackSkillBonus.Add(settings.SkillBonusSettings.SameGirlSkill.SameGirlAttackLargeUp + frontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float |> (*) backDeckFactor)
+                                            target.AppliedAttackSkillBonus.Add(settings.SkillBonusSettings.SameGirlSkill.SameGirlAttackLargeUp + skillRaiseFrontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float |> (*) backDeckFactor)
                                             //暫定的に大Upに
                                         | Large -> // 大からスーパー特大
-                                            target.AppliedAttackSkillBonus.Add(settings.SkillBonusSettings.SameGirlSkill.SameGirlAttackExtraLargeUp + frontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float |> (*) backDeckFactor)
+                                            target.AppliedAttackSkillBonus.Add(settings.SkillBonusSettings.SameGirlSkill.SameGirlAttackExtraLargeUp + skillRaiseFrontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float |> (*) backDeckFactor)
                                             // 暫定的に特大Upに
                                         | ExtraLarge -> // 特大から超スーパー特大
-                                            target.AppliedAttackSkillBonus.Add(settings.SkillBonusSettings.SameGirlSkill.SameGirlAttackSuperUp + frontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float |> (*) backDeckFactor)
+                                            target.AppliedAttackSkillBonus.Add(settings.SkillBonusSettings.SameGirlSkill.SameGirlAttackSuperUp + skillRaiseFrontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float |> (*) backDeckFactor)
                                             //暫定的にスーパー特大Upに
                                         // 大から特大もいる あとで実装
                                     | Mode.Defence ->
                                         match skillMin with
                                         | Middle -> // 中から特大    
-                                            target.AppliedDefenceSkillBonus.Add(settings.SkillBonusSettings.SameGirlSkill.SameGirlDefenceLargeUp + frontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float |> (*) backDeckFactor)
+                                            target.AppliedDefenceSkillBonus.Add(settings.SkillBonusSettings.SameGirlSkill.SameGirlDefenceLargeUp + skillRaiseFrontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float |> (*) backDeckFactor)
                                             //暫定的に大Upに
                                         | Large -> // 大からスーパー特大
-                                            target.AppliedDefenceSkillBonus.Add(settings.SkillBonusSettings.SameGirlSkill.SameGirlDefenceExtraLargeUp + frontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float |> (*) backDeckFactor)
+                                            target.AppliedDefenceSkillBonus.Add(settings.SkillBonusSettings.SameGirlSkill.SameGirlDefenceExtraLargeUp + skillRaiseFrontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float |> (*) backDeckFactor)
                                             // 暫定的に特大Upに
                                         | ExtraLarge -> // 特大から超スーパー特大
-                                            target.AppliedDefenceSkillBonus.Add(settings.SkillBonusSettings.SameGirlSkill.SameGirlDefenceSuperUp + frontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float |> (*) backDeckFactor)
+                                            target.AppliedDefenceSkillBonus.Add(settings.SkillBonusSettings.SameGirlSkill.SameGirlDefenceSuperUp + skillRaiseFrontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float |> (*) backDeckFactor)
                                             //暫定的にスーパー特大Upに
                                     | Mode.AttackAndDefence ->
                                         match skillMin with
                                         | Middle -> // 中から特大    
-                                            target.AppliedAttackSkillBonus.Add(settings.SkillBonusSettings.SameGirlSkill.SameGirlAttackAndDefenceLargeUp + frontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float |> (*) backDeckFactor)
-                                            target.AppliedDefenceSkillBonus.Add(settings.SkillBonusSettings.SameGirlSkill.SameGirlAttackAndDefenceLargeUp + frontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float |> (*) backDeckFactor)
+                                            target.AppliedAttackSkillBonus.Add(settings.SkillBonusSettings.SameGirlSkill.SameGirlAttackAndDefenceLargeUp + skillRaiseFrontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float |> (*) backDeckFactor)
+                                            target.AppliedDefenceSkillBonus.Add(settings.SkillBonusSettings.SameGirlSkill.SameGirlAttackAndDefenceLargeUp + skillRaiseFrontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float |> (*) backDeckFactor)
                                             //暫定的に大Upに
                                         | Large -> // 大からスーパー特大
-                                            target.AppliedAttackSkillBonus.Add(settings.SkillBonusSettings.SameGirlSkill.SameGirlAttackAndDefenceExtraLargeUp + frontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float |> (*) backDeckFactor)
-                                            target.AppliedDefenceSkillBonus.Add(settings.SkillBonusSettings.SameGirlSkill.SameGirlAttackAndDefenceExtraLargeUp + frontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float |> (*) backDeckFactor)
+                                            target.AppliedAttackSkillBonus.Add(settings.SkillBonusSettings.SameGirlSkill.SameGirlAttackAndDefenceExtraLargeUp + skillRaiseFrontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float |> (*) backDeckFactor)
+                                            target.AppliedDefenceSkillBonus.Add(settings.SkillBonusSettings.SameGirlSkill.SameGirlAttackAndDefenceExtraLargeUp + skillRaiseFrontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float |> (*) backDeckFactor)
                                             // 暫定的に特大Upに
                                         | ExtraLarge -> // 特大から超スーパー特大
-                                            target.AppliedAttackSkillBonus.Add(settings.SkillBonusSettings.SameGirlSkill.SameGirlAttackAndDefenceSuperUp + frontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float |> (*) backDeckFactor)
-                                            target.AppliedDefenceSkillBonus.Add(settings.SkillBonusSettings.SameGirlSkill.SameGirlAttackAndDefenceSuperUp + frontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float |> (*) backDeckFactor)
+                                            target.AppliedAttackSkillBonus.Add(settings.SkillBonusSettings.SameGirlSkill.SameGirlAttackAndDefenceSuperUp + skillRaiseFrontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float |> (*) backDeckFactor)
+                                            target.AppliedDefenceSkillBonus.Add(settings.SkillBonusSettings.SameGirlSkill.SameGirlAttackAndDefenceSuperUp + skillRaiseFrontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float |> (*) backDeckFactor)
                                             //暫定的にスーパー特大Upに
                         | SkillTarget.MySelf ->
                             match skill.effect with
                             | SkillType.Effect.Ultra ->
                                 match skill.mode with
                                 | Mode.Attack ->
-                                    frontCard.AppliedAttackSkillBonus.Add(settings.SkillBonusSettings.SelfSkill.SelfAttackUltraUp + frontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float)
+                                    skillRaiseFrontCard.AppliedAttackSkillBonus.Add(settings.SkillBonusSettings.SelfSkill.SelfAttackUltraUp + skillRaiseFrontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float)
                                 | Mode.Defence ->
-                                    frontCard.AppliedDefenceSkillBonus.Add(settings.SkillBonusSettings.SelfSkill.SelfDefenceUltraUp + frontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float)
+                                    skillRaiseFrontCard.AppliedDefenceSkillBonus.Add(settings.SkillBonusSettings.SelfSkill.SelfDefenceUltraUp + skillRaiseFrontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float)
                                 | Mode.AttackAndDefence ->
-                                    frontCard.AppliedAttackSkillBonus.Add(settings.SkillBonusSettings.SelfSkill.SelfAttackAndDefenceUltraUp + frontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float)
-                                    frontCard.AppliedDefenceSkillBonus.Add(settings.SkillBonusSettings.SelfSkill.SelfAttackAndDefenceUltraUp + frontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float)
+                                    skillRaiseFrontCard.AppliedAttackSkillBonus.Add(settings.SkillBonusSettings.SelfSkill.SelfAttackAndDefenceUltraUp + skillRaiseFrontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float)
+                                    skillRaiseFrontCard.AppliedDefenceSkillBonus.Add(settings.SkillBonusSettings.SelfSkill.SelfAttackAndDefenceUltraUp + skillRaiseFrontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float)
                             | SkillType.Effect.ExtraSuper ->
                                 match skill.mode with
                                 | Mode.Attack ->
-                                    frontCard.AppliedAttackSkillBonus.Add(settings.SkillBonusSettings.SelfSkill.SelfAttackExtraSuperUp + frontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float)
+                                    skillRaiseFrontCard.AppliedAttackSkillBonus.Add(settings.SkillBonusSettings.SelfSkill.SelfAttackExtraSuperUp + skillRaiseFrontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float)
                                 | Mode.Defence ->
-                                    frontCard.AppliedDefenceSkillBonus.Add(settings.SkillBonusSettings.SelfSkill.SelfDefenceExtraSuperUp + frontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float)
+                                    skillRaiseFrontCard.AppliedDefenceSkillBonus.Add(settings.SkillBonusSettings.SelfSkill.SelfDefenceExtraSuperUp + skillRaiseFrontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float)
                                 | Mode.AttackAndDefence ->
-                                    frontCard.AppliedAttackSkillBonus.Add(settings.SkillBonusSettings.SelfSkill.SelfAttackAndDefenceExtraSuperUp + frontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float)
-                                    frontCard.AppliedDefenceSkillBonus.Add(settings.SkillBonusSettings.SelfSkill.SelfAttackAndDefenceExtraSuperUp + frontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float)
+                                    skillRaiseFrontCard.AppliedAttackSkillBonus.Add(settings.SkillBonusSettings.SelfSkill.SelfAttackAndDefenceExtraSuperUp + skillRaiseFrontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float)
+                                    skillRaiseFrontCard.AppliedDefenceSkillBonus.Add(settings.SkillBonusSettings.SelfSkill.SelfAttackAndDefenceExtraSuperUp + skillRaiseFrontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float)
                             | SkillType.Effect.Super ->
                                 match skill.mode with
                                 | Mode.Attack ->
-                                    frontCard.AppliedAttackSkillBonus.Add(settings.SkillBonusSettings.SelfSkill.SelfAttackSuperUp + frontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float)
+                                    skillRaiseFrontCard.AppliedAttackSkillBonus.Add(settings.SkillBonusSettings.SelfSkill.SelfAttackSuperUp + skillRaiseFrontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float)
                                 | Mode.Defence ->
-                                    frontCard.AppliedDefenceSkillBonus.Add(settings.SkillBonusSettings.SelfSkill.SelfDefenceSuperUp + frontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float)
+                                    skillRaiseFrontCard.AppliedDefenceSkillBonus.Add(settings.SkillBonusSettings.SelfSkill.SelfDefenceSuperUp + skillRaiseFrontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float)
                                 | Mode.AttackAndDefence ->
-                                    frontCard.AppliedAttackSkillBonus.Add(settings.SkillBonusSettings.SelfSkill.SelfAttackAndDefenceSuperUp + frontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float)
-                                    frontCard.AppliedDefenceSkillBonus.Add(settings.SkillBonusSettings.SelfSkill.SelfAttackAndDefenceSuperUp + frontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float) 
+                                    skillRaiseFrontCard.AppliedAttackSkillBonus.Add(settings.SkillBonusSettings.SelfSkill.SelfAttackAndDefenceSuperUp + skillRaiseFrontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float)
+                                    skillRaiseFrontCard.AppliedDefenceSkillBonus.Add(settings.SkillBonusSettings.SelfSkill.SelfAttackAndDefenceSuperUp + skillRaiseFrontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float) 
                             | SkillType.Effect.ExtraLarge ->
                                 match skill.mode with
                                 | Mode.Attack ->
-                                    frontCard.AppliedAttackSkillBonus.Add(settings.SkillBonusSettings.SelfSkill.SelfAttackExtraLargeUp + frontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float)
+                                    skillRaiseFrontCard.AppliedAttackSkillBonus.Add(settings.SkillBonusSettings.SelfSkill.SelfAttackExtraLargeUp + skillRaiseFrontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float)
                                 | Mode.Defence ->
-                                    frontCard.AppliedDefenceSkillBonus.Add(settings.SkillBonusSettings.SelfSkill.SelfDefenceExtraLargeUp + frontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float)
+                                    skillRaiseFrontCard.AppliedDefenceSkillBonus.Add(settings.SkillBonusSettings.SelfSkill.SelfDefenceExtraLargeUp + skillRaiseFrontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float)
                                 | Mode.AttackAndDefence ->
-                                    frontCard.AppliedAttackSkillBonus.Add(settings.SkillBonusSettings.SelfSkill.SelfAttackAndDefenceExtraLargeUp + frontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float)
-                                    frontCard.AppliedDefenceSkillBonus.Add(settings.SkillBonusSettings.SelfSkill.SelfAttackAndDefenceExtraLargeUp + frontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float)
+                                    skillRaiseFrontCard.AppliedAttackSkillBonus.Add(settings.SkillBonusSettings.SelfSkill.SelfAttackAndDefenceExtraLargeUp + skillRaiseFrontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float)
+                                    skillRaiseFrontCard.AppliedDefenceSkillBonus.Add(settings.SkillBonusSettings.SelfSkill.SelfAttackAndDefenceExtraLargeUp + skillRaiseFrontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float)
                             | SkillType.Effect.Large ->
                                 match skill.mode with
                                 | Mode.Attack ->
-                                    frontCard.AppliedAttackSkillBonus.Add(settings.SkillBonusSettings.SelfSkill.SelfAttackLargeUp + frontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float)
+                                    skillRaiseFrontCard.AppliedAttackSkillBonus.Add(settings.SkillBonusSettings.SelfSkill.SelfAttackLargeUp + skillRaiseFrontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float)
                                 | Mode.Defence ->
-                                    frontCard.AppliedDefenceSkillBonus.Add(settings.SkillBonusSettings.SelfSkill.SelfDefenceLargeUp + frontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float)
+                                    skillRaiseFrontCard.AppliedDefenceSkillBonus.Add(settings.SkillBonusSettings.SelfSkill.SelfDefenceLargeUp + skillRaiseFrontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float)
                                 | Mode.AttackAndDefence ->
-                                    frontCard.AppliedAttackSkillBonus.Add(settings.SkillBonusSettings.SelfSkill.SelfAttackAndDefenceLargeUp + frontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float)
-                                    frontCard.AppliedDefenceSkillBonus.Add(settings.SkillBonusSettings.SelfSkill.SelfAttackAndDefenceLargeUp + frontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float)
+                                    skillRaiseFrontCard.AppliedAttackSkillBonus.Add(settings.SkillBonusSettings.SelfSkill.SelfAttackAndDefenceLargeUp + skillRaiseFrontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float)
+                                    skillRaiseFrontCard.AppliedDefenceSkillBonus.Add(settings.SkillBonusSettings.SelfSkill.SelfAttackAndDefenceLargeUp + skillRaiseFrontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float)
                             | SkillType.Effect.Middle ->
                                 match skill.mode with
                                 | Mode.Attack ->
-                                    frontCard.AppliedAttackSkillBonus.Add(settings.SkillBonusSettings.SelfSkill.SelfAttackMiddleUp + frontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float)
+                                    skillRaiseFrontCard.AppliedAttackSkillBonus.Add(settings.SkillBonusSettings.SelfSkill.SelfAttackMiddleUp + skillRaiseFrontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float)
                                 | Mode.Defence ->
-                                    frontCard.AppliedDefenceSkillBonus.Add(settings.SkillBonusSettings.SelfSkill.SelfDefenceMiddleUp + frontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float)
+                                    skillRaiseFrontCard.AppliedDefenceSkillBonus.Add(settings.SkillBonusSettings.SelfSkill.SelfDefenceMiddleUp + skillRaiseFrontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float)
                                 | Mode.AttackAndDefence ->
-                                    frontCard.AppliedAttackSkillBonus.Add(settings.SkillBonusSettings.SelfSkill.SelfAttackAndDefenceMiddleUp + frontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float)
-                                    frontCard.AppliedDefenceSkillBonus.Add(settings.SkillBonusSettings.SelfSkill.SelfAttackAndDefenceMiddleUp + frontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float)
+                                    skillRaiseFrontCard.AppliedAttackSkillBonus.Add(settings.SkillBonusSettings.SelfSkill.SelfAttackAndDefenceMiddleUp + skillRaiseFrontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float)
+                                    skillRaiseFrontCard.AppliedDefenceSkillBonus.Add(settings.SkillBonusSettings.SelfSkill.SelfAttackAndDefenceMiddleUp + skillRaiseFrontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float)
                             | SkillType.Effect.Small ->
                                 match skill.mode with
                                 | Mode.Attack ->
-                                    frontCard.AppliedAttackSkillBonus.Add(settings.SkillBonusSettings.SelfSkill.SelfAttackSmallUp + frontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float)
+                                    skillRaiseFrontCard.AppliedAttackSkillBonus.Add(settings.SkillBonusSettings.SelfSkill.SelfAttackSmallUp + skillRaiseFrontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float)
                                 | Mode.Defence ->
-                                    frontCard.AppliedDefenceSkillBonus.Add(settings.SkillBonusSettings.SelfSkill.SelfDefenceSmallUp + frontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float)
+                                    skillRaiseFrontCard.AppliedDefenceSkillBonus.Add(settings.SkillBonusSettings.SelfSkill.SelfDefenceSmallUp + skillRaiseFrontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float)
                                 | Mode.AttackAndDefence ->
-                                    frontCard.AppliedAttackSkillBonus.Add(settings.SkillBonusSettings.SelfSkill.SelfAttackAndDefenceSmallUp + frontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float)
-                                    frontCard.AppliedDefenceSkillBonus.Add(settings.SkillBonusSettings.SelfSkill.SelfAttackAndDefenceSmallUp + frontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float)
+                                    skillRaiseFrontCard.AppliedAttackSkillBonus.Add(settings.SkillBonusSettings.SelfSkill.SelfAttackAndDefenceSmallUp + skillRaiseFrontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float)
+                                    skillRaiseFrontCard.AppliedDefenceSkillBonus.Add(settings.SkillBonusSettings.SelfSkill.SelfAttackAndDefenceSmallUp + skillRaiseFrontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float)
                             | SkillType.Effect.Random(skillMin, skillMax) ->
                                 match skill.mode with
                                 | Mode.Attack ->
                                     match skillMin with
                                     | Middle -> // 中から特大    
-                                        frontCard.AppliedAttackSkillBonus.Add(settings.SkillBonusSettings.SelfSkill.SelfAttackLargeUp + frontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float)
+                                        skillRaiseFrontCard.AppliedAttackSkillBonus.Add(settings.SkillBonusSettings.SelfSkill.SelfAttackLargeUp + skillRaiseFrontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float)
                                         //暫定的に大Upに
                                     | Large -> // 大からスーパー特大
-                                        frontCard.AppliedAttackSkillBonus.Add(settings.SkillBonusSettings.SelfSkill.SelfAttackExtraLargeUp + frontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float)
+                                        skillRaiseFrontCard.AppliedAttackSkillBonus.Add(settings.SkillBonusSettings.SelfSkill.SelfAttackExtraLargeUp + skillRaiseFrontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float)
                                         // 暫定的に特大Upに
                                     | ExtraLarge -> // 特大から超スーパー特大
-                                        frontCard.AppliedAttackSkillBonus.Add(settings.SkillBonusSettings.SelfSkill.SelfAttackSuperUp + frontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float)
+                                        skillRaiseFrontCard.AppliedAttackSkillBonus.Add(settings.SkillBonusSettings.SelfSkill.SelfAttackSuperUp + skillRaiseFrontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float)
                                         //暫定的にスーパー特大Upに
                                     // 大から特大もいる あとで実装
                                 | Mode.Defence ->
                                     match skillMin with
                                     | Middle -> // 中から特大    
-                                        frontCard.AppliedDefenceSkillBonus.Add(settings.SkillBonusSettings.SelfSkill.SelfDefenceLargeUp + frontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float)
+                                        skillRaiseFrontCard.AppliedDefenceSkillBonus.Add(settings.SkillBonusSettings.SelfSkill.SelfDefenceLargeUp + skillRaiseFrontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float)
                                         //暫定的に大Upに
                                     | Large -> // 大からスーパー特大
-                                        frontCard.AppliedDefenceSkillBonus.Add(settings.SkillBonusSettings.SelfSkill.SelfDefenceExtraLargeUp + frontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float)
+                                        skillRaiseFrontCard.AppliedDefenceSkillBonus.Add(settings.SkillBonusSettings.SelfSkill.SelfDefenceExtraLargeUp + skillRaiseFrontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float)
                                         // 暫定的に特大Upに
                                     | ExtraLarge -> // 特大から超スーパー特大
-                                        frontCard.AppliedDefenceSkillBonus.Add(settings.SkillBonusSettings.SelfSkill.SelfDefenceSuperUp + frontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float)
+                                        skillRaiseFrontCard.AppliedDefenceSkillBonus.Add(settings.SkillBonusSettings.SelfSkill.SelfDefenceSuperUp + skillRaiseFrontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float)
                                         //暫定的にスーパー特大Upに
                                 | Mode.AttackAndDefence ->
                                     match skillMin with
                                     | Middle -> // 中から特大    
-                                        frontCard.AppliedAttackSkillBonus.Add(settings.SkillBonusSettings.SelfSkill.SelfAttackAndDefenceLargeUp + frontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float)
-                                        frontCard.AppliedDefenceSkillBonus.Add(settings.SkillBonusSettings.SelfSkill.SelfAttackAndDefenceLargeUp + frontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float)
+                                        skillRaiseFrontCard.AppliedAttackSkillBonus.Add(settings.SkillBonusSettings.SelfSkill.SelfAttackAndDefenceLargeUp + skillRaiseFrontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float)
+                                        skillRaiseFrontCard.AppliedDefenceSkillBonus.Add(settings.SkillBonusSettings.SelfSkill.SelfAttackAndDefenceLargeUp + skillRaiseFrontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float)
                                         //暫定的に大Upに
                                     | Large -> // 大からスーパー特大
-                                        frontCard.AppliedAttackSkillBonus.Add(settings.SkillBonusSettings.SelfSkill.SelfAttackAndDefenceExtraLargeUp + frontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float)
-                                        frontCard.AppliedDefenceSkillBonus.Add(settings.SkillBonusSettings.SelfSkill.SelfAttackAndDefenceExtraLargeUp + frontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float)
+                                        skillRaiseFrontCard.AppliedAttackSkillBonus.Add(settings.SkillBonusSettings.SelfSkill.SelfAttackAndDefenceExtraLargeUp + skillRaiseFrontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float)
+                                        skillRaiseFrontCard.AppliedDefenceSkillBonus.Add(settings.SkillBonusSettings.SelfSkill.SelfAttackAndDefenceExtraLargeUp + skillRaiseFrontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float)
                                         // 暫定的に特大Upに
                                     | ExtraLarge -> // 特大から超スーパー特大
-                                        frontCard.AppliedAttackSkillBonus.Add(settings.SkillBonusSettings.SelfSkill.SelfAttackAndDefenceSuperUp + frontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float)
-                                        frontCard.AppliedDefenceSkillBonus.Add(settings.SkillBonusSettings.SelfSkill.SelfAttackAndDefenceSuperUp + frontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float)
+                                        skillRaiseFrontCard.AppliedAttackSkillBonus.Add(settings.SkillBonusSettings.SelfSkill.SelfAttackAndDefenceSuperUp + skillRaiseFrontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float)
+                                        skillRaiseFrontCard.AppliedDefenceSkillBonus.Add(settings.SkillBonusSettings.SelfSkill.SelfAttackAndDefenceSuperUp + skillRaiseFrontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float)
                                         //暫定的にスーパー特大Upに                                                 
             else
                 0 |> ignore
