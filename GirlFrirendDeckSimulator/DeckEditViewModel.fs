@@ -531,6 +531,7 @@ type DeckEditViewModel(frontDeck: CardViewWithStrap[], backDeck: CardView[], sel
 
     member this.getSelectionBonusLevelMap =
         let mutable selectionBonusLevelMap = Map.empty
+        let deckInGirlNames = [||] |> ResizeArray // すでにデッキに入っているときはセンボを上げない
         for cardView in frontDeck do
             if cardView.Card.cardType = CardType.Kira
             then 
