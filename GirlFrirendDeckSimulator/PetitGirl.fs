@@ -26,7 +26,7 @@ module PetitGirl =
     type PetitCheerEffect = {
         petitCheerType: PetitCheerType;
         effectNum: float;
-        targetPetitGirlName: option<string>
+        //targetPetitGirlNames: list<string>
     }
 
     type PetitSkillType =

@@ -1,6 +1,7 @@
 ﻿namespace GirlFriendDeckSimulator
 open PreciousScene
-open SkillAttributeTypeConverter
+open System
+
 
 module PreciousSceneView = 
     type PreciousSceneView(preciousScene: PreciousScene) =
@@ -10,3 +11,7 @@ module PreciousSceneView =
         member val SceneEffect = SceneEffectConverter.toString(preciousScene.sceneEffect)
         member val EffectMax = preciousScene.effectMaxNum.ToString("F1") + EffectNumTypeConverter.toString(preciousScene.effectNumType)
         member val TargetAttribute = SkillAttributeTypeConverter.toString(preciousScene.sceneEffect.sceneTargetAttribute)
+
+        interface IEquatable<PreciousSceneView> with
+            member this.Equals(other) =
+                this.SceneName = other.SceneName

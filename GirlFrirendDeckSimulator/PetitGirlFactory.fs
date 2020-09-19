@@ -43,10 +43,10 @@ module PetitGirlFactory =
                 {
                     petitCheerType = PetitCheerTypeConverter.fromString(cheerEffect.CheerType);
                     effectNum = cheerEffect.CheerEffectNum |> float;
-                    targetPetitGirlName = 
-                        match PetitCheerTypeConverter.fromString(cheerEffect.CheerType) with
-                        | SameGirlCheerType(_) -> Some(petitGirlElements.GirlName)
-                        | _ -> None
+                    //targetPetitGirlName = 
+                    //    match PetitCheerTypeConverter.fromString(cheerEffect.CheerType) with
+                    //    | SameGirlCheerType(_) -> Some(petitGirlElements.GirlName)
+                    //    | _ -> None
                 }
                 ) petitGirlElements.PetitCheerEffects
             petitSkillEffect = 

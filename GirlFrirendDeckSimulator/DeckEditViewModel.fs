@@ -533,32 +533,42 @@ type DeckEditViewModel(frontDeck: CardViewWithStrap[], backDeck: CardView[], sel
         let mutable selectionBonusLevelMap = Map.empty
         let deckInGirlNames = [||] |> ResizeArray // すでにデッキに入っているときはセンボを上げない
         for cardView in frontDeck do
-            if cardView.Card.cardType = CardType.Kira
-            then 
-                match selectionBonusLevelMap.TryFind(SelectionBonus("シャイニング★スプラッシュ")) with
-                | Some(level) -> selectionBonusLevelMap <- selectionBonusLevelMap.Add(SelectionBonus("シャイニング★スプラッシュ"), level + 1)
-                | None -> selectionBonusLevelMap <- selectionBonusLevelMap.Add(SelectionBonus("シャイニング★スプラッシュ"), 1)
-            else
+            if deckInGirlNames.Contains(cardView.CardName)
+            then
                 0 |> ignore
+            else
+                deckInGirlNames.Add(cardView.CardName)
+                if cardView.Card.cardType = CardType.Kira
+                then 
+                    match selectionBonusLevelMap.TryFind(SelectionBonus("シャイニング★スプラッシュ")) with
+                    | Some(level) -> selectionBonusLevelMap <- selectionBonusLevelMap.Add(SelectionBonus("シャイニング★スプラッシュ"), level + 1)
+                    | None -> selectionBonusLevelMap <- selectionBonusLevelMap.Add(SelectionBonus("シャイニング★スプラッシュ"), 1)
+                else
+                    0 |> ignore
 
-            for selectionBonus in cardView.Card.girl.selectionBonuses do
-                match selectionBonusLevelMap.TryFind(selectionBonus) with
-                | Some(level) -> selectionBonusLevelMap <- selectionBonusLevelMap.Add(selectionBonus, level + 1)
-                | None -> selectionBonusLevelMap <- selectionBonusLevelMap.Add(selectionBonus, 1)
+                for selectionBonus in cardView.Card.girl.selectionBonuses do
+                    match selectionBonusLevelMap.TryFind(selectionBonus) with
+                    | Some(level) -> selectionBonusLevelMap <- selectionBonusLevelMap.Add(selectionBonus, level + 1)
+                    | None -> selectionBonusLevelMap <- selectionBonusLevelMap.Add(selectionBonus, 1)
 
         for cardView in backDeck do
-            if cardView.Card.cardType = CardType.Kira
-            then 
-                match selectionBonusLevelMap.TryFind(SelectionBonus("シャイニング★スプラッシュ")) with
-                | Some(level) -> selectionBonusLevelMap <- selectionBonusLevelMap.Add(SelectionBonus("シャイニング★スプラッシュ"), level + 1)
-                | None -> selectionBonusLevelMap <- selectionBonusLevelMap.Add(SelectionBonus("シャイニング★スプラッシュ"), 1)
-            else
+            if deckInGirlNames.Contains(cardView.CardName)
+            then
                 0 |> ignore
+            else
+                deckInGirlNames.Add(cardView.CardName)
+                if cardView.Card.cardType = CardType.Kira
+                then 
+                    match selectionBonusLevelMap.TryFind(SelectionBonus("シャイニング★スプラッシュ")) with
+                    | Some(level) -> selectionBonusLevelMap <- selectionBonusLevelMap.Add(SelectionBonus("シャイニング★スプラッシュ"), level + 1)
+                    | None -> selectionBonusLevelMap <- selectionBonusLevelMap.Add(SelectionBonus("シャイニング★スプラッシュ"), 1)
+                else
+                    0 |> ignore
 
-            for selectionBonus in cardView.Card.girl.selectionBonuses do
-                match selectionBonusLevelMap.TryFind(selectionBonus) with
-                | Some(level) -> selectionBonusLevelMap <- selectionBonusLevelMap.Add(selectionBonus, level + 1)
-                | None -> selectionBonusLevelMap <- selectionBonusLevelMap.Add(selectionBonus, 1)
+                for selectionBonus in cardView.Card.girl.selectionBonuses do
+                    match selectionBonusLevelMap.TryFind(selectionBonus) with
+                    | Some(level) -> selectionBonusLevelMap <- selectionBonusLevelMap.Add(selectionBonus, level + 1)
+                    | None -> selectionBonusLevelMap <- selectionBonusLevelMap.Add(selectionBonus, 1)
         // levelでソート
         selectionBonusLevelMap <- selectionBonusLevelMap |> Map.toArray |> Array.sortBy(fun (k, v) -> v) |> Map.ofArray
         selectionBonusLevelMap

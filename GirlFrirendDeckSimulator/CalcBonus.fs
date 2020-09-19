@@ -17,6 +17,7 @@ open SkillType
 open SelectionBonus
 open CardView
 open Girl
+open PetitGirlView
 
 
 module CalcBonus =
@@ -73,7 +74,6 @@ module CalcBonus =
                                             | Mode.Defence ->
                                                 frontCard.AppliedDefenceSkillBonus.Add(settings.SkillBonusSettings.AttributeSkill.AttributeDefenceSuperUp + skillRaiseFrontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float)
                                             | Mode.AttackAndDefence ->
-                                                Console.WriteLine(skill.skillEnchantLevel)
                                                 frontCard.AppliedAttackSkillBonus.Add(settings.SkillBonusSettings.AttributeSkill.AttributeAttackAndDefenceSuperUp + skillRaiseFrontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float)
                                                 frontCard.AppliedDefenceSkillBonus.Add(settings.SkillBonusSettings.AttributeSkill.AttributeAttackAndDefenceSuperUp + skillRaiseFrontCard.Card.skillLevel - 1 + skill.skillEnchantLevel |> float) 
                                         | SkillType.Effect.ExtraLarge ->
@@ -1240,6 +1240,7 @@ module CalcBonus =
         let backDeckGirls = [||] |> ResizeArray
         let specialBonusGirl1 = specialBonusEditViewModel.MemorialStorySpecialGirl1
         let specialBonusGirl2 = specialBonusEditViewModel.MemorialStorySpecialGirl2
+        let petitGirlLeaders = Array.choose (fun (petitDeck: ResizeArray<PetitGirlView>) -> if petitDeck.Count > 1 then Some(petitDeck.Item(0).petitGirl.girlName) else None) [|petitDeckEditViewModel.PetitGirlDeck1; petitDeckEditViewModel.PetitGirlDeck2; petitDeckEditViewModel.PetitGirlDeck3|]
 
         for cardView in deckEditViewModel.BackDeck do
             if not <| backDeckGirls.Contains(cardView.Card.girl.name)
@@ -1480,7 +1481,7 @@ module CalcBonus =
                             petitCheerEffectDefenceBonus <- petitCheerEffectDefenceBonus + petitCheerEffect.effectNum
                     else 0 |> ignore    
             | SameGirlCheerType(mode) ->
-                if petitCheerEffect.targetPetitGirlName.Value = card.girl.name
+                if Array.contains card.girl.name petitGirlLeaders
                     then match mode with
                     | Mode.Attack -> 
                         petitCheerEffectAttackBonus <- petitCheerEffectAttackBonus + petitCheerEffect.effectNum
@@ -1674,13 +1675,13 @@ module CalcBonus =
                 |]
             )
 
-        Console.WriteLine("")
-        Console.WriteLine("")
-        Console.WriteLine("---------------------------------")
+        //Console.WriteLine("")
+        //Console.WriteLine("")
+        //Console.WriteLine("---------------------------------")
         let attackBonusWithStrapsAndSceneAndBackDeckFactor =
-            Console.WriteLine("声援")
-            for v in triggeredAttackSkillBonus do
-                Console.WriteLine(v.ToString())
+            //Console.WriteLine("声援")
+            //for v in triggeredAttackSkillBonus do
+            //    Console.WriteLine(v.ToString())
             Array.append [|datingBonus|] triggeredAttackSkillBonus
         let defenceBonusWithStrapsAndSceneAndBackDeckFactor = Array.append [|datingBonus|] triggeredDefenceSkillBonus
         let attackBonusWithStraps = [|touchBonus|]
@@ -1690,34 +1691,34 @@ module CalcBonus =
         let attackBonusWithStrapsAndScene =  
             match ev with
             | MemorialStory -> 
-                Console.WriteLine(card.girl.name + ": " + Option.defaultValue "" card.eventName)
-                printfn "コロン: %f, ホワイトボード: %f, テレビ: %f, ロッカー: %f, ぷち: %f" colonBonus whiteboardBonus televisionBonus lockerBonus petitCheerEffectAttackBonus
-                Console.WriteLine("センボ(precious, シャイニング, ...)")
-                for v in selectionAttackBonusVals do
-                    Console.Write(v.ToString() + ", ")
+                //Console.WriteLine(card.girl.name + ": " + Option.defaultValue "" card.eventName)
+                //printfn "コロン: %f, ホワイトボード: %f, テレビ: %f, ロッカー: %f, ぷち: %f" colonBonus whiteboardBonus televisionBonus lockerBonus petitCheerEffectAttackBonus
+                //Console.WriteLine("センボ(precious, シャイニング, ...)")
+                //for v in selectionAttackBonusVals do
+                //    Console.Write(v.ToString() + ", ")
                 [|colonBonus; whiteboardBonus; televisionBonus; lockerBonus; petitCheerEffectAttackBonus|] 
                 |> Array.append selectionAttackBonusVals
             | Battle | Charisma -> 
                 if backDeckFactor = 1.0
                 then 
-                    Console.WriteLine(card.girl.name + ": " + Option.defaultValue "" card.eventName)
-                    printfn "属性: %f, 部一致: %f, コロン: %f, ホワイトボード: %f, テレビ: %f, ロッカー: %f, 役職: %f, ぷち: %f" attrBonus clubTypeBonus colonBonus whiteboardBonus televisionBonus lockerBonus clubRoleAttackBonus petitCheerEffectAttackBonus
-                    Console.WriteLine("センボ(precious, シャイニング, ...)")
-                    for v in selectionAttackBonusVals do
-                        Console.Write(v.ToString() + ", ")
+                    //Console.WriteLine(card.girl.name + ": " + Option.defaultValue "" card.eventName)
+                    //printfn "属性: %f, 部一致: %f, コロン: %f, ホワイトボード: %f, テレビ: %f, ロッカー: %f, 役職: %f, ぷち: %f" attrBonus clubTypeBonus colonBonus whiteboardBonus televisionBonus lockerBonus clubRoleAttackBonus petitCheerEffectAttackBonus
+                    //Console.WriteLine("センボ(precious, シャイニング, ...)")
+                    //for v in selectionAttackBonusVals do
+                    //    Console.Write(v.ToString() + ", ")
                     [|attrBonus; clubTypeBonus; colonBonus; whiteboardBonus; televisionBonus; lockerBonus; clubRoleAttackBonus; petitCheerEffectAttackBonus|] 
                     |> Array.append selectionAttackBonusVals
                 else 
-                    Console.WriteLine(card.girl.name + ": " + Option.defaultValue "" card.eventName)
-                    printfn "コロン: %f, ぷち: %f" colonBonus petitCheerEffectAttackBonus
-                    Console.WriteLine("センボ(precious, シャイニング, ...)")
-                    for v in selectionAttackBonusVals do
-                        Console.Write(v.ToString() + ", ")
+                    //Console.WriteLine(card.girl.name + ": " + Option.defaultValue "" card.eventName)
+                    //printfn "コロン: %f, ぷち: %f" colonBonus petitCheerEffectAttackBonus
+                    //Console.WriteLine("センボ(precious, シャイニング, ...)")
+                    //for v in selectionAttackBonusVals do
+                    //    Console.Write(v.ToString() + ", ")
                     [|colonBonus; petitCheerEffectAttackBonus|] 
                     |> Array.append selectionAttackBonusVals
             | otherwise ->
-                Console.WriteLine(card.girl.name + ": " + Option.defaultValue "" card.eventName)
-                printfn "属性: %f, 部一致: %f, コロン: %f, ホワイトボード: %f, テレビ: %f, ロッカー: %f, 役職: %f, ぷち: %f" attrBonus clubTypeBonus colonBonus whiteboardBonus televisionBonus lockerBonus clubRoleAttackBonus petitCheerEffectAttackBonus
+                //Console.WriteLine(card.girl.name + ": " + Option.defaultValue "" card.eventName)
+                //printfn "属性: %f, 部一致: %f, コロン: %f, ホワイトボード: %f, テレビ: %f, ロッカー: %f, 役職: %f, ぷち: %f" attrBonus clubTypeBonus colonBonus whiteboardBonus televisionBonus lockerBonus clubRoleAttackBonus petitCheerEffectAttackBonus
                 [|attrBonus; clubTypeBonus; colonBonus; whiteboardBonus; televisionBonus; lockerBonus; clubRoleAttackBonus; petitCheerEffectAttackBonus|] 
                 
         let defenceBonusWithStrapsAndScene = 

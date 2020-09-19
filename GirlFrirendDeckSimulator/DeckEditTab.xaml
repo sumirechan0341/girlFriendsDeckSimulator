@@ -219,6 +219,7 @@
                 <DataGridTextColumn Header="補正守援力" Binding="{Binding CorrectedDefence, UpdateSourceTrigger=PropertyChanged}" x:Name="CorrectedDefences" IsReadOnly="True"></DataGridTextColumn>
                 <DataGridTextColumn Header="声援" Binding="{Binding SkillType}" IsReadOnly="True"></DataGridTextColumn>
                 <DataGridTextColumn x:Name="SkillLevelText" Header="声援Lv" Binding="{Binding SkillLevel}" IsReadOnly="False"></DataGridTextColumn>
+                <DataGridCheckBoxColumn Header="声援発動" Binding="{Binding IsTriggeredSkillBonus, UpdateSourceTrigger=PropertyChanged}" IsReadOnly="False" ></DataGridCheckBoxColumn>
                 <DataGridCheckBoxColumn x:Name="FavoriteCardCheckBox" Header="本命設定" Binding="{Binding IsFavoriteCard, UpdateSourceTrigger=PropertyChanged}" IsReadOnly="False" ></DataGridCheckBoxColumn>
                 <DataGridCheckBoxColumn x:Name="DatingCardCheckBox" Header="デート設定" Binding="{Binding IsDatingCard, UpdateSourceTrigger=PropertyChanged}" IsReadOnly="False" ></DataGridCheckBoxColumn>
                 <DataGridCheckBoxColumn x:Name="TouchBonusCheckBox" Header="タッチボーナス" Binding="{Binding IsTouched, UpdateSourceTrigger=PropertyChanged}" IsReadOnly="False" ></DataGridCheckBoxColumn>

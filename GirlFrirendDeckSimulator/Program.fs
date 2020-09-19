@@ -198,16 +198,35 @@ let main argv =
         // 声援、タッチ、本命、デート情報保存
         let isTriggeredSkillBonusList = Array.map (fun (c: CardViewWithStrap) -> c.IsTriggeredSkillBonus) <| deckEditViewModel.FrontDeck.ToArray()
             
+        let isTriggeredSkillBonusSwitchList = Array.map (fun (c: CardView) -> (c.IsTriggeredSkillBonus, c)) <| deckEditViewModel.BackDeck.ToArray()
+
+        let triggeredSkillBonusSwitchList = 
+            if deckEditViewModel.SelectedEventType = EventType.CoolMega || deckEditViewModel.SelectedEventType = EventType.PopMega || deckEditViewModel.SelectedEventType = EventType.SweetMega
+            then Array.empty
+            else Array.filter (fun (c: CardView) -> c.Card.cardType = CardType.Switch) (deckEditViewModel.BackDeck.ToArray())
+        
+        let triggeredSkillBonusGirlList = Array.append ((deckEditViewModel.FrontDeck.ToArray()) |> Array.map (fun (c: CardViewWithStrap) -> c :> CardView)) triggeredSkillBonusSwitchList
+        
+        //let frontDeckNum = deckEditViewModel.FrontDeck.Count
+        let triggeredSkillBonusGirlNum = triggeredSkillBonusGirlList.Length
         let mutable expectation: float = 0.0
-        for triggeredIndexList in makePowerSet([1..deckEditViewModel.FrontDeck.Count-1]) do
+        for triggeredIndexList in makePowerSet([1..triggeredSkillBonusGirlNum-1]) do
             
-            for (index, frontCardView) in Array.indexed <| deckEditViewModel.FrontDeck.ToArray() do
+            for (index, skillCardView) in Array.indexed <| triggeredSkillBonusGirlList do
                 if index = 0
-                then frontCardView.IsTriggeredSkillBonus <- true
-                else frontCardView.IsTriggeredSkillBonus <- false
+                then skillCardView.IsTriggeredSkillBonus <- true
+                else skillCardView.IsTriggeredSkillBonus <- false
             // 期待値計算
             for index in triggeredIndexList do
-                deckEditViewModel.FrontDeck.[index].IsTriggeredSkillBonus <- true
+                triggeredSkillBonusGirlList.[index].IsTriggeredSkillBonus <- true
+                //if index >= frontDeckNum
+                //then 
+                //    // 主センにないindexはスイッチガールの指定
+                //    let switchIndex = triggeredSkillBonusGirlNum - frontDeckNum
+                //    let switchGirls = deckEditViewModel.BackDeck.FindAll(fun c -> c.Card.cardType = CardType.Switch)
+                //    switchGirls.[index].IsTriggeredSkillBonus <- true
+                //else
+                //    deckEditViewModel.FrontDeck.[index].IsTriggeredSkillBonus <- true
 
             CalcBonus.applySkillBonus(deckEditViewModel.FrontDeck, deckEditViewModel.BackDeck)
             for cardView in deckEditViewModel.FrontDeck do
@@ -220,11 +239,13 @@ let main argv =
                 cardView.CorrectedDefence <- correctedVals.CorrectedDefence
             let triggeredProbability = 
                 Math.Pow(settings.SkillBonusSettings.SkillRaisedProbability |> float, triggeredIndexList.Length |> float)
-                * Math.Pow(1.0 - (settings.SkillBonusSettings.SkillRaisedProbability |> float), deckEditViewModel.FrontDeck.Count - 1 - triggeredIndexList.Length |> float)
+                * Math.Pow(1.0 - (settings.SkillBonusSettings.SkillRaisedProbability |> float), triggeredSkillBonusGirlList.Length - 1 - triggeredIndexList.Length |> float)
             
             expectation <- expectation + (calcDamage(deckEditViewModel.FrontDeck, deckEditViewModel.BackDeck, petitDeckEditViewModel.TotalAttack, petitDeckEditViewModel.TotalDefence, playerParameterViewModel.AttackCost, deckEditViewModel.SelectedEventType, deckEditViewModel.SelectedMode) |> float) * triggeredProbability
         for (index, isTriggeredSkillBonus) in Array.indexed isTriggeredSkillBonusList do
             deckEditViewModel.FrontDeck.[index].IsTriggeredSkillBonus <- isTriggeredSkillBonus
+        for (isTriggeredSkillBonus, card) in isTriggeredSkillBonusSwitchList do
+            deckEditViewModel.BackDeck.[(card.Index |> int) - 1].IsTriggeredSkillBonus <- isTriggeredSkillBonus
 
         expectation
         
@@ -332,7 +353,8 @@ let main argv =
             0 |> ignore
         deckEditViewModel.TotalAttack <- deckEditViewModel.TotalAttack + petitDeckEditViewModel.TotalAttack
         deckEditViewModel.TotalDefence <- deckEditViewModel.TotalDefence + petitDeckEditViewModel.TotalDefence
-        
+        deckEditViewModel.EstimatedDamage <- calcDamage(deckEditViewModel.FrontDeck, deckEditViewModel.BackDeck, petitDeckEditViewModel.TotalAttack, petitDeckEditViewModel.TotalDefence, playerParameterViewModel.AttackCost, deckEditViewModel.SelectedEventType, deckEditViewModel.SelectedMode)
+
     window.TabControl.SelectionChanged.Add(fun e ->
         if(window.TabControl.SelectedIndex = 1 && e.OriginalSource :? TabControl) 
             then
@@ -619,6 +641,7 @@ let main argv =
     )  
     
     deckEditTabContent.BackDeckList.CellEditEnding.Add(fun e ->
+        let deckEditViewModel = deckEditTabContent.DataContext :?> DeckEditViewModel
         if e.EditAction = DataGridEditAction.Commit
             then 
                 let deckEditViewModel = deckEditTabContent.DataContext :?> DeckEditViewModel
@@ -654,6 +677,23 @@ let main argv =
                                 0 |> ignore
                     else
                         0 |> ignore
+
+                if e.Column.Header.ToString() = "声援発動"
+                then
+                    let selectedCardView = e.Row.DataContext :?> CardView
+                    if selectedCardView.IsTriggeredSkillBonus 
+                        && not (deckEditViewModel.SelectedEventType = EventType.CoolMega || deckEditViewModel.SelectedEventType = EventType.PopMega || deckEditViewModel.SelectedEventType = EventType.SweetMega)
+                        then // チェック入った方 
+                            // スイッチガールでないのに声援にチェックがつくと取り消す
+                            if selectedCardView.Card.cardType = CardType.Switch
+                            then 
+                                0 |> ignore
+                            else
+                                selectedCardView.IsTriggeredSkillBonus <- false
+                        else 
+                            0 |> ignore
+                else
+                    0 |> ignore
                 
                 deckEditViewModel.save()
                 refreshDeckEditTab()
@@ -665,33 +705,20 @@ let main argv =
             let selectionBonusInfoView = listItem :?> SelectionBonusInfoView
             selectionBonusInfoView.AfterEditSelectionBonusLevel <- selectionBonusInfoView.CurrentSelectionBonusLevel
 
-        for line in deckEditTabContent.FrontDeckGirlList.SelectedItems do
-            let cardView = line :?> CardViewWithStrap
-            for selectionBonus in cardView.Card.girl.selectionBonuses do
-                for listItem in deckEditTabContent.SelectionBonusBox.Items do
-                    let selectionBonusInfoView = listItem :?> SelectionBonusInfoView
-                    if selectionBonusInfoView.SelectionBonus.SelectionBonusName = selectionBonus.SelectionBonusName
-                    then 
-                        selectionBonusInfoView.AfterEditSelectionBonusLevel <- selectionBonusInfoView.AfterEditSelectionBonusLevel - 1
-                        selectionBonusInfoView.ConvertToEditSelectionBonusInfo()
-                        selectionBonusInfoView.IsOutOfDeck <- true
-                    else 
-                        0 |> ignore
-    )
-
-    deckEditTabContent.FrontDeckGirlList.GotFocus.Add(fun e ->
-        //Console.WriteLine(e.OriginalSource)
-        // Focusが当たっているCardViewは取れる
-        // でも複数選択のときの処理が不可能（フォーカスが当たるのはひとつだけ）
-        for listItem in deckEditTabContent.SelectionBonusBox.Items do
-            let selectionBonusInfoView = listItem :?> SelectionBonusInfoView
-            selectionBonusInfoView.AfterEditSelectionBonusLevel <- selectionBonusInfoView.CurrentSelectionBonusLevel
-        
-        match e.OriginalSource with
-        | :? DataGridCell as cell ->
-            match cell.DataContext with
-            | :? CardViewWithStrap as cardView ->
-                for selectionBonus in cardView.Card.girl.selectionBonuses do
+        let deckEditViewModel = deckEditTabContent.DataContext :?> DeckEditViewModel
+        let selectedItemsArray = Array.zeroCreate deckEditTabContent.FrontDeckGirlList.SelectedItems.Count
+        deckEditTabContent.FrontDeckGirlList.SelectedItems.CopyTo(selectedItemsArray, 0)
+        let selectedGirlNames = Array.map (fun (selectedItem: obj) -> (selectedItem :?> CardViewWithStrap).CardName) <| selectedItemsArray
+        let selectedCards = Array.distinctBy (fun (cardView: CardViewWithStrap) -> cardView.CardName) <| (Array.map (fun (selectedItem: obj) -> (selectedItem :?> CardViewWithStrap)) <| selectedItemsArray)
+        for line in selectedCards do
+            //let cardView = line :?> CardViewWithStrap   
+            if deckEditViewModel.FrontDeck.FindAll(fun cardView -> cardView.CardName = line.CardName).Count > (Array.length <| Array.filter (fun girlName -> girlName = line.CardName) selectedGirlNames)
+                || deckEditViewModel.BackDeck.Exists(fun cardView -> cardView.CardName = line.CardName)
+            then 
+                // 主センバツから当該ガールがすべて抜ける予定ではないか、副センバツに当該ガールが存在する場合、センバツボーナスは変化しない
+                0 |> ignore
+            else
+                for selectionBonus in line.Card.girl.selectionBonuses do
                     for listItem in deckEditTabContent.SelectionBonusBox.Items do
                         let selectionBonusInfoView = listItem :?> SelectionBonusInfoView
                         if selectionBonusInfoView.SelectionBonus.SelectionBonusName = selectionBonus.SelectionBonusName
@@ -701,6 +728,35 @@ let main argv =
                             selectionBonusInfoView.IsOutOfDeck <- true
                         else 
                             0 |> ignore
+    )
+
+    deckEditTabContent.FrontDeckGirlList.GotFocus.Add(fun e ->
+        //Console.WriteLine(e.OriginalSource)
+        // Focusが当たっているCardViewは取れる
+        // でも複数選択のときの処理が不可能（フォーカスが当たるのはひとつだけ）
+        for listItem in deckEditTabContent.SelectionBonusBox.Items do
+            let selectionBonusInfoView = listItem :?> SelectionBonusInfoView
+            selectionBonusInfoView.AfterEditSelectionBonusLevel <- selectionBonusInfoView.CurrentSelectionBonusLevel
+        let deckEditViewModel = deckEditTabContent.DataContext :?> DeckEditViewModel
+        match e.OriginalSource with
+        | :? DataGridCell as cell ->
+            match cell.DataContext with
+            | :? CardViewWithStrap as cardView ->
+                if deckEditViewModel.FrontDeck.FindAll(fun frontCardView -> cardView.CardName = frontCardView.CardName).Count > 1
+                    || deckEditViewModel.BackDeck.Exists(fun backCardView -> cardView.CardName = backCardView.CardName) 
+                then 
+                    0 |> ignore // 同一カードが存在
+                else
+                    for selectionBonus in cardView.Card.girl.selectionBonuses do
+                        for listItem in deckEditTabContent.SelectionBonusBox.Items do
+                            let selectionBonusInfoView = listItem :?> SelectionBonusInfoView
+                            if selectionBonusInfoView.SelectionBonus.SelectionBonusName = selectionBonus.SelectionBonusName
+                            then 
+                                selectionBonusInfoView.AfterEditSelectionBonusLevel <- selectionBonusInfoView.AfterEditSelectionBonusLevel - 1
+                                selectionBonusInfoView.ConvertToEditSelectionBonusInfo()
+                                selectionBonusInfoView.IsOutOfDeck <- true
+                            else 
+                                0 |> ignore
             | _ -> 0 |> ignore
         | _ -> 0 |> ignore
         //for line in deckEditTabContent.GirlListBox.SelectedItems do
@@ -720,18 +776,30 @@ let main argv =
         for listItem in deckEditTabContent.SelectionBonusBox.Items do
             let selectionBonusInfoView = listItem :?> SelectionBonusInfoView
             selectionBonusInfoView.AfterEditSelectionBonusLevel <- selectionBonusInfoView.CurrentSelectionBonusLevel
-        for line in deckEditTabContent.BackDeckList.SelectedItems do
-            let cardView = line :?> CardView
-            for selectionBonus in cardView.Card.girl.selectionBonuses do
-                for listItem in deckEditTabContent.SelectionBonusBox.Items do
-                    let selectionBonusInfoView = listItem :?> SelectionBonusInfoView
-                    if selectionBonusInfoView.SelectionBonus.SelectionBonusName = selectionBonus.SelectionBonusName
-                    then 
-                        selectionBonusInfoView.AfterEditSelectionBonusLevel <- selectionBonusInfoView.AfterEditSelectionBonusLevel - 1
-                        selectionBonusInfoView.ConvertToEditSelectionBonusInfo()
-                        selectionBonusInfoView.IsOutOfDeck <- true
-                    else 
-                        0 |> ignore
+        
+        let deckEditViewModel = deckEditTabContent.DataContext :?> DeckEditViewModel
+        let selectedItemsArray = Array.zeroCreate deckEditTabContent.BackDeckList.SelectedItems.Count
+        deckEditTabContent.BackDeckList.SelectedItems.CopyTo(selectedItemsArray, 0)
+        let selectedGirlNames = Array.map (fun (selectedItem: obj) -> (selectedItem :?> CardView).CardName) <| selectedItemsArray
+        let selectedCards = Array.distinctBy (fun (cardView: CardView) -> cardView.CardName) <| (Array.map (fun (selectedItem: obj) -> (selectedItem :?> CardView)) <| selectedItemsArray)
+        
+        for line in selectedCards do
+            //let cardView = line :?> CardView
+            if deckEditViewModel.BackDeck.FindAll(fun cardView -> cardView.CardName = line.CardName).Count > (Array.length <| Array.filter (fun girlName -> girlName = line.CardName) selectedGirlNames)
+                || deckEditViewModel.FrontDeck.Exists(fun cardView -> cardView.CardName = line.CardName)
+            then 
+                0 |> ignore
+            else
+                for selectionBonus in line.Card.girl.selectionBonuses do
+                    for listItem in deckEditTabContent.SelectionBonusBox.Items do
+                        let selectionBonusInfoView = listItem :?> SelectionBonusInfoView
+                        if selectionBonusInfoView.SelectionBonus.SelectionBonusName = selectionBonus.SelectionBonusName
+                        then 
+                            selectionBonusInfoView.AfterEditSelectionBonusLevel <- selectionBonusInfoView.AfterEditSelectionBonusLevel - 1
+                            selectionBonusInfoView.ConvertToEditSelectionBonusInfo()
+                            selectionBonusInfoView.IsOutOfDeck <- true
+                        else 
+                            0 |> ignore
     )
 
     deckEditTabContent.BackDeckList.GotFocus.Add(fun e ->
@@ -749,16 +817,21 @@ let main argv =
         //let cardView = (e.OriginalSource :?> DataGridCell).DataContext :?> CardView
         //for line in deckEditTabContent.GirlListBox.SelectedItems do
         //    let cardView = line :?> CardView
-                for selectionBonus in cardView.Card.girl.selectionBonuses do
-                    for listItem in deckEditTabContent.SelectionBonusBox.Items do
-                        let selectionBonusInfoView = listItem :?> SelectionBonusInfoView
-                        if selectionBonusInfoView.SelectionBonus.SelectionBonusName = selectionBonus.SelectionBonusName
-                        then 
-                            selectionBonusInfoView.AfterEditSelectionBonusLevel <- selectionBonusInfoView.AfterEditSelectionBonusLevel - 1
-                            selectionBonusInfoView.ConvertToEditSelectionBonusInfo()
-                            selectionBonusInfoView.IsOutOfDeck <- true
-                        else 
-                            0 |> ignore
+                if deckEditViewModel.BackDeck.FindAll(fun backCardView -> cardView.CardName = backCardView.CardName).Count > 1
+                    || deckEditViewModel.FrontDeck.Exists(fun frontCardView -> cardView.CardName = frontCardView.CardName)
+                then
+                    0 |> ignore
+                else
+                    for selectionBonus in cardView.Card.girl.selectionBonuses do
+                        for listItem in deckEditTabContent.SelectionBonusBox.Items do
+                            let selectionBonusInfoView = listItem :?> SelectionBonusInfoView
+                            if selectionBonusInfoView.SelectionBonus.SelectionBonusName = selectionBonus.SelectionBonusName
+                            then 
+                                selectionBonusInfoView.AfterEditSelectionBonusLevel <- selectionBonusInfoView.AfterEditSelectionBonusLevel - 1
+                                selectionBonusInfoView.ConvertToEditSelectionBonusInfo()
+                                selectionBonusInfoView.IsOutOfDeck <- true
+                            else 
+                                0 |> ignore
             | _ -> 0 |> ignore
         | _ -> 0 |> ignore
     )
@@ -789,7 +862,64 @@ let main argv =
         //let cardView = (e.OriginalSource :?> DataGridCell).DataContext :?> CardView
         //for line in deckEditTabContent.GirlListBox.SelectedItems do
         //    let cardView = line :?> CardView
-                let newSelectionBonusInfoViews = [||] |> ResizeArray
+                if deckEditViewModel.FrontDeck.Exists(fun frontCard -> frontCard.CardName = cardView.CardName)
+                    || deckEditViewModel.BackDeck.Exists(fun backCard -> backCard.CardName = cardView.CardName)
+                then
+                    0 |> ignore
+                else
+                    let newSelectionBonusInfoViews = [||] |> ResizeArray
+                    for selectionBonus in cardView.Card.girl.selectionBonuses do
+                        if deckEditViewModel.SelectionBonusInfoViews.Exists(fun sbiv -> sbiv.SelectionBonus = selectionBonus)
+                        then
+                            for listItem in deckEditTabContent.SelectionBonusBox.Items do
+                                let selectionBonusInfoView = listItem :?> SelectionBonusInfoView
+                                if selectionBonusInfoView.SelectionBonus.SelectionBonusName = selectionBonus.SelectionBonusName
+                                then 
+                                    selectionBonusInfoView.AfterEditSelectionBonusLevel <- selectionBonusInfoView.AfterEditSelectionBonusLevel + 1
+                                    selectionBonusInfoView.ConvertToEditSelectionBonusInfo()
+                                    selectionBonusInfoView.IsIntoDeck <- true
+                                else 
+                                    0 |> ignore
+                        else 
+                            let newSelectionBonusInfoView = SelectionBonusInfoView(selectionBonus, 0, 5)
+                            newSelectionBonusInfoView.AfterEditSelectionBonusLevel <- 1
+                            newSelectionBonusInfoView.ConvertToEditSelectionBonusInfo()
+                            newSelectionBonusInfoView.IsIntoDeck <- true
+                            if newSelectionBonusInfoView.SelectionBonus.getSelectionBonusMode.IsAppliable(deckEditViewModel.SelectedMode)
+                            then 
+                                newSelectionBonusInfoViews.Add(newSelectionBonusInfoView)
+                            else 0 |> ignore
+                    deckEditViewModel.SelectionBonusInfoViews.AddRange(newSelectionBonusInfoViews)
+                    deckEditTabContent.SelectionBonusBox.Items.Refresh()
+            | _ -> 0 |> ignore
+        | _ -> 0 |> ignore
+        //let selectionBonusInfoViews = deckEditTabContent.SelectionBonusBox.ItemsSource
+        //deckEditTabContent.SelectionBonusBox.ItemsSource <- null
+        //deckEditTabContent.SelectionBonusBox.ItemsSource <- selectionBonusInfoViews
+    )
+
+    deckEditTabContent.GirlListBox.SelectionChanged.Add(fun e ->
+        for listItem in deckEditTabContent.SelectionBonusBox.Items do
+            let selectionBonusInfoView = listItem :?> SelectionBonusInfoView
+            selectionBonusInfoView.AfterEditSelectionBonusLevel <- selectionBonusInfoView.CurrentSelectionBonusLevel
+        let newSelectionBonusInfoViews = [||] |> ResizeArray
+        let deckEditViewModel = deckEditTabContent.DataContext :?> DeckEditViewModel
+        deckEditViewModel.SelectionBonusInfoViews.RemoveAll(fun sbiv -> sbiv.CurrentSelectionBonusLevel = 0) |> ignore    
+
+        let selectedItemsArray = Array.zeroCreate deckEditTabContent.GirlListBox.SelectedItems.Count
+        deckEditTabContent.GirlListBox.SelectedItems.CopyTo(selectedItemsArray, 0)
+        let selectedGirlNames = Array.map (fun (selectedItem: obj) -> (selectedItem :?> CardView).CardName) <| selectedItemsArray
+        let selectedCards = Array.distinctBy (fun (cardView: CardView) -> cardView.CardName) <| (Array.map (fun (selectedItem: obj) -> (selectedItem :?> CardView)) <| selectedItemsArray)
+
+        for cardView in selectedCards do
+            //let cardView = line :?> CardView
+            if deckEditViewModel.FrontDeck.Exists(fun frontCard -> frontCard.CardName = cardView.CardName) 
+                || deckEditViewModel.BackDeck.Exists(fun backCard -> backCard.CardName = cardView.CardName)
+            then 
+                // 入れようとしてるカードがすでにデッキ内に入っているときは
+                // センボを追加しない
+                0 |> ignore
+            else
                 for selectionBonus in cardView.Card.girl.selectionBonuses do
                     if deckEditViewModel.SelectionBonusInfoViews.Exists(fun sbiv -> sbiv.SelectionBonus = selectionBonus)
                     then
@@ -811,46 +941,6 @@ let main argv =
                         then 
                             newSelectionBonusInfoViews.Add(newSelectionBonusInfoView)
                         else 0 |> ignore
-                deckEditViewModel.SelectionBonusInfoViews.AddRange(newSelectionBonusInfoViews)
-                deckEditTabContent.SelectionBonusBox.Items.Refresh()
-            | _ -> 0 |> ignore
-        | _ -> 0 |> ignore
-        //let selectionBonusInfoViews = deckEditTabContent.SelectionBonusBox.ItemsSource
-        //deckEditTabContent.SelectionBonusBox.ItemsSource <- null
-        //deckEditTabContent.SelectionBonusBox.ItemsSource <- selectionBonusInfoViews
-    )
-
-    deckEditTabContent.GirlListBox.SelectionChanged.Add(fun e ->
-        for listItem in deckEditTabContent.SelectionBonusBox.Items do
-            let selectionBonusInfoView = listItem :?> SelectionBonusInfoView
-            selectionBonusInfoView.AfterEditSelectionBonusLevel <- selectionBonusInfoView.CurrentSelectionBonusLevel
-        let newSelectionBonusInfoViews = [||] |> ResizeArray
-        let deckEditViewModel = deckEditTabContent.DataContext :?> DeckEditViewModel
-        deckEditViewModel.SelectionBonusInfoViews.RemoveAll(fun sbiv -> sbiv.CurrentSelectionBonusLevel = 0) |> ignore    
-
-        for line in deckEditTabContent.GirlListBox.SelectedItems do
-            let cardView = line :?> CardView
-            for selectionBonus in cardView.Card.girl.selectionBonuses do
-                if deckEditViewModel.SelectionBonusInfoViews.Exists(fun sbiv -> sbiv.SelectionBonus = selectionBonus)
-                then
-                    for listItem in deckEditTabContent.SelectionBonusBox.Items do
-                        let selectionBonusInfoView = listItem :?> SelectionBonusInfoView
-                        if selectionBonusInfoView.SelectionBonus.SelectionBonusName = selectionBonus.SelectionBonusName
-                        then 
-                            selectionBonusInfoView.AfterEditSelectionBonusLevel <- selectionBonusInfoView.AfterEditSelectionBonusLevel + 1
-                            selectionBonusInfoView.ConvertToEditSelectionBonusInfo()
-                            selectionBonusInfoView.IsIntoDeck <- true
-                        else 
-                            0 |> ignore
-                else 
-                    let newSelectionBonusInfoView = SelectionBonusInfoView(selectionBonus, 0, 5)
-                    newSelectionBonusInfoView.AfterEditSelectionBonusLevel <- 1
-                    newSelectionBonusInfoView.ConvertToEditSelectionBonusInfo()
-                    newSelectionBonusInfoView.IsIntoDeck <- true
-                    if newSelectionBonusInfoView.SelectionBonus.getSelectionBonusMode.IsAppliable(deckEditViewModel.SelectedMode)
-                    then 
-                        newSelectionBonusInfoViews.Add(newSelectionBonusInfoView)
-                    else 0 |> ignore
         deckEditViewModel.SelectionBonusInfoViews.AddRange(newSelectionBonusInfoViews)
         deckEditTabContent.SelectionBonusBox.Items.Refresh()
         //let selectionBonusInfoViews = deckEditTabContent.SelectionBonusBox.ItemsSource
@@ -887,14 +977,15 @@ let main argv =
         let deckEditViewModel = deckEditTabContent.DataContext :?> DeckEditViewModel
         let playerParameterViewModel = playerParameterTabContent.DataContext :?> PlayerParameterViewModel
         let maxBackDeckNum = 
-            if deckEditViewModel.SelectedEventType = Charisma 
+            if deckEditViewModel.SelectedEventType = EventType.Charisma 
             then 20
             else playerParameterViewModel.BackDeckNum
         
-        if deckEditViewModel.BackDeck.Count + deckEditViewModel.SelectedPreciousSceneList.Count > maxBackDeckNum
+        if deckEditTabContent.GirlListBox.SelectedItems.Count + deckEditViewModel.BackDeck.Count + deckEditViewModel.SelectedPreciousSceneList.Count > maxBackDeckNum
         then MessageBox.Show("副センバツの枠数の上限を超えています") |> ignore
         else 
             for g in deckEditTabContent.GirlListBox.SelectedItems do
+                (g :?> CardView).IsTriggeredSkillBonus <- false
                 deckEditViewModel.BackDeck.Add(g :?> CardView)
                 deckEditViewModel.CardListView.Remove(g :?> CardView) |> ignore
             refreshDeckEditTab()
