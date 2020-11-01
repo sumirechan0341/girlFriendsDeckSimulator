@@ -37,4 +37,6 @@ module SkillAttributeTypeConverter =
         | "POP" | "POPタイプ" | "POPﾀｲﾌﾟ" -> SkillAttributeType.Pop
         | "SWEET" | "SWEETタイプ" | "SWEETﾀｲﾌﾟ" -> SkillAttributeType.Sweet
         | "全タイプ" | "全ﾀｲﾌﾟ" -> SkillAttributeType.All
-        | combiAttrStr -> SkillAttributeType.Combination(fromString(combiAttrStr.Split('&').[0]), fromString(combiAttrStr.Split('&').[1]))
+        | "" -> SkillAttributeType.All // 全タイプのときタイプが明記されないことがある
+        // | combiAttrStr -> SkillAttributeType.Combination(fromString(combiAttrStr.Split('&').[0]), fromString(combiAttrStr.Split('&').[1]))
+        // 仲良し未実装

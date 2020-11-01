@@ -15,6 +15,7 @@ open PreciousSceneView
 open PreciousSceneFactory
 open SelectionBonus
 open System.Text.RegularExpressions
+open System
 
 type DeckElements = JsonProvider<""" 
     [{
@@ -190,6 +191,14 @@ type SelectionBonusInfoView(selectionBonus: SelectionBonus, currentSelectionBonu
     interface INotifyPropertyChanged with
         [<CLIEvent>]
         member this.PropertyChanged = ev.Publish
+    interface IComparable with
+        member this.CompareTo(other: obj) =
+            let otherSelectionBonusInfoView = other :?> SelectionBonusInfoView
+            if this.MaxSelectionBonusLevel.CompareTo(otherSelectionBonusInfoView.MaxSelectionBonusLevel) <> 0
+            then 
+                this.MaxSelectionBonusLevel.CompareTo(otherSelectionBonusInfoView.MaxSelectionBonusLevel)
+            else 
+                this.CurrentSelectionBonusLevel.CompareTo(otherSelectionBonusInfoView.CurrentSelectionBonusLevel)
 
 type DeckEditViewModel(frontDeck: CardViewWithStrap[], backDeck: CardView[], selectedPreciousScene: PreciousSceneView[], eventType: EventType) =
     let ev = Event<_, _>()

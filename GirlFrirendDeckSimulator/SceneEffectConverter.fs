@@ -21,7 +21,7 @@ module SceneEffectConverter =
             if m.Success
             then Some (List.tail [ for x in m.Groups -> x.Value ])
             else None
-        let costPattern = "(?:(主センバツ|副センバツ)の)?(COOL|POP|SWEET)ガールのコストが高いほど(攻援|守援|攻守)UP"
+        let costPattern = "(?:(主センバツ|副センバツ)の)?(COOL|POP|SWEET)?ガールのコストが高いほど(攻援|守援|攻守)UP"
         let exedPattern = "(?:(主センバツ|副センバツ)に)?(COOL|POP|SWEET)のEx進展ガールが多いほど(攻援|守援|攻守)UP"
         let skillLevelPattern = "(?:(主センバツ|副センバツ)の)?(COOL|POP|SWEET)ガールの声援Lvが高いほど(攻援|守援|攻守)UP"
         let rarityPattern = "(?:(主センバツ|副センバツ)の)?(COOL|POP|SWEET)ガールのレアリティが高いほど(攻援|守援|攻守)UP"
@@ -31,6 +31,7 @@ module SceneEffectConverter =
         match sceneEffectDescription with
         | ParseRegex costPattern [sceneTarget; skillAttribute; mode] ->
             let sceneEffectMaxCost = sceneEffectMaxTerms.Replace("コスト", "") |> int
+            System.Console.WriteLine(skillAttribute)
             {
                 sceneEffectType = CostType sceneEffectMaxCost
                 sceneTarget = SceneTargetConverter.fromString(sceneTarget);

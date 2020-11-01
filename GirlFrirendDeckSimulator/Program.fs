@@ -126,8 +126,7 @@ let main argv =
                 SelectionBonusInfoView(pair.Key, pair.Value, maxLevel)
             |] 
             |> Array.filter (fun (sbiv: SelectionBonusInfoView) -> sbiv.SelectionBonus.getSelectionBonusMode.IsAppliable(deckEditViewModel.SelectedMode)) 
-            |> Array.sortByDescending (fun (sbiv: SelectionBonusInfoView) -> sbiv.CurrentSelectionBonusLevel)
-            |> Array.sortByDescending (fun (sbiv: SelectionBonusInfoView) -> sbiv.MaxSelectionBonusLevel)
+            |> Array.sortDescending
             |> ResizeArray
 
         deckEditTabContent.SelectionBonusBox.Items.Refresh()
@@ -168,7 +167,8 @@ let main argv =
             |> int64
         let maxConsumeUnitNum = 
             match eventType with
-            | EventType.Raid | EventType.CoolTrio |  EventType.PopTrio | EventType.SweetTrio | EventType.CoolMega | EventType.PopMega | EventType.SweetMega | EventType.Hunters -> 12L
+            | EventType.Raid | EventType.CoolTrio |  EventType.PopTrio | EventType.SweetTrio | EventType.CoolMega | EventType.PopMega | EventType.SweetMega -> 12L
+            | EventType.Hunters -> 36L
             | otherwise -> 1L
 
         let damage: int64 = 
@@ -208,15 +208,58 @@ let main argv =
         let triggeredSkillBonusGirlList = Array.append ((deckEditViewModel.FrontDeck.ToArray()) |> Array.map (fun (c: CardViewWithStrap) -> c :> CardView)) triggeredSkillBonusSwitchList
         
         //let frontDeckNum = deckEditViewModel.FrontDeck.Count
+        
+        let fixedFrontSkillTriggeredGirlNum = 
+            match deckEditViewModel.SelectedEventType with
+            | CoolTrio | PopTrio | SweetTrio | Raid ->
+                if deckEditViewModel.SelectedMode = Mode.Defence
+                then
+                    3
+                else
+                    1
+            | Hunters | Charisma | MemorialStory | CoolMega | PopMega | SweetMega -> 1
+            | Battle -> 5
+        let maxFrontSkillTriggeredGirlNum =
+            match deckEditViewModel.SelectedEventType with
+            | CoolTrio | PopTrio | SweetTrio | Raid ->
+                if deckEditViewModel.SelectedMode = Mode.Defence
+                then
+                    3
+                else
+                    5
+            | Hunters | Charisma | MemorialStory | CoolMega | PopMega | SweetMega -> 5
+            | Battle -> 5
+
+        let fixedSwitchSkillTriggeredGirlNum =
+            match deckEditViewModel.SelectedEventType with
+            | CoolTrio | PopTrio | SweetTrio | Raid ->
+                if deckEditViewModel.SelectedMode = Mode.Defence
+                then
+                    2
+                else
+                    0
+            | Battle -> 2
+            | otherwise -> 0
+
+        let maxSwitchSkillTriggeredGirlNum = 2
+                
         let triggeredSkillBonusGirlNum = triggeredSkillBonusGirlList.Length
         let mutable expectation: float = 0.0
-        for triggeredIndexList in makePowerSet([1..triggeredSkillBonusGirlNum-1]) do
-            
-            for (index, skillCardView) in Array.indexed <| triggeredSkillBonusGirlList do
-                if index = 0
-                then skillCardView.IsTriggeredSkillBonus <- true
-                else skillCardView.IsTriggeredSkillBonus <- false
+        //let switchIndexStartPosition = triggeredSkillBonusGirlNum - deckEditViewModel.FrontDeck.Count
+        for triggeredIndexList in makePowerSet([0..triggeredSkillBonusGirlNum-1]) do
+            // 初期化
+            for skillCardView in triggeredSkillBonusGirlList do
+                skillCardView.IsTriggeredSkillBonus <- false
+            // 確定分のindexListを作成
+            let fixedFrontSkillTriggeredGirlIndexList = [0..fixedFrontSkillTriggeredGirlNum-1]
+            //let fixedSwitchSkillTriggeredGirlIndexList = [deckEditViewModel.FrontDeck.Count..]
+
             // 期待値計算
+            //let frontDeckIndices = List.filter (fun i -> i < deckEditViewModel.FrontDeck.Count) triggeredIndexList
+            //let switchGirlIndices = List.filter (fun i -> i >= deckEditViewModel.FrontDeck.Count) triggeredIndexList
+            //let triggeredFrontDeckIndices = List.truncate 5 frontDeckIndices // 声援発動指定indexが6個以上あるときは5個に切り捨て
+            //let triggeredSwitchGirlIndices = List.truncate 2 switchGirlIndices // スイッチ発動上限は2
+            //for index in List.append triggeredFrontDeckIndices triggeredSwitchGirlIndices do
             for index in triggeredIndexList do
                 triggeredSkillBonusGirlList.[index].IsTriggeredSkillBonus <- true
                 //if index >= frontDeckNum
@@ -227,8 +270,8 @@ let main argv =
                 //    switchGirls.[index].IsTriggeredSkillBonus <- true
                 //else
                 //    deckEditViewModel.FrontDeck.[index].IsTriggeredSkillBonus <- true
-
-            CalcBonus.applySkillBonus(deckEditViewModel.FrontDeck, deckEditViewModel.BackDeck)
+            
+            CalcBonus.applySkillBonus(deckEditViewModel.FrontDeck, deckEditViewModel.BackDeck, deckEditViewModel.CardListView)
             for cardView in deckEditViewModel.FrontDeck do
                 let correctedVals = CalcBonus.calcBonus(cardView, playerParameterViewModel.playerFactory, deckEditViewModel, petitDeckEditViewModel, specialBonusEditViewModel)
                 cardView.CorrectedAttack <- correctedVals.CorrectedAttack
@@ -258,7 +301,7 @@ let main argv =
         match deckEditViewModel.SelectedEventType with
         | EventType.CoolMega | EventType.PopMega | EventType.SweetMega -> 
             //副センバツは計算しない（重いから）
-            CalcBonus.applySkillBonus(deckEditViewModel.FrontDeck, deckEditViewModel.BackDeck)
+            CalcBonus.applySkillBonus(deckEditViewModel.FrontDeck, deckEditViewModel.BackDeck, deckEditViewModel.CardListView)
             deckEditViewModel.FrontDeck.ForEach(fun cardView ->
                 let correctedVals = CalcBonus.calcBonus(cardView, playerParameterViewModel.playerFactory, deckEditViewModel, petitDeckEditViewModel, specialBonusEditViewModel)
                 cardView.CorrectedAttack <- correctedVals.CorrectedAttack
@@ -277,7 +320,7 @@ let main argv =
             // 予想ダメージ
             deckEditViewModel.EstimatedDamage <- calcDamage(deckEditViewModel.FrontDeck, deckEditViewModel.BackDeck, petitDeckEditViewModel.TotalAttack, petitDeckEditViewModel.TotalDefence, playerParameterViewModel.AttackCost, deckEditViewModel.SelectedEventType, deckEditViewModel.SelectedMode)
         | otherwise ->
-            CalcBonus.applySkillBonus(deckEditViewModel.FrontDeck, deckEditViewModel.BackDeck)
+            CalcBonus.applySkillBonus(deckEditViewModel.FrontDeck, deckEditViewModel.BackDeck, deckEditViewModel.CardListView)
             
             deckEditViewModel.CardListView.ForEach(fun cardView ->
                  let correctedVals = CalcBonus.calcBonus(cardView, playerParameterViewModel.playerFactory, deckEditViewModel, petitDeckEditViewModel, specialBonusEditViewModel)
@@ -547,6 +590,7 @@ let main argv =
             deckEditViewModel.FrontDeck.Remove(g :?> CardViewWithStrap) |> ignore
         deckEditViewModel.save()
         //再計算
+        deckEditViewModel.applyFilter()
         refreshDeckEditTab()
 
     )
@@ -961,7 +1005,9 @@ let main argv =
     deckEditTabContent.EventTypeComboBox.SelectionChanged.Add(fun e ->
         let deckEditViewModel = deckEditTabContent.DataContext :?> DeckEditViewModel
         deckEditViewModel.loadDeck()
+        deckEditViewModel.resetFilter()
         refreshDeckEditTab()
+        deckEditViewModel.applyFilter()
     )
     deckEditTabContent.BirthdayGirlSettingComboBox.SelectionChanged.Add(fun e ->
         refreshDeckEditTab()
@@ -1000,6 +1046,7 @@ let main argv =
             deckEditViewModel.CardListView.Add(g :?> CardView)
             deckEditViewModel.BackDeck.Remove(g :?> CardView) |> ignore
 
+        deckEditViewModel.applyFilter()
         refreshDeckEditTab()
         deckEditViewModel.save()
     )

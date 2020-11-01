@@ -102,6 +102,25 @@
             <ComboBox ItemsSource="{Binding GirlList}" SelectedItem="{Binding MemorialStorySpecialGirl2}">
 
             </ComboBox>
+            <TextBlock Text="ハンターズSP">
+
+            </TextBlock>
+            <TextBlock Text="超レア"/>
+            <TextBox>
+                <TextBox.Text>
+                    <Binding Path="HuntersSuperRare" UpdateSourceTrigger="PropertyChanged">
+
+                    </Binding>
+                </TextBox.Text>
+            </TextBox>
+            <TextBlock Text="夜行性"/>
+            <TextBox>
+                <TextBox.Text>
+                    <Binding Path="HuntersNocturnalRare" UpdateSourceTrigger="PropertyChanged">
+
+                    </Binding>
+                </TextBox.Text>
+            </TextBox>
         </StackPanel>
     </Grid>
             
