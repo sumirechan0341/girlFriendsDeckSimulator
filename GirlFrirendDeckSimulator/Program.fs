@@ -210,15 +210,17 @@ let main argv =
         //let frontDeckNum = deckEditViewModel.FrontDeck.Count
         
         let fixedFrontSkillTriggeredGirlNum = 
-            match deckEditViewModel.SelectedEventType with
-            | CoolTrio | PopTrio | SweetTrio | Raid ->
-                if deckEditViewModel.SelectedMode = Mode.Defence
-                then
-                    3
-                else
-                    1
-            | Hunters | Charisma | MemorialStory | CoolMega | PopMega | SweetMega -> 1
-            | Battle -> 5
+            let maxFrontFixNum =
+                match deckEditViewModel.SelectedEventType with
+                | CoolTrio | PopTrio | SweetTrio | Raid ->
+                    if deckEditViewModel.SelectedMode = Mode.Defence
+                    then
+                        3
+                    else
+                        1
+                | Hunters | Charisma | MemorialStory | CoolMega | PopMega | SweetMega -> 1
+                | Battle -> 5
+            min deckEditViewModel.FrontDeck.Count maxFrontFixNum
         let maxFrontSkillTriggeredGirlNum =
             match deckEditViewModel.SelectedEventType with
             | CoolTrio | PopTrio | SweetTrio | Raid ->
@@ -227,64 +229,91 @@ let main argv =
                     3
                 else
                     5
-            | Hunters | Charisma | MemorialStory | CoolMega | PopMega | SweetMega -> 5
+            | Hunters -> 3 
+            | Charisma | MemorialStory | CoolMega | PopMega | SweetMega -> 5
             | Battle -> 5
 
         let fixedSwitchSkillTriggeredGirlNum =
-            match deckEditViewModel.SelectedEventType with
-            | CoolTrio | PopTrio | SweetTrio | Raid ->
-                if deckEditViewModel.SelectedMode = Mode.Defence
-                then
-                    2
-                else
-                    0
-            | Battle -> 2
-            | otherwise -> 0
+            let maxSwitchFixNum =
+                match deckEditViewModel.SelectedEventType with
+                | CoolTrio | PopTrio | SweetTrio | Raid ->
+                    if deckEditViewModel.SelectedMode = Mode.Defence
+                    then
+                        2
+                    else
+                        0
+                | Battle -> 2
+                | otherwise -> 0
+            min maxSwitchFixNum <| Array.length(triggeredSkillBonusSwitchList)
 
-        let maxSwitchSkillTriggeredGirlNum = 2
-                
+        let maxSwitchSkillTriggeredGirlNum = 2                
         let triggeredSkillBonusGirlNum = triggeredSkillBonusGirlList.Length
         let mutable expectation: float = 0.0
         //let switchIndexStartPosition = triggeredSkillBonusGirlNum - deckEditViewModel.FrontDeck.Count
-        for triggeredIndexList in makePowerSet([0..triggeredSkillBonusGirlNum-1]) do
-            // 初期化
-            for skillCardView in triggeredSkillBonusGirlList do
-                skillCardView.IsTriggeredSkillBonus <- false
-            // 確定分のindexListを作成
-            let fixedFrontSkillTriggeredGirlIndexList = [0..fixedFrontSkillTriggeredGirlNum-1]
-            //let fixedSwitchSkillTriggeredGirlIndexList = [deckEditViewModel.FrontDeck.Count..]
+        
+        // 主センの確定分声援発動
+        // 先頭優先
+        let mutable frontSkillTriggeredNum = 0
+        for frontSkillCardView in deckEditViewModel.FrontDeck do
+            if frontSkillTriggeredNum < fixedFrontSkillTriggeredGirlNum
+            then
+                frontSkillCardView.IsTriggeredSkillBonus <- true  
+                frontSkillTriggeredNum <- frontSkillTriggeredNum + 1
+            else 0 |> ignore
+        // スイッチガールの確定分発動
+        // 先頭優先
+        let mutable switchSkillTriggeredGirlNum = 0
+        for switchSkillCardView in triggeredSkillBonusSwitchList do
+            if switchSkillTriggeredGirlNum < fixedSwitchSkillTriggeredGirlNum
+            then
+                switchSkillCardView.IsTriggeredSkillBonus <- true  
+                switchSkillTriggeredGirlNum <- switchSkillTriggeredGirlNum + 1
+            else 0 |> ignore
 
-            // 期待値計算
-            //let frontDeckIndices = List.filter (fun i -> i < deckEditViewModel.FrontDeck.Count) triggeredIndexList
-            //let switchGirlIndices = List.filter (fun i -> i >= deckEditViewModel.FrontDeck.Count) triggeredIndexList
-            //let triggeredFrontDeckIndices = List.truncate 5 frontDeckIndices // 声援発動指定indexが6個以上あるときは5個に切り捨て
-            //let triggeredSwitchGirlIndices = List.truncate 2 switchGirlIndices // スイッチ発動上限は2
-            //for index in List.append triggeredFrontDeckIndices triggeredSwitchGirlIndices do
-            for index in triggeredIndexList do
-                triggeredSkillBonusGirlList.[index].IsTriggeredSkillBonus <- true
-                //if index >= frontDeckNum
-                //then 
-                //    // 主センにないindexはスイッチガールの指定
-                //    let switchIndex = triggeredSkillBonusGirlNum - frontDeckNum
-                //    let switchGirls = deckEditViewModel.BackDeck.FindAll(fun c -> c.Card.cardType = CardType.Switch)
-                //    switchGirls.[index].IsTriggeredSkillBonus <- true
-                //else
-                //    deckEditViewModel.FrontDeck.[index].IsTriggeredSkillBonus <- true
+        for frontIndices in makePowerSet([fixedFrontSkillTriggeredGirlNum..deckEditViewModel.FrontDeck.Count-1]) do
+            for backIndices in makePowerSet([fixedSwitchSkillTriggeredGirlNum..Array.length(triggeredSkillBonusSwitchList)-1]) do
+                // 初期化
+                for index in [fixedFrontSkillTriggeredGirlNum..deckEditViewModel.FrontDeck.Count-1] do
+                    deckEditViewModel.FrontDeck.[index].IsTriggeredSkillBonus <- false
+
+                for index in [fixedSwitchSkillTriggeredGirlNum..Array.length(triggeredSkillBonusSwitchList)-1] do
+                    triggeredSkillBonusSwitchList.[index].IsTriggeredSkillBonus <- false
+
+                let mutable frontSkillCardNum = frontSkillTriggeredNum + 1
+                let mutable backSkillCardNum = switchSkillTriggeredGirlNum + 1
+                for frontIndex in frontIndices do
+                    if frontSkillCardNum < maxFrontSkillTriggeredGirlNum
+                    then
+                        deckEditViewModel.FrontDeck.[frontIndex].IsTriggeredSkillBonus <- true
+                        frontSkillCardNum <- frontSkillCardNum + 1
+                    else 0 |> ignore 
+                for backIndex in backIndices do
+                    if backSkillCardNum < maxSwitchSkillTriggeredGirlNum
+                    then
+                        triggeredSkillBonusSwitchList.[backIndex].IsTriggeredSkillBonus <- true
+                        backSkillCardNum <- backSkillCardNum + 1
             
-            CalcBonus.applySkillBonus(deckEditViewModel.FrontDeck, deckEditViewModel.BackDeck, deckEditViewModel.CardListView)
-            for cardView in deckEditViewModel.FrontDeck do
-                let correctedVals = CalcBonus.calcBonus(cardView, playerParameterViewModel.playerFactory, deckEditViewModel, petitDeckEditViewModel, specialBonusEditViewModel)
-                cardView.CorrectedAttack <- correctedVals.CorrectedAttack
-                cardView.CorrectedDefence <- correctedVals.CorrectedDefence
-            for cardView in deckEditViewModel.BackDeck do
-                let correctedVals = CalcBonus.calcBonus(cardView, playerParameterViewModel.playerFactory, deckEditViewModel, petitDeckEditViewModel, specialBonusEditViewModel)
-                cardView.CorrectedAttack <- correctedVals.CorrectedAttack
-                cardView.CorrectedDefence <- correctedVals.CorrectedDefence
-            let triggeredProbability = 
-                Math.Pow(settings.SkillBonusSettings.SkillRaisedProbability |> float, triggeredIndexList.Length |> float)
-                * Math.Pow(1.0 - (settings.SkillBonusSettings.SkillRaisedProbability |> float), triggeredSkillBonusGirlList.Length - 1 - triggeredIndexList.Length |> float)
+                CalcBonus.applySkillBonus(deckEditViewModel.FrontDeck, deckEditViewModel.BackDeck, deckEditViewModel.CardListView)
+                for cardView in deckEditViewModel.FrontDeck do
+                    let correctedVals = CalcBonus.calcBonus(cardView, playerParameterViewModel.playerFactory, deckEditViewModel, petitDeckEditViewModel, specialBonusEditViewModel)
+                    cardView.CorrectedAttack <- correctedVals.CorrectedAttack
+                    cardView.CorrectedDefence <- correctedVals.CorrectedDefence
+                for cardView in deckEditViewModel.BackDeck do
+                    let correctedVals = CalcBonus.calcBonus(cardView, playerParameterViewModel.playerFactory, deckEditViewModel, petitDeckEditViewModel, specialBonusEditViewModel)
+                    cardView.CorrectedAttack <- correctedVals.CorrectedAttack
+                    cardView.CorrectedDefence <- correctedVals.CorrectedDefence
+                
+                // 主 確定1 最大声援発揮数5 設定主セン人数5 
+                // スイッチ 確定0 最大声援発揮数2 設定スイッチ人数3のとき
+                // frontIndicesは{1..4}の部分集合
+                // backIndicesは{0..2}の部分集合
+                // 最大発揮数オーバーのときも期待値の計算は普通に
+                let triggeredProbability = 
+                    Math.Pow(settings.SkillBonusSettings.SkillRaisedProbability |> float, List.length(frontIndices) + List.length(backIndices) |> float)
+                    * Math.Pow(1.0 - (settings.SkillBonusSettings.SkillRaisedProbability |> float), deckEditViewModel.FrontDeck.Count - fixedFrontSkillTriggeredGirlNum + (Array.length(triggeredSkillBonusSwitchList) - fixedSwitchSkillTriggeredGirlNum) - (List.length(frontIndices) + List.length(backIndices)) |> float)
             
-            expectation <- expectation + (calcDamage(deckEditViewModel.FrontDeck, deckEditViewModel.BackDeck, petitDeckEditViewModel.TotalAttack, petitDeckEditViewModel.TotalDefence, playerParameterViewModel.AttackCost, deckEditViewModel.SelectedEventType, deckEditViewModel.SelectedMode) |> float) * triggeredProbability
+                expectation <- expectation + (calcDamage(deckEditViewModel.FrontDeck, deckEditViewModel.BackDeck, petitDeckEditViewModel.TotalAttack, petitDeckEditViewModel.TotalDefence, playerParameterViewModel.AttackCost, deckEditViewModel.SelectedEventType, deckEditViewModel.SelectedMode) |> float) * triggeredProbability
+       
         for (index, isTriggeredSkillBonus) in Array.indexed isTriggeredSkillBonusList do
             deckEditViewModel.FrontDeck.[index].IsTriggeredSkillBonus <- isTriggeredSkillBonus
         for (isTriggeredSkillBonus, card) in isTriggeredSkillBonusSwitchList do

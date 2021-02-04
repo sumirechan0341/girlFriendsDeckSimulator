@@ -29,4 +29,7 @@ module CardFactory =
 
     let cardList = 
         Seq.map(cardFactoryFromJson) <| 
-        Seq.filter (String.IsNullOrWhiteSpace >> not) (File.ReadLines(".\CardList.txt"))
+        if File.Exists(".\CardList.txt")
+        then 
+            Seq.filter (String.IsNullOrWhiteSpace >> not) (File.ReadLines(".\CardList.txt"))
+        else Seq.empty

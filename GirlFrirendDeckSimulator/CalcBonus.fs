@@ -18,6 +18,7 @@ open SelectionBonus
 open CardView
 open Girl
 open PetitGirlView
+open EventType
 
 
 module CalcBonus =
@@ -1245,7 +1246,7 @@ module CalcBonus =
         let isTouched = cardView.IsTouched
         let straps = cardView.Straps
         let preciousScenes = deckEditViewModel.SelectedPreciousSceneList
-        let exedGirlNum = deckEditViewModel.FrontDeck.FindAll(fun cardView -> cardView.Card.isEXed).Count
+        let exedGirlNum = deckEditViewModel.FrontDeck.FindAll(fun cardView -> cardView.Card.isEXed).Count + deckEditViewModel.BackDeck.FindAll(fun cardView -> cardView.Card.isEXed).Count
         let backDeckGirls = [||] |> ResizeArray
         let specialBonusGirl1 = specialBonusEditViewModel.MemorialStorySpecialGirl1
         let specialBonusGirl2 = specialBonusEditViewModel.MemorialStorySpecialGirl2
@@ -1811,8 +1812,6 @@ module CalcBonus =
         let percentagePreciousBonusDefenceList = [||] |> ResizeArray
         let valuePreciousBonusAttackList = [||] |> ResizeArray
         let valuePreciousBonusDefenceList = [||] |> ResizeArray
-        // Exガールの数副センバツバージョン未実装
-        // 最適化が必要
         for scene in preciousScenes do
             match scene.PreciousScene.sceneEffect.sceneTarget with
             | FrontDeck ->
@@ -1840,6 +1839,8 @@ module CalcBonus =
                                     bonus <- Math.Pow((maxSameGirlNum |> float) / (Math.Max(girlsNum, maxSameGirlNum) |> float), 0.2) * scene.PreciousScene.effectMaxNum
                             | Uniform ->
                                 bonus <- scene.PreciousScene.effectMaxNum
+                            | WholeExedGirlNum maxGirlNum ->
+                                bonus <- Math.Pow((Math.Min(exedGirlNum, maxGirlNum) |> float) / (maxGirlNum |> float), 0.2) * scene.PreciousScene.effectMaxNum
                             match scene.PreciousScene.sceneEffect.mode with
                             | Mode.Attack -> 
                                 match scene.PreciousScene.effectNumType with
@@ -1880,6 +1881,8 @@ module CalcBonus =
                                     bonus <- Math.Pow((maxSameGirlNum |> float) / (Math.Max(girlsNum, maxSameGirlNum) |> float), 0.2) * scene.PreciousScene.effectMaxNum
                             | Uniform ->
                                 bonus <- scene.PreciousScene.effectMaxNum
+                            | WholeExedGirlNum maxGirlNum ->
+                                bonus <- Math.Pow((Math.Min(exedGirlNum, maxGirlNum) |> float) / (maxGirlNum |> float), 0.2) * scene.PreciousScene.effectMaxNum
                             match scene.PreciousScene.sceneEffect.mode with
                             | Mode.Attack -> 
                                 match scene.PreciousScene.effectNumType with
@@ -1920,6 +1923,8 @@ module CalcBonus =
                                     bonus <- Math.Pow((maxSameGirlNum |> float) / (Math.Max(girlsNum, maxSameGirlNum) |> float), 0.2) * scene.PreciousScene.effectMaxNum
                             | Uniform ->
                                 bonus <- scene.PreciousScene.effectMaxNum
+                            | WholeExedGirlNum maxGirlNum ->
+                                bonus <- Math.Pow((Math.Min(exedGirlNum, maxGirlNum) |> float) / (maxGirlNum |> float), 0.2) * scene.PreciousScene.effectMaxNum
                             match scene.PreciousScene.sceneEffect.mode with
                             | Mode.Attack -> 
                                 match scene.PreciousScene.effectNumType with
@@ -1958,6 +1963,8 @@ module CalcBonus =
                                 bonus <- Math.Pow((maxSameGirlNum |> float) / (Math.Max(girlsNum, maxSameGirlNum) |> float), 0.2) * scene.PreciousScene.effectMaxNum
                         | Uniform ->
                             bonus <- scene.PreciousScene.effectMaxNum
+                        | WholeExedGirlNum maxGirlNum ->
+                            bonus <- Math.Pow((Math.Min(exedGirlNum, maxGirlNum) |> float) / (maxGirlNum |> float), 0.2) * scene.PreciousScene.effectMaxNum
                         match scene.PreciousScene.sceneEffect.mode with
                         | Mode.Attack -> 
                             match scene.PreciousScene.effectNumType with
@@ -2002,6 +2009,8 @@ module CalcBonus =
                                     bonus <- Math.Pow((maxSameGirlNum |> float) / (Math.Max(girlsNum, maxSameGirlNum) |> float), 0.2) * scene.PreciousScene.effectMaxNum
                             | Uniform ->
                                 bonus <- scene.PreciousScene.effectMaxNum
+                            | WholeExedGirlNum maxGirlNum ->
+                                bonus <- Math.Pow((Math.Min(exedGirlNum, maxGirlNum) |> float) / (maxGirlNum |> float), 0.2) * scene.PreciousScene.effectMaxNum
                             match scene.PreciousScene.sceneEffect.mode with
                             | Mode.Attack -> 
                                 match scene.PreciousScene.effectNumType with
@@ -2042,6 +2051,8 @@ module CalcBonus =
                                     bonus <- Math.Pow((maxSameGirlNum |> float) / (Math.Max(girlsNum, maxSameGirlNum) |> float), 0.2) * scene.PreciousScene.effectMaxNum
                             | Uniform ->
                                 bonus <- scene.PreciousScene.effectMaxNum
+                            | WholeExedGirlNum maxGirlNum ->
+                                bonus <- Math.Pow((Math.Min(exedGirlNum, maxGirlNum) |> float) / (maxGirlNum |> float), 0.2) * scene.PreciousScene.effectMaxNum
                             match scene.PreciousScene.sceneEffect.mode with
                             | Mode.Attack -> 
                                 match scene.PreciousScene.effectNumType with
@@ -2082,6 +2093,8 @@ module CalcBonus =
                                     bonus <- Math.Pow((maxSameGirlNum |> float) / (Math.Max(girlsNum, maxSameGirlNum) |> float), 0.2) * scene.PreciousScene.effectMaxNum
                             | Uniform ->
                                 bonus <- scene.PreciousScene.effectMaxNum
+                            | WholeExedGirlNum maxGirlNum ->
+                                bonus <- Math.Pow((Math.Min(exedGirlNum, maxGirlNum) |> float) / (maxGirlNum |> float), 0.2) * scene.PreciousScene.effectMaxNum
                             match scene.PreciousScene.sceneEffect.mode with
                             | Mode.Attack -> 
                                 match scene.PreciousScene.effectNumType with
@@ -2120,6 +2133,8 @@ module CalcBonus =
                                 bonus <- Math.Pow((maxSameGirlNum |> float) / (Math.Max(girlsNum, maxSameGirlNum) |> float), 0.2) * scene.PreciousScene.effectMaxNum
                         | Uniform ->
                             bonus <- scene.PreciousScene.effectMaxNum
+                        | WholeExedGirlNum maxGirlNum ->
+                            bonus <- Math.Pow((Math.Min(exedGirlNum, maxGirlNum) |> float) / (maxGirlNum |> float), 0.2) * scene.PreciousScene.effectMaxNum
                         match scene.PreciousScene.sceneEffect.mode with
                         | Mode.Attack -> 
                             match scene.PreciousScene.effectNumType with
@@ -2162,6 +2177,8 @@ module CalcBonus =
                                 bonus <- Math.Pow((maxSameGirlNum |> float) / (Math.Max(girlsNum, maxSameGirlNum) |> float), 0.2) * scene.PreciousScene.effectMaxNum
                         | Uniform ->
                             bonus <- scene.PreciousScene.effectMaxNum
+                        | WholeExedGirlNum maxGirlNum ->
+                            bonus <- Math.Pow((Math.Min(exedGirlNum, maxGirlNum) |> float) / (maxGirlNum |> float), 0.2) * scene.PreciousScene.effectMaxNum
                         match scene.PreciousScene.sceneEffect.mode with
                         | Mode.Attack -> 
                             match scene.PreciousScene.effectNumType with
@@ -2202,6 +2219,8 @@ module CalcBonus =
                                 bonus <- Math.Pow((maxSameGirlNum |> float) / (Math.Max(girlsNum, maxSameGirlNum) |> float), 0.2) * scene.PreciousScene.effectMaxNum
                         | Uniform ->
                             bonus <- scene.PreciousScene.effectMaxNum
+                        | WholeExedGirlNum maxGirlNum ->
+                            bonus <- Math.Pow((Math.Min(exedGirlNum, maxGirlNum) |> float) / (maxGirlNum |> float), 0.2) * scene.PreciousScene.effectMaxNum
                         match scene.PreciousScene.sceneEffect.mode with
                         | Mode.Attack -> 
                             match scene.PreciousScene.effectNumType with
@@ -2242,6 +2261,8 @@ module CalcBonus =
                                 bonus <- Math.Pow((maxSameGirlNum |> float) / (Math.Max(girlsNum, maxSameGirlNum) |> float), 0.2) * scene.PreciousScene.effectMaxNum
                         | Uniform ->
                             bonus <- scene.PreciousScene.effectMaxNum
+                        | WholeExedGirlNum maxGirlNum ->
+                            bonus <- Math.Pow((Math.Min(exedGirlNum, maxGirlNum) |> float) / (maxGirlNum |> float), 0.2) * scene.PreciousScene.effectMaxNum
                         match scene.PreciousScene.sceneEffect.mode with
                         | Mode.Attack -> 
                             match scene.PreciousScene.effectNumType with
@@ -2280,6 +2301,8 @@ module CalcBonus =
                             bonus <- Math.Pow((maxSameGirlNum |> float) / (Math.Max(girlsNum, maxSameGirlNum) |> float), 0.2) * scene.PreciousScene.effectMaxNum
                     | Uniform ->
                         bonus <- scene.PreciousScene.effectMaxNum
+                    | WholeExedGirlNum maxGirlNum ->
+                        bonus <- Math.Pow((Math.Min(exedGirlNum, maxGirlNum) |> float) / (maxGirlNum |> float), 0.2) * scene.PreciousScene.effectMaxNum
                     match scene.PreciousScene.sceneEffect.mode with
                     | Mode.Attack -> 
                         match scene.PreciousScene.effectNumType with

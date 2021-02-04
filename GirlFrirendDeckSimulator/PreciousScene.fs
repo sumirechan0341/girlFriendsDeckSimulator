@@ -6,7 +6,7 @@ open SkillAttributeType
 open FSharp.Data
 
 module PreciousScene =
-    type SceneEffectType = CostType of int | ExedGirlNum of int | SkillLevel of int | Rarity of Card.Rarity | SpecificGirl of int | Uniform
+    type SceneEffectType = CostType of int | ExedGirlNum of int | SkillLevel of int | Rarity of Card.Rarity | SpecificGirl of int | Uniform | WholeExedGirlNum of int
 
     type SceneTargetType = FrontDeck | BackDeck | All
 

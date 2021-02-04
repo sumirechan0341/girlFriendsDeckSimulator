@@ -28,10 +28,10 @@ module SceneEffectConverter =
         let specificGirlPattern = "(?:(主センバツ|副センバツ)を)?特定の(COOL|POP|SWEET)ガールで編成するほど(攻援|守援|攻守)UP"
         let uniformPattern = "(?:(主センバツ|副センバツ)における)?(COOLタイプ|POPタイプ|SWEETタイプ|全タイプ)のガールの(攻援|守援|攻守)UP"   
         let uniformPatternAll = "(COOL|POP|SWEET)ガールの(攻援|守援|攻守)UP"
+        let wholeExedPattern = "(?:(COOL|POP|SWEET)の)?Ex進展ガールが多いほど(攻援|守援|攻守)UP"
         match sceneEffectDescription with
         | ParseRegex costPattern [sceneTarget; skillAttribute; mode] ->
             let sceneEffectMaxCost = sceneEffectMaxTerms.Replace("コスト", "") |> int
-            System.Console.WriteLine(skillAttribute)
             {
                 sceneEffectType = CostType sceneEffectMaxCost
                 sceneTarget = SceneTargetConverter.fromString(sceneTarget);
@@ -80,6 +80,14 @@ module SceneEffectConverter =
         | ParseRegex uniformPatternAll [skillAttribute; mode] ->
             {
                 sceneEffectType = Uniform;
+                sceneTarget = SceneTargetType.All;
+                sceneTargetAttribute = SkillAttributeTypeConverter.fromString(skillAttribute);
+                mode = ModeConverter.fromString(mode)
+            }
+        | ParseRegex wholeExedPattern [skillAttribute; mode] ->
+            let sceneEffectMaxGirlNum = sceneEffectMaxTerms.Replace("ガール", "") |> int
+            {
+                sceneEffectType = WholeExedGirlNum sceneEffectMaxGirlNum;
                 sceneTarget = SceneTargetType.All;
                 sceneTargetAttribute = SkillAttributeTypeConverter.fromString(skillAttribute);
                 mode = ModeConverter.fromString(mode)
@@ -142,3 +150,13 @@ module SceneEffectConverter =
             ModeConverter.toString(sceneEffect.mode) +
             "UP" +
             "(均等に効果を発揮)"
+        | WholeExedGirlNum num ->
+            SceneTargetConverter.toString(sceneEffect.sceneTarget) + 
+            "において" +
+            SkillAttributeTypeConverter.toString(sceneEffect.sceneTargetAttribute) +
+            "のEx進展ガールが多いほど" +
+            ModeConverter.toString(sceneEffect.mode) +
+            "UP" +
+            "(最大発揮人数: " +
+            num.ToString() + 
+            ")"

@@ -22,4 +22,7 @@ module PreciousSceneFactory =
 
     let preciousSceneList = 
         Seq.map(preciousSceneFactoryFromJson) <| 
-        Seq.filter (String.IsNullOrWhiteSpace >> not) (File.ReadLines(".\PreciousSceneList.txt"))
+        if File.Exists(".\PreciousSceneList.txt")
+        then
+            Seq.filter (String.IsNullOrWhiteSpace >> not) (File.ReadLines(".\PreciousSceneList.txt"))
+        else Seq.empty

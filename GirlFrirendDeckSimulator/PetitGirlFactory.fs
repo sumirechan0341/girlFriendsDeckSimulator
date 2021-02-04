@@ -64,4 +64,7 @@ module PetitGirlFactory =
         
     let petitGirlList = 
         Seq.map (petitGirlFactoryFromJson) <| 
-        Seq.filter (String.IsNullOrWhiteSpace >> not) (File.ReadLines(".\PetitGirl.txt"))
+        if File.Exists(".\PetitGirl.txt")
+        then
+            Seq.filter (String.IsNullOrWhiteSpace >> not) (File.ReadLines(".\PetitGirl.txt"))
+        else Seq.empty
