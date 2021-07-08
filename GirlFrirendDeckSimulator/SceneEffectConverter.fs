@@ -23,7 +23,7 @@ module SceneEffectConverter =
             else None
         let costPattern = "(?:(主センバツ|副センバツ)の)?(COOL|POP|SWEET)?ガールのコストが高いほど(攻援|守援|攻守)UP"
         let exedPattern = "(?:(主センバツ|副センバツ)に)?(COOL|POP|SWEET)のEx進展ガールが多いほど(攻援|守援|攻守)UP"
-        let skillLevelPattern = "(?:(主センバツ|副センバツ)の)?(COOL|POP|SWEET)ガールの声援Lvが高いほど(攻援|守援|攻守)UP"
+        let skillLevelPattern = "(?:(主センバツ|副センバツ)の)?(COOL|POP|SWEET)?ガールの声援Lvが高いほど(攻援|守援|攻守)UP"
         let rarityPattern = "(?:(主センバツ|副センバツ)の)?(COOL|POP|SWEET)ガールのレアリティが高いほど(攻援|守援|攻守)UP"
         let specificGirlPattern = "(?:(主センバツ|副センバツ)を)?特定の(COOL|POP|SWEET)ガールで編成するほど(攻援|守援|攻守)UP"
         let uniformPattern = "(?:(主センバツ|副センバツ)における)?(COOLタイプ|POPタイプ|SWEETタイプ|全タイプ)のガールの(攻援|守援|攻守)UP"   
