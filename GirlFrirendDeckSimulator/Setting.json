@@ -97,9 +97,9 @@
 			"selfDefenceSmallUp": 5
 		},
 		"attributeSkill": {
-			"attributeAttackAndDefenceExtraSuperUp": 33,
-			"attributeAttackExtraSuperUp": 35,
-			"attributeDefenceExtraSuperUp": 35,
+			"attributeAttackAndDefenceExtraSuperUp": 39,
+			"attributeAttackExtraSuperUp": 41,
+			"attributeDefenceExtraSuperUp": 41,
 			"attributeAttackAndDefenceSuperUp": 28,
 			"attributeAttackSuperUp": 30,
 			"attributeDefenceSuperUp": 30,

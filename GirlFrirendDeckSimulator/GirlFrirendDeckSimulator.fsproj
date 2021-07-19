@@ -68,8 +68,8 @@
     <Compile Include="PetitGirl.fs" />
     <Compile Include="EventType.fs" />
     <Compile Include="Girl.fs" />
-    <Compile Include="Card.fs" />
     <Compile Include="SkilType.fs" />
+    <Compile Include="Card.fs" />
     <Compile Include="PreciousScene.fs" />
     <Compile Include="ColonFormRule.fs" />
     <Compile Include="Converter.fs" />

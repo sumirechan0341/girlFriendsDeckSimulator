@@ -1,9 +1,11 @@
 ﻿namespace GirlFriendDeckSimulator
+
 open Card
 open System.Text.RegularExpressions
+
 module CardConverter =
     module RarityConverter =
-        let fromString(rarityStr: string) =
+        let fromString (rarityStr: string) =
             match rarityStr with
             | "N" -> Card.Rarity.N
             | "HN" -> Card.Rarity.HN
@@ -12,8 +14,9 @@ module CardConverter =
             | "SR" -> Card.Rarity.SR
             | "SSR" -> Card.Rarity.SSR
             | "UR" -> Card.Rarity.UR
+            | _ -> failwith "レアリティのパースに失敗しました"
 
-        let toString(rarity: Rarity) =
+        let toString (rarity: Rarity) =
             match rarity with
             | Card.Rarity.N -> "N"
             | Card.Rarity.HN -> "HN"
@@ -24,38 +27,37 @@ module CardConverter =
             | Card.Rarity.UR -> "UR"
 
     module CardTypeConverter =
-
         let (|ParseRegex|_|) regex str =
             let m = Regex(regex).Match(str)
-            if m.Success
-            then Some (m.Value)
-            else None
+            if m.Success then
+                Some(m.Value)
+            else
+                None
 
-        let fromEventName(eventName: string) =
+        let fromEventName (eventName: string) =
             match eventName with
-            | ParseRegex "ｷﾗ★ｶﾞｰﾙ" _
-                 -> CardType.Kira
-            | ParseRegex "ｽｲｯﾁｶﾞｰﾙ" _
-                 -> CardType.Switch
-            | ParseRegex "ﾐﾗｰｶﾞｰﾙ." _
-                 -> CardType.Mirror
-            | ParseRegex "ﾊﾞｰｽﾃﾞｰｶﾞｰﾙ|誕生日\d+" _
-                -> CardType.Birthday
-            | ParseRegex "仲良し|×ｱﾆﾒ仲良し" _
-                -> CardType.Friends
+            | ParseRegex "ｷﾗ★ｶﾞｰﾙ" _ -> CardType.Kira
+            | ParseRegex "ｽｲｯﾁｶﾞｰﾙ" _ -> CardType.Switch
+            | ParseRegex "ﾐﾗｰｶﾞｰﾙ." _ -> CardType.Mirror
+            | ParseRegex "ﾊﾞｰｽﾃﾞｰｶﾞｰﾙ|誕生日\d+" _ -> CardType.Birthday
+            | ParseRegex "仲良し|×ｱﾆﾒ仲良し" _ -> CardType.Friends
             | _ -> CardType.Common
 
-        let fromString(cardTypeStr: string) =
+        let fromString (cardTypeStr: string) =
             match cardTypeStr with
             | "キラ" -> CardType.Kira
             | "スイッチ" -> CardType.Switch
             | "ミラー" -> CardType.Mirror
             | "バースデー" -> CardType.Birthday
             | "仲良し" -> CardType.Friends
+            | _ -> failwith "カードタイプが不明です"
 
 
-    let toString(card: Card) =
+    let toString (card: Card) =
         card.girl.name + " " + card.attack.ToString()
 
 type CardConverter() =
-    inherit ConverterBase(CardConverter.toString >> (fun s -> s :> obj) |> convert, nullFunction)
+    inherit ConverterBase(CardConverter.toString
+                          >> (fun s -> s :> obj)
+                          |> convert,
+                          nullFunction)
