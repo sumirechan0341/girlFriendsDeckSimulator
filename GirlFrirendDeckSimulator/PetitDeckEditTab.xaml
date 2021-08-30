@@ -4,6 +4,7 @@
     xmlns:c="clr-namespace:GirlFriendDeckSimulator;assembly=GirlFrirendDeckSimulator"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" mc:Ignorable="d"
+    xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
 >
     <UserControl.DataContext>
         <c:PetitDeckEditViewModel/>
@@ -43,6 +44,11 @@
                 <DataGridTextColumn Header="センバツボーナス1" Binding="{Binding PetitSelectionBonus1}" IsReadOnly="True"/>
                 <DataGridTextColumn Header="センバツボーナス2" Binding="{Binding PetitSelectionBonus2}" IsReadOnly="True"/>
             </DataGrid.Columns>
+            <i:Interaction.Triggers>
+                <i:EventTrigger EventName="SelectionChanged">
+                    <i:InvokeCommandAction Command="{Binding AddSelectedPetitGirlsToDeck1Command}"/>
+                </i:EventTrigger>
+            </i:Interaction.Triggers>
             <DataGrid.RowStyle>
                 <Style TargetType="{x:Type DataGridRow}">
                     <Setter Property="Background" Value="LightBlue" />

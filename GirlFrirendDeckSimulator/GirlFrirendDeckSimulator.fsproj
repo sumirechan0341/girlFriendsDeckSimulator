@@ -88,6 +88,7 @@
     <Compile Include="PreciousSceneFactory.fs" />
     <Compile Include="PetitGirlConverter.fs" />
     <Compile Include="PetitGirlFactory.fs" />
+    <Compile Include="RelayCommand.fs" />
     <Compile Include="PlayerParameterViewModel.fs" />
     <Compile Include="PreciousSceneView.fs" />
     <Compile Include="CardView.fs" />
@@ -123,10 +124,20 @@
     <Reference Include="FsXaml.Wpf.TypeProvider">
       <HintPath>..\packages\FsXaml.Wpf.3.1.6\lib\net45\FsXaml.Wpf.TypeProvider.dll</HintPath>
     </Reference>
+    <Reference Include="Microsoft.Xaml.Behaviors">
+      <HintPath>..\packages\Microsoft.Xaml.Behaviors.Wpf.1.1.31\lib\net45\Microsoft.Xaml.Behaviors.dll</HintPath>
+    </Reference>
     <Reference Include="mscorlib" />
     <Reference Include="PresentationCore" />
     <Reference Include="PresentationFramework" />
+    <Reference Include="Prism">
+      <HintPath>..\packages\Prism.Core.8.1.97\lib\net47\Prism.dll</HintPath>
+    </Reference>
+    <Reference Include="Prism.Wpf">
+      <HintPath>..\packages\Prism.Wpf.8.1.97\lib\net47\Prism.Wpf.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
+    <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
     <Reference Include="System.Data" />
     <Reference Include="System.Numerics" />
@@ -135,6 +146,7 @@
     </Reference>
     <Reference Include="System.Xaml" />
     <Reference Include="System.Xml" />
+    <Reference Include="System.XML" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="UIAutomationTypes" />
     <Reference Include="WindowsBase" />
